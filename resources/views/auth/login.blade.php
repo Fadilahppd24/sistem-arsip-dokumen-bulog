@@ -4,32 +4,45 @@
 
 @section('content')
 <div class="login-wrapper">
-    <div class="row g-0 w-100">
-        <div class="col-lg-6 login-hero d-none d-lg-flex flex-column justify-content-between p-5">
-            <div class="d-flex align-items-center gap-2">
-                <i class="bi bi-box-seam-fill brand-icon fs-2"></i>
-                <div>
-                    <div class="fw-bold fs-4 lh-1">BULOG</div>
-                    <div class="small text-white-50">mengantarkan kebaikan</div>
-                </div>
-            </div>
+    <div class="row g-0 w-100 vh-100">
+
+        <!-- KIRI -->
+        <div class="col-lg-6 login-hero d-none d-lg-flex flex-column justify-content-between">
 
             <div>
-                <h1 class="display-6 fw-bold mb-3">Sistem Arsip<br>Dokumen BULOG</h1>
-                <p class="text-white-50 mb-0" style="max-width: 380px;">
+                <img src="{{ asset('images/logobulog.png') }}"
+                     alt="Logo BULOG"
+                     class="login-logo">
+            </div>
+
+
+            <div>
+                <h1 class="display-6 fw-bold mb-3">
+                    Sistem Arsip<br>
+                    Dokumen BULOG
+                </h1>
+
+                <p class="text-white-50 mb-0" style="max-width:380px;">
                     Kelola, simpan, dan temukan dokumen dengan mudah dan aman.
                 </p>
             </div>
 
-            <div class="small text-white-50">&copy; {{ date('Y') }} BULOG. All rights reserved.</div>
+
+            <div class="small text-white-50">
+                &copy; {{ date('Y') }} BULOG. All rights reserved.
+            </div>
+
         </div>
 
+
+        <!-- KANAN -->
         <div class="col-lg-6 d-flex align-items-center justify-content-center login-card p-4">
             <div style="max-width: 380px; width: 100%;">
                 <div class="d-lg-none text-center mb-4">
-                    <i class="bi bi-box-seam-fill text-bulog-navy fs-1"></i>
-                    <div class="fw-bold fs-4 text-bulog-navy">BULOG</div>
-                </div>
+    <img src="{{ asset('images/logobulog.png') }}"
+         alt="Logo BULOG"
+         class="login-logo-mobile">
+</div>
 
                 <h2 class="fw-bold mb-1">Selamat Datang</h2>
                 <p class="text-muted mb-4">Silakan masuk untuk melanjutkan</p>

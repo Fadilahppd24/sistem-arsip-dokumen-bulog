@@ -16,17 +16,54 @@ body {
 }
 
 /* ===== Halaman Login ===== */
-.login-wrapper {
-  min-height: 100vh;
-  display: flex;
-  align-items: stretch;
+/* ===== LOGIN ===== */
+
+.login-wrapper{
+    width:100%;
+    min-height:100vh;
+    overflow:hidden;
 }
 
-.login-hero {
-  background: linear-gradient(160deg, var(--bulog-navy) 0%, var(--bulog-blue-light) 100%);
-  color: #fff;
-  position: relative;
-  overflow: hidden;
+.login-wrapper .row{
+    min-height:100vh;
+}
+
+
+/* sisi kiri */
+.login-hero{
+    height:100vh;
+    color:white;
+    position:relative;
+    overflow:hidden;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+
+    padding:50px 55px;
+
+    background:
+    linear-gradient(
+        rgba(10,46,110,.65),
+        rgba(10,46,110,.75)
+    ),
+    url("../images/kantorbulog.jpg");
+
+    background-size:cover;
+    background-position:center;
+}
+
+
+/* logo */
+.login-logo{
+    width:180px;
+}
+
+
+/* sisi kanan */
+.login-card{
+   height:100vh;
+   background:#fff !important;
 }
 
 .login-hero::after {
@@ -68,16 +105,12 @@ body {
   top: 0;
 }
 
-.sidebar .brand {
-  padding: 1.25rem 1.25rem 1rem;
-}
-
-.sidebar .nav-section-title {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #7d93c2;
-  padding: 1rem 1.25rem 0.35rem;
+.sidebar .nav-section-title{
+    font-size:.7rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:#7d93c2;
+    padding:.55rem 1.25rem .25rem;
 }
 
 .sidebar .nav-link {
@@ -194,181 +227,40 @@ body {
   font-size: 0.85rem;
 }
 
-
-/* =====================================
-   DARK MODE
-===================================== */
-
-body.dark-mode {
-    background-color: #121212;
-    color: #f1f1f1;
+.sidebar .brand{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 8px 0 8px;
+    height: 145px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
-/* Topbar */
-body.dark-mode .topbar {
-    background: #1e1e1e;
-    border-bottom: 1px solid #333;
+.sidebar-logo{
+    width: 230px;
+    height: auto;
+    margin-top: -6px;
 }
 
-/* Sidebar */
-body.dark-mode .sidebar {
-    background: #111827;
+.sidebar nav{
+    margin-top: -4px;
 }
 
-body.dark-mode .sidebar .nav-link {
-    color: #d1d5db;
+/* ===== Logo Login ===== */
+
+.login-brand{
+    margin-bottom: 30px;
 }
 
-body.dark-mode .sidebar .nav-link:hover {
-    background: rgba(255,255,255,.08);
+.login-logo{
+    width: 260px;
+    height: auto;
+    display: block;
 }
 
-body.dark-mode .sidebar .nav-link.active {
-    background: #1f2937;
-}
-
-/* Card */
-body.dark-mode .card-panel,
-body.dark-mode .stat-card,
-body.dark-mode .login-card {
-    background: #1e1e1e;
-    color: #f1f1f1;
-    border-color: #333;
-}
-
-/* Table */
-body.dark-mode table {
-    color: #f1f1f1;
-}
-
-body.dark-mode .table-hover tbody tr:hover {
-    background-color: #2b2b2b;
-}
-
-/* Input */
-body.dark-mode .form-control,
-body.dark-mode .form-select {
-    background: #2b2b2b;
-    color: #fff;
-    border-color: #444;
-}
-
-body.dark-mode .form-control::placeholder {
-    color: #bbb;
-}
-
-/* Button */
-body.dark-mode .btn-light {
-    background: #2b2b2b;
-    color: #fff;
-    border-color: #444;
-}
-
-/* Dropdown */
-body.dark-mode .dropdown-menu {
-    background: #1e1e1e;
-    border-color: #333;
-}
-
-body.dark-mode .dropdown-item {
-    color: #f1f1f1;
-}
-
-body.dark-mode .dropdown-item:hover {
-    background: #2b2b2b;
-}
-
-/* Badge */
-body.dark-mode .badge.bg-light {
-    background: #2b2b2b !important;
-    color: #fff !important;
-}
-
-/* ===== Perbaikan Text Dark Mode ===== */
-
-body.dark-mode {
-    color: #e5e7eb;
-}
-
-/* Semua teks muted */
-body.dark-mode .text-muted {
-    color: #9ca3af !important;
-}
-
-/* Judul dan teks utama */
-body.dark-mode h1,
-body.dark-mode h2,
-body.dark-mode h3,
-body.dark-mode h4,
-body.dark-mode h5,
-body.dark-mode h6 {
-    color: #f9fafb;
-}
-
-/* Link */
-body.dark-mode a {
-    color: #60a5fa;
-}
-
-/* Navbar user */
-body.dark-mode .dropdown-toggle {
-    color: #f9fafb !important;
-}
-
-/* Tabel */
-body.dark-mode .table {
-    color: #f9fafb;
-}
-
-body.dark-mode .table th {
-    color: #ffffff;
-}
-
-body.dark-mode .table td {
-    color: #e5e7eb;
-}
-
-/* Statistik card */
-body.dark-mode .stat-card .fw-bold,
-body.dark-mode .stat-card h5,
-body.dark-mode .stat-card span {
-    color: #f9fafb;
-}
-
-/* Card dashboard */
-body.dark-mode .card-panel {
-    color: #f9fafb;
-}
-
-/* Badge kategori */
-body.dark-mode .badge-kategori {
-    color: #fff !important;
-}
-
-
-/* ===== Tabel Dark Mode ===== */
-
-body.dark-mode .table {
-    color: #ffffff !important;
-}
-
-body.dark-mode .table th {
-    color: #ffffff !important;
-    background-color: #1e1e1e !important;
-}
-
-body.dark-mode .table td {
-    color: #ffffff !important;
-    background-color: #1e1e1e !important;
-}
-
-body.dark-mode .table-hover > tbody > tr:hover > * {
-    background-color: #2d2d2d !important;
-    color: #ffffff !important;
-}
-
-body.dark-mode .table > :not(caption) > * > * {
-    background-color: #1e1e1e !important;
-    color: #ffffff !important;
-    border-color: #3a3a3a !important;
+.login-logo-mobile{
+    width: 220px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }

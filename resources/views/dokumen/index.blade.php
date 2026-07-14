@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Pengolahan Dokumen')
+@section('title', 'Kelola Dokumen')
 
 @section('content')
 <nav aria-label="breadcrumb" class="mb-2">
@@ -22,7 +22,7 @@
         <div class="col-md-4">
             <div class="input-group">
                 <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
-                <input type="text" name="q" class="form-control" placeholder="Cari dokumen pengolahan..." value="{{ request('q') }}">
+                <input type="text" name="q" class="form-control" placeholder="Cari dokumen..." value="{{ request('q') }}">
             </div>
         </div>
         <div class="col-md-2">
@@ -41,14 +41,19 @@
                 @endforeach
             </select>
         </div>
-        <div class="col-md-3">
-            <select name="kategori_id" class="form-select" onchange="this.form.submit()">
-                <option value="">Semua Jenis</option>
-                @foreach ($kategoris as $kategori)
-                    <option value="{{ $kategori->id }}" {{ request('kategori_id') == $kategori->id ? 'selected' : '' }}>{{ $kategori->nama }}</option>
-                @endforeach
-            </select>
-        </div>
+        <div class="col-md-2">
+    <select name="tanggal" class="form-select" onchange="this.form.submit()">
+        <option value="">Tanggal</option>
+
+        @for ($d = 1; $d <= 31; $d++)
+            <option value="{{ $d }}"
+                {{ request('tanggal') == $d ? 'selected' : '' }}>
+                {{ $d }}
+            </option>
+        @endfor
+
+    </select>
+</div>
         <div class="col-md-1 d-grid">
             <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-funnel"></i></button>
         </div>
