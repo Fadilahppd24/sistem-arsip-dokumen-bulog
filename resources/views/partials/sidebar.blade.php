@@ -2,13 +2,11 @@
     $user = auth()->user();
 @endphp
 <aside class="sidebar d-flex flex-column">
-    <div class="brand d-flex align-items-center gap-2">
-        <i class="bi bi-box-seam-fill text-bulog-yellow fs-3"></i>
-        <div>
-            <div class="fw-bold text-white lh-1">BULOG</div>
-            <div class="small" style="color:#9db3d9; font-size:.65rem;">mengantarkan kebaikan</div>
-        </div>
-    </div>
+   <div class="brand">
+    <img src="{{ asset('images/logobulog.png') }}"
+         alt="Logo BULOG"
+         class="sidebar-logo">
+</div>
 
     <nav class="flex-grow-1 overflow-auto pb-3">
         <div class="nav-section-title">Menu</div>

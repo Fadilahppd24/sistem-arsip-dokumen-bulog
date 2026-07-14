@@ -16,17 +16,54 @@ body {
 }
 
 /* ===== Halaman Login ===== */
-.login-wrapper {
-  min-height: 100vh;
-  display: flex;
-  align-items: stretch;
+/* ===== LOGIN ===== */
+
+.login-wrapper{
+    width:100%;
+    min-height:100vh;
+    overflow:hidden;
 }
 
-.login-hero {
-  background: linear-gradient(160deg, var(--bulog-navy) 0%, var(--bulog-blue-light) 100%);
-  color: #fff;
-  position: relative;
-  overflow: hidden;
+.login-wrapper .row{
+    min-height:100vh;
+}
+
+
+/* sisi kiri */
+.login-hero{
+    height:100vh;
+    color:white;
+    position:relative;
+    overflow:hidden;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+
+    padding:50px 55px;
+
+    background:
+    linear-gradient(
+        rgba(10,46,110,.65),
+        rgba(10,46,110,.75)
+    ),
+    url("../images/kantorbulog.jpg");
+
+    background-size:cover;
+    background-position:center;
+}
+
+
+/* logo */
+.login-logo{
+    width:180px;
+}
+
+
+/* sisi kanan */
+.login-card{
+   height:100vh;
+   background:#fff !important;
 }
 
 .login-hero::after {
@@ -68,16 +105,12 @@ body {
   top: 0;
 }
 
-.sidebar .brand {
-  padding: 1.25rem 1.25rem 1rem;
-}
-
-.sidebar .nav-section-title {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #7d93c2;
-  padding: 1rem 1.25rem 0.35rem;
+.sidebar .nav-section-title{
+    font-size:.7rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:#7d93c2;
+    padding:.55rem 1.25rem .25rem;
 }
 
 .sidebar .nav-link {
@@ -192,4 +225,42 @@ body {
   justify-content: center;
   font-weight: 600;
   font-size: 0.85rem;
+}
+
+.sidebar .brand{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 8px 0 8px;
+    height: 145px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.sidebar-logo{
+    width: 230px;
+    height: auto;
+    margin-top: -6px;
+}
+
+.sidebar nav{
+    margin-top: -4px;
+}
+
+/* ===== Logo Login ===== */
+
+.login-brand{
+    margin-bottom: 30px;
+}
+
+.login-logo{
+    width: 260px;
+    height: auto;
+    display: block;
+}
+
+.login-logo-mobile{
+    width: 220px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
