@@ -7,13 +7,10 @@
     </div>
 
     <div class="d-flex align-items-center gap-3">
-        <button class="btn btn-sm btn-light position-relative">
-            <i class="bi bi-bell-fill"></i>
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:.5rem;">
-                &nbsp;<span class="visually-hidden">notifikasi baru</span>
-            </span>
-        </button>
-        <button class="btn btn-sm btn-light"><i class="bi bi-moon-fill"></i></button>
+        
+        <button class="btn btn-sm btn-light" id="themeToggle" title="Ganti Tema">
+    <i class="bi bi-moon-fill" id="themeIcon"></i>
+</button>
 
         <div class="dropdown">
             <a href="#" class="d-flex align-items-center gap-2 text-decoration-none text-dark dropdown-toggle" data-bs-toggle="dropdown">

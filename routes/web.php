@@ -35,7 +35,16 @@ Route::middleware('auth')->group(function () {
         Route::resource('users', UserController::class)->except(['show']);
     });
 
-    // Dokumen: show/download bisa diakses Admin & User
-    Route::get('/dokumen/{dokumen}', [DokumenController::class, 'show'])->name('dokumen.show');
-    Route::get('/dokumen/{dokumen}/download', [DokumenController::class, 'download'])->name('dokumen.download');
+    // Dokumen: preview/show/download bisa diakses Admin & User
+Route::get('/dokumen/{dokumen}/preview', [DokumenController::class, 'preview'])
+    ->name('dokumen.preview');
+
+Route::get('/dokumen/{dokumen}/file', [DokumenController::class, 'file'])
+    ->name('dokumen.file');
+
+Route::get('/dokumen/{dokumen}', [DokumenController::class, 'show'])
+    ->name('dokumen.show');
+
+Route::get('/dokumen/{dokumen}/download', [DokumenController::class, 'download'])
+    ->name('dokumen.download');
 });

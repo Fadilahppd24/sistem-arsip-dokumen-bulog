@@ -134,6 +134,30 @@ class DokumenController extends Controller
         );
     }
 
+public function preview(Dokumen $dokumen): View
+{
+    $dokumen->load(['kategori', 'uploader']);
+
+    return view('dokumen.show', compact('dokumen'));
+}
+
+
+public function file(Dokumen $dokumen)
+{
+    abort_unless(
+        Storage::disk('public')->exists($dokumen->file_path),
+        404,
+        'File dokumen tidak ditemukan.'
+    );
+
+    return response()->file(
+        Storage::disk('public')->path($dokumen->file_path),
+        [
+            'Content-Type' => 'application/pdf',
+        ]
+    );
+}
+
     private function validasi(Request $request, bool $wajibFile = true): array
     {
         return $request->validate([
