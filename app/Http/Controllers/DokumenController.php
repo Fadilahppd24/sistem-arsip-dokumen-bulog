@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use App\Helpers\AuditHelper;
 
 class DokumenController extends Controller
 {
@@ -51,19 +52,39 @@ class DokumenController extends Controller
     {
         $validated = $this->validasi($request);
 
+
+         $cekDokumen = Dokumen::where('nama_dokumen', $validated['nama_dokumen'])
+    ->where('nomor_keterangan', $validated['nomor_keterangan'] ?? null)
+    ->exists();
+
+if ($cekDokumen) {
+    return back()
+        ->withInput()
+        ->with('error', 'Dokumen dengan nama dan nomor yang sama sudah ada.');
+}
+
         $file = $request->file('file');
         $path = $file->store('dokumen', 'public');
 
-        Dokumen::create([
-            'kategori_id' => $validated['kategori_id'],
-            'nama_dokumen' => $validated['nama_dokumen'],
-            'nomor_keterangan' => $validated['nomor_keterangan'] ?? null,
-            'tanggal_dokumen' => $validated['tanggal_dokumen'],
-            'deskripsi' => $validated['deskripsi'] ?? null,
-            'file_path' => $path,
-            'file_size' => $file->getSize(),
-            'user_id' => Auth::id(),
-        ]);
+       
+
+        $dokumen = Dokumen::create([
+    'kategori_id' => $validated['kategori_id'],
+    'nama_dokumen' => $validated['nama_dokumen'],
+    'nomor_keterangan' => $validated['nomor_keterangan'] ?? null,
+    'tanggal_dokumen' => $validated['tanggal_dokumen'],
+    'deskripsi' => $validated['deskripsi'] ?? null,
+    'file_path' => $path,
+    'file_size' => $file->getSize(),
+    'user_id' => Auth::id(),
+]);
+
+AuditHelper::catat(
+    'Upload Dokumen',
+    'Dokumen',
+    $dokumen->id,
+    'Mengunggah dokumen '.$dokumen->nama_dokumen
+);
 
         return redirect()->route('dokumen.index')
             ->with('success', 'Dokumen berhasil diunggah.');
@@ -107,6 +128,13 @@ class DokumenController extends Controller
 
         $dokumen->save();
 
+        AuditHelper::catat(
+    'Edit Dokumen',
+    'Dokumen',
+    $dokumen->id,
+    'Mengubah dokumen '.$dokumen->nama_dokumen
+);
+
         return redirect()->route('dokumen.index')
             ->with('success', 'Dokumen berhasil diperbarui.');
     }
@@ -117,15 +145,67 @@ class DokumenController extends Controller
             Storage::disk('public')->delete($dokumen->file_path);
         }
 
+
+        AuditHelper::catat(
+    'Hapus Dokumen',
+    'Dokumen',
+    $dokumen->id,
+    'Menghapus dokumen '.$dokumen->nama_dokumen
+);
         $dokumen->delete();
 
         return redirect()->route('dokumen.index')
             ->with('success', 'Dokumen berhasil dihapus.');
     }
 
+    public function restore($id): RedirectResponse
+{
+    $dokumen = Dokumen::withTrashed()->findOrFail($id);
+
+    $dokumen->restore();
+
+    AuditHelper::catat(
+        'Restore Dokumen',
+        'Dokumen',
+        $dokumen->id,
+        'Mengembalikan dokumen '.$dokumen->nama_dokumen
+    );
+
+    return redirect()->route('dokumen.index')
+        ->with('success', 'Dokumen berhasil dipulihkan.');
+}
+
+public function forceDelete($id): RedirectResponse
+{
+    $dokumen = Dokumen::withTrashed()->findOrFail($id);
+
+    if ($dokumen->file_path && Storage::disk('public')->exists($dokumen->file_path)) {
+        Storage::disk('public')->delete($dokumen->file_path);
+    }
+
+    $dokumen->forceDelete();
+
+    AuditHelper::catat(
+        'Hapus Permanen Dokumen',
+        'Dokumen',
+        $id,
+        'Menghapus permanen dokumen '.$dokumen->nama_dokumen
+    );
+
+    return redirect()->route('dokumen.index')
+        ->with('success', 'Dokumen berhasil dihapus permanen.');
+}
+
     public function download(Dokumen $dokumen)
     {
         abort_unless(Storage::disk('public')->exists($dokumen->file_path), 404, 'File dokumen tidak ditemukan.');
+
+AuditHelper::catat(
+    'Download Dokumen',
+    'Dokumen',
+    $dokumen->id,
+    'Mengunduh dokumen '.$dokumen->nama_dokumen
+);
 
         return Storage::disk('public')->download(
             $dokumen->file_path,
@@ -137,6 +217,7 @@ public function preview(Dokumen $dokumen): View
 {
     $dokumen->load(['kategori', 'uploader']);
 
+    
     return view('dokumen.show', compact('dokumen'));
 }
 
@@ -157,6 +238,7 @@ public function file(Dokumen $dokumen)
     );
 }
 
+
     private function validasi(Request $request, bool $wajibFile = true): array
     {
         return $request->validate([
@@ -165,14 +247,14 @@ public function file(Dokumen $dokumen)
             'nomor_keterangan' => ['nullable', 'string', 'max:255'],
             'tanggal_dokumen' => ['required', 'date'],
             'deskripsi' => ['nullable', 'string', 'max:1000'],
-            'file' => [$wajibFile ? 'required' : 'nullable', 'file', 'mimes:pdf', 'max:20480'],
+            'file' => [$wajibFile ? 'required' : 'nullable', 'file', 'mimes:pdf', 'max:51200'],
         ], [
             'kategori_id.required' => 'Kategori wajib dipilih.',
             'nama_dokumen.required' => 'Nama dokumen wajib diisi.',
             'tanggal_dokumen.required' => 'Tanggal dokumen wajib diisi.',
             'file.required' => 'File PDF wajib diunggah.',
             'file.mimes' => 'File harus berformat PDF.',
-            'file.max' => 'Ukuran file maksimal 20 MB.',
+            'file.max' => 'Ukuran file maksimal 50 MB.',
         ]);
     }
 }

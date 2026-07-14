@@ -4,7 +4,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BackupController;
 use Illuminate\Support\Facades\Route;
+
 
 Route::redirect('/', '/login');
 
@@ -32,7 +34,18 @@ Route::middleware('auth')->group(function () {
         Route::put('/dokumen/{dokumen}', [DokumenController::class, 'update'])->name('dokumen.update');
         Route::delete('/dokumen/{dokumen}', [DokumenController::class, 'destroy'])->name('dokumen.destroy');
 
+
+
+Route::patch('/dokumen/{dokumen}/restore', [DokumenController::class, 'restore'])
+    ->name('dokumen.restore');
+
+Route::delete('/dokumen/{dokumen}/force-delete', [DokumenController::class, 'forceDelete'])
+    ->name('dokumen.forceDelete');
+
         Route::resource('users', UserController::class)->except(['show']);
+
+        Route::get('/backup/database', [BackupController::class, 'database'])
+    ->name('backup.database');
     });
 
     // Dokumen: preview/show/download bisa diakses Admin & User
