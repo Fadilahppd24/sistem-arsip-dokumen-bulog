@@ -1,7 +1,41 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DokumenController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::redirect('/', '/login');
+
+// ==== Guest (belum login) ====
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [LoginController::class, 'create'])->name('login');
+    Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+});
+
+// ==== Wajib login (Admin & User) ====
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Dokumen: index/search bisa diakses Admin & User
+    Route::get('/dokumen', [DokumenController::class, 'index'])->name('dokumen.index');
+
+    // ==== Khusus Admin (rute literal /dokumen/create didaftarkan SEBELUM
+    // rute berparameter /dokumen/{dokumen} agar tidak bentrok) ====
+    Route::middleware('admin')->group(function () {
+        Route::get('/dokumen/create', [DokumenController::class, 'create'])->name('dokumen.create');
+        Route::post('/dokumen', [DokumenController::class, 'store'])->name('dokumen.store');
+        Route::get('/dokumen/{dokumen}/edit', [DokumenController::class, 'edit'])->name('dokumen.edit');
+        Route::put('/dokumen/{dokumen}', [DokumenController::class, 'update'])->name('dokumen.update');
+        Route::delete('/dokumen/{dokumen}', [DokumenController::class, 'destroy'])->name('dokumen.destroy');
+
+        Route::resource('users', UserController::class)->except(['show']);
+    });
+
+    // Dokumen: show/download bisa diakses Admin & User
+    Route::get('/dokumen/{dokumen}', [DokumenController::class, 'show'])->name('dokumen.show');
+    Route::get('/dokumen/{dokumen}/download', [DokumenController::class, 'download'])->name('dokumen.download');
 });
