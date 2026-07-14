@@ -24,7 +24,10 @@
                 </a>
             </div>
             <div style="height: 640px; background: #525659;">
-                <iframe src="{{ asset('storage/'.$dokumen->file_path) }}" width="100%" height="100%" style="border:none;"></iframe>
+               <iframe src="{{ route('dokumen.file', $dokumen) }}"
+        width="100%"
+        height="100%"
+        style="border:none;"></iframe>
             </div>
         </div>
     </div>
