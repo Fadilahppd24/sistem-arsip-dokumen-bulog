@@ -264,3 +264,149 @@ body {
     display: block;
     margin: 0 auto;
 }
+
+
+
+/* ===== DARK MODE ===== */
+
+body.dark-mode {
+    background-color: #181a1f;
+    color: #e5e7eb;
+}
+
+
+/* Topbar */
+body.dark-mode .topbar {
+    background: #1f2937;
+    border-bottom: 1px solid #374151;
+}
+
+
+/* Judul halaman */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+    color: #f9fafb;
+}
+
+
+/* Card */
+body.dark-mode .card-panel,
+body.dark-mode .stat-card {
+    background: #1f2937;
+    border-color: #374151;
+}
+
+
+/* Table */
+body.dark-mode .table {
+    --bs-table-bg: transparent;
+    --bs-table-color: #e5e7eb;
+}
+
+body.dark-mode .table thead {
+    background: #111827;
+}
+
+body.dark-mode .table tbody tr {
+    border-color: #374151;
+}
+
+
+/* Input search/filter */
+body.dark-mode .form-control,
+body.dark-mode .form-select {
+    background-color: #111827;
+    border-color: #374151;
+    color: white;
+}
+
+body.dark-mode .form-control::placeholder {
+    color: #9ca3af;
+}
+
+
+/* Tombol light */
+body.dark-mode .btn-light {
+    background: #374151;
+    border-color: #4b5563;
+    color: white;
+}
+
+
+/* Dropdown */
+body.dark-mode .dropdown-menu {
+    background: #1f2937;
+    border-color: #374151;
+}
+
+body.dark-mode .dropdown-item {
+    color: white;
+}
+
+body.dark-mode .dropdown-item:hover {
+    background: #374151;
+}
+
+
+/* Breadcrumb */
+body.dark-mode .breadcrumb-item,
+body.dark-mode .breadcrumb-item a {
+    color: #9ca3af;
+}
+
+
+/* Text muted */
+body.dark-mode .text-muted {
+    color: #9ca3af !important;
+}
+
+/* Perbaikan teks dashboard dark mode */
+
+body.dark-mode .stat-card .text-muted,
+body.dark-mode .card-panel .text-muted {
+    color: #94a3b8 !important;
+}
+
+body.dark-mode .stat-card h3,
+body.dark-mode .stat-card h4,
+body.dark-mode .stat-card .fw-bold {
+    color: #f8fafc !important;
+}
+
+
+/* Angka statistik */
+body.dark-mode .stat-card .display-6,
+body.dark-mode .stat-card h2,
+body.dark-mode .stat-card h3 {
+    color: #ffffff !important;
+}
+
+
+/* Tabel */
+body.dark-mode .table td,
+body.dark-mode .table th {
+    color: #e5e7eb;
+}
+
+
+/* Judul card */
+body.dark-mode .card-panel h5,
+body.dark-mode .card-panel h6 {
+    color: #ffffff;
+}
+
+
+/* Link */
+body.dark-mode a {
+    color: #60a5fa;
+}
+
+
+/* Statistik kategori */
+body.dark-mode .statistik-item {
+    color: #e5e7eb;
+}
