@@ -3,9 +3,25 @@
 @section('title', 'Beranda')
 
 @section('content')
-<div class="mb-4">
-    <h3 class="fw-bold mb-1">Beranda</h3>
-    <p class="text-muted mb-0">Kelola dan akses dokumen dengan lebih mudah dan cepat.</p>
+<div class="dashboard-header mb-4">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+        <div>
+            <h2 class="fw-bold mb-2">
+                Selamat Datang Kembali
+            </h2>
+
+            <p class="text-muted mb-0">
+                Kelola dan akses dokumen dengan lebih mudah dan cepat.
+            </p>
+        </div>
+
+        <div class="date-box">
+            <i class="bi bi-calendar-event"></i>
+            {{ now()->translatedFormat('l, d F Y') }}
+        </div>
+
+    </div>
 </div>
 
 <div class="row g-3 mb-4">
@@ -24,6 +40,10 @@
                             <div class="text-muted small">{{ $kategori->nama }}</div>
                             <div class="fs-4 fw-bold text-dark">{{ $kategori->dokumens_count }}</div>
                             <div class="text-muted small">Dokumen</div>
+                            <div class="small text-muted mt-2">
+                            {{ $totalDokumen > 0 ? round(($kategori->dokumens_count / $totalDokumen) * 100, 1) : 0 }}%
+                            dari total dokumen
+                        </div>
                         </div>
                     </div>
                     <i class="bi bi-chevron-right text-muted"></i>
@@ -54,7 +74,35 @@
                     <tbody>
                         @forelse ($dokumenTerbaru as $dokumen)
                             <tr>
-                                <td class="fw-semibold">{{ $dokumen->nama_dokumen }}</td>
+                                <td>
+
+<div class="d-flex align-items-center gap-3">
+
+    <div class="file-icon">
+
+        @php
+            $ext = pathinfo($dokumen->file_path, PATHINFO_EXTENSION);
+        @endphp
+
+        @if($ext=='pdf')
+            <i class="bi bi-file-earmark-pdf-fill text-danger"></i>
+        @elseif(in_array($ext,['doc','docx']))
+            <i class="bi bi-file-earmark-word-fill text-primary"></i>
+        @elseif(in_array($ext,['xls','xlsx']))
+            <i class="bi bi-file-earmark-excel-fill text-success"></i>
+        @else
+            <i class="bi bi-file-earmark-fill"></i>
+        @endif
+
+    </div>
+
+    <span class="fw-semibold">
+        {{ $dokumen->nama_dokumen }}
+    </span>
+
+</div>
+
+</td>
                                 <td><span class="badge bg-light text-dark border badge-kategori">{{ $dokumen->kategori->nama }}</span></td>
                                 <td>{{ $dokumen->tanggal_dokumen->format('d M Y') }}</td>
                                 <td>{{ $dokumen->uploader->name }}</td>
@@ -79,9 +127,18 @@
             </div>
 
             <div class="text-center mb-3">
-                <div class="fs-3 fw-bold text-bulog-navy">{{ $totalDokumen }}</div>
-                <div class="text-muted small">Total Dokumen</div>
-            </div>
+    <div class="mx-auto" style="max-width:220px;">
+        <canvas id="kategoriChart"></canvas>
+    </div>
+
+    <div class="fs-3 fw-bold text-bulog-navy mt-3">
+        {{ $totalDokumen }}
+    </div>
+
+    <div class="text-muted small">
+        Total Dokumen
+    </div>
+</div>
 
             <ul class="list-unstyled mb-0">
                 @foreach ($kategoris as $kategori)
@@ -97,4 +154,57 @@
         </div>
     </div>
 </div>
+
 @endsection
+
+@push('scripts')
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+new Chart(document.getElementById('kategoriChart'),{
+
+type:'doughnut',
+
+data:{
+
+labels:[
+@foreach($kategoris as $k)
+'{{ $k->nama }}',
+@endforeach
+],
+
+datasets:[{
+
+data:[
+@foreach($kategoris as $k)
+{{ $k->dokumens_count }},
+@endforeach
+],
+
+backgroundColor:[
+'#1D4ED8',
+'#F59E0B',
+'#06B6D4',
+'#6B7280'
+]
+
+}]
+
+},
+
+options: {
+    plugins: {
+        legend: {
+            display: false
+        }
+    },
+    cutout: '70%'
+}
+
+});
+
+</script>
+
+@endpush
