@@ -75,7 +75,7 @@
                     <i class="bi bi-cloud-arrow-up fs-1 text-bulog-navy"></i>
                     <div class="fw-semibold mt-2">Klik untuk mengganti file</div>
                     <div class="text-muted small">atau drag &amp; drop file baru di sini</div>
-                    <div class="text-muted small">Format: PDF (Maks. 20 MB) — kosongkan jika tidak ingin mengganti</div>
+                    <div class="text-muted small">Format: PDF (Maks. 50 MB) — kosongkan jika tidak ingin mengganti</div>
                     <input type="file" name="file" id="file" accept="application/pdf" class="d-none">
                 </label>
                 @error('file') <div class="text-danger small mb-2">{{ $message }}</div> @enderror

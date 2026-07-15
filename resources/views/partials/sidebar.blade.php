@@ -43,16 +43,41 @@
                         <i class="bi bi-folder2-open"></i> Kelola Dokumen
                     </a>
                 </li>
+
+<li class="nav-item">
+    <a href="{{ route('trash.index') }}" 
+       class="nav-link {{ request()->routeIs('trash.*') ? 'active' : '' }}">
+        <i class="bi bi-trash-fill"></i>
+        Sampah Dokumen
+    </a>
+</li>
+
             </ul>
 
-            <div class="nav-section-title">Pengaturan</div>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
-                        <i class="bi bi-people-fill"></i> Pengguna
-                    </a>
-                </li>
-            </ul>
+           <div class="nav-section-title">Pengaturan</div>
+<ul class="nav flex-column">
+
+    <li class="nav-item">
+        <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
+            <i class="bi bi-people-fill"></i> Pengguna
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{{ route('audit-log.index') }}" class="nav-link {{ request()->routeIs('audit-log.*') ? 'active' : '' }}">
+            <i class="bi bi-clock-history"></i> Riwayat Aktivitas
+        </a>
+    </li>
+
+    <li class="nav-item">
+    <a href="{{ route('backup.index') }}" 
+       class="nav-link {{ request()->routeIs('backup.*') ? 'active' : '' }}">
+        <i class="bi bi-database-fill-down"></i>
+        Backup Database
+    </a>
+</li>
+
+</ul>
         @else
             <div class="nav-section-title">Lainnya</div>
             <ul class="nav flex-column">

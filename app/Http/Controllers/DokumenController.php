@@ -21,6 +21,10 @@ class DokumenController extends Controller
         $query = Dokumen::with(['kategori', 'uploader'])
             ->cari($request->q);
 
+            if ($request->filled('kategori_id')) {
+    $query->where('kategori_id', $request->kategori_id);
+}
+
         
         if ($request->filled('tanggal')) {
             $query->whereDay('tanggal_dokumen', $request->tanggal);

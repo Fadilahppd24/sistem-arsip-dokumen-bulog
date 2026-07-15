@@ -5,6 +5,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BackupController;
+use App\Http\Controllers\AuditLogController;
+use App\Http\Controllers\TrashController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -35,6 +37,13 @@ Route::middleware('auth')->group(function () {
         Route::delete('/dokumen/{dokumen}', [DokumenController::class, 'destroy'])->name('dokumen.destroy');
 
 
+        Route::get('/backup', function () {
+    return view('backup.index');
+})->name('backup.index');
+
+
+Route::get('/trash', [TrashController::class, 'index'])
+    ->name('trash.index');
 
 Route::patch('/dokumen/{dokumen}/restore', [DokumenController::class, 'restore'])
     ->name('dokumen.restore');
@@ -47,6 +56,9 @@ Route::delete('/dokumen/{dokumen}/force-delete', [DokumenController::class, 'for
         Route::get('/backup/database', [BackupController::class, 'database'])
     ->name('backup.database');
     });
+
+    Route::get('/audit-log', [AuditLogController::class, 'index'])
+    ->name('audit-log.index');
 
     // Dokumen: preview/show/download bisa diakses Admin & User
 Route::get('/dokumen/{dokumen}/preview', [DokumenController::class, 'preview'])
