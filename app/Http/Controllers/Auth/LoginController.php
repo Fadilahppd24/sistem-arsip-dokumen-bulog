@@ -40,7 +40,10 @@ class LoginController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard'));
+        return redirect()
+        ->intended(route('dashboard'))
+        ->with('success', 'Login berhasil.');
+
     }
 
     /**
@@ -53,6 +56,8 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('login');
+        return redirect()
+        ->route('login')
+        ->with('success', 'Logout berhasil.');
     }
 }
