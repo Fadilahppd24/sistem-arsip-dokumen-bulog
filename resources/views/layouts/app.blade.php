@@ -19,20 +19,11 @@
         @include('partials.navbar')
 
         <main class="p-4">
-            @if (session('success'))
-                <div class="alert alert-success d-flex align-items-center gap-2 py-2">
-                    <i class="bi bi-check-circle-fill"></i> {{ session('success') }}
-                </div>
-            @endif
 
-            @if (session('error'))
-                <div class="alert alert-danger d-flex align-items-center gap-2 py-2">
-                    <i class="bi bi-exclamation-triangle-fill"></i> {{ session('error') }}
-                </div>
-            @endif
+    @yield('content')
 
-            @yield('content')
-        </main>
+</main>
+
     </div>
 </div>
 
