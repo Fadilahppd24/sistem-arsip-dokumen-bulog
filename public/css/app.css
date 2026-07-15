@@ -410,3 +410,23 @@ body.dark-mode a {
 body.dark-mode .statistik-item {
     color: #e5e7eb;
 }
+
+/* Dark mode navbar user */
+body.dark-mode .user-dropdown {
+    color: #fff !important;
+}
+
+body.dark-mode .user-dropdown .text-muted {
+    color: #94a3b8 !important;
+}
+
+body.dark-mode .topbar {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+body.dark-mode .topbar .btn-light {
+    background: #334155;
+    border-color: #475569;
+    color: #fff;
+}

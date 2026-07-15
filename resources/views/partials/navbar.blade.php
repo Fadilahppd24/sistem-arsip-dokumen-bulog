@@ -13,7 +13,7 @@
 </button>
 
         <div class="dropdown">
-            <a href="#" class="d-flex align-items-center gap-2 text-decoration-none text-dark dropdown-toggle" data-bs-toggle="dropdown">
+            <a href="#" class="d-flex align-items-center gap-2 text-decoration-none dropdown-toggle user-dropdown">
                 <div class="avatar-circle bg-bulog-navy">{{ strtoupper(substr($user->name, 0, 1)) }}</div>
                 <div class="d-none d-md-block text-start">
                     <div class="small fw-semibold lh-1">{{ $user->name }}</div>
