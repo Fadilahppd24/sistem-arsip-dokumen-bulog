@@ -3,9 +3,29 @@
 @section('title', 'Beranda')
 
 @section('content')
-<div class="mb-4">
-    <h3 class="fw-bold mb-1">Beranda</h3>
-    <p class="text-muted mb-0">Selamat datang, {{ auth()->user()->name }}. Temukan dokumen yang Anda butuhkan di sini.</p>
+<div class="dashboard-header mb-4">
+
+<div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+<div>
+<h2 class="fw-bold mb-2">
+Selamat Datang Kembali
+</h2>
+
+<p class="text-muted mb-0">
+Temukan dokumen yang Anda butuhkan dengan mudah dan cepat.
+</p>
+
+</div>
+
+
+<div class="date-box">
+<i class="bi bi-calendar-event"></i>
+{{ now()->translatedFormat('l, d F Y') }}
+</div>
+
+</div>
+
 </div>
 
 <div class="row g-3 mb-4">
@@ -51,7 +71,21 @@
             <tbody>
                 @forelse ($dokumenTerbaru as $dokumen)
                     <tr>
-                        <td class="fw-semibold">{{ $dokumen->nama_dokumen }}</td>
+                        <td>
+
+<div class="d-flex align-items-center gap-3">
+
+<div class="file-icon">
+<i class="bi bi-file-earmark-pdf-fill text-danger"></i>
+</div>
+
+<span class="fw-semibold">
+{{ $dokumen->nama_dokumen }}
+</span>
+
+</div>
+
+</td>
                         <td><span class="badge bg-light text-dark border badge-kategori">{{ $dokumen->kategori->nama }}</span></td>
                         <td>{{ $dokumen->tanggal_dokumen->format('d M Y') }}</td>
                         <td class="text-end">
