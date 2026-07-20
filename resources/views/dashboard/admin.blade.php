@@ -18,7 +18,7 @@
 
         <div class="date-box">
             <i class="bi bi-calendar-event"></i>
-            {{ now()->translatedFormat('l, d F Y') }}
+            {{ \Carbon\Carbon::now()->locale('id')->isoFormat('dddd, D MMMM YYYY') }}
         </div>
 
     </div>
