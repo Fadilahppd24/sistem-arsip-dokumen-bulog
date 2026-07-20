@@ -166,14 +166,79 @@ body {
 }
 
 .stat-icon {
-  width: 46px;
-  height: 46px;
-  border-radius: 0.65rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.25rem;
-  color: #fff;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(0,0,0,.12);
+    transition: all .25s ease;
+}
+
+.stat-card:hover .stat-icon{
+    transform: scale(1.08);
+}
+
+.stat-number{
+
+    font-size:2.35rem;
+
+    font-weight:700;
+
+    line-height:1;
+
+    color:var(--bulog-navy);
+
+}
+
+.kategori-title{
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    color:#374151;
+
+}
+
+.jumlah-dokumen{
+
+    font-size:.95rem;
+
+    color:#6B7280;
+
+    margin-bottom:6px;
+
+    margin-left:2px;
+
+    line-height:1.2;
+
+}
+
+body.dark-mode .stat-number{
+    color:#93C5FD;
+}
+
+.persentase-dokumen{
+
+    margin-top:8px;
+
+    font-size:.88rem;
+
+    color:#6B7280;
+
+}
+
+body.dark-mode .kategori-title{
+    color:#F9FAFB;
+}
+
+body.dark-mode .jumlah-dokumen,
+body.dark-mode .persentase-dokumen{
+    color:#94A3B8;
 }
 
 .bg-bulog-navy { background-color: var(--bulog-navy) !important; }
@@ -509,6 +574,22 @@ body.dark-mode .date-box{
 .stat-card:hover{
     transform:translateY(-6px);
     box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.stat-card-primary{
+    border-top:4px solid #0A2E6E;
+}
+
+.stat-card-warning{
+    border-top:4px solid #F5A623;
+}
+
+.stat-card-info{
+    border-top:4px solid #06B6D4;
+}
+
+.stat-card-secondary{
+    border-top:4px solid #6B7280;
 }
 
 .file-icon{

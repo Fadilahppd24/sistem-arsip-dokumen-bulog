@@ -31,20 +31,35 @@
     @foreach ($kategoris as $kategori)
         <div class="col-6 col-lg-3">
             <a href="{{ route('dokumen.index', ['kategori_id' => $kategori->id]) }}" class="text-decoration-none">
-                <div class="stat-card d-flex align-items-start justify-content-between h-100">
+                <div class="stat-card stat-card-{{ $kategori->warna }} d-flex align-items-start justify-content-between h-100">
                     <div class="d-flex gap-3">
                         <div class="stat-icon {{ $warnaIkon[$kategori->warna] ?? 'bg-bulog-navy' }}">
                             <i class="bi {{ $kategori->icon ?? 'bi-folder-fill' }}"></i>
                         </div>
                         <div>
-                            <div class="text-muted small">{{ $kategori->nama }}</div>
-                            <div class="fs-4 fw-bold text-dark">{{ $kategori->dokumens_count }}</div>
-                            <div class="text-muted small">Dokumen</div>
-                            <div class="small text-muted mt-2">
-                            {{ $totalDokumen > 0 ? round(($kategori->dokumens_count / $totalDokumen) * 100, 1) : 0 }}%
-                            dari total dokumen
-                        </div>
-                        </div>
+
+    <div class="kategori-title">
+        {{ $kategori->nama }}
+    </div>
+
+    <div class="d-flex align-items-end gap-2 mt-1">
+
+        <div class="stat-number">
+            {{ $kategori->dokumens_count }}
+        </div>
+
+        <div class="jumlah-dokumen">
+            Dokumen
+        </div>
+
+    </div>
+
+    <div class="persentase-dokumen">
+        {{ $totalDokumen > 0 ? round(($kategori->dokumens_count / $totalDokumen) * 100, 1) : 0 }}%
+        dari total
+    </div>
+
+</div>
                     </div>
                     <i class="bi bi-chevron-right text-muted"></i>
                 </div>
@@ -102,13 +117,26 @@
 
 </div>
 
-</td>
-                                <td><span class="badge bg-light text-dark border badge-kategori">{{ $dokumen->kategori->nama }}</span></td>
+                                </td>
+                                                                <td>
+                                    @php
+                                        $badge = match($dokumen->kategori->warna){
+                                            'primary' => 'bg-primary-subtle text-primary border border-primary-subtle',
+                                            'warning' => 'bg-warning-subtle text-warning-emphasis border border-warning-subtle',
+                                            'info' => 'bg-info-subtle text-info-emphasis border border-info-subtle',
+                                            default => 'bg-secondary-subtle text-secondary border border-secondary-subtle',
+                                        };
+                                    @endphp
+
+                                    <span class="badge rounded-pill {{ $badge }}">
+                                        {{ $dokumen->kategori->nama }}
+                                    </span>
+                                </td>
                                 <td>{{ $dokumen->tanggal_dokumen->format('d M Y') }}</td>
                                 <td>{{ $dokumen->uploader->name }}</td>
                                 <td class="text-end">
-                                    <a href="{{ route('dokumen.show', $dokumen) }}" class="btn btn-sm btn-light"><i class="bi bi-eye"></i></a>
-                                    <a href="{{ route('dokumen.download', $dokumen) }}" class="btn btn-sm btn-light"><i class="bi bi-download"></i></a>
+                                    <a href="{{ route('dokumen.show', $dokumen) }}" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></a>
+                                    <a href="{{ route('dokumen.download', $dokumen) }}" class="btn btn-sm btn-outline-success"><i class="bi bi-download"></i></a>
                                 </td>
                             </tr>
                         @empty
