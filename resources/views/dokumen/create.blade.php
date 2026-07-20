@@ -79,6 +79,39 @@
                     <i class="bi bi-check-circle-fill text-success"></i>
                 </div>
 
+                <div id="previewContainer" class="d-none mt-3">
+
+                    <label class="form-label fw-semibold">
+                        Preview Dokumen
+                    </label>
+
+                    <div class="border rounded overflow-hidden">
+
+                        <iframe
+                            id="previewFrame"
+                            width="100%"
+                            height="420"
+                            style="border:0; cursor:pointer;">
+                        </iframe>
+
+                    </div>
+
+                    <div class="text-center mt-3">
+
+                        <button
+                            type="button"
+                            id="btnPreview"
+                            class="btn btn-outline-primary">
+
+                            <i class="bi bi-arrows-fullscreen"></i>
+                            Lihat Dokumen Ukuran Penuh
+
+                        </button>
+
+                    </div>
+
+                </div>
+
                 <div class="mt-auto d-flex justify-content-end gap-2 pt-3">
                     <a href="{{ route('dokumen.index') }}" class="btn btn-light">Batal</a>
                     <button type="submit" class="btn btn-bulog"><i class="bi bi-check-lg"></i> Simpan Dokumen</button>
@@ -88,9 +121,50 @@
     </div>
 </form>
 
+<div class="modal fade" id="previewModal" tabindex="-1">
+
+    <div class="modal-dialog modal-xl">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+                    Preview Dokumen
+                </h5>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+            <div class="modal-body p-0">
+
+                <iframe
+                    id="previewFrameModal"
+                    width="100%"
+                    height="700"
+                    style="border:0;">
+                </iframe>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 @push('scripts')
 <script>
     const fileInput = document.getElementById('file');
+    const previewContainer = document.getElementById('previewContainer');
+    const previewFrame = document.getElementById('previewFrame');
+    const btnPreview = document.getElementById('btnPreview');
+    const previewFrameModal = document.getElementById('previewFrameModal');
     const dropzone = document.getElementById('dropzone');
     const fileInfo = document.getElementById('fileInfo');
     const fileName = document.getElementById('fileName');
@@ -102,7 +176,14 @@
             fileName.textContent = file.name;
             fileSize.textContent = (file.size / (1024 * 1024)).toFixed(2) + ' MB';
             fileInfo.classList.remove('d-none');
-        }
+            const url = URL.createObjectURL(file);
+
+            previewContainer.classList.remove('d-none');
+
+            previewFrame.src = url;
+
+            previewFrameModal.src = url;
+                    }
     });
 
     ['dragover', 'dragleave', 'drop'].forEach(evt => {
@@ -115,6 +196,26 @@
         fileInput.files = e.dataTransfer.files;
         fileInput.dispatchEvent(new Event('change'));
     });
+
+   btnPreview.addEventListener('click', function () {
+
+    if (fileInput.files.length) {
+
+        const url = URL.createObjectURL(fileInput.files[0]);
+
+        previewFrameModal.src = url;
+
+    }
+
+    const modal = new bootstrap.Modal(
+        document.getElementById('previewModal')
+    );
+
+    modal.show();
+
+});
+
 </script>
+
 @endpush
 @endsection

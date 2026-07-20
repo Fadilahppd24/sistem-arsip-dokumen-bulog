@@ -29,6 +29,8 @@ class BackupController extends Controller
     'Melakukan backup database'
 );
 
-        return response()->download($path)->deleteFileAfterSend(true);
+return response()
+    ->download($path)
+    ->deleteFileAfterSend(true);
     }
 }
