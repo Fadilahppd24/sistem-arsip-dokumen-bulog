@@ -58,6 +58,7 @@ class LoginController extends Controller
 
         return redirect()
         ->route('login')
-        ->with('success', 'Logout berhasil.');
+        ->with('success', 'Logout berhasil.')
+        ->with('play_logout_audio', true);
     }
 }

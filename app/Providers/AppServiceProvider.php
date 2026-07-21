@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Auth\Events\Login;
+use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\Event;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
 
         Event::listen(Login::class, function () {
             session()->flash('play_welcome_audio', true);
+        });
+
+        Event::listen(Logout::class, function () {
+            session()->flash('play_logout_audio', true);
         });
     }
 }

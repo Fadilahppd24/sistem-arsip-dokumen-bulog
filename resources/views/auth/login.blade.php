@@ -101,4 +101,20 @@
         icon.classList.toggle('bi-eye-slash');
     });
 </script>
+
+@if(session('play_logout_audio'))
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const audio = new Audio("{{ asset('audio/logout.mp3') }}");
+    audio.volume = 1;
+
+    setTimeout(() => {
+        audio.play().catch(err => {
+            console.warn('Autoplay diblokir browser:', err);
+        });
+    }, 500);
+});
+</script>
+@endif
+
 @endsection
