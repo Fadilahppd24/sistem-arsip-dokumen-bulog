@@ -85,30 +85,30 @@
                         Preview Dokumen
                     </label>
 
-                    <div class="border rounded overflow-hidden">
+                    <div class="border rounded overflow-hidden position-relative" style="isolation: isolate;">
 
-                        <iframe
-                            id="previewFrame"
-                            width="100%"
-                            height="420"
-                            style="border:0; cursor:pointer;">
-                        </iframe>
+    <iframe
+        id="previewFrame"
+        width="100%"
+        height="420"
+        style="border:0; cursor:pointer; display:block;">
+    </iframe>
 
-                    </div>
+</div>
 
-                    <div class="text-center mt-3">
+<div class="text-center mt-4 pt-2">
 
-                        <button
-                            type="button"
-                            id="btnPreview"
-                            class="btn btn-outline-primary">
+    <button
+        type="button"
+        id="btnPreview"
+        class="btn btn-outline-primary d-inline-flex align-items-center gap-2">
 
-                            <i class="bi bi-arrows-fullscreen"></i>
-                            Lihat Dokumen Ukuran Penuh
+        <i class="bi bi-arrows-fullscreen"></i>
+        <span>Lihat Dokumen Ukuran Penuh</span>
 
-                        </button>
+    </button>
 
-                    </div>
+</div>
 
                 </div>
 

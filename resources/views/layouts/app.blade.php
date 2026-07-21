@@ -30,6 +30,34 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const body = document.body;
+    const toggle = document.getElementById('themeToggle');
+    const icon = document.getElementById('themeIcon');
+
+    if (localStorage.getItem('theme') === 'dark') {
+        body.classList.add('dark-mode');
+        icon.classList.remove('bi-moon-fill');
+        icon.classList.add('bi-sun-fill');
+    }
+
+    toggle.addEventListener('click', function () {
+        body.classList.toggle('dark-mode');
+
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark');
+            icon.classList.remove('bi-moon-fill');
+            icon.classList.add('bi-sun-fill');
+        } else {
+            localStorage.setItem('theme', 'light');
+            icon.classList.remove('bi-sun-fill');
+            icon.classList.add('bi-moon-fill');
+        }
+    });
+});
+</script>
+
+<script>
 @if(session('play_welcome_audio'))
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -44,7 +72,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 @endif
-
 </script>
 
 @stack('scripts')
@@ -70,25 +97,6 @@ Swal.fire({
     text: "{{ session('error') }}"
 });
 @endif
-
-document.addEventListener('DOMContentLoaded', function () {
-
-    if (sessionStorage.getItem('welcomePlayed')) {
-        return;
-    }
-
-    sessionStorage.setItem('welcomePlayed', 'true');
-
-    const audio = new Audio("{{ asset('audio/welcome.mp3') }}");
-    audio.volume = 1;
-
-    setTimeout(() => {
-        audio.play().catch(err => {
-            console.warn('Autoplay diblokir browser:', err);
-        });
-    }, 1000);
-
-});
 
 </script>
 

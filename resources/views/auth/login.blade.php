@@ -44,8 +44,8 @@
          class="login-logo-mobile">
 </div>
 
-                <h2 class="fw-bold mb-1">Selamat Datang</h2>
-                <p class="text-muted mb-4">Silakan masuk untuk melanjutkan</p>
+                <h2 class="fw-bold mb-1 text-center">Selamat Datang</h2>
+                <p class="text-muted mb-4 text-center">Silakan masuk untuk melanjutkan</p>
 
                 @if ($errors->any())
                     <div class="alert alert-danger py-2 small">
@@ -56,17 +56,17 @@
                 <form method="POST" action="{{ route('login.store') }}">
                     @csrf
 
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <label for="email" class="form-label fw-semibold">Email</label>
                         <input type="email" class="form-control form-control-lg" id="email" name="email"
-                               placeholder="Masukkan email Anda" value="{{ old('email') }}" required autofocus>
+                            placeholder="Masukkan email Anda" value="{{ old('email') }}" required autofocus>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <label for="password" class="form-label fw-semibold">Password</label>
                         <div class="input-group">
                             <input type="password" class="form-control form-control-lg" id="password" name="password"
-                                   placeholder="Masukkan password Anda" required>
+                                placeholder="Masukkan password Anda" required>
                             <button class="btn btn-outline-secondary" type="button" id="togglePassword">
                                 <i class="bi bi-eye"></i>
                             </button>

@@ -124,10 +124,10 @@
                                                                 <td>
                                     @php
                                         $badge = match($dokumen->kategori->warna){
-                                            'primary' => 'bg-primary-subtle text-primary border border-primary-subtle',
-                                            'warning' => 'bg-warning-subtle text-warning-emphasis border border-warning-subtle',
-                                            'info' => 'bg-info-subtle text-info-emphasis border border-info-subtle',
-                                            default => 'bg-secondary-subtle text-secondary border border-secondary-subtle',
+                                            'primary' => 'badge-modern-navy',
+                                            'warning' => 'badge-modern-yellow',
+                                            'info' => 'badge-modern-info',
+                                            default => 'badge-modern-gray',
                                         };
                                     @endphp
 
@@ -186,7 +186,7 @@
                 @foreach ($kategoris as $kategori)
                     <li class="d-flex justify-content-between align-items-center py-2 border-top">
                         <span class="d-flex align-items-center gap-2 small">
-                            <span class="d-inline-block rounded-circle {{ $warnaIkon[$kategori->warna] ?? 'bg-bulog-navy' }}" style="width:10px;height:10px;"></span>
+                            <span class="d-inline-block rounded-circle {{ $warnaIkon[$kategori->warna] ?? 'bg-bulog-navy' }}" style="width:14px;height:14px;"></span>
                             {{ $kategori->nama }}
                         </span>
                         <span class="fw-semibold small">{{ $kategori->dokumens_count }}</span>
