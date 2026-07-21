@@ -576,6 +576,22 @@ body.dark-mode .date-box{
     box-shadow:0 15px 35px rgba(0,0,0,.08);
 }
 
+.stat-card .bi-chevron-right{
+    color:#9CA3AF;
+    opacity:.45;
+    transition:all .25s ease;
+}
+
+.stat-card:hover .bi-chevron-right{
+    opacity:1;
+    transform:translateX(5px);
+    color:var(--bulog-navy);
+}
+
+body.dark-mode .stat-card:hover .bi-chevron-right{
+    color:#60A5FA;
+}
+
 .stat-card-primary{
     border-top:4px solid #0A2E6E;
 }
@@ -631,3 +647,125 @@ body.dark-mode .date-box{
 body.dark-mode .dashboard-header .bi-calendar-event{
     color: #F5A623;
 }
+
+.chart-wrapper{
+
+    position:relative;
+
+    width:250px;
+
+    height:250px;
+
+    margin:0 auto;
+
+}
+
+.chart-wrapper canvas{
+
+    width:100% !important;
+
+    height:100% !important;
+
+}
+
+.chart-center{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    pointer-events:none;
+
+}
+
+.chart-total{
+
+    font-size:2.3rem;
+
+    font-weight:700;
+
+    color:var(--bulog-navy);
+
+    line-height:1;
+
+}
+
+.chart-label{
+
+    margin-top:6px;
+
+    font-size:.95rem;
+
+    font-weight:500;
+
+    letter-spacing:.02em;
+
+    color:#6B7280;
+
+}
+
+body.dark-mode .chart-total{
+
+    color:#fff;
+
+}
+
+body.dark-mode .chart-label{
+
+    color:#94A3B8;
+
+}
+
+.table thead th{
+    background:#F8FAFC;
+    color:#374151;
+    font-size:.9rem;
+    font-weight:700;
+    border-bottom:2px solid #E5E7EB;
+    padding-top:14px;
+    padding-bottom:14px;
+}
+
+body.dark-mode .table thead th{
+    background:#111827;
+    border-bottom:1px solid #374151;
+}
+
+.table tbody tr{
+    transition:.25s ease;
+}
+
+.table tbody tr:hover{
+    background:#F8FAFC;
+}
+
+body.dark-mode .table tbody tr:hover{
+    background:#293244;
+}
+
+.btn-outline-primary,
+.btn-outline-success{
+
+transition:.2s;
+
+}
+
+.btn-outline-primary:hover,
+.btn-outline-success:hover{
+
+transform:translateY(-2px);
+
+}
+
+.sidebar-footer .text-muted{
+    color:rgba(255,255,255,.75) !important;
+}
+

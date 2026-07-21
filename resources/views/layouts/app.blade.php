@@ -30,32 +30,21 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
+@if(session('play_welcome_audio'))
 document.addEventListener('DOMContentLoaded', function () {
-    const body = document.body;
-    const toggle = document.getElementById('themeToggle');
-    const icon = document.getElementById('themeIcon');
 
-    // Terapkan tema yang tersimpan
-    if (localStorage.getItem('theme') === 'dark') {
-        body.classList.add('dark-mode');
-        icon.classList.remove('bi-moon-fill');
-        icon.classList.add('bi-sun-fill');
-    }
+    const audio = new Audio("{{ asset('audio/welcome.mp3') }}");
+    audio.volume = 1;
 
-    toggle.addEventListener('click', function () {
-        body.classList.toggle('dark-mode');
+    setTimeout(() => {
+        audio.play().catch(err => {
+            console.warn('Autoplay diblokir browser:', err);
+        });
+    }, 1000);
 
-        if (body.classList.contains('dark-mode')) {
-            localStorage.setItem('theme', 'dark');
-            icon.classList.remove('bi-moon-fill');
-            icon.classList.add('bi-sun-fill');
-        } else {
-            localStorage.setItem('theme', 'light');
-            icon.classList.remove('bi-sun-fill');
-            icon.classList.add('bi-moon-fill');
-        }
-    });
 });
+@endif
+
 </script>
 
 @stack('scripts')
@@ -63,8 +52,8 @@ document.addEventListener('DOMContentLoaded', function () {
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-@if(session('success'))
 
+@if(session('success'))
 Swal.fire({
     icon: 'success',
     title: 'Berhasil',
@@ -72,19 +61,35 @@ Swal.fire({
     timer: 3000,
     showConfirmButton: false
 });
-
 @endif
 
-
 @if(session('error'))
-
 Swal.fire({
     icon: 'error',
     title: 'Gagal',
     text: "{{ session('error') }}"
 });
-
 @endif
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    if (sessionStorage.getItem('welcomePlayed')) {
+        return;
+    }
+
+    sessionStorage.setItem('welcomePlayed', 'true');
+
+    const audio = new Audio("{{ asset('audio/welcome.mp3') }}");
+    audio.volume = 1;
+
+    setTimeout(() => {
+        audio.play().catch(err => {
+            console.warn('Autoplay diblokir browser:', err);
+        });
+    }, 1000);
+
+});
+
 </script>
 
 </body>

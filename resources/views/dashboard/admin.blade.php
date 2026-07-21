@@ -72,7 +72,10 @@
     <div class="col-lg-8">
         <div class="card-panel p-3">
             <div class="d-flex justify-content-between align-items-center mb-2">
-                <h6 class="fw-bold mb-0">Dokumen Terbaru</h6>
+                <h6 class="fw-bold mb-0 d-flex align-items-center gap-2">
+    <i class="bi bi-clock-history text-bulog-navy"></i>
+    Dokumen Terbaru
+</h6>
                 <a href="{{ route('dokumen.index') }}" class="small text-decoration-none">Lihat Semua</a>
             </div>
             <div class="table-responsive">
@@ -151,21 +154,32 @@
     <div class="col-lg-4">
         <div class="card-panel p-3 h-100">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h6 class="fw-bold mb-0">Statistik Dokumen</h6>
+                <h6 class="fw-bold mb-0 d-flex align-items-center gap-2">
+    <i class="bi bi-pie-chart-fill text-bulog-navy"></i>
+    Statistik Dokumen
+</h6>
             </div>
 
-            <div class="text-center mb-3">
-    <div class="mx-auto" style="max-width:220px;">
+            <div class="text-center mb-2">
+
+    <div class="chart-wrapper mx-auto">
+
         <canvas id="kategoriChart"></canvas>
+
+        <div class="chart-center">
+
+            <div class="chart-total">
+                {{ $totalDokumen }}
+            </div>
+
+            <div class="chart-label">
+                Dokumen
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="fs-3 fw-bold text-bulog-navy mt-3">
-        {{ $totalDokumen }}
-    </div>
-
-    <div class="text-muted small">
-        Total Dokumen
-    </div>
 </div>
 
             <ul class="list-unstyled mb-0">
@@ -228,7 +242,7 @@ options: {
             display: false
         }
     },
-    cutout: '70%'
+    cutout: '76%'
 }
 
 });
