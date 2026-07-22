@@ -80,10 +80,10 @@
                         <td>{{ $dokumen->tanggal_dokumen->format('d M Y') }}</td>
                         <td>{{ $dokumen->uploader->name }}</td>
                         <td class="text-end">
-                            <a href="{{ route('dokumen.show', $dokumen) }}" class="btn btn-sm btn-light" title="Lihat"><i class="bi bi-eye"></i></a>
-                            <a href="{{ route('dokumen.download', $dokumen) }}" class="btn btn-sm btn-light" title="Unduh"><i class="bi bi-download"></i></a>
-                            <a href="{{ route('dokumen.edit', $dokumen) }}" class="btn btn-sm btn-light" title="Edit"><i class="bi bi-pencil"></i></a>
-                            <button type="button" class="btn btn-sm btn-light text-danger" title="Hapus"
+                            <a href="{{ route('dokumen.show', $dokumen) }}" class="btn btn-sm btn-outline-primary" title="Lihat"><i class="bi bi-eye"></i></a>
+                            <a href="{{ route('dokumen.download', $dokumen) }}" class="btn btn-sm btn-outline-success" title="Unduh"><i class="bi bi-download"></i></a>
+                            <a href="{{ route('dokumen.edit', $dokumen) }}" class="btn btn-sm btn-outline-warning" title="Edit"><i class="bi bi-pencil"></i></a>
+                            <button type="button" class="btn btn-sm btn-outline-danger" title="Hapus"
                                     data-bs-toggle="modal" data-bs-target="#hapusModal{{ $dokumen->id }}">
                                 <i class="bi bi-trash"></i>
                             </button>
@@ -108,7 +108,12 @@
                         </td>
                     </tr>
                 @empty
-                    <tr><td colspan="6" class="text-center text-muted py-4">Tidak ada dokumen ditemukan.</td></tr>
+                    <tr>
+                        <td colspan="6" class="text-center py-5">
+                            <i class="bi bi-inbox text-muted" style="font-size:2.5rem;"></i>
+                            <div class="text-muted mt-2">Tidak ada dokumen ditemukan.</div>
+                        </td>
+                    </tr>
                 @endforelse
             </tbody>
         </table>

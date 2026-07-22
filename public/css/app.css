@@ -11,7 +11,7 @@
 
 body {
   background-color: var(--bulog-bg);
-  font-family: 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Inter', 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
   color: #24304A;
 }
 
@@ -131,6 +131,23 @@ body {
 .sidebar .nav-link i {
   font-size: 1.05rem;
   width: 1.25rem;
+  transition: color .2s ease;
+}
+
+.sidebar .nav-link:hover i{
+  color: var(--bulog-yellow);
+}
+
+.pagination .page-link{
+    border-radius: 8px !important;
+    margin: 0 3px;
+    border: 1px solid var(--bulog-border);
+    color: var(--bulog-navy);
+}
+
+.pagination .page-item.active .page-link{
+    background: var(--bulog-navy);
+    border-color: var(--bulog-navy);
 }
 
 .sidebar .nav-link:hover {
@@ -257,6 +274,16 @@ body.dark-mode .persentase-dokumen{
   background: #fff;
   border: 1px solid var(--bulog-border);
   border-radius: 0.75rem;
+  box-shadow: 0 4px 16px rgba(15,23,42,.04);
+  transition: box-shadow .2s ease;
+}
+
+.card-panel:hover{
+  box-shadow: 0 8px 24px rgba(15,23,42,.07);
+}
+
+.btn-light{
+    border-radius: 10px;
 }
 
 .table > :not(caption) > * > * {
@@ -270,12 +297,25 @@ body.dark-mode .persentase-dokumen{
 
 .upload-dropzone {
   border: 2px dashed #c7d2e6;
-  border-radius: 0.75rem;
+  border-radius: 14px;
   background: #fafbfd;
   padding: 2.5rem 1rem;
   text-align: center;
   cursor: pointer;
-  transition: border-color .15s ease, background .15s ease;
+  transition: all .2s ease;
+}
+
+.upload-dropzone:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(30,79,160,.08);
+}
+
+.upload-dropzone i{
+  transition: transform .2s ease;
+}
+
+.upload-dropzone:hover i{
+  transform: translateY(-3px);
 }
 
 .upload-dropzone:hover,
@@ -285,16 +325,34 @@ body.dark-mode .persentase-dokumen{
 }
 
 .avatar-circle {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  background: var(--bulog-blue-light);
+  background: linear-gradient(135deg, var(--bulog-navy), var(--bulog-blue-light));
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
   font-size: 0.85rem;
+  box-shadow: 0 4px 10px rgba(10,46,110,.3);
+}
+
+#themeToggle{
+    width: 38px;
+    height: 38px;
+    border-radius: 50% !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all .2s ease;
+}
+
+#themeToggle:hover{
+    transform: rotate(15deg);
+    background: var(--bulog-navy) !important;
+    color: #fff !important;
 }
 
 .sidebar .brand{
@@ -822,3 +880,100 @@ body.dark-mode .table tbody tr:hover{
 .badge-modern-yellow{ background: linear-gradient(135deg, #F5A623, #E0940F); }
 .badge-modern-info{ background: linear-gradient(135deg, #06B6D4, #0891B2); }
 .badge-modern-gray{ background: linear-gradient(135deg, #6B7280, #4B5563); }
+
+/* Matikan reveal password bawaan Edge/Chrome biar nggak dobel sama tombol custom */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none;
+}
+
+.table .btn-outline-warning,
+.table .btn-outline-danger{
+    transition: .2s;
+    width: 36px;
+    height: 36px;
+    border-radius: 50% !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.table .btn-outline-warning:hover,
+.table .btn-outline-danger:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,.15);
+}
+
+.card-panel form.row.g-2{
+    background: #F8FAFC;
+    border-radius: 14px;
+    padding: 16px 12px;
+    margin-bottom: 20px !important;
+    border: 1px solid var(--bulog-border);
+}
+
+body.dark-mode .card-panel form.row.g-2{
+    background: #111827;
+    border-color: #374151;
+}
+
+.btn-bulog{
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(10, 46, 110, .25);
+    transition: all .2s ease;
+}
+
+.btn-bulog:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(10, 46, 110, .35);
+    color: #fff;
+}
+
+.table thead th{
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    font-size: .78rem;
+}
+
+.form-control, .form-select{
+    border-radius: 10px;
+    border-color: var(--bulog-border);
+    padding: 10px 14px;
+    transition: all .2s ease;
+}
+
+.form-control:focus, .form-select:focus{
+    border-color: var(--bulog-blue-light);
+    box-shadow: 0 0 0 4px rgba(30, 79, 160, .1);
+}
+
+body.dark-mode .form-control:focus,
+body.dark-mode .form-select:focus{
+    box-shadow: 0 0 0 4px rgba(96, 165, 250, .15);
+}
+
+.breadcrumb-item + .breadcrumb-item::before{
+    content: "›";
+    font-weight: 700;
+    color: #B0B9C9;
+}
+
+.breadcrumb-item a{
+    color: var(--bulog-blue-light);
+    font-weight: 500;
+}
+
+.breadcrumb-item.active{
+    color: var(--bulog-text-muted);
+    font-weight: 500;
+}
+
+h3.fw-bold{
+    color: #1A2544;
+    letter-spacing: -0.3px;
+}
+
+body.dark-mode h3.fw-bold{
+    color: #F9FAFB;
+}
