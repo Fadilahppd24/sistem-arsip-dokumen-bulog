@@ -35,15 +35,20 @@ Temukan dokumen yang Anda butuhkan dengan mudah dan cepat.
     @foreach ($kategoris as $kategori)
         <div class="col-6 col-lg-3">
             <a href="{{ route('dokumen.index', ['kategori_id' => $kategori->id]) }}" class="text-decoration-none">
-                <div class="stat-card d-flex align-items-start justify-content-between h-100">
+                <div class="stat-card stat-card-{{ $kategori->warna }} d-flex align-items-start justify-content-between h-100">
                     <div class="d-flex gap-3">
                         <div class="stat-icon {{ $warnaIkon[$kategori->warna] ?? 'bg-bulog-navy' }}">
                             <i class="bi {{ $kategori->icon ?? 'bi-folder-fill' }}"></i>
                         </div>
                         <div>
-                            <div class="text-muted small">{{ $kategori->nama }}</div>
-                            <div class="fs-4 fw-bold text-dark">{{ $kategori->dokumens_count }}</div>
-                            <div class="text-muted small">Dokumen</div>
+                            <div class="kategori-title">{{ $kategori->nama }}</div>
+                            <div class="d-flex align-items-end gap-2 mt-1">
+                                <div class="stat-number">{{ $kategori->dokumens_count }}</div>
+                                <div class="jumlah-dokumen">Dokumen</div>
+                            </div>
+                            <div class="persentase-dokumen">
+                                {{ $totalDokumen > 0 ? round(($kategori->dokumens_count / $totalDokumen) * 100, 1) : 0 }}% dari total
+                            </div>
                         </div>
                     </div>
                     <i class="bi bi-chevron-right text-muted"></i>
@@ -76,7 +81,19 @@ Temukan dokumen yang Anda butuhkan dengan mudah dan cepat.
 <div class="d-flex align-items-center gap-3">
 
 <div class="file-icon">
-<i class="bi bi-file-earmark-pdf-fill text-danger"></i>
+@php
+    $ext = pathinfo($dokumen->file_path, PATHINFO_EXTENSION);
+@endphp
+
+@if($ext=='pdf')
+    <i class="bi bi-file-earmark-pdf-fill text-danger"></i>
+@elseif(in_array($ext,['doc','docx']))
+    <i class="bi bi-file-earmark-word-fill text-primary"></i>
+@elseif(in_array($ext,['xls','xlsx']))
+    <i class="bi bi-file-earmark-excel-fill text-success"></i>
+@else
+    <i class="bi bi-file-earmark-fill"></i>
+@endif
 </div>
 
 <span class="fw-semibold">
@@ -86,11 +103,21 @@ Temukan dokumen yang Anda butuhkan dengan mudah dan cepat.
 </div>
 
 </td>
-                        <td><span class="badge bg-light text-dark border badge-kategori">{{ $dokumen->kategori->nama }}</span></td>
+                        <td>
+                            @php
+                                $badge = match($dokumen->kategori->warna){
+                                    'primary' => 'badge-modern-navy',
+                                    'warning' => 'badge-modern-yellow',
+                                    'info' => 'badge-modern-info',
+                                    default => 'badge-modern-gray',
+                                };
+                            @endphp
+                            <span class="badge rounded-pill {{ $badge }}">{{ $dokumen->kategori->nama }}</span>
+                        </td>
                         <td>{{ $dokumen->tanggal_dokumen->format('d M Y') }}</td>
                         <td class="text-end">
-                            <a href="{{ route('dokumen.show', $dokumen) }}" class="btn btn-sm btn-light"><i class="bi bi-eye"></i></a>
-                            <a href="{{ route('dokumen.download', $dokumen) }}" class="btn btn-sm btn-light"><i class="bi bi-download"></i></a>
+                            <a href="{{ route('dokumen.show', $dokumen) }}" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></a>
+                            <a href="{{ route('dokumen.download', $dokumen) }}" class="btn btn-sm btn-outline-success"><i class="bi bi-download"></i></a>
                         </td>
                     </tr>
                 @empty
