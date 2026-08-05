@@ -59,7 +59,7 @@
 
     <li class="nav-item">
         <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
-            <i class="bi bi-people-fill"></i> Pengguna
+            <i class="bi bi-people-fill"></i> Kelola Pengguna
         </a>
     </li>
 
