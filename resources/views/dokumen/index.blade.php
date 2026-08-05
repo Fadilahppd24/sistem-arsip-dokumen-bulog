@@ -10,11 +10,8 @@
     </ol>
 </nav>
 
-<div class="d-flex justify-content-between align-items-center mb-3">
+<div class="mb-3">
     <h3 class="fw-bold mb-0">Kelola Dokumen</h3>
-    <a href="{{ route('dokumen.create') }}" class="btn btn-bulog">
-        <i class="bi bi-plus-lg"></i> Upload Dokumen
-    </a>
 </div>
 
 <div class="card-panel p-3">
