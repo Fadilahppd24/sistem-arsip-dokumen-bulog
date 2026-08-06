@@ -978,59 +978,192 @@ body.dark-mode h3.fw-bold{
     color: #F9FAFB;
 }
 
-/* ===== Air Datepicker ===== */
+/* ==============================
+   AIR DATEPICKER CUSTOM
+============================== */
 
 .air-datepicker{
+    width:360px !important;
     border:none;
-    border-radius:18px;
+    border-radius:20px;
     overflow:hidden;
-    box-shadow:0 15px 40px rgba(0,0,0,.18);
-    width:330px;
+    box-shadow:0 18px 45px rgba(0,0,0,.18);
+    font-family:'Inter',sans-serif;
 }
+
+/* HEADER */
 
 .air-datepicker-nav{
-    height:120px;
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
     position:relative;
+    height:115px;
+    padding:16px 18px 0;
+    background-size:cover !important;
+    background-position:center !important;
+    border-radius:20px 20px 0 0;
+    overflow:hidden;
 }
 
-.air-datepicker-nav::after{
+/* gradient */
+
+.air-datepicker-nav::before{
+
     content:"";
+
     position:absolute;
-    left:0;
-    right:0;
-    bottom:-1px;
-    height:34px;
-    background:#fff;
-    border-radius:100% 100% 0 0;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            to bottom,
+
+            rgba(0,0,0,.18) 0%,
+
+            rgba(0,0,0,.08) 25%,
+
+            rgba(255,255,255,.08) 45%,
+
+            rgba(255,255,255,.45) 65%,
+
+            rgba(255,255,255,.85) 85%,
+
+            #fff 100%
+        );
+
+    z-index:1;
+
 }
 
-.air-datepicker-nav>*{
-    position:relative;
-    z-index:2;
+/* Judul */
+
+.air-datepicker-nav--title{
+
+    position:absolute;
+
+    top:18px;
+    width:100%;
+    text-align:center;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    z-index:5;
+
+    color:white !important;
+
+    font-size:18px;
+
+    font-weight:700;
+
 }
+
+.air-datepicker-nav--title i{
+    color:white !important;
+}
+
+/* Panah */
+
+.air-datepicker-nav--action{
+
+    width:42px;
+
+    height:42px;
+
+    margin-top:12px;
+
+    background:white;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    box-shadow:0 6px 18px rgba(0,0,0,.18);
+
+    transition:.2s;
+
+    z-index:5;
+
+}
+
+.air-datepicker-nav--action:hover{
+
+    transform:scale(1.05);
+
+}
+
+.air-datepicker-nav--action path{
+
+    stroke:#c62828;
+
+    stroke-width:2;
+
+}
+
+/* BODY */
 
 .air-datepicker-body{
-    background:#fff;
+
+    position:relative;
+
+    margin-top:-52px;
+
+    background:white;
+
+    border-radius:34px 34px 0 0;
+
+    padding-top:22px;
+
+    z-index:4;
+
+}
+
+.air-datepicker-body--day-name{
+
+    color:#ff6d00;
+
+    font-weight:700;
+
+}
+
+.air-datepicker-cell{
+
+    border-radius:50%;
+
+}
+
+.air-datepicker-cell.-current-{
+
+    border:2px solid #2196F3;
+
+    color:#2196F3;
+
 }
 
 .air-datepicker-cell.-selected-{
-    background:#2563eb !important;
-    color:#fff;
+
+    background:#d32f2f !important;
+
+    color:white;
+
 }
 
-.air-datepicker-cell:hover{
-    background:#dbeafe;
+/* Footer */
+
+.air-datepicker-buttons{
+
+    border-top:1px solid #eee;
+
 }
 
-.air-datepicker-nav--title{
-    color:#fff;
-    font-weight:700;
-    font-size:18px;
-}
+.air-datepicker-button{
 
-.air-datepicker-nav--action{
-    color:#fff;
+    height:52px;
+
+    font-weight:600;
+
 }

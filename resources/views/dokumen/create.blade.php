@@ -207,27 +207,27 @@ const localeID = {
     firstDay: 1
 };
 
-const dp = new AirDatepicker('#tanggal_dokumen',{
+const dp = new AirDatepicker('#tanggal_dokumen', {
 
     locale: localeID,
 
-    autoClose:true,
+    autoClose: true,
 
-    dateFormat:'yyyy-MM-dd',
+    dateFormat: 'yyyy-MM-dd',
 
-    buttons:['today','clear'],
+    buttons: ['today', 'clear'],
 
-    navTitles:{
-        days:'MMMM yyyy'
+    navTitles: {
+        days: 'MMMM yyyy'
     },
 
-    onShow(){
-        setTimeout(updateHeader,20);
-    },
+    onShow() {
+    setTimeout(updateHeader,0);
+},
 
-    onChangeViewDate(){
-        setTimeout(updateHeader,20);
-    }
+onChangeViewDate() {
+    setTimeout(updateHeader,0);
+}
 
 });
 
@@ -242,6 +242,8 @@ function updateHeader(){
     header.style.backgroundImage=`url(${gambarBulan[bulan]})`;
 
 }
+
+updateHeader();
 
     const fileInput = document.getElementById('file');
     const previewContainer = document.getElementById('previewContainer');
