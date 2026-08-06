@@ -45,8 +45,16 @@
 
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Tanggal Dokumen</label>
-                    <input type="date" name="tanggal_dokumen" class="form-control @error('tanggal_dokumen') is-invalid @enderror"
-                           value="{{ old('tanggal_dokumen', now()->format('Y-m-d')) }}" required>
+                   <input
+    id="tanggal_dokumen"
+    type="text"
+    name="tanggal_dokumen"
+    class="form-control @error('tanggal_dokumen') is-invalid @enderror"
+    value="{{ old('tanggal_dokumen') }}"
+    placeholder="Pilih tanggal dokumen"
+    required
+>
+
                     @error('tanggal_dokumen') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
 
@@ -160,6 +168,81 @@
 
 @push('scripts')
 <script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+   const gambarBulan = [
+    "{{ asset('images/calendar/Sunrise_Januari.jpg') }}",
+    "{{ asset('images/calendar/Bluesky_Februari.jpg') }}",
+    "{{ asset('images/calendar/Forest_Maret.jpg') }}",
+    "{{ asset('images/calendar/Sakura_April.jpg') }}",
+    "{{ asset('images/calendar/Flower_Mei.jpg') }}",
+    "{{ asset('images/calendar/TropicalBeach_Juni.jpg') }}",
+    "{{ asset('images/calendar/Sunflower_Juli.jpg') }}",
+    "{{ asset('images/calendar/Indonesia_Agustus.jpg') }}",
+    "{{ asset('images/calendar/RiceField_September.jpg') }}",
+    "{{ asset('images/calendar/AutumnForest_Oktober.jpg') }}",
+    "{{ asset('images/calendar/GoldenRice_November.jpg') }}",
+    "{{ asset('images/calendar/Winter_Desember.jpg') }}"
+];
+
+const localeID = {
+    days: ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'],
+    daysShort: ['Min','Sen','Sel','Rab','Kam','Jum','Sab'],
+    daysMin: ['Mg','Sn','Sl','Rb','Km','Jm','Sb'],
+
+    months: [
+        'Januari','Februari','Maret','April','Mei','Juni',
+        'Juli','Agustus','September','Oktober','November','Desember'
+    ],
+
+    monthsShort: [
+        'Jan','Feb','Mar','Apr','Mei','Jun',
+        'Jul','Agu','Sep','Okt','Nov','Des'
+    ],
+
+    today: 'Hari Ini',
+    clear: 'Bersihkan',
+    dateFormat: 'yyyy-MM-dd',
+    firstDay: 1
+};
+
+const dp = new AirDatepicker('#tanggal_dokumen',{
+
+    locale: localeID,
+
+    autoClose:true,
+
+    dateFormat:'yyyy-MM-dd',
+
+    buttons:['today','clear'],
+
+    navTitles:{
+        days:'MMMM yyyy'
+    },
+
+    onShow(){
+        setTimeout(updateHeader,20);
+    },
+
+    onChangeViewDate(){
+        setTimeout(updateHeader,20);
+    }
+
+});
+
+function updateHeader(){
+
+    const header=document.querySelector(".air-datepicker-nav");
+
+    if(!header) return;
+
+    const bulan=dp.viewDate.getMonth();
+
+    header.style.backgroundImage=`url(${gambarBulan[bulan]})`;
+
+}
+
     const fileInput = document.getElementById('file');
     const previewContainer = document.getElementById('previewContainer');
     const previewFrame = document.getElementById('previewFrame');
@@ -213,6 +296,7 @@
 
     modal.show();
 
+});
 });
 
 </script>

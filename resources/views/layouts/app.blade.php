@@ -11,6 +11,10 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/air-datepicker@3.6.0/air-datepicker.css">
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @stack('styles')
 </head>
@@ -77,6 +81,9 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 @endif
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.6.0/air-datepicker.js"></script>
+
 
 @stack('scripts')
 

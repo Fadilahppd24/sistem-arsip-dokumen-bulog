@@ -977,3 +977,60 @@ h3.fw-bold{
 body.dark-mode h3.fw-bold{
     color: #F9FAFB;
 }
+
+/* ===== Air Datepicker ===== */
+
+.air-datepicker{
+    border:none;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 15px 40px rgba(0,0,0,.18);
+    width:330px;
+}
+
+.air-datepicker-nav{
+    height:120px;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    position:relative;
+}
+
+.air-datepicker-nav::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:-1px;
+    height:34px;
+    background:#fff;
+    border-radius:100% 100% 0 0;
+}
+
+.air-datepicker-nav>*{
+    position:relative;
+    z-index:2;
+}
+
+.air-datepicker-body{
+    background:#fff;
+}
+
+.air-datepicker-cell.-selected-{
+    background:#2563eb !important;
+    color:#fff;
+}
+
+.air-datepicker-cell:hover{
+    background:#dbeafe;
+}
+
+.air-datepicker-nav--title{
+    color:#fff;
+    font-weight:700;
+    font-size:18px;
+}
+
+.air-datepicker-nav--action{
+    color:#fff;
+}
