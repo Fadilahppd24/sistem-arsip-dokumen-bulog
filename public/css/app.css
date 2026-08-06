@@ -305,6 +305,21 @@ body.dark-mode .persentase-dokumen{
   transition: all .2s ease;
 }
 
+body.dark-mode .upload-dropzone {
+    background: #111827;
+    border-color: #374151;
+}
+
+body.dark-mode .upload-dropzone:hover,
+body.dark-mode .upload-dropzone.dragover {
+    background: #1f2937;
+    border-color: var(--bulog-blue-light);
+}
+
+body.dark-mode .upload-dropzone .text-muted {
+    color: #9ca3af !important;
+}
+
 .upload-dropzone:hover{
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(30,79,160,.08);
@@ -322,6 +337,17 @@ body.dark-mode .persentase-dokumen{
 .upload-dropzone.dragover {
   border-color: var(--bulog-blue-light);
   background: #f0f4fc;
+}
+
+.input-group-text {
+    background: #fff;
+    border-color: var(--bulog-border);
+}
+
+body.dark-mode .input-group-text {
+    background: #111827;
+    border-color: #374151;
+    color: #9ca3af;
 }
 
 .avatar-circle {
@@ -469,6 +495,16 @@ body.dark-mode .form-control::placeholder {
     color: #9ca3af;
 }
 
+/* Fix autofill Chrome/Edge di dark mode */
+body.dark-mode input.form-control:-webkit-autofill,
+body.dark-mode input.form-control:-webkit-autofill:hover,
+body.dark-mode input.form-control:-webkit-autofill:focus,
+body.dark-mode input.form-control:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px #111827 inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+    caret-color: #ffffff;
+    transition: background-color 5000s ease-in-out 0s;
+}
 
 /* Tombol light */
 body.dark-mode .btn-light {
@@ -981,6 +1017,12 @@ body.dark-mode h3.fw-bold{
 /* ==============================
    AIR DATEPICKER CUSTOM
 ============================== */
+.air-datepicker-nav,
+.air-datepicker-nav--title,
+.air-datepicker-body {
+    user-select: none;
+    -webkit-user-select: none;
+}
 
 .air-datepicker{
     width:360px !important;
@@ -1032,6 +1074,11 @@ body.dark-mode h3.fw-bold{
 
     z-index:1;
 
+}
+
+.air-datepicker-nav--title:hover,
+.air-datepicker-nav *:hover {
+    background: transparent !important;
 }
 
 /* Judul */

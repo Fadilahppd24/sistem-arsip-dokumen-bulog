@@ -18,7 +18,7 @@
     <form method="GET" class="row g-2 mb-3">
         <div class="col-md-4">
             <div class="input-group">
-                <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+                <span class="input-group-text"><i class="bi bi-search"></i></span>
                 <input type="text" name="q" class="form-control" placeholder="Cari dokumen..." value="{{ request('q') }}">
             </div>
         </div>
