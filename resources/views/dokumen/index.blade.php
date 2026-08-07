@@ -78,7 +78,13 @@
                         <td>{{ $dokumen->uploader->name }}</td>
                         <td class="text-end">
                             <a href="{{ route('dokumen.show', $dokumen) }}" class="btn btn-sm btn-outline-primary" title="Lihat"><i class="bi bi-eye"></i></a>
-                            <a href="{{ route('dokumen.download', $dokumen) }}" class="btn btn-sm btn-outline-success" title="Unduh"><i class="bi bi-download"></i></a>
+                           <a href="{{ route('dokumen.download', $dokumen) }}"
+   target="downloadFrame"
+   onclick="setTimeout(function(){ window.location='{{ route('dashboard') }}'; }, 500)"
+   class="btn btn-sm btn-outline-success"
+   title="Unduh">
+    <i class="bi bi-download"></i>
+</a>
                             <a href="{{ route('dokumen.edit', $dokumen) }}" class="btn btn-sm btn-outline-warning" title="Edit"><i class="bi bi-pencil"></i></a>
                             <button type="button" class="btn btn-sm btn-outline-danger" title="Hapus"
                                     data-bs-toggle="modal" data-bs-target="#hapusModal{{ $dokumen->id }}">
@@ -123,4 +129,6 @@
         {{ $dokumens->links('pagination::bootstrap-5') }}
     </div>
 </div>
+
+<iframe name="downloadFrame" style="display:none;"></iframe>
 @endsection

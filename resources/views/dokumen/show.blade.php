@@ -19,9 +19,12 @@
                     <i class="bi bi-file-earmark-pdf-fill text-danger fs-4"></i>
                     <span class="fw-semibold text-truncate">{{ $dokumen->nama_dokumen }}</span>
                 </div>
-                <a href="{{ route('dokumen.download', $dokumen) }}" class="btn btn-sm btn-bulog">
-                    <i class="bi bi-download"></i> Unduh
-                </a>
+                <a href="{{ route('dokumen.download', $dokumen) }}"
+   target="_blank"
+   onclick="window.location='{{ route('dashboard') }}'"
+   class="btn btn-sm btn-bulog">
+    <i class="bi bi-download"></i> Unduh
+</a>
             </div>
             <div style="height: 640px; background: #525659;">
                <iframe src="{{ route('dokumen.file', $dokumen) }}"
