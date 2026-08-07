@@ -4,6 +4,16 @@
 
 @section('content')
 <div class="dashboard-header dashboard-header-hero mb-4">
+
+<div class="pet-runner">
+    <div class="pet-move">
+        <div class="pet-bounce">
+            <span class="pet-cargo">🌾</span>
+            <span class="pet-emoji">🐦</span>
+        </div>
+    </div>
+</div>
+
     <div class="d-flex align-items-center flex-wrap gap-4">
 
         <div class="hero-icon-circle">
@@ -22,7 +32,8 @@
         </div>
 
         <div class="hero-logo d-none d-lg-block">
-            <img src="{{ asset('images/logobulog.png') }}" alt="BULOG" class="hero-logo-img">
+            <img src="{{ asset('images/dashboard/logobulog-color.png') }}" alt="BULOG" class="hero-logo-img hero-logo-light">
+            <img src="{{ asset('images/dashboard/logobulog-white-ribbon.png') }}" alt="BULOG" class="hero-logo-img hero-logo-dark">
         </div>
 
     </div>
@@ -70,6 +81,29 @@
             </a>
         </div>
     @endforeach
+</div>
+
+<div class="storage-card mb-4">
+    <div class="d-flex align-items-center gap-4 flex-wrap position-relative" style="z-index:1;">
+        <div class="storage-icon">
+            <i class="bi bi-hdd-stack-fill"></i>
+        </div>
+        <div class="flex-grow-1" style="min-width:240px;">
+            <h6 class="fw-bold mb-1">Penyimpanan Arsip</h6>
+            <p class="text-muted small mb-0">Kapasitas penyimpanan dokumen yang telah digunakan</p>
+        </div>
+        <div class="text-end">
+            <div class="fw-bold storage-usage-text">{{ $storageUsedGB }} GB / {{ $storageTotalGB }} GB</div>
+        </div>
+        <span class="storage-status storage-status-{{ Str::slug($storageStatus) }}">
+            <i class="bi bi-circle-fill"></i> Status : {{ $storageStatus }}
+        </span>
+    </div>
+
+    <div class="storage-progress mt-3">
+        <div class="storage-progress-bar" style="width: {{ min($storagePercent, 100) }}%;"></div>
+    </div>
+    <div class="text-muted small mt-2">{{ $storagePercent }}% Terpakai</div>
 </div>
 
 <div class="row g-3">
