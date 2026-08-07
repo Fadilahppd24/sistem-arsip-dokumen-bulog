@@ -252,7 +252,7 @@ public function file(Dokumen $dokumen)
             'nomor_keterangan' => ['nullable', 'string', 'max:255'],
             'tanggal_dokumen' => ['required', 'date'],
             'deskripsi' => ['nullable', 'string', 'max:1000'],
-            'file' => [$wajibFile ? 'required' : 'nullable', 'file', 'mimes:pdf', 'max:51200'],
+           'file' => [$wajibFile ? 'required' : 'nullable', 'file', 'mimes:pdf', 'max:102400'],
         ], [
             'kategori_id.required' => 'Kategori wajib dipilih.',
             'nama_dokumen.required' => 'Nama dokumen wajib diisi.',
