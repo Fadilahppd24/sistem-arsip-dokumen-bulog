@@ -7,7 +7,12 @@
     </div>
 
     <div class="d-flex align-items-center gap-3">
-        
+
+        <div class="date-box">
+            <i class="bi bi-calendar-event"></i>
+            {{ \Carbon\Carbon::now()->locale('id')->isoFormat('dddd, D MMMM YYYY') }}
+        </div>
+
         <button class="btn btn-sm btn-light" id="themeToggle" title="Ganti Tema">
     <i class="bi bi-moon-fill" id="themeIcon"></i>
 </button>

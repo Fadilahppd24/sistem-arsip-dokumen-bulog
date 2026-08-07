@@ -3,12 +3,17 @@
 @section('title', 'Beranda')
 
 @section('content')
-<div class="dashboard-header mb-4">
-    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+<div class="dashboard-header dashboard-header-hero mb-4">
+    <div class="d-flex align-items-center flex-wrap gap-4">
 
-        <div>
+        <div class="hero-icon-circle">
+            <img src="{{ asset('images/dashboard/hero-icon-v2.svg') }}" alt="Ilustrasi Dokumen" class="hero-icon-img">
+        </div>
+
+        <div class="flex-grow-1">
             <h2 class="fw-bold mb-2">
-                Selamat Datang Kembali
+                Selamat Datang Kembali <span class="wave-emoji">👋</span><br>
+                Di Sistem Arsip Dokumen BULOG
             </h2>
 
             <p class="text-muted mb-0">
@@ -16,9 +21,8 @@
             </p>
         </div>
 
-        <div class="date-box">
-            <i class="bi bi-calendar-event"></i>
-            {{ \Carbon\Carbon::now()->locale('id')->isoFormat('dddd, D MMMM YYYY') }}
+        <div class="hero-logo d-none d-lg-block">
+            <img src="{{ asset('images/logobulog.png') }}" alt="BULOG" class="hero-logo-img">
         </div>
 
     </div>

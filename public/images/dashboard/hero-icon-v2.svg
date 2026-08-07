@@ -1,0 +1,71 @@
+<svg width="220" height="220" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="folderBack2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD166"/>
+      <stop offset="100%" stop-color="#F5A623"/>
+    </linearGradient>
+    <linearGradient id="folderFront2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFC94D"/>
+      <stop offset="100%" stop-color="#EF9A0E"/>
+    </linearGradient>
+    <linearGradient id="paperBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C9E0FF"/>
+      <stop offset="100%" stop-color="#93C5FD"/>
+    </linearGradient>
+    <filter id="softShadow2" x="-60%" y="-60%" width="220%" height="220%">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#0A2E6E" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#softShadow2)">
+    <path d="M186 34 L189 43 L198 46 L189 49 L186 58 L183 49 L174 46 L183 43 Z" fill="#FFFFFF"/>
+    <path d="M28 150 L30 156 L36 158 L30 160 L28 166 L26 160 L20 158 L26 156 Z" fill="#FFFFFF" opacity="0.85"/>
+    <circle cx="34" cy="60" r="5" fill="#FFFFFF" opacity="0.8"/>
+  </g>
+
+  <g transform="rotate(-13 78 92)" filter="url(#softShadow2)">
+    <rect x="53" y="54" width="74" height="94" rx="14" fill="url(#paperBlue)"/>
+  </g>
+
+  <g transform="rotate(10 132 88)" filter="url(#softShadow2)">
+    <rect x="100" y="48" width="74" height="94" rx="14" fill="#FFFFFF"/>
+    <rect x="116" y="72" width="42" height="7" rx="3.5" fill="#D6E6FB"/>
+    <rect x="116" y="87" width="42" height="7" rx="3.5" fill="#D6E6FB"/>
+    <rect x="116" y="102" width="28" height="7" rx="3.5" fill="#FFD166"/>
+  </g>
+
+  <path d="M42 100
+           C42 91 49 84 58 84
+           L90 84
+           C96 84 101 87 104 92
+           L108 99
+           L164 99
+           C173 99 180 106 180 115
+           L180 163
+           C180 172 173 179 164 179
+           L58 179
+           C49 179 42 172 42 163
+           Z"
+        fill="url(#folderBack2)" filter="url(#softShadow2)"/>
+
+  <path d="M38 122
+           C38 113 45 106 54 106
+           L162 106
+           C172 106 179 115 176 125
+           L168 171
+           C166 177 160 181 154 181
+           L54 181
+           C45 181 38 174 37 165
+           Z"
+        fill="url(#folderFront2)"/>
+
+  <ellipse cx="70" cy="128" rx="22" ry="7" fill="#FFFFFF" opacity="0.18"/>
+
+  <g transform="translate(148,36)" filter="url(#softShadow2)">
+    <circle cx="22" cy="22" r="24" fill="#0A2E6E" stroke="#FFFFFF" stroke-width="4.5"/>
+    <rect x="13" y="11" width="18" height="22" rx="3" fill="#FFFFFF"/>
+    <rect x="16.5" y="16.5" width="11" height="2.4" rx="1.2" fill="#1E4FA0"/>
+    <rect x="16.5" y="21" width="11" height="2.4" rx="1.2" fill="#1E4FA0"/>
+    <rect x="16.5" y="25.5" width="7" height="2.4" rx="1.2" fill="#F5A623"/>
+  </g>
+</svg> 
