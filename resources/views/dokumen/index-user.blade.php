@@ -3,6 +3,14 @@
 @section('title', 'Dokumen')
 
 @section('content')
+
+<div class="d-flex justify-content-end mb-3">
+    <a href="{{ route('dokumen.export') }}" class="btn btn-primary">
+        <i class="bi bi-file-earmark-zip me-1"></i>
+        Ekspor Dokumen
+    </a>
+</div>
+
 <nav aria-label="breadcrumb" class="mb-2">
     <ol class="breadcrumb small mb-0">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}" class="text-decoration-none">Beranda</a></li>

@@ -27,6 +27,13 @@ Route::middleware('auth')->group(function () {
     // Dokumen: index/search bisa diakses Admin & User
     Route::get('/dokumen', [DokumenController::class, 'index'])->name('dokumen.index');
 
+    // Ekspor Dokumen — Admin & User
+Route::get('/dokumen/export', [DokumenController::class, 'exportForm'])
+    ->name('dokumen.export');
+
+Route::post('/dokumen/export', [DokumenController::class, 'export'])
+    ->name('dokumen.export.process');
+
     // ==== Khusus Admin (rute literal /dokumen/create didaftarkan SEBELUM
     // rute berparameter /dokumen/{dokumen} agar tidak bentrok) ====
     Route::middleware('admin')->group(function () {

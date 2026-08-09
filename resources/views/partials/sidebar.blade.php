@@ -28,10 +28,22 @@
                     </a>
                 </li>
             @endforeach
-        </ul>
+        
+    </ul>
 
-        @if ($user->isAdmin())
-            <div class="nav-section-title">Kelola</div>
+    {{-- Ekspor Dokumen - Admin & User --}}
+    <div class="nav-section-title">Ekspor</div>
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a href="{{ route('dokumen.export') }}"
+               class="nav-link {{ request()->routeIs('dokumen.export') ? 'active' : '' }}">
+                <i class="bi bi-file-earmark-zip-fill"></i> Ekspor Dokumen
+            </a>
+        </li>
+    </ul>
+
+    @if ($user->isAdmin())
+        <div class="nav-section-title">Kelola</div>
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a href="{{ route('dokumen.create') }}" class="nav-link {{ request()->routeIs('dokumen.create') ? 'active' : '' }}">
