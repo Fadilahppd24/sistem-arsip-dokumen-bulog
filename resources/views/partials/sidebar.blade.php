@@ -69,6 +69,14 @@
            <div class="nav-section-title">Pengaturan</div>
 <ul class="nav flex-column">
 
+
+    <li class="nav-item">
+    <a href="{{ route('kategori.index') }}"
+       class="nav-link {{ request()->routeIs('kategori.*') ? 'active' : '' }}">
+        <i class="bi bi-tags-fill"></i> Kelola Kategori
+    </a>
+</li>
+
     <li class="nav-item">
         <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
             <i class="bi bi-people-fill"></i> Kelola Pengguna
