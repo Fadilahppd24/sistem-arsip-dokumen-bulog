@@ -13,6 +13,21 @@ class DashboardController extends Controller
     {
         $kategoris = Kategori::withCount('dokumens')->get();
 
+      $warnaIkon = [
+    'primary'   => 'kategori-primary',
+    'warning'   => 'kategori-warning',
+    'info'      => 'kategori-info',
+    'secondary' => 'kategori-secondary',
+    'success'   => 'kategori-success',
+    'danger'    => 'kategori-danger',
+    'purple'    => 'kategori-purple',
+    'pink'      => 'kategori-pink',
+    'teal'      => 'kategori-teal',
+    'orange'    => 'kategori-orange',
+    'indigo'    => 'kategori-indigo',
+    'cyan'      => 'kategori-cyan',
+];
+
         $totalDokumen = Dokumen::count();
 
         $dokumenTerbaru = Dokumen::with(['kategori', 'uploader'])
@@ -41,8 +56,13 @@ class DashboardController extends Controller
         $view = Auth::user()->isAdmin() ? 'dashboard.admin' : 'dashboard.user';
 
         return view($view, compact(
-            'kategoris', 'totalDokumen', 'dokumenTerbaru', 'statistikBulanIni',
-            'storageTotalGB', 'storageUsedGB', 'storagePercent', 'storageStatus'
-        ));
-    }
-}
+    'kategoris',
+    'totalDokumen',
+    'dokumenTerbaru',
+    'statistikBulanIni',
+    'storageTotalGB',
+    'storageUsedGB',
+    'storagePercent',
+    'storageStatus',
+    'warnaIkon'
+));

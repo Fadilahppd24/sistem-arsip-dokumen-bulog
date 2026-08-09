@@ -11,6 +11,9 @@
     </a>
 </div>
 
+<div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+        
 <nav aria-label="breadcrumb" class="mb-2">
     <ol class="breadcrumb small mb-0">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}" class="text-decoration-none">Beranda</a></li>

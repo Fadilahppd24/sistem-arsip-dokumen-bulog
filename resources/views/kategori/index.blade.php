@@ -31,11 +31,41 @@
 
     </div>
 
-    {{-- Judul --}}
-    <h2 class="fw-bold mb-0"
-        style="color:#172554;">
-        Kelola Kategori
-    </h2>
+{{-- Header Halaman --}}
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+        {{-- Breadcrumb --}}
+        <div class="d-flex align-items-center gap-2 mb-2 small">
+            <a href="{{ route('dashboard') }}"
+               class="text-decoration-none"
+               style="color:#1d4ed8;">
+                Beranda
+            </a>
+
+            <span class="text-muted">></span>
+
+            <span class="text-muted">
+                Kelola Kategori
+            </span>
+        </div>
+
+        {{-- Judul --}}
+        <h2 class="fw-bold mb-0" style="color:#172554;">
+            Kelola Kategori
+        </h2>
+    </div>
+
+    {{-- Tombol Tambah Kategori --}}
+    <button type="button"
+            class="btn btn-primary px-4"
+            data-bs-toggle="modal"
+            data-bs-target="#modalTambahKategori">
+        <i class="bi bi-plus-lg me-1"></i>
+        Tambah Kategori
+    </button>
+
+</div>
 
 </div>   
 
@@ -199,37 +229,61 @@
                             <div class="col-md-3">
 
                                 <select id="filterWarna"
-                                        class="form-select">
+        class="form-select">
 
-                                    <option value="">
-                                        Semua Warna
-                                    </option>
+    <option value="">
+        Semua Warna
+    </option>
 
-                                    <option value="primary">
-                                        Biru
-                                    </option>
+    <option value="primary">
+        Navy
+    </option>
 
-                                    <option value="success">
-                                        Hijau
-                                    </option>
+    <option value="warning">
+        Kuning
+    </option>
 
-                                    <option value="warning">
-                                        Kuning
-                                    </option>
+    <option value="info">
+        Biru Muda
+    </option>
 
-                                    <option value="info">
-                                        Biru Muda
-                                    </option>
+    <option value="secondary">
+        Abu-abu
+    </option>
 
-                                    <option value="danger">
-                                        Merah
-                                    </option>
+    <option value="success">
+        Hijau
+    </option>
 
-                                    <option value="secondary">
-                                        Abu-abu
-                                    </option>
+    <option value="danger">
+        Merah
+    </option>
 
-                                </select>
+    <option value="purple">
+        Ungu
+    </option>
+
+    <option value="pink">
+        Pink
+    </option>
+
+    <option value="teal">
+        Teal
+    </option>
+
+    <option value="orange">
+        Orange
+    </option>
+
+    <option value="indigo">
+        Indigo
+    </option>
+
+    <option value="cyan">
+        Cyan
+    </option>
+
+</select>
 
                             </div>
 
@@ -302,19 +356,26 @@
 
                                     <td>
 
-                                        <div class="d-flex align-items-center justify-content-center"
-                                             style="
-                                                width:42px;
-                                                height:42px;
-                                                border-radius:10px;
-                                                background:#f1f5f9;
-                                             ">
+                                        @php
+    $warnaIcon = [
+        'primary'   => 'kategori-primary',
+        'warning'   => 'kategori-warning',
+        'info'      => 'kategori-info',
+        'secondary' => 'kategori-secondary',
+        'success'   => 'kategori-success',
+        'danger'    => 'kategori-danger',
+        'purple'    => 'kategori-purple',
+        'pink'      => 'kategori-pink',
+        'teal'      => 'kategori-teal',
+        'orange'    => 'kategori-orange',
+        'indigo'    => 'kategori-indigo',
+        'cyan'      => 'kategori-cyan',
+    ];
+@endphp
 
-                                            <i class="bi {{ $kategori->icon ?? 'bi-folder-fill' }}"
-                                               style="font-size:20px;">
-                                            </i>
-
-                                        </div>
+<div class="kategori-icon-box {{ $warnaIcon[$kategori->warna] ?? 'kategori-secondary' }}">
+    <i class="bi {{ $kategori->icon ?? 'bi-folder-fill' }}"></i>
+</div>
 
                                     </td>
 
@@ -370,18 +431,48 @@
 
                                     </td>
 
-
                                     {{-- WARNA --}}
+<td>
+    @php
+        $warnaLabel = [
+            'primary'   => 'Navy',
+            'warning'   => 'Kuning',
+            'info'      => 'Biru Muda',
+            'secondary' => 'Abu-abu',
+            'success'   => 'Hijau',
+            'danger'    => 'Merah',
+            'purple'    => 'Ungu',
+            'pink'      => 'Pink',
+            'teal'      => 'Teal',
+            'orange'    => 'Orange',
+            'indigo'    => 'Indigo',
+            'cyan'      => 'Cyan',
+        ];
 
-                                    <td>
+        $warnaClass = [
+            'primary'   => 'warna-navy',
+            'warning'   => 'warna-kuning',
+            'info'      => 'warna-biru-muda',
+            'secondary' => 'warna-abu',
+            'success'   => 'warna-hijau',
+            'danger'    => 'warna-merah',
+            'purple'    => 'warna-ungu',
+            'pink'      => 'warna-pink',
+            'teal'      => 'warna-teal',
+            'orange'    => 'warna-orange',
+            'indigo'    => 'warna-indigo',
+            'cyan'      => 'warna-cyan',
+        ];
+    @endphp
 
-                                        <span class="badge bg-{{ $kategori->warna ?? 'secondary' }}">
+    <div class="warna-kategori">
+        <span class="warna-dot {{ $warnaClass[$kategori->warna] ?? 'warna-abu' }}"></span>
 
-                                            {{ $kategori->warna ?? 'secondary' }}
-
-                                        </span>
-
-                                    </td>
+        <span class="warna-label">
+            {{ $warnaLabel[$kategori->warna] ?? 'Abu-abu' }}
+        </span>
+    </div>
+</td>
 
 
                                     {{-- AKSI --}}
@@ -851,145 +942,6 @@
 
 
 {{-- ================================================= --}}
-{{-- MODAL TAMBAH KATEGORI --}}
-{{-- ================================================= --}}
-
-<div class="modal fade"
-     id="modalTambahKategori"
-     tabindex="-1"
-     aria-hidden="true">
-
-    <div class="modal-dialog modal-dialog-centered">
-
-        <div class="modal-content border-0 shadow">
-
-            <div class="modal-header">
-
-                <h5 class="modal-title fw-bold">
-                    Tambah Kategori
-                </h5>
-
-                <button type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal">
-                </button>
-
-            </div>
-
-
-            <form action="{{ route('kategori.store') }}"
-                  method="POST">
-
-                @csrf
-
-                <div class="modal-body">
-
-                    <div class="mb-3">
-
-                        <label class="form-label fw-semibold">
-                            Nama Kategori
-                        </label>
-
-                        <input type="text"
-                               name="nama"
-                               class="form-control"
-                               placeholder="Masukkan nama kategori"
-                               required>
-
-                    </div>
-
-
-                    <div class="mb-3">
-
-                        <label class="form-label fw-semibold">
-                            Icon
-                        </label>
-
-                        <input type="text"
-                               name="icon"
-                               class="form-control"
-                               placeholder="Contoh: bi-folder-fill">
-
-                        <small class="text-muted">
-
-                            Gunakan nama class dari Bootstrap Icons.
-
-                        </small>
-
-                    </div>
-
-
-                    <div>
-
-                        <label class="form-label fw-semibold">
-                            Warna
-                        </label>
-
-                        <select name="warna"
-                                class="form-select">
-
-                            <option value="primary">
-                                Biru
-                            </option>
-
-                            <option value="success">
-                                Hijau
-                            </option>
-
-                            <option value="warning">
-                                Kuning
-                            </option>
-
-                            <option value="info">
-                                Biru muda
-                            </option>
-
-                            <option value="danger">
-                                Merah
-                            </option>
-
-                            <option value="secondary">
-                                Abu-abu
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-
-                <div class="modal-footer">
-
-                    <button type="button"
-                            class="btn btn-light"
-                            data-bs-dismiss="modal">
-
-                        Batal
-
-                    </button>
-
-                    <button type="submit"
-                            class="btn btn-primary">
-
-                        <i class="bi bi-plus-lg me-1"></i>
-
-                        Tambah Kategori
-
-                    </button>
-
-                </div>
-
-            </form>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-{{-- ================================================= --}}
 {{-- MODAL EDIT KATEGORI --}}
 {{-- ================================================= --}}
 
@@ -1062,28 +1014,61 @@
                             Warna
                         </label>
 
-                        <select name="warna"
-                                class="form-select">
+ 
+@php
+    $warnaTersedia = [
+        'primary'   => 'Navy',
+        'warning'   => 'Kuning',
+        'info'      => 'Biru Muda',
+        'secondary' => 'Abu-abu',
+        'success'   => 'Hijau',
+        'danger'    => 'Merah',
+        'purple'    => 'Ungu',
+        'pink'      => 'Pink',
+        'teal'      => 'Teal',
+        'orange'    => 'Orange',
+        'indigo'    => 'Indigo',
+        'cyan'      => 'Cyan',
+    ];
 
-                            @foreach ([
-                                'primary' => 'Biru',
-                                'success' => 'Hijau',
-                                'warning' => 'Kuning',
-                                'info' => 'Biru muda',
-                                'danger' => 'Merah',
-                                'secondary' => 'Abu-abu'
-                            ] as $value => $label)
+    $warnaTerpakai = $kategoris
+        ->where('id', '!=', $kategori->id)
+        ->pluck('warna')
+        ->filter()
+        ->toArray();
+@endphp
 
-                                <option value="{{ $value }}"
-                                    {{ $kategori->warna === $value ? 'selected' : '' }}>
+<select name="warna" class="form-select">
 
-                                    {{ $label }}
+    @foreach ($warnaTersedia as $value => $label)
 
-                                </option>
+        <option value="{{ $value }}"
+            {{ $kategori->warna === $value ? 'selected' : '' }}
+            {{ in_array($value, $warnaTerpakai) ? 'disabled' : '' }}>
 
-                            @endforeach
+            {{ $label }}
 
-                        </select>
+            @if (in_array($value, $warnaTerpakai))
+                (sudah digunakan)
+            @endif
+
+        </option>
+
+    @endforeach
+
+</select>
+
+        <option value="{{ $value }}"
+            {{ $kategori->warna === $value ? 'selected' : '' }}>
+
+            {{ $label }}
+
+        </option>
+
+    @endforeach
+
+</select>
+
 
                     </div>
 
@@ -1119,7 +1104,86 @@
 
 </div>
 
-@endforeach
+</div>
+
+{{-- MODAL TAMBAH KATEGORI --}}
+<div class="modal fade" id="modalTambahKategori" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">
+                    Tambah Kategori
+                </h5>
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal">
+                </button>
+            </div>
+
+            <form action="{{ route('kategori.store') }}" method="POST">
+                @csrf
+
+                <div class="modal-body">
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">
+                            Nama Kategori
+                        </label>
+
+                        <input type="text"
+                               name="nama"
+                               class="form-control"
+                               placeholder="Masukkan nama kategori"
+                               required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">
+                            Icon
+                        </label>
+
+                        <input type="text"
+                               name="icon"
+                               class="form-control"
+                               placeholder="Contoh: bi-folder-fill">
+                    </div>
+
+                    <div class="mb-3">
+    <label class="form-label fw-semibold">
+        Warna
+    </label>
+
+    <div class="form-control bg-light text-muted">
+        <i class="bi bi-magic me-1"></i>
+        Warna akan dipilih otomatis oleh sistem
+    </div>
+</div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="button"
+                            class="btn btn-light"
+                            data-bs-dismiss="modal">
+                        Batal
+                    </button>
+
+                    <button type="submit"
+                            class="btn btn-primary">
+                        <i class="bi bi-check-lg me-1"></i>
+                        Simpan Kategori
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
 
 
 @endsection

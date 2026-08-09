@@ -1599,3 +1599,216 @@ body.dark-mode .storage-progress{
     0%, 100% { transform: translateY(0) rotate(0deg); }
     50%      { transform: translateY(-5px) rotate(-4deg); }
 }
+
+
+
+.bg-purple {
+    background-color: #7c3aed !important;
+}
+
+.bg-pink {
+    background-color: #ec4899 !important;
+}
+
+.bg-teal {
+    background-color: #0d9488 !important;
+}
+
+.bg-orange {
+    background-color: #f97316 !important;
+}
+
+.bg-indigo {
+    background-color: #6366f1 !important;
+}
+
+.bg-cyan {
+    background-color: #06b6d4 !important;
+}
+
+
+/* Warna kategori tambahan */
+.bg-purple {
+    background-color: #7c3aed !important;
+}
+
+.bg-pink {
+    background-color: #ec4899 !important;
+}
+
+.bg-teal {
+    background-color: #0d9488 !important;
+}
+
+.bg-orange {
+    background-color: #f97316 !important;
+}
+
+.bg-indigo {
+    background-color: #6366f1 !important;
+}
+
+.bg-cyan {
+    background-color: #06b6d4 !important;
+}
+
+/* =========================================
+   ICON KATEGORI
+========================================= */
+
+.kategori-icon-box {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 19px;
+
+    transition: all .2s ease;
+}
+
+.kategori-icon-box:hover {
+    transform: translateY(-2px) scale(1.05);
+}
+
+
+/* =========================================
+   WARNA ICON
+========================================= */
+
+.kategori-primary {
+    background: #e8f0ff;
+    color: #174ea6;
+}
+
+.kategori-warning {
+    background: #fff4d6;
+    color: #f5a900;
+}
+
+.kategori-info {
+    background: #e5f5ff;
+    color: #4aa3df;
+}
+
+.kategori-secondary {
+    background: #eef1f4;
+    color: #68737d;
+}
+
+.kategori-success {
+    background: #e4f7ed;
+    color: #0f9d68;
+}
+
+.kategori-danger {
+    background: #ffe8eb;
+    color: #e33445;
+}
+
+.kategori-purple {
+    background: #f0e8ff;
+    color: #7137c8;
+}
+
+.kategori-pink {
+    background: #ffe8f1;
+    color: #e95791;
+}
+
+.kategori-teal {
+    background: #e3f8f7;
+    color: #0c9f9a;
+}
+
+.kategori-orange {
+    background: #fff0df;
+    color: #ed7d17;
+}
+
+.kategori-indigo {
+    background: #e8ebff;
+    color: #3f51b5;
+}
+
+.kategori-cyan {
+    background: #e2f8fc;
+    color: #0ca6c7;
+}
+
+
+/* =========================================
+   WARNA DI KOLOM WARNA
+========================================= */
+
+.warna-kategori {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.warna-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.warna-label {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+
+/* WARNA DOT */
+
+.warna-navy {
+    background: #174ea6;
+}
+
+.warna-kuning {
+    background: #f5b400;
+}
+
+.warna-biru-muda {
+    background: #64b5f6;
+}
+
+.warna-abu {
+    background: #87919b;
+}
+
+.warna-hijau {
+    background: #18a66a;
+}
+
+.warna-merah {
+    background: #e63946;
+}
+
+.warna-ungu {
+    background: #7137c8;
+}
+
+.warna-pink {
+    background: #e95791;
+}
+
+.warna-teal {
+    background: #0c9f9a;
+}
+
+.warna-orange {
+    background: #ed7d17;
+}
+
+.warna-indigo {
+    background: #3f51b5;
+}
+
+.warna-cyan {
+    background: #0ca6c7;
+}
