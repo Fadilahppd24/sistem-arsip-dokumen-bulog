@@ -1555,58 +1555,45 @@
 
 
 
-                                {{-- AKSI --}}
+{{-- AKSI --}}
+<td class="text-end pe-4">
 
-                                <td class="text-end pe-4">
+    <div class="d-inline-flex align-items-center gap-1">
 
-                                    <div class="d-inline-flex gap-1">
+        {{-- EDIT --}}
+        <button type="button"
+                class="btn btn-sm btn-light border"
+                data-bs-toggle="modal"
+                data-bs-target="#modalEdit{{ $kategori->id }}"
+                title="Edit kategori">
 
+            <i class="bi bi-pencil"></i>
 
-                                        {{-- EDIT --}}
-
-                                        <button
-                                            type="button"
-                                            class="btn btn-sm btn-light border"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#modalEdit{{ $kategori->id }}"
-                                            title="Edit kategori"
-                                        >
-
-                                            <i class="bi bi-pencil"></i>
-
-                                        </button>
+        </button>
 
 
+        {{-- NONAKTIFKAN --}}
+        <form action="{{ route('kategori.destroy', $kategori) }}"
+              method="POST"
+              class="d-inline form-nonaktifkan"
+              data-nama="{{ $kategori->nama }}">
 
-                                        {{-- NONAKTIFKAN --}}
+            @csrf
+            @method('DELETE')
 
-                                        <form
-                                            action="{{ route('kategori.destroy', $kategori) }}"
-                                            method="POST"
-                                            class="d-inline"
-                                            onsubmit="return confirm('Nonaktifkan kategori {{ $kategori->nama }}?')"
-                                        >
+            <button type="submit"
+                    class="btn btn-sm btn-light border text-danger"
+                    title="Nonaktifkan kategori">
 
-                                            @csrf
+                <i class="bi bi-trash"></i>
 
-                                            @method('DELETE')
+            </button>
 
+        </form>
 
-                                            <button
-                                                type="submit"
-                                                class="btn btn-sm btn-light border text-danger"
-                                                title="Nonaktifkan kategori"
-                                            >
+    </div>
 
-                                                <i class="bi bi-trash"></i>
-
-                                            </button>
-
-                                        </form>
-
-                                    </div>
-
-                                </td>
+</td>
 
                             </tr>
 
@@ -1795,44 +1782,26 @@
                                     <td class="text-end">
 
 
-                                        {{-- RESTORE --}}
+  {{-- RESTORE --}}
+<form action="{{ route('kategori.restore', $kategori->id) }}"
+      method="POST"
+      class="d-inline-flex">
 
-                                        <form
-                                            action="{{ route('kategori.restore', $kategori->id) }}"
-                                            method="POST"
-                                            class="d-inline"
-                                        >
+    @csrf
+    @method('PATCH')
 
-                                            @csrf
+    <button type="submit"
+            class="btn btn-sm btn-outline-success action-icon-btn"
+            title="Pulihkan kategori">
 
-                                            @method('PATCH')
+        <i class="bi bi-arrow-counterclockwise"></i>
 
+    </button>
 
-                                            <button
-                                                type="submit"
-                                                class="btn btn-sm btn-outline-success"
-                                            >
-
-                                                <i
-                                                    class="bi bi-arrow-counterclockwise me-1"
-                                                ></i>
-
-                                                Pulihkan
-
-                                            </button>
-
-                                        </form>
+</form>
 
 
 
-                                        {{-- HAPUS PERMANEN --}}
-
-                                        <form
-                                            action="{{ route('kategori.forceDelete', $kategori->id) }}"
-                                            method="POST"
-                                            class="d-inline"
-                                            onsubmit="return confirm('Hapus kategori ini secara permanen? Data yang sudah dihapus tidak dapat dikembalikan.')"
-                                        >
 
                                             @csrf
 
@@ -1899,237 +1868,10 @@
 
 
 
-{{-- =========================================================
-     INFORMASI / ALUR KELOLA KATEGORI
-========================================================= --}}
 
-<div class="row g-3 mt-3">
 
 
-    {{-- ALUR --}}
-
-    <div class="col-md-8">
-
-        <div class="card border-0 shadow-sm h-100">
-
-            <div class="card-body p-4">
-
-
-                <h5 class="fw-bold mb-4">
-
-                    <i
-                        class="bi bi-diagram-3 me-2 text-primary"
-                    ></i>
-
-                    Alur Kelola Kategori
-
-                </h5>
-
-
-
-                <div class="row g-3">
-
-
-                    {{-- TAMBAH --}}
-
-                    <div class="col-md-3">
-
-                        <div class="border rounded-3 p-3 h-100">
-
-                            <div
-                                class="d-flex align-items-center mb-3"
-                            >
-
-                                <span
-                                    class="badge rounded-pill bg-primary me-2"
-                                >
-                                    1
-                                </span>
-
-
-                                <strong class="small">
-                                    Tambah
-                                </strong>
-
-                            </div>
-
-
-                            <p class="small text-muted mb-0">
-
-                                Tambahkan kategori dokumen baru
-                                melalui tombol
-                                <strong>Tambah Kategori</strong>.
-
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-
-                    {{-- EDIT --}}
-
-                    <div class="col-md-3">
-
-                        <div class="border rounded-3 p-3 h-100">
-
-                            <div
-                                class="d-flex align-items-center mb-3"
-                            >
-
-                                <span
-                                    class="badge rounded-pill bg-primary me-2"
-                                >
-                                    2
-                                </span>
-
-
-                                <strong class="small">
-                                    Edit
-                                </strong>
-
-                            </div>
-
-
-                            <p class="small text-muted mb-0">
-
-                                Ubah nama, icon, atau warna
-                                kategori yang sudah tersedia.
-
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-
-                    {{-- NONAKTIFKAN --}}
-
-                    <div class="col-md-3">
-
-                        <div class="border rounded-3 p-3 h-100">
-
-                            <div
-                                class="d-flex align-items-center mb-3"
-                            >
-
-                                <span
-                                    class="badge rounded-pill bg-warning text-dark me-2"
-                                >
-                                    3
-                                </span>
-
-
-                                <strong class="small">
-                                    Nonaktifkan
-                                </strong>
-
-                            </div>
-
-
-                            <p class="small text-muted mb-0">
-
-                                Kategori tidak digunakan untuk
-                                dokumen baru, tetapi data tetap aman.
-
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-
-                    {{-- PULIHKAN --}}
-
-                    <div class="col-md-3">
-
-                        <div class="border rounded-3 p-3 h-100">
-
-                            <div
-                                class="d-flex align-items-center mb-3"
-                            >
-
-                                <span
-                                    class="badge rounded-pill bg-success me-2"
-                                >
-                                    4
-                                </span>
-
-
-                                <strong class="small">
-                                    Pulihkan
-                                </strong>
-
-                            </div>
-
-
-                            <p class="small text-muted mb-0">
-
-                                Kategori yang dinonaktifkan
-                                dapat dipulihkan kembali.
-
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-
-    {{-- INFORMASI --}}
-
-    <div class="col-md-4">
-
-        <div class="card border-0 shadow-sm h-100">
-
-            <div class="card-body p-4">
-
-
-                <h6 class="fw-bold text-primary mb-3">
-
-                    <i
-                        class="bi bi-info-circle me-2"
-                    ></i>
-
-                    Informasi
-
-                </h6>
-
-
-                <p class="small text-muted mb-0">
-
-                    Kategori yang dinonaktifkan tidak dapat digunakan
-                    pada dokumen baru.
-
-                    Namun dokumen lama tetap aman dan masih menggunakan
-                    kategori tersebut.
-
-                    Kategori juga dapat dikembalikan melalui menu
-                    <strong>Kategori Terhapus</strong>.
-
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-</div>
-
+   
 
 
 {{-- =========================================================
@@ -2565,6 +2307,81 @@
 </div>
 
 
+{{-- ================================================= --}}
+{{-- MODAL KONFIRMASI --}}
+{{-- ================================================= --}}
+
+<div class="modal fade"
+     id="modalKonfirmasi"
+     tabindex="-1"
+     aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered modal-dialog-confirm">
+
+        <div class="modal-content confirm-modal">
+
+            <div class="modal-body text-center p-4 p-md-5">
+
+                {{-- ICON --}}
+                <div class="confirm-icon" id="confirmIcon">
+                    <i class="bi bi-exclamation-lg"></i>
+                </div>
+
+                {{-- JUDUL --}}
+                <h4 class="fw-bold mb-2"
+                    id="confirmTitle">
+                    Konfirmasi
+                </h4>
+
+                {{-- PESAN --}}
+                <p class="text-muted mb-4"
+                   id="confirmMessage">
+                    Apakah Anda yakin?
+                </p>
+
+                {{-- PERINGATAN --}}
+                <div class="confirm-warning"
+                     id="confirmWarning">
+
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+
+                    <span id="confirmWarningText">
+                        Tindakan ini tidak dapat dibatalkan.
+                    </span>
+
+                </div>
+
+                {{-- BUTTON --}}
+                <div class="d-flex gap-2 justify-content-center mt-4">
+
+                    <button type="button"
+                            class="btn btn-confirm-cancel"
+                            data-bs-dismiss="modal">
+
+                        Batal
+
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-confirm-danger"
+                            id="btnConfirmAction">
+
+                        <i class="bi bi-trash3 me-1"></i>
+
+                        Ya, Hapus Permanen
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 @endsection
 
 
@@ -2579,154 +2396,158 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    const modalElement = document.getElementById('modalKonfirmasi');
+
+    const modal = new bootstrap.Modal(modalElement);
+
+    const confirmTitle =
+        document.getElementById('confirmTitle');
+
+    const confirmMessage =
+        document.getElementById('confirmMessage');
+
+    const confirmWarning =
+        document.getElementById('confirmWarning');
+
+    const confirmWarningText =
+        document.getElementById('confirmWarningText');
+
+    const confirmIcon =
+        document.getElementById('confirmIcon');
+
+    const confirmButton =
+        document.getElementById('btnConfirmAction');
+
+    let formTarget = null;
+
+
     /* =====================================================
-       SEARCH + FILTER KATEGORI
+       NONAKTIFKAN KATEGORI
     ===================================================== */
 
-    const searchInput =
-        document.getElementById('searchKategori');
+    document.querySelectorAll('.form-nonaktifkan')
+        .forEach(function (form) {
 
-    const filterWarna =
-        document.getElementById('filterWarna');
+            form.addEventListener('submit', function (e) {
 
-    const rows =
-        document.querySelectorAll('.kategori-row');
+                e.preventDefault();
 
+                formTarget = form;
 
-    function filterKategori() {
-
-        const search =
-            searchInput
-                ? searchInput.value.toLowerCase().trim()
-                : '';
-
-        const warna =
-            filterWarna
-                ? filterWarna.value
-                : '';
+                const nama =
+                    form.dataset.nama;
 
 
-        rows.forEach(function (row) {
+                confirmTitle.textContent =
+                    'Nonaktifkan kategori?';
 
-            const nama =
-                row.dataset.nama || '';
+                confirmMessage.innerHTML =
+                    'Kategori <strong>' +
+                    nama +
+                    '</strong> akan dinonaktifkan.';
 
-            const rowWarna =
-                row.dataset.warna || '';
+                confirmWarningText.textContent =
+                    'Kategori tidak dapat digunakan untuk dokumen baru, tetapi dokumen lama tetap aman.';
 
+                confirmIcon.innerHTML =
+                    '<i class="bi bi-folder-x"></i>';
 
-            const cocokNama =
-                nama.includes(search);
+                confirmIcon.style.background =
+                    '#fff7ed';
 
-            const cocokWarna =
-                !warna || rowWarna === warna;
+                confirmIcon.style.borderColor =
+                    '#fed7aa';
 
+                confirmIcon.style.color =
+                    '#f97316';
 
-            row.style.display =
-                cocokNama && cocokWarna
-                    ? ''
-                    : 'none';
+                confirmButton.innerHTML =
+                    '<i class="bi bi-folder-x me-1"></i> Ya, Nonaktifkan';
+
+                confirmButton.style.background =
+                    '#f97316';
+
+                modal.show();
+
+            });
 
         });
 
-    }
+
+    /* =====================================================
+       HAPUS PERMANEN
+    ===================================================== */
+
+    document.querySelectorAll('.form-hapus-permanen')
+        .forEach(function (form) {
+
+            form.addEventListener('submit', function (e) {
+
+                e.preventDefault();
+
+                formTarget = form;
 
 
-    if (searchInput) {
+                confirmTitle.textContent =
+                    'Hapus kategori secara permanen?';
 
-        searchInput.addEventListener(
-            'input',
-            filterKategori
-        );
+                confirmMessage.textContent =
+                    'Data kategori yang sudah dihapus tidak dapat dikembalikan.';
 
-    }
+                confirmWarningText.textContent =
+                    'Tindakan ini akan menghapus kategori secara permanen dari sistem.';
 
+                confirmIcon.innerHTML =
+                    '<i class="bi bi-trash3"></i>';
 
-    if (filterWarna) {
+                confirmIcon.style.background =
+                    '#fef2f2';
 
-        filterWarna.addEventListener(
-            'change',
-            filterKategori
-        );
+                confirmIcon.style.borderColor =
+                    '#fecaca';
 
-    }
+                confirmIcon.style.color =
+                    '#dc3545';
 
+                confirmButton.innerHTML =
+                    '<i class="bi bi-trash3 me-1"></i> Ya, Hapus Permanen';
+
+                confirmButton.style.background =
+                    '#dc3545';
+
+                modal.show();
+
+            });
+
+        });
 
 
     /* =====================================================
-       ANIMASI ANGKA KATEGORI AKTIF
+       TOMBOL KONFIRMASI
     ===================================================== */
 
-    const counter =
-        document.querySelector('.kategori-hero-number');
+    confirmButton.addEventListener('click', function () {
 
+        if (formTarget) {
 
-    if (counter) {
+            modal.hide();
 
-        const target =
-            parseInt(
-                counter.dataset.count,
-                10
-            ) || 0;
-
-
-        const duration = 1000;
-
-        const startTime =
-            performance.now();
-
-
-        function animateCounter(currentTime) {
-
-            const elapsed =
-                currentTime - startTime;
-
-
-            const progress =
-                Math.min(
-                    elapsed / duration,
-                    1
-                );
-
-
-            /*
-             * Easing supaya gerakannya
-             * halus dan tidak kaku.
-             */
-            const eased =
-                1 - Math.pow(
-                    1 - progress,
-                    3
-                );
-
-
-            counter.textContent =
-                Math.floor(
-                    eased * target
-                );
-
-
-            if (progress < 1) {
-
-                requestAnimationFrame(
-                    animateCounter
-                );
-
-            } else {
-
-                counter.textContent =
-                    target;
-
-            }
+            formTarget.submit();
 
         }
 
+    });
 
-        requestAnimationFrame(
-            animateCounter
-        );
 
-    }
+    /* =====================================================
+       RESET
+    ===================================================== */
+
+    modalElement.addEventListener('hidden.bs.modal', function () {
+
+        formTarget = null;
+
+    });
 
 });
 

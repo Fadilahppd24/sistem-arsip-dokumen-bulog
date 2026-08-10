@@ -5837,3 +5837,158 @@ body.dark-mode .sampah-breadcrumb span:nth-child(2) {
 body.dark-mode .sampah-breadcrumb span:last-child {
     color: #d1d9e6 !important;
 }
+
+/* =========================================================
+   MODAL KONFIRMASI KATEGORI
+========================================================= */
+
+.modal-dialog-confirm {
+    max-width: 440px;
+}
+
+.confirm-modal {
+    border: none;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 25px 70px rgba(15, 23, 42, 0.25);
+}
+
+/* ICON */
+
+.confirm-icon {
+    width: 76px;
+    height: 76px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fff7ed;
+    border: 2px solid #fed7aa;
+
+    color: #f97316;
+
+    font-size: 38px;
+}
+
+.confirm-icon i {
+    line-height: 1;
+}
+
+/* JUDUL */
+
+.confirm-modal h4 {
+    color: #172554;
+    font-size: 22px;
+}
+
+/* PESAN */
+
+.confirm-modal p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* WARNING */
+
+.confirm-warning {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    text-align: left;
+
+    padding: 13px 15px;
+
+    border-radius: 12px;
+
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+
+    color: #9a3412;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.confirm-warning i {
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+/* BUTTON BATAL */
+
+.btn-confirm-cancel {
+    min-width: 130px;
+
+    padding: 10px 20px;
+
+    border-radius: 10px;
+
+    border: 1px solid #dbe2ea;
+
+    background: #fff;
+
+    color: #475569;
+
+    font-weight: 600;
+
+    transition: .2s;
+}
+
+.btn-confirm-cancel:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+    color: #1e293b;
+}
+
+/* BUTTON HAPUS */
+
+.btn-confirm-danger {
+    min-width: 170px;
+
+    padding: 10px 20px;
+
+    border-radius: 10px;
+
+    border: none;
+
+    background: #dc3545;
+
+    color: white;
+
+    font-weight: 600;
+
+    transition: .2s;
+}
+
+.btn-confirm-danger:hover {
+    background: #bb2d3b;
+    color: white;
+
+    transform: translateY(-1px);
+}
+
+/* ANIMASI */
+
+.confirm-modal {
+    animation: confirmModalIn .2s ease-out;
+}
+
+@keyframes confirmModalIn {
+
+    from {
+        opacity: 0;
+        transform: scale(.94) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+
+}
