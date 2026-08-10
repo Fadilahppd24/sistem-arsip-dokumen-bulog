@@ -1125,17 +1125,200 @@ input[type="password"]::-ms-clear {
     box-shadow: 0 6px 14px rgba(0,0,0,.15);
 }
 
+/* =========================================================
+   FILTER / PENCARIAN DOKUMEN
+========================================================= */
+
 .card-panel form.row.g-2{
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(320px, 1.7fr)
+        minmax(150px, .9fr)
+        minmax(150px, .9fr)
+        minmax(150px, .9fr)
+        145px;
+
+    gap: 12px;
+
+    align-items: center;
+
     background: #F8FAFC;
-    border-radius: 14px;
-    padding: 16px 12px;
-    margin-bottom: 20px !important;
+
+    border-radius: 16px;
+
+    padding: 14px;
+
+    margin: 0 !important;
+
     border: 1px solid var(--bulog-border);
+
+    box-sizing: border-box;
 }
+
+
+/* =========================================================
+   SEMUA KOLOM FILTER
+========================================================= */
+
+.card-panel form.row.g-2 > [class*="col-"]{
+    width: 100% !important;
+    max-width: none !important;
+    flex: none !important;
+
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+
+    margin: 0 !important;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.card-panel form.row.g-2 .input-group{
+    width: 100%;
+    height: 50px;
+
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+
+    margin: 0;
+}
+
+
+/* ICON SEARCH */
+
+.card-panel form.row.g-2 .input-group-text{
+    width: 48px;
+    height: 50px;
+
+    flex: 0 0 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff;
+
+    border-color: var(--bulog-border);
+
+    border-radius: 10px 0 0 10px;
+
+    font-size: 17px;
+}
+
+
+/* INPUT SEARCH */
+
+.card-panel form.row.g-2 .form-control{
+    height: 50px;
+
+    flex: 1 1 auto;
+
+    width: 1%;
+    min-width: 0;
+
+    border-radius: 0 10px 10px 0 !important;
+
+    padding: 10px 14px;
+
+    font-size: 14px;
+
+    background: #fff;
+
+    border-color: var(--bulog-border);
+}
+
+
+/* =========================================================
+   DROPDOWN TAHUN / BULAN / TANGGAL
+========================================================= */
+
+.card-panel form.row.g-2 .form-select{
+    width: 100%;
+
+    height: 50px;
+
+    border-radius: 10px !important;
+
+    padding: 10px 14px;
+
+    font-size: 14px;
+
+    background-color: #fff;
+
+    border-color: var(--bulog-border);
+}
+
+
+/* =========================================================
+   TOMBOL FILTER
+========================================================= */
+
+.card-panel form.row.g-2 .btn-bulog{
+    width: 100%;
+
+    min-width: 0;
+
+    height: 50px;
+
+    padding: 0 20px;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin: 0;
+}
+
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+.card-panel form.row.g-2 .form-control:focus,
+.card-panel form.row.g-2 .form-select:focus{
+
+    border-color: var(--bulog-blue-light);
+
+    box-shadow:
+        0 0 0 4px rgba(30, 79, 160, .08);
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
 
 body.dark-mode .card-panel form.row.g-2{
     background: #111827;
     border-color: #374151;
+}
+
+
+body.dark-mode .card-panel form.row.g-2 .input-group-text,
+body.dark-mode .card-panel form.row.g-2 .form-control,
+body.dark-mode .card-panel form.row.g-2 .form-select{
+
+    background: #111827;
+
+    border-color: #374151;
+
+    color: #fff;
+}
+
+
+body.dark-mode .card-panel form.row.g-2 .form-control::placeholder{
+    color: #9ca3af;
 }
 
 .btn-bulog{
@@ -1907,4 +2090,616 @@ body.dark-mode .dokumen-hero-counter-number{
 
 body.dark-mode .dokumen-hero-counter-label{
     color: #94A3B8;
+}
+
+/* =========================================
+   QUICK ACTION DOKUMEN
+========================================= */
+
+.dokumen-quick-action {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    margin: 18px 0 20px;
+    padding: 18px 22px;
+
+    background: linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #f5f9ff 100%
+    );
+
+    border: 1px solid #e1e8f2;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 24px rgba(20, 55, 100, 0.07);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+/* ORNAMEN BULAT DI KANAN */
+
+.dokumen-quick-action::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 120px;
+    height: 120px;
+
+    right: -45px;
+    top: -60px;
+
+    background: rgba(24, 78, 145, 0.06);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+
+/* EFEK SAAT MOUSE DIARAHKAN */
+
+.dokumen-quick-action:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 30px rgba(20, 55, 100, 0.11);
+}
+
+
+/* =========================================
+   ICON
+========================================= */
+
+.dokumen-quick-icon {
+
+    flex: 0 0 52px;
+
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: linear-gradient(
+        135deg,
+        #16478a,
+        #2864b5
+    );
+
+    color: #ffffff;
+
+    font-size: 23px;
+
+    box-shadow:
+        0 7px 16px rgba(22, 71, 138, 0.22);
+
+}
+
+
+/* ANIMASI ICON */
+
+.dokumen-quick-icon i {
+
+    transition:
+        transform 0.25s ease;
+
+}
+
+.dokumen-quick-action:hover
+.dokumen-quick-icon i {
+
+    transform:
+        scale(1.12)
+        rotate(-4deg);
+
+}
+
+
+/* =========================================
+   TEXT
+========================================= */
+
+.dokumen-quick-content {
+
+    flex: 1;
+
+    min-width: 0;
+
+}
+
+
+.dokumen-quick-content h6 {
+
+    margin: 0 0 4px;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    color: #19345f;
+
+}
+
+
+.dokumen-quick-content p {
+
+    margin: 0;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    color: #718096;
+
+}
+
+
+/* =========================================
+   BUTTON
+========================================= */
+
+.dokumen-quick-button {
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+.btn-upload-quick {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 10px 17px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background: #123d7a;
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    box-shadow:
+        0 6px 14px rgba(18, 61, 122, 0.18);
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+
+}
+
+
+.btn-upload-quick:hover {
+
+    background: #1d579f;
+
+    color: #ffffff;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 9px 20px rgba(18, 61, 122, 0.25);
+
+}
+
+
+.btn-upload-quick i {
+
+    font-size: 14px;
+
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .dokumen-quick-action {
+
+        align-items: flex-start;
+
+        flex-wrap: wrap;
+
+    }
+
+
+    .dokumen-quick-content {
+
+        flex: 1 1 calc(100% - 75px);
+
+    }
+
+
+    .dokumen-quick-button {
+
+        width: 100%;
+
+        margin-left: 70px;
+
+    }
+
+
+    .btn-upload-quick {
+
+        width: 100%;
+
+        justify-content: center;
+
+    }
+
+}
+
+/* =========================================================
+   INFORMASI DOKUMEN TERBARU
+========================================================= */
+
+.dokumen-info-card {
+
+    width: 100%;
+
+    min-height: 96px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 17px 22px;
+
+    margin: 0 0 16px 0;
+
+    box-sizing: border-box;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #f5f9ff 100%
+        );
+
+    border: 1px solid #e1e8f2;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 24px rgba(20, 55, 100, 0.06);
+
+    position: relative;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+/* ORNAMEN HALUS DI KANAN */
+
+.dokumen-info-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 150px;
+    height: 150px;
+
+    right: -65px;
+    top: -75px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(30, 91, 160, 0.045);
+
+    pointer-events: none;
+
+}
+
+
+/* HOVER */
+
+.dokumen-info-card:hover {
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 11px 28px rgba(20, 55, 100, 0.09);
+
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.dokumen-info-icon {
+
+    width: 52px;
+    height: 52px;
+
+    flex: 0 0 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    font-size: 23px;
+
+    position: relative;
+
+    z-index: 1;
+
+}
+
+
+/* ICON DOKUMEN */
+
+.dokumen-info-icon-document {
+
+    background:
+        #eef4ff;
+
+    color:
+        #2864b5;
+
+    border:
+        1px solid #d8e6fa;
+
+}
+
+
+/* ICON KOSONG */
+
+.dokumen-info-icon-empty {
+
+    background:
+        linear-gradient(
+            135deg,
+            #16478a,
+            #2864b5
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 7px 16px rgba(22, 71, 138, 0.20);
+
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.dokumen-info-content {
+
+    flex: 1;
+
+    min-width: 0;
+
+    position: relative;
+
+    z-index: 1;
+
+}
+
+
+/* LABEL */
+
+.dokumen-info-label {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin-bottom: 3px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.4px;
+
+    text-transform: uppercase;
+
+    color: #718096;
+
+}
+
+
+.dokumen-info-label i {
+
+    font-size: 12px;
+
+    color: #2864b5;
+
+}
+
+
+/* JUDUL */
+
+.dokumen-info-title {
+
+    margin: 0;
+
+    max-width: 700px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    color: #19345f;
+
+}
+
+
+/* META */
+
+.dokumen-info-meta {
+
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-top: 3px;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+
+    color: #718096;
+
+}
+
+
+.dokumen-info-meta span {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+}
+
+
+.dokumen-info-meta i {
+
+    font-size: 11px;
+
+    color: #8a9bb2;
+
+}
+
+
+.dokumen-info-dot {
+
+    color: #b5c0ce;
+
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.dokumen-info-action {
+
+    flex-shrink: 0;
+
+    margin-left: auto;
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+.dokumen-info-action .btn-upload-quick {
+
+    min-width: 165px;
+
+    white-space: nowrap;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .dokumen-info-card {
+
+        align-items: flex-start;
+
+        flex-wrap: wrap;
+
+        padding: 16px 18px;
+
+    }
+
+
+    .dokumen-info-content {
+
+        flex: 1;
+
+    }
+
+
+    .dokumen-info-title {
+
+        white-space: normal;
+
+    }
+
+
+    .dokumen-info-action {
+
+        width: 100%;
+
+        margin-left: 70px;
+
+    }
+
+
+    .dokumen-info-action .btn-upload-quick {
+
+        width: 100%;
+
+    }
+
 }
