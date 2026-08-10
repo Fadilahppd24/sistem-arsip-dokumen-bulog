@@ -4,146 +4,375 @@
 
 @section('content')
 
-<nav aria-label="breadcrumb" class="mb-2">
-    <ol class="breadcrumb small mb-0">
-        <li class="breadcrumb-item">
-            <a href="{{ route('dashboard') }}" class="text-decoration-none">
-                Beranda
-            </a>
-        </li>
-        <li class="breadcrumb-item active">
-            Sampah Dokumen
-        </li>
-    </ol>
-</nav>
+{{-- =========================================================
+    HERO SAMPAH DOKUMEN
+========================================================= --}}
 
+<div class="sampah-hero mb-4">
 
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <div>
-        <h3 class="fw-bold mb-0">
-            <i class="bi bi-trash-fill me-2"></i>
-            Sampah Dokumen
-        </h3>
-        <small class="text-muted">
-            Dokumen yang telah dihapus sementara
-        </small>
+    <div class="sampah-hero-decoration">
+        <span class="sampah-sparkle s1">✦</span>
+        <span class="sampah-sparkle s2">✦</span>
+
+        <span class="sampah-circle c1"></span>
+        <span class="sampah-circle c2"></span>
     </div>
+
+    <div class="sampah-hero-icon">
+        <i class="bi bi-trash3-fill"></i>
+    </div>
+
+    <div class="sampah-hero-content">
+
+        <span class="sampah-kicker">
+            RECYCLE BIN
+        </span>
+
+        <h2>
+            Sampah Dokumen
+        </h2>
+
+        <p>
+            Kelola dokumen yang sudah dihapus dengan aman.
+            Pulihkan kembali jika masih dibutuhkan.
+        </p>
+
+    </div>
+
 </div>
 
 
-<div class="card-panel p-3">
+{{-- =========================================================
+    INFO SAMPAH
+========================================================= --}}
+
+<div class="sampah-info-card mb-4">
+
+    <div class="sampah-info-icon">
+        <i class="bi bi-arrow-repeat"></i>
+    </div>
+
+    <div class="sampah-info-content">
+
+        <strong>
+            Dokumen masih bisa diselamatkan ✨
+        </strong>
+
+        <p>
+            Dokumen yang masuk ke sampah belum terhapus permanen.
+            Kamu dapat memulihkannya kembali atau menghapusnya selamanya.
+        </p>
+
+    </div>
+
+    <div class="sampah-info-status">
+        <i class="bi bi-shield-check"></i>
+        Aman
+    </div>
+
+</div>
+
+
+{{-- =========================================================
+    DOCUMENT CARD
+========================================================= --}}
+
+<div class="sampah-card">
+
+    {{-- HEADER --}}
+    <div class="sampah-card-header">
+
+        <div class="sampah-card-title">
+
+            <div class="sampah-title-icon">
+                <i class="bi bi-archive"></i>
+            </div>
+
+            <div>
+
+                <span>
+                    RECENTLY DELETED
+                </span>
+
+                <h5>
+                    Dokumen Terhapus
+                </h5>
+
+                <p>
+                    Arsip yang menunggu untuk dipulihkan atau
+                    dihapus permanen.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="sampah-total-badge">
+
+            <i class="bi bi-file-earmark"></i>
+
+            {{ $dokumens->total() }} dokumen
+
+        </div>
+
+    </div>
+
+
+    {{-- =====================================================
+        TABLE
+    ====================================================== --}}
 
     <div class="table-responsive">
 
-        <table class="table table-hover align-middle mb-0">
+        <table class="table align-middle mb-0 sampah-table">
 
             <thead>
-                <tr class="text-muted small">
-                    <th>No</th>
-                    <th>Nama Dokumen</th>
-                    <th>Kategori</th>
-                    <th>Diupload Oleh</th>
-                    <th>Dihapus Pada</th>
-                    <th class="text-end">Aksi</th>
+
+                <tr>
+
+                    <th>
+                        No
+                    </th>
+
+                    <th>
+                        <i class="bi bi-file-earmark-text me-1"></i>
+                        Nama Dokumen
+                    </th>
+
+                    <th>
+                        <i class="bi bi-folder me-1"></i>
+                        Kategori
+                    </th>
+
+                    <th>
+                        <i class="bi bi-person me-1"></i>
+                        Diupload Oleh
+                    </th>
+
+                    <th>
+                        <i class="bi bi-clock me-1"></i>
+                        Dihapus Pada
+                    </th>
+
+                    <th class="text-end">
+                        Aksi
+                    </th>
+
                 </tr>
+
             </thead>
 
 
             <tbody>
 
-            @forelse ($dokumens as $i => $dokumen)
+                @forelse ($dokumens as $i => $dokumen)
 
-                <tr>
+                    <tr>
 
-                    <td>
-                        {{ $dokumens->firstItem() + $i }}
-                    </td>
+                        {{-- NO --}}
+                        <td>
 
+                            <span class="sampah-number">
 
-                    <td class="fw-semibold">
-                        {{ $dokumen->nama_dokumen }}
+                                {{ $dokumens->firstItem() + $i }}
 
-                        <br>
+                            </span>
 
-                        <small class="text-muted">
-                            {{ $dokumen->nomor_keterangan ?? '-' }}
-                        </small>
-                    </td>
+                        </td>
 
 
-                    <td>
-                        {{ $dokumen->kategori->nama ?? '-' }}
-                    </td>
+                        {{-- NAMA DOKUMEN --}}
+                        <td>
+
+                            <div class="sampah-document">
+
+                                <div class="sampah-pdf-icon">
+                                    <i class="bi bi-file-earmark-pdf-fill"></i>
+                                </div>
 
 
-                    <td>
-                        {{ $dokumen->uploader->name ?? '-' }}
-                    </td>
+                                <div>
+
+                                    <div class="sampah-document-name">
+
+                                        {{ $dokumen->nama_dokumen }}
+
+                                    </div>
 
 
-                    <td>
-                        {{ $dokumen->deleted_at->format('d M Y H:i') }}
-                    </td>
+                                    <small>
+
+                                        {{ $dokumen->nomor_keterangan ?? '-' }}
+
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </td>
 
 
-                    <td class="text-end">
+                        {{-- KATEGORI --}}
+                        <td>
 
-                        {{-- Restore --}}
-                        <form action="{{ route('dokumen.restore', $dokumen->id) }}"
-                              method="POST"
-                              class="d-inline">
+                            <span class="sampah-category">
 
-                            @csrf
-                            @method('PATCH')
+                                <i class="bi bi-folder-fill"></i>
 
-                            <button type="submit"
-                                    class="btn btn-sm btn-success"
-                                    title="Restore">
+                                {{ $dokumen->kategori->nama ?? '-' }}
 
-                                <i class="bi bi-arrow-counterclockwise"></i>
-                                Restore
+                            </span>
 
-                            </button>
-
-                        </form>
+                        </td>
 
 
+                        {{-- UPLOADER --}}
+                        <td>
 
-                        {{-- Hapus Permanen --}}
-                        <form action="{{ route('dokumen.forceDelete', $dokumen->id) }}"
-                              method="POST"
-                              class="d-inline"
-                              onsubmit="return confirm('Yakin ingin menghapus permanen dokumen ini?')">
+                            <div class="sampah-user">
 
-                            @csrf
-                            @method('DELETE')
+                                <span class="sampah-user-icon">
 
-                            <button type="submit"
-                                    class="btn btn-sm btn-danger">
+                                    <i class="bi bi-person-fill"></i>
 
-                                <i class="bi bi-trash-fill"></i>
-                                Hapus Permanen
+                                </span>
 
-                            </button>
+                                <span>
+                                    {{ $dokumen->uploader->name ?? '-' }}
+                                </span>
 
-                        </form>
+                            </div>
 
-
-                    </td>
-
-                </tr>
+                        </td>
 
 
-            @empty
+                        {{-- TANGGAL DIHAPUS --}}
+                        <td>
 
-                <tr>
-                    <td colspan="6" class="text-center text-muted py-4">
-                        Tidak ada dokumen di sampah.
-                    </td>
-                </tr>
+                            <div class="sampah-date">
 
-            @endforelse
+                                <i class="bi bi-calendar3"></i>
 
+                                <div>
+
+                                    <strong>
+                                        {{ $dokumen->deleted_at->format('d M Y') }}
+                                    </strong>
+
+                                    <small>
+                                        {{ $dokumen->deleted_at->format('H:i') }}
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        {{-- AKSI --}}
+                        <td>
+
+                            <div class="sampah-actions">
+
+
+                                {{-- RESTORE --}}
+                                <form
+                                    action="{{ route('dokumen.restore', $dokumen->id) }}"
+                                    method="POST"
+                                >
+
+                                    @csrf
+
+                                    @method('PATCH')
+
+                                    <button
+                                        type="submit"
+                                        class="sampah-btn sampah-btn-restore"
+                                        title="Pulihkan dokumen"
+                                    >
+
+                                        <i class="bi bi-arrow-clockwise"></i>
+
+                                        <span>
+                                            Pulihkan
+                                        </span>
+
+                                    </button>
+
+                                </form>
+
+
+                                {{-- HAPUS PERMANEN --}}
+                                <form
+                                    action="{{ route('dokumen.forceDelete', $dokumen->id) }}"
+                                    method="POST"
+                                    onsubmit="return confirm('Yakin ingin menghapus permanen dokumen ini?')"
+                                >
+
+                                    @csrf
+
+                                    @method('DELETE')
+
+                                    <button
+                                        type="submit"
+                                        class="sampah-btn sampah-btn-delete"
+                                        title="Hapus permanen"
+                                    >
+
+                                        <i class="bi bi-trash3-fill"></i>
+
+                                        <span>
+                                            Hapus Permanen
+                                        </span>
+
+                                    </button>
+
+                                </form>
+
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                @empty
+
+                    {{-- =================================================
+                        EMPTY STATE
+                    ================================================== --}}
+
+                    <tr>
+
+                        <td
+                            colspan="6"
+                            class="sampah-empty"
+                        >
+
+                            <div class="sampah-empty-icon">
+
+                                <i class="bi bi-trash3"></i>
+
+                            </div>
+
+                            <h5>
+                                Tempat sampah masih kosong
+                            </h5>
+
+                            <p>
+                                Belum ada dokumen yang dihapus.
+                                Dokumen yang kamu hapus nantinya akan muncul di sini.
+                            </p>
+
+                        </td>
+
+                    </tr>
+
+                @endforelse
 
             </tbody>
 
@@ -152,25 +381,45 @@
     </div>
 
 
-    <div class="d-flex justify-content-between align-items-center mt-3">
+    {{-- =====================================================
+        PAGINATION
+    ====================================================== --}}
 
-        <div class="text-muted small">
-            Menampilkan 
-            {{ $dokumens->firstItem() ?? 0 }}
+    <div class="sampah-pagination">
+
+        <div>
+
+            Menampilkan
+
+            <strong>
+                {{ $dokumens->firstItem() ?? 0 }}
+            </strong>
+
             hingga
-            {{ $dokumens->lastItem() ?? 0 }}
+
+            <strong>
+                {{ $dokumens->lastItem() ?? 0 }}
+            </strong>
+
             dari
-            {{ $dokumens->total() }}
+
+            <strong>
+                {{ $dokumens->total() }}
+            </strong>
+
             data
+
         </div>
 
 
-        {{ $dokumens->links('pagination::bootstrap-5') }}
+        <div>
+
+            {{ $dokumens->links('pagination::bootstrap-5') }}
+
+        </div>
 
     </div>
 
-
 </div>
-
 
 @endsection
