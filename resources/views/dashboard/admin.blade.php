@@ -47,17 +47,15 @@
 </div>
 
 <div class="row g-3 mb-4">
-    @php
-        $warnaIkon = ['primary' => 'bg-bulog-navy', 'warning' => 'bg-bulog-yellow', 'info' => 'bg-info', 'secondary' => 'bg-secondary'];
-    @endphp
+    
     @foreach ($kategoris as $kategori)
         <div class="col-6 col-lg-3">
             <a href="{{ route('dokumen.index', ['kategori_id' => $kategori->id]) }}" class="text-decoration-none">
                 <div class="stat-card stat-card-{{ $kategori->warna }} d-flex align-items-start justify-content-between h-100">
                     <div class="d-flex gap-3">
-                        <div class="stat-icon {{ $warnaIkon[$kategori->warna] ?? 'bg-bulog-navy' }}">
-                            <i class="bi {{ $kategori->icon ?? 'bi-folder-fill' }}"></i>
-                        </div>
+                       <div class="stat-icon kategori-icon-{{ $kategori->warna ?? 'secondary' }}">
+    <i class="bi {{ $kategori->icon ?? 'bi-folder-fill' }}"></i>
+</div>
                         <div>
 
     <div class="kategori-title">
@@ -239,7 +237,10 @@
                 @foreach ($kategoris as $kategori)
                     <li class="d-flex justify-content-between align-items-center py-2 border-top">
                         <span class="d-flex align-items-center gap-2 small">
-                            <span class="d-inline-block rounded-circle {{ $warnaIkon[$kategori->warna] ?? 'bg-bulog-navy' }}" style="width:14px;height:14px;"></span>
+                       <span
+    class="d-inline-block rounded-circle kategori-dot-{{ $kategori->warna ?? 'secondary' }}"
+    style="width:14px;height:14px;">
+</span>
                             {{ $kategori->nama }}
                         </span>
                         <span class="fw-semibold small">{{ $kategori->dokumens_count }}</span>
@@ -264,25 +265,69 @@ type:'doughnut',
 
 data:{
 
-labels:[
-@foreach($kategoris as $k)
-'{{ $k->nama }}',
-@endforeach
-],
+labels: @json($kategoris->pluck('nama')),
 
 datasets:[{
 
-data:[
-@foreach($kategoris as $k)
-{{ $k->dokumens_count }},
-@endforeach
-],
+data: @json($kategoris->pluck('dokumens_count')),
 
-backgroundColor:[
-'#1D4ED8',
-'#F59E0B',
-'#06B6D4',
-'#6B7280'
+backgroundColor: [
+    @foreach($kategoris as $k)
+        @switch($k->warna)
+
+            @case('primary')
+                '#0A2E6E',
+                @break
+
+            @case('warning')
+                '#F5A623',
+                @break
+
+            @case('info')
+                '#06B6D4',
+                @break
+
+            @case('success')
+                '#22C55E',
+                @break
+
+            @case('danger')
+                '#EF4444',
+                @break
+
+            @case('purple')
+                '#7C3AED',
+                @break
+
+            @case('pink')
+                '#EC4899',
+                @break
+
+            @case('teal')
+                '#0D9488',
+                @break
+
+            @case('orange')
+                '#F97316',
+                @break
+
+            @case('indigo')
+                '#6366F1',
+                @break
+
+            @case('cyan')
+                '#06B6D4',
+                @break
+
+            @case('secondary')
+                '#6B7280',
+                @break
+
+            @default
+                '#6B7280',
+
+        @endswitch
+    @endforeach
 ]
 
 }]

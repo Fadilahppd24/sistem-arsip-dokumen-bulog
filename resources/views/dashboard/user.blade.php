@@ -30,8 +30,21 @@ Temukan dokumen yang Anda butuhkan dengan mudah dan cepat.
 
 <div class="row g-3 mb-4">
     @php
-        $warnaIkon = ['primary' => 'bg-bulog-navy', 'warning' => 'bg-bulog-yellow', 'info' => 'bg-info', 'secondary' => 'bg-secondary'];
-    @endphp
+    $warnaIkon = [
+        'primary'   => 'bg-bulog-navy',
+        'warning'   => 'bg-bulog-yellow',
+        'info'      => 'bg-info',
+        'secondary' => 'bg-secondary',
+        'success'   => 'bg-success',
+        'danger'    => 'bg-danger',
+        'purple'    => 'bg-purple',
+        'pink'      => 'bg-pink',
+        'teal'      => 'bg-teal',
+        'orange'    => 'bg-orange',
+        'indigo'    => 'bg-indigo',
+        'cyan'      => 'bg-cyan',
+    ];
+@endphp
     @foreach ($kategoris as $kategori)
         <div class="col-6 col-lg-3">
             <a href="{{ route('dokumen.index', ['kategori_id' => $kategori->id]) }}" class="text-decoration-none">
