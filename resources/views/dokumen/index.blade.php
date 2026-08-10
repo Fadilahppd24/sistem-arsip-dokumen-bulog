@@ -15,13 +15,7 @@
 </div>
 
 @php
-    $iconBg = match($kategoriAktif->warna ?? null) {
-        'primary' => 'bg-bulog-navy',
-        'warning' => 'bg-bulog-yellow',
-        'info' => 'bg-info',
-        'secondary' => 'bg-secondary',
-        default => 'bg-bulog-navy',
-    };
+    $warnaKategori = $kategoriAktif->warna ?? 'secondary';
 
     $jumlahDokumenKategori = $kategoriAktif
         ? $kategoriAktif->dokumens()->count()
@@ -50,7 +44,7 @@
         {{-- ICON KATEGORI --}}
         <div class="dokumen-hero-icon-ring">
 
-            <div class="dokumen-hero-icon {{ $iconBg }}">
+            <div class="dokumen-hero-icon kategori-icon-{{ $warnaKategori }}">
                 <i class="bi {{ $kategoriAktif->icon ?? 'bi-folder-fill' }}"></i>
             </div>
 
