@@ -6,14 +6,14 @@
 
 <div class="container-fluid px-0">
 
-    {{-- ============================= --}}
-    {{-- HEADER --}}
-    {{-- ============================= --}}
+{{-- ============================= --}}
+{{-- HEADER --}}
+{{-- ============================= --}}
 
 <div class="mb-4">
 
-    {{-- Breadcrumb --}}
-    <div class="d-flex align-items-center gap-2 mb-2 small">
+    {{-- BREADCRUMB --}}
+    <div class="d-flex align-items-center gap-2 mb-3 small">
 
         <a href="{{ route('dashboard') }}"
            class="text-decoration-none"
@@ -21,9 +21,7 @@
             Beranda
         </a>
 
-        <span class="text-muted">
-            >
-        </span>
+        <span class="text-muted">></span>
 
         <span class="text-muted">
             Kelola Kategori
@@ -31,43 +29,67 @@
 
     </div>
 
-{{-- Header Halaman --}}
-<div class="d-flex justify-content-between align-items-center mb-4">
 
-    <div>
-        {{-- Breadcrumb --}}
-        <div class="d-flex align-items-center gap-2 mb-2 small">
-            <a href="{{ route('dashboard') }}"
-               class="text-decoration-none"
-               style="color:#1d4ed8;">
-                Beranda
-            </a>
+    {{-- HERO HEADER --}}
+    <div class="kategori-hero">
 
-            <span class="text-muted">></span>
+        {{-- ICON --}}
+        <div class="kategori-hero-icon">
 
-            <span class="text-muted">
-                Kelola Kategori
-            </span>
+            <div class="kategori-hero-icon-inner">
+                <i class="bi bi-folder-fill"></i>
+            </div>
+
         </div>
 
-        {{-- Judul --}}
-        <h2 class="fw-bold mb-0" style="color:#172554;">
-            Kelola Kategori
-        </h2>
+
+        {{-- JUDUL + DESKRIPSI --}}
+        <div class="flex-grow-1">
+
+            <h2 class="fw-bold mb-2">
+                Kelola Kategori
+            </h2>
+
+            <p class="mb-0">
+                Kelola dan atur kategori dokumen sistem dengan mudah.
+            </p>
+
+        </div>
+
+
+        {{-- JUMLAH KATEGORI --}}
+        <div class="kategori-hero-stat">
+
+            <div class="kategori-hero-number">
+                {{ $kategoris->count() }}
+            </div>
+
+            <div class="kategori-hero-label">
+                KATEGORI AKTIF
+            </div>
+
+        </div>
+
+
+        {{-- TOMBOL --}}
+        <div class="kategori-hero-action">
+
+            <button type="button"
+                    class="btn btn-primary px-4 py-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalTambahKategori">
+
+                <i class="bi bi-plus-lg me-1"></i>
+
+                Tambah Kategori
+
+            </button>
+
+        </div>
+
     </div>
 
-    {{-- Tombol Tambah Kategori --}}
-    <button type="button"
-            class="btn btn-primary px-4"
-            data-bs-toggle="modal"
-            data-bs-target="#modalTambahKategori">
-        <i class="bi bi-plus-lg me-1"></i>
-        Tambah Kategori
-    </button>
-
 </div>
-
-</div>   
 
     {{-- ============================= --}}
     {{-- ALERT --}}

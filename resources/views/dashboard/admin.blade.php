@@ -165,21 +165,29 @@
 
 </div>
 
-                                </td>
-                                                                <td>
-                                    @php
-                                        $badge = match($dokumen->kategori->warna){
-                                            'primary' => 'badge-modern-navy',
-                                            'warning' => 'badge-modern-yellow',
-                                            'info' => 'badge-modern-info',
-                                            default => 'badge-modern-gray',
-                                        };
-                                    @endphp
+                                <td>
+    @php
+        $badge = match($dokumen->kategori?->warna) {
+            'primary'   => 'badge-modern-navy',
+            'warning'   => 'badge-modern-yellow',
+            'info'      => 'badge-modern-info',
+            'success'   => 'badge-modern-green',
+            'danger'    => 'badge-modern-red',
+            'purple'    => 'badge-modern-purple',
+            'pink'      => 'badge-modern-pink',
+            'teal'      => 'badge-modern-teal',
+            'orange'    => 'badge-modern-orange',
+            'indigo'    => 'badge-modern-indigo',
+            'cyan'      => 'badge-modern-cyan',
+            'secondary' => 'badge-modern-gray',
+            default     => 'badge-modern-gray',
+        };
+    @endphp
 
-                                    <span class="badge rounded-pill {{ $badge }}">
-                                        {{ $dokumen->kategori->nama }}
-                                    </span>
-                                </td>
+    <span class="badge rounded-pill {{ $badge }}">
+        {{ $dokumen->kategori?->nama ?? 'Kategori tidak tersedia' }}
+    </span>
+</td>
                                 <td>{{ $dokumen->tanggal_dokumen->format('d M Y') }}</td>
                                 <td>{{ $dokumen->uploader->name }}</td>
                                 <td class="text-end">

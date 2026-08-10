@@ -3871,3 +3871,166 @@ body.dark-mode .dokumen-hero-counter-label{
 .export-actions {
     margin-top: 24px;
 }
+
+
+/* =========================================================
+   HERO HEADER - KELOLA KATEGORI
+========================================================= */
+
+.kategori-hero {
+    position: relative;
+    min-height: 138px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 24px;
+
+    padding: 24px 30px;
+
+    border-radius: 20px;
+
+    background:
+        radial-gradient(
+            circle at 65% 50%,
+            rgba(255,255,255,.75) 0,
+            rgba(255,255,255,0) 35%
+        ),
+        linear-gradient(
+            135deg,
+            #dbeafe 0%,
+            #e8f1ff 50%,
+            #d5e7ff 100%
+        );
+
+    border-top: 2px solid #f59e0b;
+
+    overflow: hidden;
+}
+
+.kategori-hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    right: 180px;
+    top: -100px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.25);
+
+    pointer-events: none;
+}
+
+
+/* ICON */
+
+.kategori-hero-icon {
+    width: 92px;
+    height: 92px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255,255,255,.45);
+
+    border: 4px solid rgba(37,99,235,.25);
+
+    box-shadow:
+        0 8px 20px rgba(30,64,175,.15);
+}
+
+.kategori-hero-icon-inner {
+    width: 68px;
+    height: 68px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #2563eb;
+
+    color: white;
+
+    box-shadow:
+        0 8px 18px rgba(37,99,235,.30);
+}
+
+.kategori-hero-icon-inner i {
+    font-size: 30px;
+}
+
+
+/* JUDUL */
+
+.kategori-hero h2 {
+    color: #172554;
+    font-size: 28px;
+    letter-spacing: -.5px;
+}
+
+
+/* DESKRIPSI */
+
+.kategori-hero p {
+    color: #475569;
+    font-size: 14px;
+}
+
+
+/* STATISTIK */
+
+.kategori-hero-stat {
+    min-width: 120px;
+
+    text-align: center;
+
+    margin-left: auto;
+}
+
+.kategori-hero-number {
+    font-size: 42px;
+    line-height: 1;
+
+    font-weight: 800;
+
+    color: #1d4ed8;
+}
+
+.kategori-hero-label {
+    margin-top: 7px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    color: #64748b;
+}
+
+
+/* BUTTON */
+
+.kategori-hero-action {
+    position: relative;
+    z-index: 2;
+}
+
+.kategori-hero-action .btn {
+    border-radius: 10px;
+
+    box-shadow:
+        0 6px 15px rgba(37,99,235,.20);
+}
