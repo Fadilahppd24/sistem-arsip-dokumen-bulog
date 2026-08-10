@@ -1,21 +1,62 @@
 @extends('layouts.app')
 
-@section('title', 'Kelola Dokumen')
+@section('title', $kategoriAktif->nama ?? 'Kelola Dokumen')
 
 @section('content')
 <nav aria-label="breadcrumb" class="mb-2">
     <ol class="breadcrumb small mb-0">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}" class="text-decoration-none">Beranda</a></li>
-        <li class="breadcrumb-item active">Kelola Dokumen</li>
+        <li class="breadcrumb-item active">{{ $kategoriAktif->nama ?? 'Kelola Dokumen' }}</li>
     </ol>
 </nav>
 
-<div class="mb-3">
-    <h3 class="fw-bold mb-0">Kelola Dokumen</h3>
+@php
+    $iconBg = match($kategoriAktif->warna ?? null) {
+        'primary' => 'bg-bulog-navy',
+        'warning' => 'bg-bulog-yellow',
+        'info' => 'bg-info',
+        'secondary' => 'bg-secondary',
+        default => 'bg-bulog-navy',
+    };
+    $jumlahDokumenKategori = $kategoriAktif ? $kategoriAktif->dokumens()->count() : $dokumens->total();
+@endphp
+
+<div class="dashboard-header dashboard-header-hero mb-4">
+    <div class="hero-sparkles">
+        <span class="sparkle s1">✦</span>
+        <span class="sparkle s2">✦</span>
+        <span class="sparkle s3">✦</span>
+        <span class="sparkle s4">✦</span>
+    </div>
+
+    <div class="d-flex align-items-center flex-wrap gap-4">
+        <div class="dokumen-hero-icon-ring">
+            <div class="dokumen-hero-icon {{ $iconBg }}">
+                <i class="bi {{ $kategoriAktif->icon ?? 'bi-folder-fill' }}"></i>
+            </div>
+        </div>
+        <div class="flex-grow-1">
+            <h2 class="fw-bold mb-2">{{ $kategoriAktif->nama ?? 'Kelola Dokumen' }}</h2>
+            <p class="text-muted mb-0">
+                @if($kategoriAktif)
+                    Kelola dan akses dokumen kategori {{ $kategoriAktif->nama }} dengan mudah.
+                @else
+                    Kelola seluruh dokumen yang tersimpan dalam sistem.
+                @endif
+            </p>
+        </div>
+        <div class="dokumen-hero-counter text-center">
+            <div class="dokumen-hero-counter-number" data-count="{{ $jumlahDokumenKategori }}">0</div>
+            <div class="dokumen-hero-counter-label">Dokumen</div>
+        </div>
+    </div>
 </div>
 
-<div class="card-panel p-3">
-    <form method="GET" class="row g-2 mb-3">
+<div class="card-panel dokumen-filter-card p-3 mb-3">
+    <form method="GET" class="row g-2 align-items-center">
+        @if($kategoriAktif)
+            <input type="hidden" name="kategori_id" value="{{ $kategoriAktif->id }}">
+        @endif
         <div class="col-md-4">
             <div class="input-group">
                 <span class="input-group-text"><i class="bi bi-search"></i></span>
@@ -39,23 +80,20 @@
             </select>
         </div>
         <div class="col-md-2">
-    <select name="tanggal" class="form-select" onchange="this.form.submit()">
-        <option value="">Tanggal</option>
-
-        @for ($d = 1; $d <= 31; $d++)
-            <option value="{{ $d }}"
-                {{ request('tanggal') == $d ? 'selected' : '' }}>
-                {{ $d }}
-            </option>
-        @endfor
-
-    </select>
-</div>
+            <select name="tanggal" class="form-select" onchange="this.form.submit()">
+                <option value="">Tanggal</option>
+                @for ($d = 1; $d <= 31; $d++)
+                    <option value="{{ $d }}" {{ request('tanggal') == $d ? 'selected' : '' }}>{{ $d }}</option>
+                @endfor
+            </select>
+        </div>
         <div class="col-md-1 d-grid">
-            <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-funnel"></i></button>
+            <button class="btn btn-bulog" type="submit"><i class="bi bi-funnel"></i></button>
         </div>
     </form>
+</div>
 
+<div class="card-panel p-3">
     <div class="table-responsive">
         <table class="table table-hover align-middle mb-0">
             <thead>
@@ -72,19 +110,26 @@
                 @forelse ($dokumens as $i => $dokumen)
                     <tr>
                         <td>{{ $dokumens->firstItem() + $i }}</td>
-                        <td class="fw-semibold">{{ $dokumen->nama_dokumen }}</td>
+                        <td>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="file-icon">
+                                    <i class="bi bi-file-earmark-pdf-fill text-danger"></i>
+                                </div>
+                                <span class="fw-semibold">{{ $dokumen->nama_dokumen }}</span>
+                            </div>
+                        </td>
                         <td class="text-muted">{{ $dokumen->nomor_keterangan ?? '-' }}</td>
                         <td>{{ $dokumen->tanggal_dokumen->format('d M Y') }}</td>
                         <td>{{ $dokumen->uploader->name }}</td>
                         <td class="text-end">
                             <a href="{{ route('dokumen.show', $dokumen) }}" class="btn btn-sm btn-outline-primary" title="Lihat"><i class="bi bi-eye"></i></a>
-                           <a href="{{ route('dokumen.download', $dokumen) }}"
-   target="downloadFrame"
-   onclick="setTimeout(function(){ window.location='{{ route('dashboard') }}'; }, 500)"
-   class="btn btn-sm btn-outline-success"
-   title="Unduh">
-    <i class="bi bi-download"></i>
-</a>
+                            <a href="{{ route('dokumen.download', $dokumen) }}"
+                               target="downloadFrame"
+                               onclick="setTimeout(function(){ window.location='{{ route('dashboard') }}'; }, 500)"
+                               class="btn btn-sm btn-outline-success"
+                               title="Unduh">
+                                <i class="bi bi-download"></i>
+                            </a>
                             <a href="{{ route('dokumen.edit', $dokumen) }}" class="btn btn-sm btn-outline-warning" title="Edit"><i class="bi bi-pencil"></i></a>
                             <button type="button" class="btn btn-sm btn-outline-danger" title="Hapus"
                                     data-bs-toggle="modal" data-bs-target="#hapusModal{{ $dokumen->id }}">
@@ -131,4 +176,32 @@
 </div>
 
 <iframe name="downloadFrame" style="display:none;"></iframe>
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const counter = document.querySelector('.dokumen-hero-counter-number');
+    if (!counter) return;
+
+    const target = parseInt(counter.dataset.count, 10) || 0;
+    const duration = 1000;
+    const startTime = performance.now();
+
+    function animate(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        counter.textContent = Math.floor(eased * target);
+
+        if (progress < 1) {
+            requestAnimationFrame(animate);
+        } else {
+            counter.textContent = target;
+        }
+    }
+
+    requestAnimationFrame(animate);
+});
+</script>
+@endpush
 @endsection
