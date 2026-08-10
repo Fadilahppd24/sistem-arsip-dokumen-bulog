@@ -20,9 +20,9 @@ class UserSeeder extends Seeder
         );
 
         User::firstOrCreate(
-            ['email' => 'user@bulog.co.id'],
+            ['email' => 'staffbulog@gmail.com'],
             [
-                'name' => 'Pengguna Indramayu',
+                'name' => 'Staff',
                 'password' => Hash::make('indramayu'),
                 'role' => 'user',
             ]
