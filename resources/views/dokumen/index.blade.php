@@ -29,27 +29,61 @@
         <span class="sparkle s4">✦</span>
     </div>
 
-    <div class="d-flex align-items-center flex-wrap gap-4">
+    <div class="dashboard-header-hero">
+
+    {{-- Ornamen kecil --}}
+    <div class="hero-sparkles">
+        <span class="sparkle s1">✦</span>
+        <span class="sparkle s2">✦</span>
+        <span class="sparkle s3">✦</span>
+        <span class="sparkle s4">✦</span>
+    </div>
+
+    <div class="d-flex align-items-center flex-wrap gap-4 position-relative">
+
+        {{-- ICON KATEGORI --}}
         <div class="dokumen-hero-icon-ring">
             <div class="dokumen-hero-icon {{ $iconBg }}">
                 <i class="bi {{ $kategoriAktif->icon ?? 'bi-folder-fill' }}"></i>
             </div>
         </div>
+
+        {{-- JUDUL --}}
         <div class="flex-grow-1">
-            <h2 class="fw-bold mb-2">{{ $kategoriAktif->nama ?? 'Kelola Dokumen' }}</h2>
+
+            <h2 class="fw-bold mb-2">
+                {{ $kategoriAktif->nama ?? 'Kelola Dokumen' }}
+            </h2>
+
             <p class="text-muted mb-0">
                 @if($kategoriAktif)
-                    Kelola dan akses dokumen kategori {{ $kategoriAktif->nama }} dengan mudah.
+                    Kelola dan akses dokumen kategori
+                    {{ $kategoriAktif->nama }} dengan mudah.
                 @else
                     Kelola seluruh dokumen yang tersimpan dalam sistem.
                 @endif
             </p>
+
         </div>
+
+        {{-- JUMLAH DOKUMEN --}}
         <div class="dokumen-hero-counter text-center">
-            <div class="dokumen-hero-counter-number" data-count="{{ $jumlahDokumenKategori }}">0</div>
-            <div class="dokumen-hero-counter-label">Dokumen</div>
+
+            <div
+                class="dokumen-hero-counter-number"
+                data-count="{{ $jumlahDokumenKategori }}"
+            >
+                0
+            </div>
+
+            <div class="dokumen-hero-counter-label">
+                Dokumen
+            </div>
+
         </div>
+
     </div>
+</div>
 </div>
 
 <div class="card-panel dokumen-filter-card p-3 mb-3">

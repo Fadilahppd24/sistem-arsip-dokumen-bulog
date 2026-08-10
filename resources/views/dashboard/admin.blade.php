@@ -14,29 +14,36 @@
     </div>
 </div>
 
-    <div class="d-flex align-items-center flex-wrap gap-4">
+    <div class="hero-sparkles">
+    <span class="sparkle s1">✦</span>
+    <span class="sparkle s2">✦</span>
+    <span class="sparkle s3">✦</span>
+    <span class="sparkle s4">✦</span>
+</div>
 
-        <div class="hero-icon-circle">
-            <img src="{{ asset('images/dashboard/hero-icon-v2.svg') }}" alt="Ilustrasi Dokumen" class="hero-icon-img">
-        </div>
+<div class="d-flex align-items-center flex-wrap gap-4">
 
-        <div class="flex-grow-1">
-            <h2 class="fw-bold mb-2">
-                Selamat Datang Kembali <span class="wave-emoji">👋</span><br>
-                Di Sistem Arsip Dokumen BULOG
-            </h2>
-
-            <p class="text-muted mb-0">
-                Kelola dan akses dokumen dengan lebih mudah dan cepat.
-            </p>
-        </div>
-
-        <div class="hero-logo d-none d-lg-block">
-            <img src="{{ asset('images/dashboard/logobulog-color.png') }}" alt="BULOG" class="hero-logo-img hero-logo-light">
-            <img src="{{ asset('images/dashboard/logobulog-white-ribbon.png') }}" alt="BULOG" class="hero-logo-img hero-logo-dark">
-        </div>
-
+    <div class="hero-icon-circle">
+        <img src="{{ asset('images/dashboard/hero-icon-v2.svg') }}" alt="Ilustrasi Dokumen" class="hero-icon-img">
     </div>
+
+    <div class="flex-grow-1">
+        <h2 class="fw-bold mb-2">
+            Selamat Datang Kembali <span class="wave-emoji">👋</span><br>
+            Di Sistem Arsip Dokumen BULOG
+        </h2>
+
+        <p class="text-muted mb-0">
+            Kelola dan akses dokumen dengan lebih mudah dan cepat.
+        </p>
+    </div>
+
+    <div class="hero-logo d-none d-lg-block">
+        <img src="{{ asset('images/dashboard/logobulog-color.png') }}" alt="BULOG" class="hero-logo-img hero-logo-light">
+        <img src="{{ asset('images/dashboard/logobulog-white-ribbon.png') }}" alt="BULOG" class="hero-logo-img hero-logo-dark">
+    </div>
+
+</div>
 </div>
 
 <div class="row g-3 mb-4">
