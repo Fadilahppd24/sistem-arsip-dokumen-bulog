@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DokumenController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BackupController;
 use App\Http\Controllers\AuditLogController;
@@ -27,6 +28,13 @@ Route::middleware('auth')->group(function () {
     // Dokumen: index/search bisa diakses Admin & User
     Route::get('/dokumen', [DokumenController::class, 'index'])->name('dokumen.index');
 
+    // Ekspor Dokumen — Admin & User
+Route::get('/dokumen/export', [DokumenController::class, 'exportForm'])
+    ->name('dokumen.export');
+
+Route::post('/dokumen/export', [DokumenController::class, 'export'])
+    ->name('dokumen.export.process');
+
     // ==== Khusus Admin (rute literal /dokumen/create didaftarkan SEBELUM
     // rute berparameter /dokumen/{dokumen} agar tidak bentrok) ====
     Route::middleware('admin')->group(function () {
@@ -35,6 +43,24 @@ Route::middleware('auth')->group(function () {
         Route::get('/dokumen/{dokumen}/edit', [DokumenController::class, 'edit'])->name('dokumen.edit');
         Route::put('/dokumen/{dokumen}', [DokumenController::class, 'update'])->name('dokumen.update');
         Route::delete('/dokumen/{dokumen}', [DokumenController::class, 'destroy'])->name('dokumen.destroy');
+        // ==== Kelola Kategori - Khusus Admin ====
+Route::get('/kategori', [KategoriController::class, 'index'])
+    ->name('kategori.index');
+
+Route::post('/kategori', [KategoriController::class, 'store'])
+    ->name('kategori.store');
+
+Route::put('/kategori/{kategori}', [KategoriController::class, 'update'])
+    ->name('kategori.update');
+
+Route::delete('/kategori/{kategori}', [KategoriController::class, 'destroy'])
+    ->name('kategori.destroy');
+
+Route::patch('/kategori/{id}/restore', [KategoriController::class, 'restore'])
+    ->name('kategori.restore');
+
+Route::delete('/kategori/{id}/force-delete', [KategoriController::class, 'forceDelete'])
+    ->name('kategori.forceDelete');
 
 
         Route::get('/backup', function () {

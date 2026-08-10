@@ -14,29 +14,36 @@
     </div>
 </div>
 
-    <div class="d-flex align-items-center flex-wrap gap-4">
+    <div class="hero-sparkles">
+    <span class="sparkle s1">✦</span>
+    <span class="sparkle s2">✦</span>
+    <span class="sparkle s3">✦</span>
+    <span class="sparkle s4">✦</span>
+</div>
 
-        <div class="hero-icon-circle">
-            <img src="{{ asset('images/dashboard/hero-icon-v2.svg') }}" alt="Ilustrasi Dokumen" class="hero-icon-img">
-        </div>
+<div class="d-flex align-items-center flex-wrap gap-4">
 
-        <div class="flex-grow-1">
-            <h2 class="fw-bold mb-2">
-                Selamat Datang Kembali <span class="wave-emoji">👋</span><br>
-                Di Sistem Arsip Dokumen BULOG
-            </h2>
-
-            <p class="text-muted mb-0">
-                Kelola dan akses dokumen dengan lebih mudah dan cepat.
-            </p>
-        </div>
-
-        <div class="hero-logo d-none d-lg-block">
-            <img src="{{ asset('images/dashboard/logobulog-color.png') }}" alt="BULOG" class="hero-logo-img hero-logo-light">
-            <img src="{{ asset('images/dashboard/logobulog-white-ribbon.png') }}" alt="BULOG" class="hero-logo-img hero-logo-dark">
-        </div>
-
+    <div class="hero-icon-circle">
+        <img src="{{ asset('images/dashboard/hero-icon-v2.svg') }}" alt="Ilustrasi Dokumen" class="hero-icon-img">
     </div>
+
+    <div class="flex-grow-1">
+        <h2 class="fw-bold mb-2">
+            Selamat Datang Kembali <span class="wave-emoji">👋</span><br>
+            Di Sistem Arsip Dokumen BULOG
+        </h2>
+
+        <p class="text-muted mb-0">
+            Kelola dan akses dokumen dengan lebih mudah dan cepat.
+        </p>
+    </div>
+
+    <div class="hero-logo d-none d-lg-block">
+        <img src="{{ asset('images/dashboard/logobulog-color.png') }}" alt="BULOG" class="hero-logo-img hero-logo-light">
+        <img src="{{ asset('images/dashboard/logobulog-white-ribbon.png') }}" alt="BULOG" class="hero-logo-img hero-logo-dark">
+    </div>
+
+</div>
 </div>
 
 <div class="row g-3 mb-4">
@@ -158,21 +165,29 @@
 
 </div>
 
-                                </td>
-                                                                <td>
-                                    @php
-                                        $badge = match($dokumen->kategori->warna){
-                                            'primary' => 'badge-modern-navy',
-                                            'warning' => 'badge-modern-yellow',
-                                            'info' => 'badge-modern-info',
-                                            default => 'badge-modern-gray',
-                                        };
-                                    @endphp
+                                <td>
+    @php
+        $badge = match($dokumen->kategori?->warna) {
+            'primary'   => 'badge-modern-navy',
+            'warning'   => 'badge-modern-yellow',
+            'info'      => 'badge-modern-info',
+            'success'   => 'badge-modern-green',
+            'danger'    => 'badge-modern-red',
+            'purple'    => 'badge-modern-purple',
+            'pink'      => 'badge-modern-pink',
+            'teal'      => 'badge-modern-teal',
+            'orange'    => 'badge-modern-orange',
+            'indigo'    => 'badge-modern-indigo',
+            'cyan'      => 'badge-modern-cyan',
+            'secondary' => 'badge-modern-gray',
+            default     => 'badge-modern-gray',
+        };
+    @endphp
 
-                                    <span class="badge rounded-pill {{ $badge }}">
-                                        {{ $dokumen->kategori->nama }}
-                                    </span>
-                                </td>
+    <span class="badge rounded-pill {{ $badge }}">
+        {{ $dokumen->kategori?->nama ?? 'Kategori tidak tersedia' }}
+    </span>
+</td>
                                 <td>{{ $dokumen->tanggal_dokumen->format('d M Y') }}</td>
                                 <td>{{ $dokumen->uploader->name }}</td>
                                 <td class="text-end">

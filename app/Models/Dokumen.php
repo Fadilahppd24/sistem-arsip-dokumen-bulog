@@ -28,10 +28,10 @@ class Dokumen extends Model
         ];
     }
 
-    public function kategori()
-    {
-        return $this->belongsTo(Kategori::class);
-    }
+public function kategori()
+{
+    return $this->belongsTo(Kategori::class)->withTrashed();
+}
 
     /**
      * User yang mengunggah dokumen ini (Admin).
