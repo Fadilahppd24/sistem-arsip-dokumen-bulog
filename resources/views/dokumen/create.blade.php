@@ -3,133 +3,448 @@
 @section('title', 'Upload Dokumen')
 
 @section('content')
-<nav aria-label="breadcrumb" class="mb-2">
-    <ol class="breadcrumb small mb-0">
-        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}" class="text-decoration-none">Beranda</a></li>
-        <li class="breadcrumb-item active">Upload Dokumen</li>
-    </ol>
-</nav>
 
-<h3 class="fw-bold mb-3">Upload Dokumen</h3>
+<div class="upload-page">
 
-<form method="POST" action="{{ route('dokumen.store') }}" enctype="multipart/form-data">
-    @csrf
-    <div class="row g-3">
-        <div class="col-lg-6">
-            <div class="card-panel p-4 h-100">
-                <h6 class="fw-bold mb-3">Informasi Dokumen</h6>
+    {{-- ================= BREADCRUMB ================= --}}
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb small mb-0">
 
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Kategori</label>
-                    <select name="kategori_id" class="form-select @error('kategori_id') is-invalid @enderror" required>
-                        <option value="">Pilih kategori</option>
-                        @foreach ($kategoris as $kategori)
-                            <option value="{{ $kategori->id }}" {{ old('kategori_id') == $kategori->id ? 'selected' : '' }}>{{ $kategori->nama }}</option>
-                        @endforeach
-                    </select>
-                    @error('kategori_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
+            <li class="breadcrumb-item">
+                <a href="{{ route('dashboard') }}"
+                   class="text-decoration-none">
+                    Beranda
+                </a>
+            </li>
+
+            <li class="breadcrumb-item active">
+                Upload Dokumen
+            </li>
+
+        </ol>
+    </nav>
+
+
+    {{-- ================= HERO ================= --}}
+    <div class="upload-hero d-flex align-items-center gap-4 mb-4">
+
+        <div class="upload-hero-icon-ring">
+
+            <div class="upload-hero-icon">
+                <i class="bi bi-cloud-arrow-up-fill"></i>
+            </div>
+
+        </div>
+
+
+        <div class="upload-hero-content">
+
+            <h2 class="fw-bold">
+                Upload Dokumen
+            </h2>
+
+            <p>
+                Tambahkan dokumen baru ke dalam sistem arsip
+                dengan mudah dan cepat.
+            </p>
+
+        </div>
+
+
+        <i class="bi bi-stars upload-sparkle s1"></i>
+        <i class="bi bi-stars upload-sparkle s2"></i>
+        <i class="bi bi-stars upload-sparkle s3"></i>
+
+    </div>
+
+
+    {{-- ================= UPLOAD CARD ================= --}}
+    <div class="upload-card">
+
+        {{-- HEADER --}}
+
+        <div class="upload-card-header">
+
+            <div class="upload-card-header-icon">
+    <i class="bi bi-info-circle"></i>
+</div>
+
+            <div>
+
+                <h5>
+    Informasi Dokumen
+</h5>
+
+                <p>
+                    Lengkapi informasi dokumen dan pilih
+                    file PDF yang ingin disimpan.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        {{-- FORM --}}
+
+        <form
+            method="POST"
+            action="{{ route('dokumen.store') }}"
+            enctype="multipart/form-data"
+        >
+
+            @csrf
+
+
+            <div class="upload-form-body">
+
+                <div class="row g-4">
+
+
+                    {{-- ================= INFORMASI ================= --}}
+
+                    <div class="col-lg-6">
+
+                        <div class="upload-form-label mb-3">
+    <i class="bi bi-pencil-square me-1"></i>
+    Detail Dokumen
+</div>
+
+
+                        {{-- KATEGORI --}}
+
+                        <div class="mb-3">
+
+                            <label class="upload-form-label">
+                                Kategori
+                            </label>
+
+                            <select
+                                name="kategori_id"
+                                class="form-select @error('kategori_id') is-invalid @enderror"
+                                required
+                            >
+
+                                <option value="">
+                                    Pilih kategori
+                                </option>
+
+                                @foreach ($kategoris as $kategori)
+
+                                    <option
+                                        value="{{ $kategori->id }}"
+                                        {{ old('kategori_id') == $kategori->id ? 'selected' : '' }}
+                                    >
+                                        {{ $kategori->nama }}
+                                    </option>
+
+                                @endforeach
+
+                            </select>
+
+                            @error('kategori_id')
+
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+
+                            @enderror
+
+                        </div>
+
+
+                        {{-- NAMA DOKUMEN --}}
+
+                        <div class="mb-3">
+
+                            <label class="upload-form-label">
+                                Nama Dokumen
+                            </label>
+
+                            <input
+                                type="text"
+                                name="nama_dokumen"
+                                class="form-control @error('nama_dokumen') is-invalid @enderror"
+                                placeholder="Contoh: Laporan Pengolahan Juli 2026"
+                                value="{{ old('nama_dokumen') }}"
+                                required
+                            >
+
+                            @error('nama_dokumen')
+
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+
+                            @enderror
+
+                        </div>
+
+
+                        {{-- NOMOR / KETERANGAN --}}
+
+                        <div class="mb-3">
+
+                            <label class="upload-form-label">
+
+                                Nomor / Keterangan
+
+                                <span class="text-muted fw-normal">
+                                    (Opsional)
+                                </span>
+
+                            </label>
+
+                            <input
+                                type="text"
+                                name="nomor_keterangan"
+                                class="form-control"
+                                placeholder="Contoh: 123/LAP/PGH/VII/2026"
+                                value="{{ old('nomor_keterangan') }}"
+                            >
+
+                        </div>
+
+
+                        {{-- TANGGAL --}}
+
+                        <div class="mb-3">
+
+                            <label class="upload-form-label">
+                                Tanggal Dokumen
+                            </label>
+
+                            <input
+                                id="tanggal_dokumen"
+                                type="text"
+                                name="tanggal_dokumen"
+                                class="form-control @error('tanggal_dokumen') is-invalid @enderror"
+                                value="{{ old('tanggal_dokumen') }}"
+                                placeholder="Pilih tanggal dokumen"
+                                required
+                            >
+
+                            @error('tanggal_dokumen')
+
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+
+                            @enderror
+
+                        </div>
+
+
+                        {{-- DESKRIPSI --}}
+
+                        <div>
+
+                            <label class="upload-form-label">
+
+                                Deskripsi
+
+                                <span class="text-muted fw-normal">
+                                    (Opsional)
+                                </span>
+
+                            </label>
+
+                            <textarea
+                                name="deskripsi"
+                                class="form-control"
+                                rows="3"
+                                placeholder="Tulis deskripsi singkat dokumen..."
+                            >{{ old('deskripsi') }}</textarea>
+
+                        </div>
+
+                    </div>
+
+
+                    {{-- ================= FILE ================= --}}
+
+                    <div class="col-lg-6">
+
+                        <div class="upload-form-label mb-3">
+                            <i class="bi bi-cloud-arrow-up-fill me-1"></i>
+                            File Dokumen
+                        </div>
+
+
+                        {{-- DROPZONE --}}
+
+                        <label
+                            for="file"
+                            class="upload-dropzone mb-3"
+                            id="dropzone"
+                        >
+
+                            <i class="bi bi-cloud-arrow-up fs-1 text-bulog-navy"></i>
+
+                            <div class="fw-semibold mt-2">
+                                Klik untuk memilih file
+                            </div>
+
+                            <div class="text-muted small">
+                                atau drag &amp; drop file di sini
+                            </div>
+
+                            <div class="text-muted small">
+                                Format: PDF (Maks. 100 MB)
+                            </div>
+
+
+                            <input
+                                type="file"
+                                name="file"
+                                id="file"
+                                accept="application/pdf"
+                                class="d-none"
+                                required
+                            >
+
+                        </label>
+
+
+                        {{-- ERROR FILE --}}
+
+                        @error('file')
+
+                            <div class="text-danger small mb-2">
+                                {{ $message }}
+                            </div>
+
+                        @enderror
+
+
+                        {{-- FILE INFO --}}
+
+                        <div
+                            id="fileInfo"
+                            class="upload-file-info d-none d-flex align-items-center gap-2"
+                        >
+
+                            <i class="bi bi-file-earmark-pdf-fill text-danger fs-4"></i>
+
+                            <div
+                                class="flex-grow-1"
+                                style="min-width:0;"
+                            >
+
+                                <div
+                                    class="small fw-semibold text-truncate"
+                                    id="fileName"
+                                ></div>
+
+                                <div
+                                    class="small text-muted"
+                                    id="fileSize"
+                                ></div>
+
+                            </div>
+
+                            <i class="bi bi-check-circle-fill text-success"></i>
+
+                        </div>
+
+
+                        {{-- PREVIEW --}}
+
+                        <div
+                            id="previewContainer"
+                            class="upload-preview-card d-none mt-3"
+                        >
+
+                            <div class="upload-preview-header">
+
+                                <h6>
+                                    <i class="bi bi-file-earmark-pdf me-1"></i>
+                                    Preview Dokumen
+                                </h6>
+
+                            </div>
+
+
+                            <div class="upload-preview-body">
+
+                                <iframe
+                                    id="previewFrame"
+                                    width="100%"
+                                    height="420"
+                                    style="border:0; cursor:pointer; display:block;"
+                                ></iframe>
+
+                            </div>
+
+
+                            <div class="text-center p-3">
+
+                                <button
+                                    type="button"
+                                    id="btnPreview"
+                                    class="btn btn-outline-primary d-inline-flex align-items-center gap-2"
+                                >
+
+                                    <i class="bi bi-arrows-fullscreen"></i>
+
+                                    <span>
+                                        Lihat Dokumen Ukuran Penuh
+                                    </span>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Nama Dokumen</label>
-                    <input type="text" name="nama_dokumen" class="form-control @error('nama_dokumen') is-invalid @enderror"
-                           placeholder="Contoh: Laporan Pengolahan Juli 2026" value="{{ old('nama_dokumen') }}" required>
-                    @error('nama_dokumen') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                </div>
+            </div>
 
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Nomor / Keterangan <span class="text-muted fw-normal">(Opsional)</span></label>
-                    <input type="text" name="nomor_keterangan" class="form-control"
-                           placeholder="Contoh: 123/LAP/PGH/VII/2026" value="{{ old('nomor_keterangan') }}">
-                </div>
 
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Tanggal Dokumen</label>
-                   <input
-    id="tanggal_dokumen"
-    type="text"
-    name="tanggal_dokumen"
-    class="form-control @error('tanggal_dokumen') is-invalid @enderror"
-    value="{{ old('tanggal_dokumen') }}"
-    placeholder="Pilih tanggal dokumen"
-    required
+            {{-- ================= ACTION ================= --}}
+
+            <div
+    class="upload-form-actions d-flex justify-content-end align-items-center gap-2 p-3 border-top"
 >
 
-                    @error('tanggal_dokumen') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                </div>
+                <a
+                    href="{{ route('dokumen.index') }}"
+                    class="btn btn-light"
+                >
+                    Batal
+                </a>
 
-                <div class="mb-0">
-                    <label class="form-label fw-semibold">Deskripsi <span class="text-muted fw-normal">(Opsional)</span></label>
-                    <textarea name="deskripsi" class="form-control" rows="3" placeholder="Tulis deskripsi singkat dokumen...">{{ old('deskripsi') }}</textarea>
-                </div>
+
+                <button
+                    type="submit"
+                    class="upload-submit"
+                >
+
+                    <i class="bi bi-check-lg"></i>
+
+                    Simpan Dokumen
+
+                </button>
+
             </div>
-        </div>
 
-        <div class="col-lg-6">
-            <div class="card-panel p-4 h-100 d-flex flex-column">
-                <h6 class="fw-bold mb-3">File Dokumen (PDF)</h6>
+        </form>
 
-                <label for="file" class="upload-dropzone mb-3" id="dropzone">
-                    <i class="bi bi-cloud-arrow-up fs-1 text-bulog-navy"></i>
-                    <div class="fw-semibold mt-2">Klik untuk memilih file</div>
-                    <div class="text-muted small">atau drag &amp; drop file di sini</div>
-                    <div class="text-muted small">Format: PDF (Maks. 100 MB)</div>
-                    <input type="file" name="file" id="file" accept="application/pdf" class="d-none" required>
-                </label>
-                @error('file') <div class="text-danger small mb-2">{{ $message }}</div> @enderror
-
-                <div id="fileInfo" class="d-none border rounded p-2 d-flex align-items-center gap-2">
-                    <i class="bi bi-file-earmark-pdf-fill text-danger fs-4"></i>
-                    <div class="flex-grow-1" style="min-width:0;">
-                        <div class="small fw-semibold text-truncate" id="fileName"></div>
-                        <div class="small text-muted" id="fileSize"></div>
-                    </div>
-                    <i class="bi bi-check-circle-fill text-success"></i>
-                </div>
-
-                <div id="previewContainer" class="d-none mt-3">
-
-                    <label class="form-label fw-semibold">
-                        Preview Dokumen
-                    </label>
-
-                    <div class="border rounded overflow-hidden position-relative" style="isolation: isolate;">
-
-    <iframe
-        id="previewFrame"
-        width="100%"
-        height="420"
-        style="border:0; cursor:pointer; display:block;">
-    </iframe>
-
-</div>
-
-<div class="text-center mt-4 pt-2">
-
-    <button
-        type="button"
-        id="btnPreview"
-        class="btn btn-outline-primary d-inline-flex align-items-center gap-2">
-
-        <i class="bi bi-arrows-fullscreen"></i>
-        <span>Lihat Dokumen Ukuran Penuh</span>
-
-    </button>
-
-</div>
-
-                </div>
-
-                <div class="mt-auto d-flex justify-content-end gap-2 pt-3">
-                    <a href="{{ route('dokumen.index') }}" class="btn btn-light">Batal</a>
-                    <button type="submit" class="btn btn-bulog"><i class="bi bi-check-lg"></i> Simpan Dokumen</button>
-                </div>
-            </div>
-        </div>
     </div>
-</form>
 
-<div class="modal fade" id="previewModal" tabindex="-1">
+</div>
+
+
+{{-- ================= PREVIEW MODAL ================= --}}
+
+<div
+    class="modal fade"
+    id="previewModal"
+    tabindex="-1"
+>
 
     <div class="modal-dialog modal-xl">
 
@@ -144,8 +459,8 @@
                 <button
                     type="button"
                     class="btn-close"
-                    data-bs-dismiss="modal">
-                </button>
+                    data-bs-dismiss="modal"
+                ></button>
 
             </div>
 
@@ -155,8 +470,8 @@
                     id="previewFrameModal"
                     width="100%"
                     height="700"
-                    style="border:0;">
-                </iframe>
+                    style="border:0;"
+                ></iframe>
 
             </div>
 

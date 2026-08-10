@@ -339,6 +339,52 @@ body.dark-mode .upload-dropzone .text-muted {
   background: #f0f4fc;
 }
 
+/* =========================================
+   FILE DOKUMEN - SEJAJAR DENGAN FORM KIRI
+========================================= */
+
+.upload-form-body .row {
+    align-items: stretch;
+}
+
+.upload-form-body .col-lg-6:last-child {
+    display: flex;
+    flex-direction: column;
+}
+
+.upload-form-body .col-lg-6:last-child .upload-dropzone {
+    flex: 1;
+    min-height: 0;
+    height: auto;
+    margin-bottom: 0 !important;
+}
+
+/* =========================================
+   ACTION BUTTON UPLOAD
+========================================= */
+
+.upload-form-actions {
+    background: #ffffff;
+    border-color: var(--bulog-border) !important;
+}
+
+/* DARK MODE */
+body.dark-mode .upload-form-actions {
+    background: #1f2937 !important;
+    border-color: #374151 !important;
+}
+
+body.dark-mode .upload-form-actions .btn-light {
+    background: #374151 !important;
+    border-color: #4b5563 !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .upload-form-actions .btn-light:hover {
+    background: #4b5563 !important;
+    color: #ffffff !important;
+}
+
 .input-group-text {
     background: #fff;
     border-color: var(--bulog-border);
@@ -4033,4 +4079,817 @@ body.dark-mode .dokumen-hero-counter-label{
 
     box-shadow:
         0 6px 15px rgba(37,99,235,.20);
+}
+
+/* =========================================================
+   UPLOAD DOKUMEN - MODERN UPLOAD CENTER
+========================================================= */
+
+.upload-page {
+    position: relative;
+}
+
+/* HERO */
+
+.upload-hero {
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 85% 20%, rgba(255,255,255,.55), transparent 35%),
+        linear-gradient(120deg, #E3EEFC 0%, #D3E4FA 55%, #EEF5FF 100%);
+    border: 1px solid rgba(255,255,255,.8);
+    border-radius: 22px;
+    padding: 30px 34px;
+    min-height: 155px;
+    box-shadow: 0 12px 30px rgba(15,23,42,.05);
+}
+
+.upload-hero::before {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    right: -70px;
+    top: -100px;
+    background: rgba(255,255,255,.35);
+}
+
+.upload-hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.upload-hero h2 {
+    color: var(--bulog-navy);
+    font-size: 1.9rem;
+    margin-bottom: 6px;
+}
+
+.upload-hero p {
+    color: #667085;
+    margin: 0;
+}
+
+
+/* ICON HERO */
+
+.upload-hero-icon-ring {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    padding: 5px;
+    background: rgba(255,255,255,.65);
+    box-shadow: 0 10px 25px rgba(30,79,160,.16);
+    animation: uploadRing 2.5s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+.upload-hero-icon {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: linear-gradient(
+        135deg,
+        var(--bulog-navy),
+        var(--bulog-blue-light)
+    );
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: inset 0 -5px 10px rgba(0,0,0,.12);
+}
+
+@keyframes uploadRing {
+    0%,100% {
+        transform: scale(1);
+        box-shadow: 0 10px 25px rgba(30,79,160,.16);
+    }
+
+    50% {
+        transform: scale(1.04);
+        box-shadow: 0 14px 30px rgba(30,79,160,.24);
+    }
+}
+
+
+/* SPARKLE */
+
+.upload-sparkle {
+    position: absolute;
+    color: rgba(255,255,255,.9);
+    pointer-events: none;
+    animation: uploadSparkle 3s ease-in-out infinite;
+}
+
+.upload-sparkle.s1 {
+    top: 20%;
+    right: 30%;
+    font-size: .8rem;
+}
+
+.upload-sparkle.s2 {
+    top: 65%;
+    right: 20%;
+    font-size: 1rem;
+    animation-delay: .8s;
+}
+
+.upload-sparkle.s3 {
+    top: 30%;
+    right: 12%;
+    font-size: .7rem;
+    animation-delay: 1.5s;
+}
+
+@keyframes uploadSparkle {
+    0%,100% {
+        opacity: .15;
+        transform: scale(.6) rotate(0deg);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2) rotate(90deg);
+    }
+}
+
+
+/* MAIN CARD */
+
+.upload-card {
+    background: #fff;
+    border: 1px solid var(--bulog-border);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(15,23,42,.05);
+    overflow: hidden;
+}
+
+.upload-card-header {
+    padding: 22px 24px;
+    border-bottom: 1px solid var(--bulog-border);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.upload-card-header-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    background: #EAF2FF;
+    color: var(--bulog-navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+
+.upload-card-header h5 {
+    margin: 0;
+    color: #24304A;
+    font-weight: 700;
+}
+
+.upload-card-header p {
+    margin: 3px 0 0;
+    color: var(--bulog-text-muted);
+    font-size: .85rem;
+}
+
+
+/* FORM */
+
+.upload-form-body {
+    padding: 24px;
+}
+
+.upload-form-label {
+    display: block;
+    font-size: .85rem;
+    font-weight: 700;
+    color: #374151;
+    margin-bottom: 7px;
+}
+
+.upload-form-body .form-control,
+.upload-form-body .form-select {
+    min-height: 46px;
+    border-radius: 11px;
+}
+
+
+/* DROPZONE */
+
+.upload-dropzone {
+    border: 2px dashed #C7D6EC;
+    border-radius: 18px;
+    background: #F8FAFD;
+    padding: 35px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all .25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-dropzone::before {
+    content: "";
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(30,79,160,.08),
+        transparent 70%
+    );
+    top: -70px;
+    right: -40px;
+}
+
+.upload-dropzone:hover,
+.upload-dropzone.dragover {
+    transform: translateY(-2px);
+    border-color: var(--bulog-blue-light);
+    background: #F0F5FD;
+    box-shadow: 0 12px 25px rgba(30,79,160,.09);
+}
+
+.upload-dropzone i {
+    transition: transform .25s ease;
+}
+
+.upload-dropzone:hover i {
+    transform: translateY(-5px);
+}
+
+
+/* INFO FILE */
+
+.upload-file-info {
+    border-radius: 12px;
+    background: #F8FAFC;
+    border: 1px solid var(--bulog-border);
+    padding: 12px 14px;
+}
+
+
+/* PREVIEW */
+
+.upload-preview-card {
+    background: #fff;
+    border: 1px solid var(--bulog-border);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(15,23,42,.05);
+}
+
+.upload-preview-header {
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--bulog-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.upload-preview-header h6 {
+    margin: 0;
+    font-weight: 700;
+    color: #24304A;
+}
+
+.upload-preview-body {
+    background: #F3F5F8;
+    min-height: 420px;
+}
+
+
+/* BUTTON */
+
+.upload-submit {
+    min-height: 46px;
+    padding: 0 22px;
+    border: none;
+    border-radius: 11px;
+    background: linear-gradient(
+        135deg,
+        var(--bulog-navy),
+        var(--bulog-blue-light)
+    );
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 7px 18px rgba(10,46,110,.22);
+    transition: all .2s ease;
+}
+
+.upload-submit:hover {
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(10,46,110,.3);
+}
+
+
+/* DARK MODE */
+
+body.dark-mode .upload-hero {
+    background:
+        radial-gradient(circle at 85% 20%, rgba(30,79,160,.35), transparent 35%),
+        linear-gradient(120deg, #1c2534 0%, #232f45 55%, #1c2534 100%);
+    border-color: #344054;
+}
+
+body.dark-mode .upload-hero h2 {
+    color: #fff;
+}
+
+body.dark-mode .upload-hero p {
+    color: #B8C2D1;
+}
+
+body.dark-mode .upload-card,
+body.dark-mode .upload-preview-card {
+    background: #1F2937;
+    border-color: #374151;
+}
+
+body.dark-mode .upload-card-header,
+body.dark-mode .upload-preview-header {
+    border-color: #374151;
+}
+
+body.dark-mode .upload-card-header h5,
+body.dark-mode .upload-preview-header h6 {
+    color: #fff;
+}
+
+body.dark-mode .upload-form-label {
+    color: #E5E7EB;
+}
+
+body.dark-mode .upload-dropzone {
+    background: #111827;
+    border-color: #374151;
+}
+
+body.dark-mode .upload-dropzone:hover,
+body.dark-mode .upload-dropzone.dragover {
+    background: #1F2937;
+}
+
+body.dark-mode .upload-file-info {
+    background: #111827;
+    border-color: #374151;
+}
+
+body.dark-mode .upload-preview-body {
+    background: #111827;
+}
+
+/* =========================================================
+   UPLOAD FORM - BALANCED TWO COLUMN LAYOUT
+========================================================= */
+
+.upload-card {
+    width: 100%;
+}
+
+.upload-form-body {
+    padding: 28px 30px 30px;
+}
+
+/* Dua kolom dibuat benar-benar seimbang */
+.upload-form-body > .row {
+    --bs-gutter-x: 38px;
+    --bs-gutter-y: 30px;
+}
+
+.upload-form-body > .row > .col-lg-6 {
+    width: 50%;
+}
+
+
+/* JUDUL KOLOM */
+
+.upload-form-label.mb-3 {
+    font-size: .9rem;
+    color: #344054;
+    margin-bottom: 18px !important;
+}
+
+
+/* FORM KIRI */
+
+.upload-form-body .form-control,
+.upload-form-body .form-select {
+    width: 100%;
+    min-height: 50px;
+    border: 1px solid #D9E2F0;
+    border-radius: 12px;
+    padding: 0 15px;
+    font-size: .92rem;
+    background: #fff;
+    transition: all .2s ease;
+}
+
+.upload-form-body textarea.form-control {
+    min-height: 105px;
+    padding: 12px 15px;
+    resize: vertical;
+}
+
+.upload-form-body .form-control:focus,
+.upload-form-body .form-select:focus {
+    border-color: #4D82C8;
+    box-shadow: 0 0 0 4px rgba(30,79,160,.08);
+}
+
+
+/* LABEL */
+
+.upload-form-body .upload-form-label {
+    color: #344054;
+    font-size: .85rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+
+/* FILE AREA */
+
+.upload-dropzone {
+    width: 100% !important;
+    min-height: 300px;
+    height: 300px;
+    margin: 0 !important;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px dashed #C7D6EC;
+    border-radius: 18px;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(30,79,160,.06),
+            transparent 45%
+        ),
+        #F8FAFD;
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+}
+
+.upload-dropzone i {
+    font-size: 2.7rem !important;
+    margin-bottom: 6px;
+}
+
+.upload-dropzone .fw-semibold {
+    font-size: .95rem;
+    color: #263858;
+}
+
+.upload-dropzone .text-muted {
+    font-size: .82rem;
+}
+
+
+/* HOVER DROPZONE */
+
+.upload-dropzone:hover,
+.upload-dropzone.dragover {
+    transform: translateY(-2px);
+    border-color: #2F6DB5;
+    background: #F2F7FF;
+    box-shadow: 0 10px 25px rgba(30,79,160,.08);
+}
+
+
+/* FILE INFO */
+
+#fileInfo {
+    width: 100%;
+    min-height: 58px;
+}
+
+
+/* PREVIEW */
+
+#previewContainer {
+    width: 100%;
+}
+
+
+/* BAGIAN TOMBOL */
+
+.upload-card form > .d-flex {
+    padding: 18px 30px 22px !important;
+    background: #FAFBFD;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 991.98px) {
+
+    .upload-form-body > .row > .col-lg-6 {
+        width: 100%;
+    }
+
+    .upload-dropzone {
+        min-height: 260px;
+        height: 260px;
+    }
+
+}
+
+/* =========================================
+   DOKUMEN INFO CARD - DARK MODE
+========================================= */
+
+body.dark-mode .dokumen-info-card {
+    background: #1f2937 !important;
+    border-color: #374151 !important;
+    color: #f3f4f6 !important;
+}
+
+body.dark-mode .dokumen-info-card .dokumen-info-title {
+    color: #f3f4f6 !important;
+}
+
+body.dark-mode .dokumen-info-card .dokumen-info-label {
+    color: #94a3b8 !important;
+}
+
+body.dark-mode .dokumen-info-card .dokumen-info-meta {
+    color: #94a3b8 !important;
+}
+
+body.dark-mode .dokumen-info-card .dokumen-info-dot {
+    color: #64748b !important;
+}
+
+body.dark-mode .dokumen-info-card .dokumen-info-icon-empty {
+    background: #263449 !important;
+    color: #60a5fa !important;
+}
+
+/* =========================================
+   ICON DOKUMEN TERBARU - DARK MODE
+========================================= */
+
+body.dark-mode .dokumen-info-icon-document {
+    background: #263449 !important;
+    border-color: #374151 !important;
+}
+
+body.dark-mode .dokumen-info-icon-document i {
+    color: #60a5fa !important;
+}
+
+/* =========================================================
+   EXPORT - DARK MODE
+========================================================= */
+
+body.dark-mode .export-main {
+    background: #1f2937 !important;
+    color: #e5e7eb !important;
+}
+
+/* Judul bagian export */
+body.dark-mode .export-heading h4 {
+    color: #f8fafc !important;
+}
+
+body.dark-mode .export-heading p {
+    color: #94a3b8 !important;
+}
+
+body.dark-mode .export-kicker {
+    color: #93c5fd !important;
+}
+
+/* Garis pemisah */
+body.dark-mode .export-main hr,
+body.dark-mode .export-main .export-divider {
+    border-color: #374151 !important;
+}
+
+/* Label */
+body.dark-mode .export-form label {
+    color: #f1f5f9 !important;
+}
+
+/* Select */
+body.dark-mode .export-select {
+    background-color: #111827 !important;
+    color: #f8fafc !important;
+    border-color: #374151 !important;
+}
+
+body.dark-mode .export-select option {
+    background-color: #111827 !important;
+    color: #f8fafc !important;
+}
+
+/* Keterangan kecil */
+body.dark-mode .export-form small {
+    color: #94a3b8 !important;
+}
+
+/* Kotak informasi */
+body.dark-mode .export-info {
+    background: #172f46 !important;
+    border-color: #285579 !important;
+    color: #bfdbfe !important;
+}
+
+body.dark-mode .export-info i {
+    color: #38bdf8 !important;
+}
+
+/* Garis sebelum tombol */
+body.dark-mode .export-actions {
+    border-color: #374151 !important;
+}
+
+/* Tombol batal */
+body.dark-mode .export-cancel {
+    background: #273449 !important;
+    color: #cbd5e1 !important;
+    border-color: #475569 !important;
+}
+
+body.dark-mode .export-cancel:hover {
+    background: #334155 !important;
+}
+body.dark-mode .export-main,
+body.dark-mode .export-main form {
+    background: #1f2937 !important;
+}
+
+body.dark-mode .ekspor-hero {
+    background:
+        radial-gradient(
+            circle at 85% 30%,
+            rgba(96, 165, 250, .12),
+            transparent 30%
+        ),
+        linear-gradient(
+            120deg,
+            #1e293b 0%,
+            #243247 55%,
+            #1e293b 100%
+        ) !important;
+
+    border-top-color: #3b82f6 !important;
+    box-shadow: 0 12px 30px rgba(0,0,0,.35);
+}
+
+body.dark-mode .ekspor-hero-content h2 {
+    color: #f8fafc !important;
+}
+
+body.dark-mode .ekspor-hero-content p {
+    color: #94a3b8 !important;
+}
+
+body.dark-mode .ekspor-hero-icon-ring {
+    background: rgba(30, 41, 59, .8) !important;
+    border-color: rgba(255,255,255,.12) !important;
+}
+
+body.dark-mode .ekspor-hero-icon {
+    background: #123d7a !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .ekspor-hero-decoration {
+    color: rgba(147,197,253,.7) !important;
+}
+
+/* =========================================
+   EXPORT PREVIEW - DARK MODE
+========================================= */
+
+body.dark-mode .export-preview {
+    background: #243247 !important;
+    color: #f8fafc !important;
+}
+
+body.dark-mode .export-preview-icon {
+    background: #0f3b78 !important;
+}
+
+body.dark-mode .export-preview-title {
+    color: #dbeafe !important;
+}
+
+body.dark-mode .export-preview-subtitle {
+    color: #94a3b8 !important;
+}
+
+body.dark-mode .export-preview-badge {
+    background: #e8f7f0 !important;
+    color: #237a52 !important;
+}
+
+body.dark-mode .export-main,
+body.dark-mode .export-preview {
+    border-color: #374151 !important;
+}
+
+/* HERO EKSPOR - DARK MODE */
+body.dark-mode .ekspor-hero-content h2 {
+    color: #1e3a5f !important;
+}
+
+body.dark-mode .ekspor-hero-content p {
+    color: #64748b !important;
+}
+
+/* =========================================
+   HERO EXPORT - DARK MODE
+========================================= */
+
+body.dark-mode .ekspor-hero {
+    background: #243247 !important;
+    border-color: #374151 !important;
+}
+
+/* Judul */
+body.dark-mode .ekspor-hero-content h2 {
+    color: #f8fafc !important;
+}
+
+/* Deskripsi */
+body.dark-mode .ekspor-hero-content p {
+    color: #aebbd0 !important;
+}
+
+/* Lingkaran dekorasi */
+body.dark-mode .ekspor-hero::before,
+body.dark-mode .ekspor-hero::after {
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* =========================================================
+   EXPORT HERO - DARK MODE FIX
+========================================================= */
+
+body.dark-mode .export-hero {
+    background:
+        radial-gradient(
+            circle at 85% 30%,
+            rgba(96, 165, 250, 0.14),
+            transparent 30%
+        ),
+        linear-gradient(
+            120deg,
+            #1e293b 0%,
+            #243247 55%,
+            #1e293b 100%
+        ) !important;
+
+    border-top-color: #3b82f6 !important;
+    border-color: #374151 !important;
+
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .35) !important;
+}
+
+/* Judul */
+body.dark-mode .export-hero .ekspor-hero-content h2 {
+    color: #f8fafc !important;
+}
+
+/* Deskripsi */
+body.dark-mode .export-hero .ekspor-hero-content p {
+    color: #94a3b8 !important;
+}
+
+/* Lingkaran icon */
+body.dark-mode .export-hero .ekspor-hero-icon-ring {
+    background: rgba(30, 41, 59, .8) !important;
+    border-color: rgba(255,255,255,.12) !important;
+}
+
+/* Icon */
+body.dark-mode .export-hero .ekspor-hero-icon {
+    background: #123d7a !important;
+    color: #ffffff !important;
+}
+
+/* Dekorasi */
+body.dark-mode .export-hero::before,
+body.dark-mode .export-hero::after {
+    border-color: rgba(255,255,255,.08) !important;
 }
