@@ -7,22 +7,13 @@
 <div class="upload-page">
 
     {{-- ================= BREADCRUMB ================= --}}
-    <nav aria-label="breadcrumb" class="mb-3">
-        <ol class="breadcrumb small mb-0">
+    <div class="sampah-breadcrumb mb-3">
+    <a href="{{ route('dashboard') }}">Beranda</a>
 
-            <li class="breadcrumb-item">
-                <a href="{{ route('dashboard') }}"
-                   class="text-decoration-none">
-                    Beranda
-                </a>
-            </li>
+    <span>›</span>
 
-            <li class="breadcrumb-item active">
-                Upload Dokumen
-            </li>
-
-        </ol>
-    </nav>
+    <span>Upload Dokumen</span>
+</div>
 
 
     {{-- ================= HERO ================= --}}

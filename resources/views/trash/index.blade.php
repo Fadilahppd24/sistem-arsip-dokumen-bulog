@@ -4,6 +4,12 @@
 
 @section('content')
 
+<div class="sampah-breadcrumb mb-3">
+    <a href="{{ route('dashboard') }}">Beranda</a>
+    <span>›</span>
+    <span>Sampah Dokumen</span>
+</div>
+
 {{-- =========================================================
     HERO SAMPAH DOKUMEN
 ========================================================= --}}
@@ -38,6 +44,22 @@
         </p>
 
     </div>
+
+    <div class="sampah-hero-stat">
+
+    <strong>
+        {{ $dokumens->total() }}
+    </strong>
+
+    <span>
+        Dokumen
+    </span>
+
+    <small>
+        di Sampah
+    </small>
+
+</div>
 
 </div>
 
@@ -104,15 +126,6 @@
                 </p>
 
             </div>
-
-        </div>
-
-
-        <div class="sampah-total-badge">
-
-            <i class="bi bi-file-earmark"></i>
-
-            {{ $dokumens->total() }} dokumen
 
         </div>
 

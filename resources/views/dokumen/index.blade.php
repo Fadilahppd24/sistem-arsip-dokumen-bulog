@@ -4,19 +4,15 @@
 
 @section('content')
 
-<nav aria-label="breadcrumb" class="mb-2">
-    <ol class="breadcrumb small mb-0">
-        <li class="breadcrumb-item">
-            <a href="{{ route('dashboard') }}" class="text-decoration-none">
-                Beranda
-            </a>
-        </li>
+<div class="sampah-breadcrumb mb-3">
+    <a href="{{ route('dashboard') }}">Beranda</a>
 
-        <li class="breadcrumb-item active">
-            {{ $kategoriAktif->nama ?? 'Kelola Dokumen' }}
-        </li>
-    </ol>
-</nav>
+    <span>›</span>
+
+    <span>
+        {{ $kategoriAktif->nama ?? 'Kelola Dokumen' }}
+    </span>
+</div>
 
 @php
     $iconBg = match($kategoriAktif->warna ?? null) {
