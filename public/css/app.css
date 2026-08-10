@@ -2703,3 +2703,1171 @@ body.dark-mode .dokumen-hero-counter-label{
     }
 
 }
+
+/* =========================================================
+   EXPORT CENTER
+========================================================= */
+
+.export-center{
+    display: grid;
+
+    grid-template-columns: minmax(0, 1.65fr) minmax(300px, .75fr);
+
+    min-height: 410px;
+
+    overflow: hidden;
+
+    background: #fff;
+
+    border: 1px solid #e1e7ef;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 12px 30px rgba(15,42,80,.07);
+}
+
+
+/* =========================================================
+   LEFT CONTENT
+========================================================= */
+
+.export-main{
+
+    padding: 32px 34px;
+}
+
+
+.export-heading{
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    padding-bottom: 24px;
+
+    border-bottom: 1px solid #edf1f6;
+}
+
+
+.export-heading-icon{
+
+    width: 54px;
+    height: 54px;
+
+    flex: 0 0 54px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: #eaf2ff;
+
+    color: #1d5ca8;
+
+    font-size: 24px;
+}
+
+
+.export-kicker{
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #6f83a0;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+
+.export-heading h4{
+
+    margin: 0 0 5px;
+
+    color: #20375d;
+
+    font-size: 20px;
+
+    font-weight: 700;
+}
+
+
+.export-heading p{
+
+    margin: 0;
+
+    color: #718096;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.export-form{
+
+    margin-top: 30px;
+}
+
+
+.export-form label{
+
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: #263b5b;
+
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+
+.export-select{
+
+    height: 52px;
+
+    border: 1px solid #dce4ee;
+
+    border-radius: 12px;
+
+    padding: 10px 15px;
+
+    color: #334b6d;
+
+    background-color: #fff;
+
+    box-shadow: none;
+
+    transition: .2s ease;
+}
+
+
+.export-select:focus{
+
+    border-color: #2d6bc9;
+
+    box-shadow:
+        0 0 0 4px rgba(45,107,201,.10);
+}
+
+
+.export-form small{
+
+    display: block;
+
+    margin-top: 8px;
+
+    color: #7b8798;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   INFO
+========================================================= */
+
+.export-info{
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 22px;
+
+    padding: 13px 15px;
+
+    border-radius: 11px;
+
+    background: #f0f9fc;
+
+    border: 1px solid #ccecf5;
+
+    color: #477082;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+.export-info i{
+
+    flex: 0 0 auto;
+
+    color: #1597b8;
+
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   ACTION
+========================================================= */
+
+.export-actions{
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 28px;
+
+    padding-top: 22px;
+
+    border-top: 1px solid #edf1f6;
+}
+
+
+.export-cancel{
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    min-height: 44px;
+
+    padding: 9px 18px;
+
+    border: 1px solid #dce4ee;
+
+    border-radius: 10px;
+
+    color: #607086;
+
+    background: #fff;
+
+    text-decoration: none;
+
+    transition: .2s ease;
+}
+
+
+.export-cancel:hover{
+
+    background: #f6f8fb;
+
+    color: #334b6d;
+}
+
+
+.export-submit{
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 44px;
+
+    padding: 9px 20px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #123d7a;
+
+    color: #fff;
+
+    font-weight: 600;
+
+    box-shadow:
+        0 7px 18px rgba(10,46,110,.22);
+
+    transition: .2s ease;
+}
+
+
+.export-submit:hover{
+
+    color: #fff;
+
+    background: #0d3266;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 11px 22px rgba(10,46,110,.28);
+}
+
+
+/* =========================================================
+   RIGHT PREVIEW
+========================================================= */
+
+.export-preview{
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    min-height: 410px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #eaf3ff 0%,
+            #d5e8ff 55%,
+            #c4ddfa 100%
+        );
+
+    border-left: 1px solid #e0e8f2;
+}
+
+
+/* =========================================================
+   PREVIEW ICON
+========================================================= */
+
+.export-preview-icon{
+
+    position: relative;
+    z-index: 2;
+
+    width: 105px;
+    height: 105px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 28px;
+
+    background: #123d7a;
+
+    color: #fff;
+
+    font-size: 47px;
+
+    box-shadow:
+        0 18px 35px rgba(10,46,110,.22);
+
+    animation:
+        exportFloat 4s ease-in-out infinite;
+}
+
+
+@keyframes exportFloat{
+
+    0%, 100%{
+        transform: translateY(0);
+    }
+
+    50%{
+        transform: translateY(-8px);
+    }
+
+}
+
+
+/* =========================================================
+   PREVIEW TEXT
+========================================================= */
+
+.export-preview-title{
+
+    position: relative;
+    z-index: 2;
+
+    margin-top: 22px;
+
+    color: #193d70;
+
+    font-size: 30px;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+}
+
+
+.export-preview-subtitle{
+
+    position: relative;
+    z-index: 2;
+
+    margin-top: 2px;
+
+    color: #7086a3;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 4px;
+}
+
+
+/* =========================================================
+   BADGE
+========================================================= */
+
+.export-preview-badge{
+
+    position: relative;
+    z-index: 2;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 22px;
+
+    padding: 8px 13px;
+
+    border-radius: 999px;
+
+    background: rgba(255,255,255,.7);
+
+    border: 1px solid rgba(255,255,255,.9);
+
+    color: #315a83;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    backdrop-filter: blur(6px);
+}
+
+
+.export-preview-badge i{
+
+    color: #22a06b;
+}
+
+
+/* =========================================================
+   ORBIT DECORATION
+========================================================= */
+
+.export-orbit{
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255,255,255,.65);
+
+    animation: exportOrbit 6s ease-in-out infinite;
+}
+
+
+.export-orbit-1{
+
+    width: 210px;
+    height: 210px;
+
+    top: 30px;
+    right: -70px;
+}
+
+
+.export-orbit-2{
+
+    width: 150px;
+    height: 150px;
+
+    bottom: -55px;
+    left: -45px;
+
+    animation-delay: 1.5s;
+}
+
+
+@keyframes exportOrbit{
+
+    0%, 100%{
+        transform: translateY(0) scale(1);
+        opacity: .55;
+    }
+
+    50%{
+        transform: translateY(-12px) scale(1.03);
+        opacity: .9;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px){
+
+    .export-center{
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .export-preview{
+
+        min-height: 280px;
+
+        border-left: none;
+
+        border-top: 1px solid #e0e8f2;
+    }
+
+}
+
+
+@media (max-width: 600px){
+
+    .export-main{
+
+        padding: 24px 20px;
+    }
+
+
+    .export-heading{
+
+        align-items: flex-start;
+    }
+
+
+    .export-actions{
+
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+    }
+
+
+    .export-cancel,
+    .export-submit{
+
+        width: 100%;
+
+        justify-content: center;
+    }
+
+}
+
+/* =========================================================
+   CARD EKSPOR
+========================================================= */
+
+.ekspor-card{
+    position: relative;
+
+    background: #fff;
+
+    border: 1px solid #e1e7ef;
+
+    border-radius: 20px;
+
+    padding: 26px 30px;
+
+    box-shadow:
+        0 10px 28px rgba(15,42,80,.07);
+}
+
+
+/* HEADER */
+
+.ekspor-card-header{
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    padding-bottom: 24px;
+
+    margin-bottom: 24px;
+
+    border-bottom: 1px solid #edf1f6;
+}
+
+
+.ekspor-section-icon{
+
+    width: 52px;
+    height: 52px;
+
+    flex: 0 0 52px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: #eaf2ff;
+
+    color: #1e5aa8;
+
+    font-size: 23px;
+}
+
+
+.ekspor-card-header h5{
+
+    color: #20375d;
+
+    font-size: 18px;
+}
+
+
+.ekspor-card-header p{
+
+    font-size: 14px;
+
+    color: #718096 !important;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.ekspor-form-group{
+
+    margin-bottom: 24px;
+}
+
+
+.ekspor-form-group .form-label{
+
+    color: #263b5b;
+
+    margin-bottom: 9px;
+}
+
+
+.ekspor-select{
+
+    width: 100%;
+
+    min-height: 52px;
+
+    border: 1px solid #dce4ee;
+
+    border-radius: 12px;
+
+    padding: 12px 16px;
+
+    font-size: 15px;
+
+    color: #263b5b;
+
+    background-color: #fff;
+
+    box-shadow: none;
+
+    transition: all .2s ease;
+}
+
+
+.ekspor-select:focus{
+
+    border-color: #2d6bc9;
+
+    box-shadow:
+        0 0 0 4px rgba(45,107,201,.10);
+}
+
+
+/* =========================================================
+   INFORMASI
+========================================================= */
+
+.ekspor-info{
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 14px 18px;
+
+    border-radius: 12px;
+
+    background: linear-gradient(
+        90deg,
+        #eef8fc,
+        #f4fbfd
+    );
+
+    border: 1px solid #ccecf5;
+
+    color: #356273;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+.ekspor-info-icon{
+    width: 34px;
+    height: 34px;
+
+    flex: 0 0 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #d9f3fa;
+
+    color: #1597b8;
+
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   ACTION BUTTON
+========================================================= */
+
+.ekspor-actions{
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 26px;
+
+    padding-top: 22px;
+
+    border-top: 1px solid #edf1f6;
+}
+
+
+.ekspor-btn-cancel{
+
+    min-height: 46px;
+
+    padding: 10px 20px;
+
+    border: 1px solid #dce4ee;
+
+    border-radius: 10px;
+
+    color: #526174;
+
+    background: #fff;
+}
+
+
+.ekspor-btn-cancel:hover{
+
+    background: #f5f7fa;
+
+    border-color: #cbd5e1;
+}
+
+
+.ekspor-btn-submit{
+
+    min-height: 46px;
+
+    padding: 10px 22px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #123d7a;
+
+    color: #fff;
+
+    font-weight: 600;
+
+    box-shadow:
+        0 7px 18px rgba(10,46,110,.22);
+
+    transition: all .2s ease;
+}
+
+
+.ekspor-btn-submit:hover{
+
+    background: #0d3266;
+
+    color: #fff;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 24px rgba(10,46,110,.30);
+}
+
+
+.ekspor-btn-submit:active{
+
+    transform: translateY(0);
+
+    box-shadow:
+        0 5px 12px rgba(10,46,110,.20);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px){
+
+    .ekspor-hero{
+
+        padding: 22px;
+
+        gap: 18px;
+    }
+
+
+    .ekspor-hero-icon-ring{
+    width: 92px;
+    height: 92px;
+
+    flex: 0 0 92px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.42);
+
+    border: 3px solid rgba(255,255,255,.82);
+
+    box-shadow:
+        0 10px 25px rgba(10,46,110,.15);
+
+    animation: eksporIconPulse 3.5s ease-in-out infinite;
+}
+
+
+@keyframes eksporIconPulse{
+
+    0%, 100%{
+        transform: scale(1);
+        box-shadow:
+            0 10px 25px rgba(10,46,110,.15);
+    }
+
+    50%{
+        transform: scale(1.035);
+        box-shadow:
+            0 14px 30px rgba(10,46,110,.20);
+    }
+
+}
+
+
+    .ekspor-hero-icon{
+
+        width: 54px;
+        height: 54px;
+
+        font-size: 24px;
+    }
+
+
+    .ekspor-hero-content h2{
+
+        font-size: 24px;
+    }
+
+
+    .ekspor-card{
+
+        padding: 22px;
+    }
+
+
+    .ekspor-actions{
+
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+    }
+
+
+    .ekspor-btn-cancel,
+    .ekspor-btn-submit{
+
+        width: 100%;
+
+        justify-content: center;
+
+        text-align: center;
+    }
+
+}
+
+.ekspor-hero-label{
+    position: absolute;
+
+    right: 5%;
+    bottom: 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    color: rgba(18,61,122,.16);
+
+    line-height: 1;
+}
+
+
+.ekspor-hero-label span{
+    font-size: 52px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.ekspor-hero-label small{
+    margin-top: 5px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 4px;
+}
+
+/* =========================================================
+   EXPORT HERO - POSITION FIX
+========================================================= */
+
+.export-hero {
+    position: relative;
+    min-height: 165px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 25px;
+
+    padding: 28px 36px;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    background:
+        radial-gradient(
+            circle at 85% 30%,
+            rgba(255,255,255,.55),
+            transparent 24%
+        ),
+        linear-gradient(
+            120deg,
+            #e8f2ff,
+            #d9e9fb,
+            #cfe2fa
+        );
+
+    border-top: 3px solid #174f9c;
+
+    box-shadow: 0 12px 30px rgba(15,42,80,.07);
+}
+
+
+.export-hero::after {
+    content: "";
+
+    position: absolute;
+
+    right: -50px;
+    top: -80px;
+
+    width: 190px;
+    height: 190px;
+
+    border: 1px solid rgba(255,255,255,.65);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+
+.ekspor-hero-icon-ring {
+    position: relative;
+    z-index: 2;
+
+    width: 90px;
+    height: 90px;
+
+    flex: 0 0 90px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.5);
+
+    border: 3px solid rgba(255,255,255,.9);
+
+    box-shadow:
+        0 12px 28px rgba(10,46,110,.15);
+}
+
+
+.ekspor-hero-icon {
+    width: 62px;
+    height: 62px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #0A2E6E;
+
+    color: white;
+
+    font-size: 27px;
+}
+
+
+.ekspor-hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+
+.ekspor-hero-content h2 {
+    margin: 0 0 6px;
+
+    color: #20375d;
+
+    font-size: 32px;
+    font-weight: 800;
+}
+
+
+.ekspor-hero-content p {
+    color: #62758f;
+
+    font-size: 16px;
+}
+
+
+.ekspor-hero-decoration {
+    position: absolute;
+
+    z-index: 3;
+
+    right: 12%;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: rgba(255,255,255,.95);
+
+    font-size: 26px;
+
+    animation: eksporSparkle 2.8s ease-in-out infinite;
+}
+
+
+@keyframes eksporSparkle {
+
+    0%,100% {
+        opacity: .3;
+        transform: translateY(-50%) scale(.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(-50%) scale(1.15);
+    }
+}
+
+/* =========================================================
+   EXPORT - FINAL PROPORTION
+========================================================= */
+
+.export-hero {
+    min-height: 150px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+/* Panel kiri sedikit lebih dominan */
+.export-main {
+    flex: 1;
+}
+
+/* Panel kanan sedikit diperkecil */
+.export-preview {
+    flex: 0 0 31%;
+}
+
+/* Isi preview jangan terlalu besar */
+.export-preview-icon {
+    width: 112px;
+    height: 112px;
+}
+
+.export-preview-title {
+    font-size: 34px;
+}
+
+/* Supaya tombol tetap proporsional */
+.export-actions {
+    margin-top: 24px;
+}
