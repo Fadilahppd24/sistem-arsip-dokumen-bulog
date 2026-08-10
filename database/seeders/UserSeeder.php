@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             ]
         );
 
-        User::firstOrCreate(
+        User::updateOrCreate(
             ['email' => 'staffbulog@gmail.com'],
             [
                 'name' => 'Staff',

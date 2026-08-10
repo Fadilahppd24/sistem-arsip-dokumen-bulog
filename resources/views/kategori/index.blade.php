@@ -4,80 +4,953 @@
 
 @section('content')
 
+<style>
+
+/* =========================================================
+   HERO KELOLA KATEGORI
+========================================================= */
+
+.kategori-hero {
+    position: relative;
+
+    min-height: 138px;
+
+    padding: 25px 30px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 24px;
+
+    border: 1px solid #8bbcff;
+
+    border-radius: 20px;
+
+    background: linear-gradient(
+        110deg,
+        #e8f1ff 0%,
+        #dceaff 48%,
+        #edf5ff 100%
+    );
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   GARIS OREN DI PALING ATAS
+========================================================= */
+
+.kategori-hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 2px;
+
+    background: #f5a800;
+
+    border-radius: 20px 20px 0 0;
+
+    z-index: 20;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   BULATAN BESAR BACKGROUND KANAN
+========================================================= */
+
+.kategori-hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 230px;
+    height: 230px;
+
+    right: 70px;
+    top: -125px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.45);
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   SPARKLE
+========================================================= */
+
+.kategori-sparkle {
+
+    position: absolute;
+
+    color: rgba(255,255,255,.85);
+
+    pointer-events: none;
+
+    z-index: 2;
+
+    animation: kategoriSparkle 3s ease-in-out infinite;
+}
+
+
+.kategori-sparkle-1 {
+
+    right: 28%;
+
+    top: 23px;
+
+    font-size: 14px;
+
+    animation-delay: 0s;
+}
+
+
+.kategori-sparkle-2 {
+
+    right: 40%;
+
+    bottom: 25px;
+
+    font-size: 9px;
+
+    animation-delay: .8s;
+}
+
+
+.kategori-sparkle-3 {
+
+    right: 54%;
+
+    top: 38px;
+
+    font-size: 7px;
+
+    animation-delay: 1.5s;
+}
+
+
+.kategori-sparkle-4 {
+
+    right: 22%;
+
+    bottom: 38px;
+
+    font-size: 10px;
+
+    animation-delay: 2s;
+}
+
+
+@keyframes kategoriSparkle {
+
+    0%,
+    100% {
+
+        opacity: .25;
+
+        transform: scale(.75);
+
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform: scale(1.25);
+
+    }
+
+}
+
+
+/* =========================================================
+   ICON HERO
+========================================================= */
+
+.kategori-hero-icon {
+
+    position: relative;
+
+    z-index: 5;
+
+    width: 82px;
+    height: 82px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #dbeafe;
+
+    box-shadow:
+        0 7px 18px rgba(29,78,216,.15);
+}
+
+
+/* =========================================================
+   RADAR / GELOMBANG 1
+========================================================= */
+
+.kategori-hero-icon::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 50%;
+
+    border: 2px solid rgba(37,99,235,.48);
+
+    animation:
+        kategoriRadar 2.8s ease-out infinite;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   RADAR / GELOMBANG 2
+========================================================= */
+
+.kategori-hero-icon::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 50%;
+
+    border: 2px solid rgba(37,99,235,.32);
+
+    animation:
+        kategoriRadar 2.8s ease-out infinite;
+
+    animation-delay: 1.4s;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   ANIMASI RADAR
+========================================================= */
+
+@keyframes kategoriRadar {
+
+    0% {
+
+        transform: scale(.85);
+
+        opacity: .85;
+
+    }
+
+    60% {
+
+        transform: scale(1.35);
+
+        opacity: .28;
+
+    }
+
+    100% {
+
+        transform: scale(1.75);
+
+        opacity: 0;
+
+    }
+
+}
+
+
+/* =========================================================
+   LINGKARAN ICON DALAM
+========================================================= */
+
+.kategori-hero-icon-inner {
+
+    position: relative;
+
+    z-index: 6;
+
+    width: 68px;
+    height: 68px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #1769e8;
+
+    color: white;
+
+    font-size: 30px;
+
+    box-shadow:
+        0 5px 15px rgba(29,78,216,.25),
+        inset 0 0 0 2px rgba(255,255,255,.18);
+}
+
+
+/* =========================================================
+   TITIK SINYAL / KELAP-KELIP
+========================================================= */
+
+.kategori-signal-dot {
+
+    position: absolute;
+
+    z-index: 8;
+
+    display: block;
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 0 8px rgba(255,255,255,.95);
+
+    pointer-events: none;
+
+    animation:
+        kategoriSignalBlink 1.8s ease-in-out infinite;
+}
+
+
+/* TITIK 1 */
+
+.kategori-signal-dot.dot-1 {
+
+    width: 7px;
+    height: 7px;
+
+    top: 3px;
+    right: 15px;
+
+    animation-delay: 0s;
+}
+
+
+/* TITIK 2 */
+
+.kategori-signal-dot.dot-2 {
+
+    width: 5px;
+    height: 5px;
+
+    bottom: 10px;
+    left: 7px;
+
+    animation-delay: .6s;
+}
+
+
+/* TITIK 3 */
+
+.kategori-signal-dot.dot-3 {
+
+    width: 4px;
+    height: 4px;
+
+    top: 19px;
+    left: 1px;
+
+    animation-delay: 1.1s;
+}
+
+
+/* TITIK 4 */
+
+.kategori-signal-dot.dot-4 {
+
+    width: 5px;
+    height: 5px;
+
+    right: 2px;
+    bottom: 22px;
+
+    animation-delay: 1.5s;
+}
+
+
+/* =========================================================
+   ANIMASI TITIK
+========================================================= */
+
+@keyframes kategoriSignalBlink {
+
+    0%,
+    100% {
+
+        opacity: .25;
+
+        transform: scale(.7);
+
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform: scale(1.35);
+
+    }
+
+}
+
+
+/* =========================================================
+   JUDUL HERO
+========================================================= */
+
+.kategori-hero h2 {
+
+    position: relative;
+
+    z-index: 4;
+
+    margin: 0 0 6px;
+
+    color: #102a56;
+
+    font-size: 29px;
+
+    font-weight: 700;
+}
+
+
+.kategori-hero p {
+
+    position: relative;
+
+    z-index: 4;
+
+    margin: 0;
+
+    color: #526987;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   STATISTIK HERO
+========================================================= */
+
+.kategori-hero-stat {
+
+    position: relative;
+
+    z-index: 4;
+
+    min-width: 120px;
+
+    text-align: center;
+}
+
+
+.kategori-hero-number {
+
+    color: #2f6fe4;
+
+    font-size: 40px;
+
+    line-height: 1;
+
+    font-weight: 800;
+}
+
+
+.kategori-hero-label {
+
+    margin-top: 7px;
+
+    color: #687993;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: .8px;
+}
+
+
+/* =========================================================
+   BUTTON HERO
+========================================================= */
+
+.kategori-hero-action {
+
+    position: relative;
+
+    z-index: 5;
+}
+
+
+.kategori-hero-action .btn {
+
+    border-radius: 9px;
+
+    font-weight: 600;
+
+    box-shadow:
+        0 5px 12px rgba(29,78,216,.15);
+}
+
+
+/* =========================================================
+   ICON TABLE KATEGORI
+========================================================= */
+
+.kategori-icon-box {
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   WARNA ICON
+========================================================= */
+
+.kategori-primary {
+
+    background: #e8f0ff;
+    color: #1d4ed8;
+}
+
+
+.kategori-warning {
+
+    background: #fff3d6;
+    color: #f59e0b;
+}
+
+
+.kategori-info {
+
+    background: #e2f3ff;
+    color: #38a5e5;
+}
+
+
+.kategori-secondary {
+
+    background: #edf0f3;
+    color: #6b7280;
+}
+
+
+.kategori-success {
+
+    background: #e3f7eb;
+    color: #198754;
+}
+
+
+.kategori-danger {
+
+    background: #ffe5e8;
+    color: #dc3545;
+}
+
+
+.kategori-purple {
+
+    background: #f0e7ff;
+    color: #7c3aed;
+}
+
+
+.kategori-pink {
+
+    background: #ffe5f0;
+    color: #ec4899;
+}
+
+
+.kategori-teal {
+
+    background: #e1f7f5;
+    color: #0f766e;
+}
+
+
+.kategori-orange {
+
+    background: #fff0df;
+    color: #ea580c;
+}
+
+
+.kategori-indigo {
+
+    background: #e8e9ff;
+    color: #4f46e5;
+}
+
+
+.kategori-cyan {
+
+    background: #dff8ff;
+    color: #0891b2;
+}
+
+
+/* =========================================================
+   WARNA DOT
+========================================================= */
+
+.warna-kategori {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.warna-dot {
+
+    width: 10px;
+    height: 10px;
+
+    display: inline-block;
+
+    border-radius: 50%;
+}
+
+
+.warna-navy {
+    background: #1d4ed8;
+}
+
+
+.warna-kuning {
+    background: #f5b400;
+}
+
+
+.warna-biru-muda {
+    background: #60b5ee;
+}
+
+
+.warna-abu {
+    background: #8b96a3;
+}
+
+
+.warna-hijau {
+    background: #22a05a;
+}
+
+
+.warna-merah {
+    background: #ef4444;
+}
+
+
+.warna-ungu {
+    background: #8b5cf6;
+}
+
+
+.warna-pink {
+    background: #ec4899;
+}
+
+
+.warna-teal {
+    background: #0f766e;
+}
+
+
+.warna-orange {
+    background: #f97316;
+}
+
+
+.warna-indigo {
+    background: #4f46e5;
+}
+
+
+.warna-cyan {
+    background: #06b6d4;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .kategori-hero {
+
+        flex-wrap: wrap;
+
+        padding: 22px;
+
+    }
+
+
+    .kategori-hero-stat {
+
+        text-align: left;
+
+    }
+
+}
+
+
+@media (max-width: 576px) {
+
+    .kategori-hero {
+
+        gap: 15px;
+
+    }
+
+
+    .kategori-hero-icon {
+
+        width: 72px;
+        height: 72px;
+
+    }
+
+
+    .kategori-hero-icon-inner {
+
+        width: 60px;
+        height: 60px;
+
+        font-size: 26px;
+
+    }
+
+
+    .kategori-hero h2 {
+
+        font-size: 24px;
+
+    }
+
+}
+
+</style>
+
+
+
 <div class="container-fluid px-0">
 
-{{-- ============================= --}}
-{{-- HEADER --}}
-{{-- ============================= --}}
+
+{{-- =========================================================
+     BREADCRUMB + HERO
+========================================================= --}}
 
 <div class="mb-4">
 
+
     {{-- BREADCRUMB --}}
+
     <div class="d-flex align-items-center gap-2 mb-3 small">
 
-        <a href="{{ route('dashboard') }}"
-           class="text-decoration-none"
-           style="color:#1d4ed8;">
+        <a
+            href="{{ route('dashboard') }}"
+            class="text-decoration-none"
+            style="color:#1d4ed8;"
+        >
+
             Beranda
+
         </a>
 
-        <span class="text-muted">></span>
 
         <span class="text-muted">
+            >
+        </span>
+
+
+        <span class="text-muted">
+
             Kelola Kategori
+
         </span>
 
     </div>
 
 
-    {{-- HERO HEADER --}}
+
+    {{-- =====================================================
+         HERO
+    ====================================================== --}}
+
     <div class="kategori-hero">
 
-        {{-- ICON --}}
+
+        {{-- SPARKLE --}}
+
+        <span class="kategori-sparkle kategori-sparkle-1">
+            ✦
+        </span>
+
+        <span class="kategori-sparkle kategori-sparkle-2">
+            ✦
+        </span>
+
+        <span class="kategori-sparkle kategori-sparkle-3">
+            ✦
+        </span>
+
+        <span class="kategori-sparkle kategori-sparkle-4">
+            ✦
+        </span>
+
+
+
+        {{-- =================================================
+             ICON DENGAN RADAR
+        ================================================== --}}
+
         <div class="kategori-hero-icon">
 
+
+            {{-- TITIK KELAP-KELIP --}}
+
+            <span
+                class="kategori-signal-dot dot-1"
+            ></span>
+
+            <span
+                class="kategori-signal-dot dot-2"
+            ></span>
+
+            <span
+                class="kategori-signal-dot dot-3"
+            ></span>
+
+            <span
+                class="kategori-signal-dot dot-4"
+            ></span>
+
+
+
+            {{-- ICON --}}
+
             <div class="kategori-hero-icon-inner">
+
                 <i class="bi bi-folder-fill"></i>
+
             </div>
 
         </div>
 
 
-        {{-- JUDUL + DESKRIPSI --}}
+
+        {{-- =================================================
+             JUDUL + DESKRIPSI
+        ================================================== --}}
+
         <div class="flex-grow-1">
 
-            <h2 class="fw-bold mb-2">
+
+            <h2 class="fw-bold">
+
                 Kelola Kategori
+
             </h2>
 
-            <p class="mb-0">
+
+            <p>
+
                 Kelola dan atur kategori dokumen sistem dengan mudah.
+
             </p>
 
         </div>
 
 
-        {{-- JUMLAH KATEGORI --}}
+
+        {{-- =================================================
+             JUMLAH KATEGORI
+        ================================================== --}}
+
         <div class="kategori-hero-stat">
 
-            <div class="kategori-hero-number">
-                {{ $kategoris->count() }}
-            </div>
+
+            <div
+    class="kategori-hero-number"
+    data-count="{{ $kategoris->count() }}"
+>
+    0
+</div>
+
 
             <div class="kategori-hero-label">
+
                 KATEGORI AKTIF
+
             </div>
 
         </div>
 
 
-        {{-- TOMBOL --}}
+
+        {{-- =================================================
+             TOMBOL TAMBAH
+        ================================================== --}}
+
         <div class="kategori-hero-action">
 
-            <button type="button"
-                    class="btn btn-primary px-4 py-2"
-                    data-bs-toggle="modal"
-                    data-bs-target="#modalTambahKategori">
+            <button
+                type="button"
+                class="btn btn-primary px-4 py-2"
+                data-bs-toggle="modal"
+                data-bs-target="#modalTambahKategori"
+            >
 
                 <i class="bi bi-plus-lg me-1"></i>
 
@@ -87,225 +960,746 @@
 
         </div>
 
+
     </div>
 
 </div>
 
-    {{-- ============================= --}}
-    {{-- ALERT --}}
-    {{-- ============================= --}}
-
-    @if (session('success'))
-
-        <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm"
-             role="alert">
-
-            <i class="bi bi-check-circle-fill me-2"></i>
-
-            {{ session('success') }}
-
-            <button type="button"
-                    class="btn-close"
-                    data-bs-dismiss="alert">
-            </button>
-
-        </div>
-
-    @endif
 
 
-    @if (session('error'))
+{{-- =========================================================
+     ALERT SUCCESS
+========================================================= --}}
 
-        <div class="alert alert-danger alert-dismissible fade show border-0 shadow-sm"
-             role="alert">
+@if (session('success'))
 
-            <i class="bi bi-exclamation-circle-fill me-2"></i>
+    <div
+        class="alert alert-success alert-dismissible fade show border-0 shadow-sm"
+        role="alert"
+    >
 
-            {{ session('error') }}
+        <i class="bi bi-check-circle-fill me-2"></i>
 
-            <button type="button"
-                    class="btn-close"
-                    data-bs-dismiss="alert">
-            </button>
-
-        </div>
-
-    @endif
+        {{ session('success') }}
 
 
-    @if ($errors->any())
+        <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+        ></button>
 
-        <div class="alert alert-danger border-0 shadow-sm">
+    </div>
 
-            <strong>
-                Terdapat kesalahan:
-            </strong>
+@endif
 
-            <ul class="mb-0 mt-2">
 
-                @foreach ($errors->all() as $error)
 
-                    <li>{{ $error }}</li>
+{{-- =========================================================
+     ALERT ERROR
+========================================================= --}}
 
-                @endforeach
+@if (session('error'))
+
+    <div
+        class="alert alert-danger alert-dismissible fade show border-0 shadow-sm"
+        role="alert"
+    >
+
+        <i class="bi bi-exclamation-circle-fill me-2"></i>
+
+        {{ session('error') }}
+
+
+        <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+        ></button>
+
+    </div>
+
+@endif
+
+
+
+{{-- =========================================================
+     VALIDATION ERROR
+========================================================= --}}
+
+@if ($errors->any())
+
+    <div class="alert alert-danger border-0 shadow-sm">
+
+        <strong>
+            Terdapat kesalahan:
+        </strong>
+
+
+        <ul class="mb-0 mt-2">
+
+            @foreach ($errors->all() as $error)
+
+                <li>
+                    {{ $error }}
+                </li>
+
+            @endforeach
+
+        </ul>
+
+    </div>
+
+@endif
+
+
+
+{{-- =========================================================
+     CARD UTAMA
+========================================================= --}}
+
+<div class="card border-0 shadow-sm">
+
+    <div class="card-body p-0">
+
+
+        {{-- =================================================
+             TAB
+        ================================================== --}}
+
+        <div class="px-4 pt-3 border-bottom">
+
+            <ul class="nav nav-tabs border-0">
+
+
+                {{-- KATEGORI AKTIF --}}
+
+                <li class="nav-item">
+
+                    <button
+                        class="nav-link active fw-semibold"
+                        data-bs-toggle="tab"
+                        data-bs-target="#kategoriAktif"
+                    >
+
+                        Kategori Aktif
+
+
+                        <span class="badge bg-primary ms-1">
+
+                            {{ $kategoris->count() }}
+
+                        </span>
+
+                    </button>
+
+                </li>
+
+
+
+                {{-- KATEGORI TERHAPUS --}}
+
+                <li class="nav-item">
+
+                    <button
+                        class="nav-link fw-semibold"
+                        data-bs-toggle="tab"
+                        data-bs-target="#kategoriTerhapus"
+                    >
+
+                        Kategori Terhapus
+
+
+                        <span class="badge bg-secondary ms-1">
+
+                            {{ $kategoriTerhapus->count() }}
+
+                        </span>
+
+                    </button>
+
+                </li>
 
             </ul>
 
         </div>
 
-    @endif
 
 
-    {{-- ============================= --}}
-    {{-- CARD UTAMA --}}
-    {{-- ============================= --}}
-
-    <div class="card border-0 shadow-sm">
-
-        {{-- HEADER CARD --}}
-
-        <div class="card-body p-0">
-
-            
+        <div class="tab-content">
 
 
-            {{-- ============================= --}}
-            {{-- TAB --}}
-            {{-- ============================= --}}
+            {{-- =================================================
+                 TAB AKTIF
+            ================================================== --}}
 
-            <div class="px-4 pt-3 border-bottom">
+            <div
+                class="tab-pane fade show active"
+                id="kategoriAktif"
+            >
 
-                <ul class="nav nav-tabs border-0">
 
-                    <li class="nav-item">
+                {{-- SEARCH + FILTER --}}
 
-                        <button class="nav-link active fw-semibold"
-                                data-bs-toggle="tab"
-                                data-bs-target="#kategoriAktif">
+                <div class="p-4">
 
-                            Kategori Aktif
+                    <div class="row g-2">
 
-                            <span class="badge bg-primary ms-1">
-                                {{ $kategoris->count() }}
-                            </span>
 
-                        </button>
+                        {{-- SEARCH --}}
 
-                    </li>
+                        <div class="col-md-6">
 
-                    <li class="nav-item">
+                            <div class="input-group">
 
-                        <button class="nav-link fw-semibold"
-                                data-bs-toggle="tab"
-                                data-bs-target="#kategoriTerhapus">
+                                <span class="input-group-text bg-white">
 
-                            Kategori Terhapus
+                                    <i class="bi bi-search text-muted"></i>
 
-                            <span class="badge bg-secondary ms-1">
-                                {{ $kategoriTerhapus->count() }}
-                            </span>
+                                </span>
 
-                        </button>
 
-                    </li>
+                                <input
+                                    type="text"
+                                    id="searchKategori"
+                                    class="form-control"
+                                    placeholder="Cari kategori..."
+                                >
 
-                </ul>
+                            </div>
+
+                        </div>
+
+
+
+                        {{-- FILTER WARNA --}}
+
+                        <div class="col-md-3">
+
+                            <select
+                                id="filterWarna"
+                                class="form-select"
+                            >
+
+                                <option value="">
+                                    Semua Warna
+                                </option>
+
+                                <option value="primary">
+                                    Navy
+                                </option>
+
+                                <option value="warning">
+                                    Kuning
+                                </option>
+
+                                <option value="info">
+                                    Biru Muda
+                                </option>
+
+                                <option value="secondary">
+                                    Abu-abu
+                                </option>
+
+                                <option value="success">
+                                    Hijau
+                                </option>
+
+                                <option value="danger">
+                                    Merah
+                                </option>
+
+                                <option value="purple">
+                                    Ungu
+                                </option>
+
+                                <option value="pink">
+                                    Pink
+                                </option>
+
+                                <option value="teal">
+                                    Teal
+                                </option>
+
+                                <option value="orange">
+                                    Orange
+                                </option>
+
+                                <option value="indigo">
+                                    Indigo
+                                </option>
+
+                                <option value="cyan">
+                                    Cyan
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                {{-- =================================================
+                     TABLE KATEGORI
+                ================================================== --}}
+
+                <div class="table-responsive">
+
+                    <table
+                        class="table table-hover align-middle mb-0"
+                        id="tabelKategori"
+                    >
+
+                        <thead class="table-light">
+
+                            <tr class="small text-muted">
+
+
+                                <th
+                                    class="ps-4"
+                                    style="width:70px;"
+                                >
+                                    No
+                                </th>
+
+
+                                <th style="width:90px;">
+                                    Icon
+                                </th>
+
+
+                                <th>
+                                    Nama Kategori
+                                </th>
+
+
+                                <th>
+                                    Jumlah Dokumen
+                                </th>
+
+
+                                <th>
+                                    Dibuat Pada
+                                </th>
+
+
+                                <th>
+                                    Warna
+                                </th>
+
+
+                                <th class="text-end pe-4">
+                                    Aksi
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+
+                        <tbody>
+
+
+                        @forelse ($kategoris as $i => $kategori)
+
+
+                            <tr
+                                class="kategori-row"
+                                data-nama="{{ strtolower($kategori->nama) }}"
+                                data-warna="{{ $kategori->warna ?? 'secondary' }}"
+                            >
+
+
+                                {{-- NO --}}
+
+                                <td class="ps-4">
+
+                                    {{ $i + 1 }}
+
+                                </td>
+
+
+
+                                {{-- ICON --}}
+
+                                <td>
+
+                                    @php
+
+                                        $warnaIcon = [
+
+                                            'primary' =>
+                                                'kategori-primary',
+
+                                            'warning' =>
+                                                'kategori-warning',
+
+                                            'info' =>
+                                                'kategori-info',
+
+                                            'secondary' =>
+                                                'kategori-secondary',
+
+                                            'success' =>
+                                                'kategori-success',
+
+                                            'danger' =>
+                                                'kategori-danger',
+
+                                            'purple' =>
+                                                'kategori-purple',
+
+                                            'pink' =>
+                                                'kategori-pink',
+
+                                            'teal' =>
+                                                'kategori-teal',
+
+                                            'orange' =>
+                                                'kategori-orange',
+
+                                            'indigo' =>
+                                                'kategori-indigo',
+
+                                            'cyan' =>
+                                                'kategori-cyan',
+
+                                        ];
+
+                                    @endphp
+
+
+                                    <div
+                                        class="kategori-icon-box {{ $warnaIcon[$kategori->warna] ?? 'kategori-secondary' }}"
+                                    >
+
+                                        <i
+                                            class="bi {{ $kategori->icon ?? 'bi-folder-fill' }}"
+                                        ></i>
+
+                                    </div>
+
+                                </td>
+
+
+
+                                {{-- NAMA KATEGORI --}}
+
+                                <td>
+
+                                    <div class="fw-semibold">
+
+                                        {{ $kategori->nama }}
+
+                                    </div>
+
+                                </td>
+
+
+
+                                {{-- JUMLAH DOKUMEN --}}
+
+                                <td>
+
+                                    @if ($kategori->dokumens_count > 0)
+
+                                        <span class="badge bg-light text-dark border">
+
+                                            {{ $kategori->dokumens_count }}
+
+                                            dokumen
+
+                                        </span>
+
+                                    @else
+
+                                        <span
+                                            class="badge bg-success-subtle text-success border"
+                                        >
+
+                                            0 dokumen
+
+                                        </span>
+
+                                    @endif
+
+                                </td>
+
+
+
+                                {{-- DIBUAT PADA --}}
+
+                                <td>
+
+                                    <small class="text-muted">
+
+                                        {{ $kategori->created_at?->format('d M Y H:i') }}
+
+                                    </small>
+
+                                </td>
+
+
+
+                                {{-- WARNA --}}
+
+                                <td>
+
+                                    @php
+
+                                        $warnaLabel = [
+
+                                            'primary' =>
+                                                'Navy',
+
+                                            'warning' =>
+                                                'Kuning',
+
+                                            'info' =>
+                                                'Biru Muda',
+
+                                            'secondary' =>
+                                                'Abu-abu',
+
+                                            'success' =>
+                                                'Hijau',
+
+                                            'danger' =>
+                                                'Merah',
+
+                                            'purple' =>
+                                                'Ungu',
+
+                                            'pink' =>
+                                                'Pink',
+
+                                            'teal' =>
+                                                'Teal',
+
+                                            'orange' =>
+                                                'Orange',
+
+                                            'indigo' =>
+                                                'Indigo',
+
+                                            'cyan' =>
+                                                'Cyan',
+
+                                        ];
+
+
+                                        $warnaClass = [
+
+                                            'primary' =>
+                                                'warna-navy',
+
+                                            'warning' =>
+                                                'warna-kuning',
+
+                                            'info' =>
+                                                'warna-biru-muda',
+
+                                            'secondary' =>
+                                                'warna-abu',
+
+                                            'success' =>
+                                                'warna-hijau',
+
+                                            'danger' =>
+                                                'warna-merah',
+
+                                            'purple' =>
+                                                'warna-ungu',
+
+                                            'pink' =>
+                                                'warna-pink',
+
+                                            'teal' =>
+                                                'warna-teal',
+
+                                            'orange' =>
+                                                'warna-orange',
+
+                                            'indigo' =>
+                                                'warna-indigo',
+
+                                            'cyan' =>
+                                                'warna-cyan',
+
+                                        ];
+
+                                    @endphp
+
+
+                                    <div class="warna-kategori">
+
+                                        <span
+                                            class="warna-dot {{ $warnaClass[$kategori->warna] ?? 'warna-abu' }}"
+                                        ></span>
+
+
+                                        <span class="warna-label">
+
+                                            {{ $warnaLabel[$kategori->warna] ?? 'Abu-abu' }}
+
+                                        </span>
+
+                                    </div>
+
+                                </td>
+
+
+
+                                {{-- AKSI --}}
+
+                                <td class="text-end pe-4">
+
+                                    <div class="d-inline-flex gap-1">
+
+
+                                        {{-- EDIT --}}
+
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm btn-light border"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#modalEdit{{ $kategori->id }}"
+                                            title="Edit kategori"
+                                        >
+
+                                            <i class="bi bi-pencil"></i>
+
+                                        </button>
+
+
+
+                                        {{-- NONAKTIFKAN --}}
+
+                                        <form
+                                            action="{{ route('kategori.destroy', $kategori) }}"
+                                            method="POST"
+                                            class="d-inline"
+                                            onsubmit="return confirm('Nonaktifkan kategori {{ $kategori->nama }}?')"
+                                        >
+
+                                            @csrf
+
+                                            @method('DELETE')
+
+
+                                            <button
+                                                type="submit"
+                                                class="btn btn-sm btn-light border text-danger"
+                                                title="Nonaktifkan kategori"
+                                            >
+
+                                                <i class="bi bi-trash"></i>
+
+                                            </button>
+
+                                        </form>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+
+                        @empty
+
+
+                            <tr>
+
+                                <td
+                                    colspan="7"
+                                    class="text-center py-5 text-muted"
+                                >
+
+                                    <i
+                                        class="bi bi-folder-x fs-1 d-block mb-2"
+                                    ></i>
+
+                                    Belum ada kategori.
+
+                                </td>
+
+                            </tr>
+
+
+                        @endforelse
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+
+                {{-- FOOTER TABLE --}}
+
+                <div class="px-4 py-3 border-top">
+
+                    <small class="text-muted">
+
+                        Menampilkan
+
+                        {{ $kategoris->count() }}
+
+                        kategori aktif
+
+                    </small>
+
+                </div>
 
             </div>
 
 
-            <div class="tab-content">
+
+            {{-- =================================================
+                 TAB KATEGORI TERHAPUS
+            ================================================== --}}
+
+            <div
+                class="tab-pane fade"
+                id="kategoriTerhapus"
+            >
+
+                <div class="p-4">
 
 
-                {{-- ================================================= --}}
-                {{-- TAB KATEGORI AKTIF --}}
-                {{-- ================================================= --}}
+                    <div class="alert alert-info border-0">
 
-                <div class="tab-pane fade show active"
-                     id="kategoriAktif">
+                        <div class="d-flex align-items-start">
+
+                            <i
+                                class="bi bi-info-circle-fill me-2 mt-1"
+                            ></i>
 
 
-                    {{-- SEARCH + FILTER --}}
+                            <div>
 
-                    <div class="p-4">
+                                <strong>
+                                    Kategori yang dinonaktifkan
+                                </strong>
 
-                        <div class="row g-2">
 
-                            <div class="col-md-6">
+                                <div class="small mt-1">
 
-                                <div class="input-group">
+                                    Kategori yang dinonaktifkan tidak dapat
+                                    digunakan untuk dokumen baru, tetapi
+                                    dokumen lama tetap aman.
 
-                                    <span class="input-group-text bg-white">
-                                        <i class="bi bi-search text-muted"></i>
-                                    </span>
-
-                                    <input type="text"
-                                           id="searchKategori"
-                                           class="form-control"
-                                           placeholder="Cari kategori...">
+                                    Kategori dapat dipulihkan kapan saja.
 
                                 </div>
-
-                            </div>
-
-                            <div class="col-md-3">
-
-                                <select id="filterWarna"
-        class="form-select">
-
-    <option value="">
-        Semua Warna
-    </option>
-
-    <option value="primary">
-        Navy
-    </option>
-
-    <option value="warning">
-        Kuning
-    </option>
-
-    <option value="info">
-        Biru Muda
-    </option>
-
-    <option value="secondary">
-        Abu-abu
-    </option>
-
-    <option value="success">
-        Hijau
-    </option>
-
-    <option value="danger">
-        Merah
-    </option>
-
-    <option value="purple">
-        Ungu
-    </option>
-
-    <option value="pink">
-        Pink
-    </option>
-
-    <option value="teal">
-        Teal
-    </option>
-
-    <option value="orange">
-        Orange
-    </option>
-
-    <option value="indigo">
-        Indigo
-    </option>
-
-    <option value="cyan">
-        Cyan
-    </option>
-
-</select>
 
                             </div>
 
@@ -314,23 +1708,17 @@
                     </div>
 
 
-                    {{-- TABLE --}}
 
                     <div class="table-responsive">
 
-                        <table class="table table-hover align-middle mb-0"
-                               id="tabelKategori">
+                        <table class="table table-hover align-middle">
 
                             <thead class="table-light">
 
                                 <tr class="small text-muted">
 
-                                    <th class="ps-4" style="width:70px;">
+                                    <th style="width:70px;">
                                         No
-                                    </th>
-
-                                    <th style="width:90px;">
-                                        Icon
                                     </th>
 
                                     <th>
@@ -342,14 +1730,10 @@
                                     </th>
 
                                     <th>
-                                        Dibuat Pada
+                                        Dinonaktifkan
                                     </th>
 
-                                    <th>
-                                        Warna
-                                    </th>
-
-                                    <th class="text-end pe-4">
+                                    <th class="text-end">
                                         Aksi
                                     </th>
 
@@ -358,405 +1742,148 @@
                             </thead>
 
 
+
                             <tbody>
 
-                            @forelse ($kategoris as $i => $kategori)
 
-                                <tr class="kategori-row"
-                                    data-nama="{{ strtolower($kategori->nama) }}"
-                                    data-warna="{{ $kategori->warna ?? 'secondary' }}">
+                            @forelse ($kategoriTerhapus as $i => $kategori)
 
 
-                                    {{-- NO --}}
+                                <tr>
 
-                                    <td class="ps-4">
+
+                                    <td>
+
                                         {{ $i + 1 }}
-                                    </td>
-
-
-                                    {{-- ICON --}}
-
-                                    <td>
-
-                                        @php
-    $warnaIcon = [
-        'primary'   => 'kategori-primary',
-        'warning'   => 'kategori-warning',
-        'info'      => 'kategori-info',
-        'secondary' => 'kategori-secondary',
-        'success'   => 'kategori-success',
-        'danger'    => 'kategori-danger',
-        'purple'    => 'kategori-purple',
-        'pink'      => 'kategori-pink',
-        'teal'      => 'kategori-teal',
-        'orange'    => 'kategori-orange',
-        'indigo'    => 'kategori-indigo',
-        'cyan'      => 'kategori-cyan',
-    ];
-@endphp
-
-<div class="kategori-icon-box {{ $warnaIcon[$kategori->warna] ?? 'kategori-secondary' }}">
-    <i class="bi {{ $kategori->icon ?? 'bi-folder-fill' }}"></i>
-</div>
 
                                     </td>
 
 
-                                    {{-- NAMA --}}
-
                                     <td>
 
-                                        <div class="fw-semibold">
+                                        <span
+                                            class="fw-semibold text-muted"
+                                        >
 
                                             {{ $kategori->nama }}
 
-                                        </div>
+                                        </span>
 
                                     </td>
 
-
-                                    {{-- JUMLAH DOKUMEN --}}
 
                                     <td>
 
-                                        @if ($kategori->dokumens_count > 0)
+                                        {{ $kategori->dokumens_count }}
 
-                                            <span class="badge bg-light text-dark border">
-
-                                                {{ $kategori->dokumens_count }}
-                                                dokumen
-
-                                            </span>
-
-                                        @else
-
-                                            <span class="badge bg-success-subtle text-success border">
-
-                                                0 dokumen
-
-                                            </span>
-
-                                        @endif
+                                        dokumen
 
                                     </td>
 
-
-                                    {{-- DIBUAT --}}
 
                                     <td>
 
                                         <small class="text-muted">
 
-                                            {{ $kategori->created_at?->format('d M Y H:i') }}
+                                            {{ $kategori->deleted_at?->format('d M Y H:i') }}
 
                                         </small>
 
                                     </td>
 
-                                    {{-- WARNA --}}
-<td>
-    @php
-        $warnaLabel = [
-            'primary'   => 'Navy',
-            'warning'   => 'Kuning',
-            'info'      => 'Biru Muda',
-            'secondary' => 'Abu-abu',
-            'success'   => 'Hijau',
-            'danger'    => 'Merah',
-            'purple'    => 'Ungu',
-            'pink'      => 'Pink',
-            'teal'      => 'Teal',
-            'orange'    => 'Orange',
-            'indigo'    => 'Indigo',
-            'cyan'      => 'Cyan',
-        ];
 
-        $warnaClass = [
-            'primary'   => 'warna-navy',
-            'warning'   => 'warna-kuning',
-            'info'      => 'warna-biru-muda',
-            'secondary' => 'warna-abu',
-            'success'   => 'warna-hijau',
-            'danger'    => 'warna-merah',
-            'purple'    => 'warna-ungu',
-            'pink'      => 'warna-pink',
-            'teal'      => 'warna-teal',
-            'orange'    => 'warna-orange',
-            'indigo'    => 'warna-indigo',
-            'cyan'      => 'warna-cyan',
-        ];
-    @endphp
-
-    <div class="warna-kategori">
-        <span class="warna-dot {{ $warnaClass[$kategori->warna] ?? 'warna-abu' }}"></span>
-
-        <span class="warna-label">
-            {{ $warnaLabel[$kategori->warna] ?? 'Abu-abu' }}
-        </span>
-    </div>
-</td>
+                                    <td class="text-end">
 
 
-                                    {{-- AKSI --}}
+                                        {{-- RESTORE --}}
 
-                                    <td class="text-end pe-4">
+                                        <form
+                                            action="{{ route('kategori.restore', $kategori->id) }}"
+                                            method="POST"
+                                            class="d-inline"
+                                        >
 
-                                        <div class="d-inline-flex gap-1">
+                                            @csrf
+
+                                            @method('PATCH')
 
 
-                                            {{-- EDIT --}}
+                                            <button
+                                                type="submit"
+                                                class="btn btn-sm btn-outline-success"
+                                            >
 
-                                            <button type="button"
-                                                    class="btn btn-sm btn-light border"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#modalEdit{{ $kategori->id }}"
-                                                    title="Edit kategori">
+                                                <i
+                                                    class="bi bi-arrow-counterclockwise me-1"
+                                                ></i>
 
-                                                <i class="bi bi-pencil"></i>
+                                                Pulihkan
 
                                             </button>
 
+                                        </form>
 
-                                            {{-- NONAKTIFKAN --}}
 
-                                            <form action="{{ route('kategori.destroy', $kategori) }}"
-                                                  method="POST"
-                                                  class="d-inline"
-                                                  onsubmit="return confirm('Nonaktifkan kategori {{ $kategori->nama }}?')">
 
-                                                @csrf
+                                        {{-- HAPUS PERMANEN --}}
 
-                                                @method('DELETE')
+                                        <form
+                                            action="{{ route('kategori.forceDelete', $kategori->id) }}"
+                                            method="POST"
+                                            class="d-inline"
+                                            onsubmit="return confirm('Hapus kategori ini secara permanen? Data yang sudah dihapus tidak dapat dikembalikan.')"
+                                        >
 
-                                                <button type="submit"
-                                                        class="btn btn-sm btn-light border text-danger"
-                                                        title="Nonaktifkan kategori">
+                                            @csrf
 
-                                                    <i class="bi bi-trash"></i>
+                                            @method('DELETE')
 
-                                                </button>
 
-                                            </form>
+                                            <button
+                                                type="submit"
+                                                class="btn btn-sm btn-outline-danger"
+                                            >
 
-                                        </div>
+                                                <i
+                                                    class="bi bi-trash3"
+                                                ></i>
+
+                                            </button>
+
+                                        </form>
 
                                     </td>
 
                                 </tr>
+
 
                             @empty
 
+
                                 <tr>
 
-                                    <td colspan="7"
-                                        class="text-center py-5 text-muted">
+                                    <td
+                                        colspan="5"
+                                        class="text-center py-5 text-muted"
+                                    >
 
-                                        <i class="bi bi-folder-x fs-1 d-block mb-2"></i>
+                                        <i
+                                            class="bi bi-check-circle fs-1 d-block mb-2"
+                                        ></i>
 
-                                        Belum ada kategori.
+                                        Tidak ada kategori yang dinonaktifkan.
 
                                     </td>
 
                                 </tr>
 
+
                             @endforelse
+
 
                             </tbody>
 
                         </table>
-
-                    </div>
-
-
-                    {{-- FOOTER TABLE --}}
-
-                    <div class="px-4 py-3 border-top">
-
-                        <small class="text-muted">
-
-                            Menampilkan
-                            {{ $kategoris->count() }}
-                            kategori aktif
-
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-                {{-- ================================================= --}}
-                {{-- TAB KATEGORI TERHAPUS --}}
-                {{-- ================================================= --}}
-
-                <div class="tab-pane fade"
-                     id="kategoriTerhapus">
-
-
-                    <div class="p-4">
-
-                        <div class="alert alert-info border-0">
-
-                            <div class="d-flex align-items-start">
-
-                                <i class="bi bi-info-circle-fill me-2 mt-1"></i>
-
-                                <div>
-
-                                   <strong>Kategori Dinonaktifkan</strong>
-
-<div class="small mt-1">
-    Kategori yang dinonaktifkan tidak dapat digunakan untuk dokumen baru.
-    Dokumen yang sudah menggunakan kategori tersebut tetap aman dan tidak terpengaruh.
-    Kategori dapat dipulihkan kembali melalui menu <strong>Kategori Terhapus</strong>.
-</div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="table-responsive">
-
-                            <table class="table table-hover align-middle">
-
-                                <thead class="table-light">
-
-                                    <tr class="small text-muted">
-
-                                        <th style="width:70px;">
-                                            No
-                                        </th>
-
-                                        <th>
-                                            Nama Kategori
-                                        </th>
-
-                                        <th>
-                                            Jumlah Dokumen
-                                        </th>
-
-                                        <th>
-                                            Dinonaktifkan
-                                        </th>
-
-                                        <th class="text-end">
-                                            Aksi
-                                        </th>
-
-                                    </tr>
-
-                                </thead>
-
-
-                                <tbody>
-
-                                @forelse ($kategoriTerhapus as $i => $kategori)
-
-                                    <tr>
-
-                                        <td>
-                                            {{ $i + 1 }}
-                                        </td>
-
-                                        <td>
-
-                                            <span class="fw-semibold text-muted">
-
-                                                {{ $kategori->nama }}
-
-                                            </span>
-
-                                        </td>
-
-                                        <td>
-
-                                            {{ $kategori->dokumens_count }}
-                                            dokumen
-
-                                        </td>
-
-                                        <td>
-
-                                            <small class="text-muted">
-
-                                                {{ $kategori->deleted_at?->format('d M Y H:i') }}
-
-                                            </small>
-
-                                        </td>
-
-
-<td class="text-end pe-4">
-
-    <div class="kategori-trash-actions">
-
-        {{-- PULIHKAN --}}
-        <form action="{{ route('kategori.restore', $kategori->id) }}"
-              method="POST">
-
-            @csrf
-            @method('PATCH')
-
-            <button type="submit"
-                    class="kategori-btn kategori-btn-restore"
-                    title="Pulihkan">
-
-                <i class="bi bi-arrow-counterclockwise"></i>
-
-            </button>
-
-        </form>
-
-
-        {{-- HAPUS PERMANEN --}}
-        <form action="{{ route('kategori.forceDelete', $kategori->id) }}"
-              method="POST"
-              onsubmit="return confirm('Hapus kategori ini secara permanen? Data yang sudah dihapus tidak dapat dikembalikan.')">
-
-            @csrf
-            @method('DELETE')
-
-            <button type="submit"
-                    class="kategori-btn kategori-btn-delete"
-                    title="Hapus permanen">
-
-                <i class="bi bi-trash3"></i>
-
-            </button>
-
-        </form>
-
-    </div>
-
-</td>
-
-
-                                    </tr>
-
-                                @empty
-
-                                    <tr>
-
-                                        <td colspan="5"
-                                            class="text-center py-5 text-muted">
-
-                                            <i class="bi bi-check-circle fs-1 d-block mb-2"></i>
-
-                                            Tidak ada kategori yang dinonaktifkan.
-
-                                        </td>
-
-                                    </tr>
-
-                                @endforelse
-
-                                </tbody>
-
-                            </table>
-
-                        </div>
 
                     </div>
 
@@ -768,123 +1895,446 @@
 
     </div>
 
+</div>
 
 
-{{-- ================================================= --}}
-{{-- MODAL EDIT KATEGORI --}}
-{{-- ================================================= --}}
+
+{{-- =========================================================
+     INFORMASI / ALUR KELOLA KATEGORI
+========================================================= --}}
+
+<div class="row g-3 mt-3">
+
+
+    {{-- ALUR --}}
+
+    <div class="col-md-8">
+
+        <div class="card border-0 shadow-sm h-100">
+
+            <div class="card-body p-4">
+
+
+                <h5 class="fw-bold mb-4">
+
+                    <i
+                        class="bi bi-diagram-3 me-2 text-primary"
+                    ></i>
+
+                    Alur Kelola Kategori
+
+                </h5>
+
+
+
+                <div class="row g-3">
+
+
+                    {{-- TAMBAH --}}
+
+                    <div class="col-md-3">
+
+                        <div class="border rounded-3 p-3 h-100">
+
+                            <div
+                                class="d-flex align-items-center mb-3"
+                            >
+
+                                <span
+                                    class="badge rounded-pill bg-primary me-2"
+                                >
+                                    1
+                                </span>
+
+
+                                <strong class="small">
+                                    Tambah
+                                </strong>
+
+                            </div>
+
+
+                            <p class="small text-muted mb-0">
+
+                                Tambahkan kategori dokumen baru
+                                melalui tombol
+                                <strong>Tambah Kategori</strong>.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    {{-- EDIT --}}
+
+                    <div class="col-md-3">
+
+                        <div class="border rounded-3 p-3 h-100">
+
+                            <div
+                                class="d-flex align-items-center mb-3"
+                            >
+
+                                <span
+                                    class="badge rounded-pill bg-primary me-2"
+                                >
+                                    2
+                                </span>
+
+
+                                <strong class="small">
+                                    Edit
+                                </strong>
+
+                            </div>
+
+
+                            <p class="small text-muted mb-0">
+
+                                Ubah nama, icon, atau warna
+                                kategori yang sudah tersedia.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    {{-- NONAKTIFKAN --}}
+
+                    <div class="col-md-3">
+
+                        <div class="border rounded-3 p-3 h-100">
+
+                            <div
+                                class="d-flex align-items-center mb-3"
+                            >
+
+                                <span
+                                    class="badge rounded-pill bg-warning text-dark me-2"
+                                >
+                                    3
+                                </span>
+
+
+                                <strong class="small">
+                                    Nonaktifkan
+                                </strong>
+
+                            </div>
+
+
+                            <p class="small text-muted mb-0">
+
+                                Kategori tidak digunakan untuk
+                                dokumen baru, tetapi data tetap aman.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    {{-- PULIHKAN --}}
+
+                    <div class="col-md-3">
+
+                        <div class="border rounded-3 p-3 h-100">
+
+                            <div
+                                class="d-flex align-items-center mb-3"
+                            >
+
+                                <span
+                                    class="badge rounded-pill bg-success me-2"
+                                >
+                                    4
+                                </span>
+
+
+                                <strong class="small">
+                                    Pulihkan
+                                </strong>
+
+                            </div>
+
+
+                            <p class="small text-muted mb-0">
+
+                                Kategori yang dinonaktifkan
+                                dapat dipulihkan kembali.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    {{-- INFORMASI --}}
+
+    <div class="col-md-4">
+
+        <div class="card border-0 shadow-sm h-100">
+
+            <div class="card-body p-4">
+
+
+                <h6 class="fw-bold text-primary mb-3">
+
+                    <i
+                        class="bi bi-info-circle me-2"
+                    ></i>
+
+                    Informasi
+
+                </h6>
+
+
+                <p class="small text-muted mb-0">
+
+                    Kategori yang dinonaktifkan tidak dapat digunakan
+                    pada dokumen baru.
+
+                    Namun dokumen lama tetap aman dan masih menggunakan
+                    kategori tersebut.
+
+                    Kategori juga dapat dikembalikan melalui menu
+                    <strong>Kategori Terhapus</strong>.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+{{-- =========================================================
+     MODAL EDIT KATEGORI
+========================================================= --}}
 
 @foreach ($kategoris as $kategori)
 
-<div class="modal fade"
-     id="modalEdit{{ $kategori->id }}"
-     tabindex="-1"
-     aria-hidden="true">
+
+<div
+    class="modal fade"
+    id="modalEdit{{ $kategori->id }}"
+    tabindex="-1"
+    aria-hidden="true"
+>
+
 
     <div class="modal-dialog modal-dialog-centered">
 
         <div class="modal-content border-0 shadow">
 
+
             <div class="modal-header">
 
                 <h5 class="modal-title fw-bold">
+
                     Edit Kategori
+
                 </h5>
 
-                <button type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal">
-                </button>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                ></button>
 
             </div>
 
 
-            <form action="{{ route('kategori.update', $kategori) }}"
-                  method="POST">
+
+            <form
+                action="{{ route('kategori.update', $kategori) }}"
+                method="POST"
+            >
 
                 @csrf
+
                 @method('PUT')
+
 
                 <div class="modal-body">
 
+
                     {{-- NAMA --}}
+
                     <div class="mb-3">
 
-                        <label class="form-label fw-semibold">
+                        <label
+                            class="form-label fw-semibold"
+                        >
+
                             Nama Kategori
+
                         </label>
 
-                        <input type="text"
-                               name="nama"
-                               class="form-control"
-                               value="{{ $kategori->nama }}"
-                               required>
+
+                        <input
+                            type="text"
+                            name="nama"
+                            class="form-control"
+                            value="{{ $kategori->nama }}"
+                            required
+                        >
 
                     </div>
+
 
 
                     {{-- ICON --}}
+
                     <div class="mb-3">
 
-                        <label class="form-label fw-semibold">
+                        <label
+                            class="form-label fw-semibold"
+                        >
+
                             Icon
+
                         </label>
 
-                        <input type="text"
-                               name="icon"
-                               class="form-control"
-                               value="{{ $kategori->icon }}"
-                               placeholder="Contoh: bi-folder-fill">
+
+                        <input
+                            type="text"
+                            name="icon"
+                            class="form-control"
+                            value="{{ $kategori->icon }}"
+                            placeholder="Contoh: bi-folder-fill"
+                        >
 
                     </div>
 
 
+
                     {{-- WARNA --}}
+
                     <div class="mb-3">
 
-                        <label class="form-label fw-semibold">
+                        <label
+                            class="form-label fw-semibold"
+                        >
+
                             Warna
+
                         </label>
+
 
                         @php
 
                             $warnaTersedia = [
-                                'primary'   => 'Navy',
-                                'warning'   => 'Kuning',
-                                'info'      => 'Biru Muda',
-                                'secondary' => 'Abu-abu',
-                                'success'   => 'Hijau',
-                                'danger'    => 'Merah',
-                                'purple'    => 'Ungu',
-                                'pink'      => 'Pink',
-                                'teal'      => 'Teal',
-                                'orange'    => 'Orange',
-                                'indigo'    => 'Indigo',
-                                'cyan'      => 'Cyan',
+
+                                'primary' =>
+                                    'Navy',
+
+                                'warning' =>
+                                    'Kuning',
+
+                                'info' =>
+                                    'Biru Muda',
+
+                                'secondary' =>
+                                    'Abu-abu',
+
+                                'success' =>
+                                    'Hijau',
+
+                                'danger' =>
+                                    'Merah',
+
+                                'purple' =>
+                                    'Ungu',
+
+                                'pink' =>
+                                    'Pink',
+
+                                'teal' =>
+                                    'Teal',
+
+                                'orange' =>
+                                    'Orange',
+
+                                'indigo' =>
+                                    'Indigo',
+
+                                'cyan' =>
+                                    'Cyan',
+
                             ];
 
+
                             $warnaTerpakai = $kategoris
-                                ->where('id', '!=', $kategori->id)
+
+                                ->where(
+                                    'id',
+                                    '!=',
+                                    $kategori->id
+                                )
+
                                 ->pluck('warna')
+
                                 ->filter()
+
                                 ->toArray();
 
                         @endphp
 
 
-                        <select name="warna"
-                                class="form-select">
+                        <select
+                            name="warna"
+                            class="form-select"
+                        >
 
-                            @foreach ($warnaTersedia as $value => $label)
+                            @foreach (
+                                $warnaTersedia
+                                as $value => $label
+                            )
 
-                                <option value="{{ $value }}"
+                                <option
+                                    value="{{ $value }}"
                                     {{ $kategori->warna === $value ? 'selected' : '' }}
-                                    {{ in_array($value, $warnaTerpakai) ? 'disabled' : '' }}>
+                                    {{ in_array($value, $warnaTerpakai) ? 'disabled' : '' }}
+                                >
 
                                     {{ $label }}
 
-                                    @if (in_array($value, $warnaTerpakai))
-                                        — sudah digunakan
+
+                                    @if (
+                                        in_array(
+                                            $value,
+                                            $warnaTerpakai
+                                        )
+                                    )
+
+                                        (sudah digunakan)
+
                                     @endif
 
                                 </option>
@@ -893,35 +2343,40 @@
 
                         </select>
 
-                        <small class="text-muted">
-                            Warna yang sudah digunakan kategori lain tidak dapat dipilih.
-                        </small>
-
                     </div>
 
                 </div>
 
 
-                {{-- FOOTER --}}
+
                 <div class="modal-footer">
 
-                    <button type="button"
-                            class="btn btn-light"
-                            data-bs-dismiss="modal">
+
+                    <button
+                        type="button"
+                        class="btn btn-light"
+                        data-bs-dismiss="modal"
+                    >
 
                         Batal
 
                     </button>
 
-                    <button type="submit"
-                            class="btn btn-primary">
 
-                        <i class="bi bi-check-lg me-1"></i>
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+
+                        <i
+                            class="bi bi-check-lg me-1"
+                        ></i>
 
                         Simpan Perubahan
 
                     </button>
 
+
                 </div>
 
             </form>
@@ -931,95 +2386,192 @@
     </div>
 
 </div>
+
 
 @endforeach
 
-{{-- MODAL TAMBAH KATEGORI --}}
-<div class="modal fade" id="modalTambahKategori" tabindex="-1">
+
+
+{{-- =========================================================
+     MODAL TAMBAH KATEGORI
+========================================================= --}}
+
+<div
+    class="modal fade"
+    id="modalTambahKategori"
+    tabindex="-1"
+    aria-labelledby="modalTambahKategoriLabel"
+    aria-hidden="true"
+>
+
+
     <div class="modal-dialog modal-dialog-centered">
+
         <div class="modal-content border-0 shadow">
 
+
             <div class="modal-header">
-                <h5 class="modal-title fw-bold">
+
+
+                <h5
+                    class="modal-title fw-bold"
+                    id="modalTambahKategoriLabel"
+                >
+
                     Tambah Kategori
+
                 </h5>
 
-                <button type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal">
-                </button>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+
+
             </div>
 
-            <form action="{{ route('kategori.store') }}" method="POST">
+
+
+            <form
+                action="{{ route('kategori.store') }}"
+                method="POST"
+            >
+
                 @csrf
+
 
                 <div class="modal-body">
 
+
+                    {{-- NAMA --}}
+
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">
+
+                        <label
+                            class="form-label fw-semibold"
+                        >
+
                             Nama Kategori
+
                         </label>
 
-                        <input type="text"
-                               name="nama"
-                               class="form-control"
-                               placeholder="Masukkan nama kategori"
-                               required>
+
+                        <input
+                            type="text"
+                            name="nama"
+                            class="form-control"
+                            placeholder="Masukkan nama kategori"
+                            required
+                        >
+
                     </div>
 
+
+
+                    {{-- ICON --}}
+
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">
+
+                        <label
+                            class="form-label fw-semibold"
+                        >
+
                             Icon
+
                         </label>
 
-                        <input type="text"
-                               name="icon"
-                               class="form-control"
-                               placeholder="Contoh: bi-folder-fill">
+
+                        <input
+                            type="text"
+                            name="icon"
+                            class="form-control"
+                            placeholder="Contoh: bi-folder-fill"
+                        >
+
                     </div>
 
-                    <div class="mb-3">
-    <label class="form-label fw-semibold">
-        Warna
-    </label>
 
-    <div class="form-control bg-light text-muted">
-        <i class="bi bi-magic me-1"></i>
-        Warna akan dipilih otomatis oleh sistem
-    </div>
-</div>
+
+                    {{-- WARNA --}}
+
+                    <div class="mb-3">
+
+                        <label
+                            class="form-label fw-semibold"
+                        >
+
+                            Warna
+
+                        </label>
+
+
+                        <div
+                            class="form-control bg-light text-muted"
+                        >
+
+                            <i
+                                class="bi bi-magic me-1"
+                            ></i>
+
+                            Warna akan dipilih otomatis oleh sistem
+
+                        </div>
+
+                    </div>
 
                 </div>
 
+
+
                 <div class="modal-footer">
 
-                    <button type="button"
-                            class="btn btn-light"
-                            data-bs-dismiss="modal">
+
+                    <button
+                        type="button"
+                        class="btn btn-light"
+                        data-bs-dismiss="modal"
+                    >
+
                         Batal
+
                     </button>
 
-                    <button type="submit"
-                            class="btn btn-primary">
-                        <i class="bi bi-check-lg me-1"></i>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+
+                        <i
+                            class="bi bi-check-lg me-1"
+                        ></i>
+
                         Simpan Kategori
+
                     </button>
+
 
                 </div>
 
             </form>
 
         </div>
+
     </div>
+
 </div>
 
 
 @endsection
 
 
-{{-- ================================================= --}}
-{{-- JAVASCRIPT SEARCH + FILTER --}}
-{{-- ================================================= --}}
+
+{{-- =========================================================
+     JAVASCRIPT SEARCH + FILTER
+========================================================= --}}
 
 @push('scripts')
 
@@ -1027,21 +2579,40 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    const searchInput = document.getElementById('searchKategori');
-    const filterWarna = document.getElementById('filterWarna');
-    const rows = document.querySelectorAll('.kategori-row');
+    /* =====================================================
+       SEARCH + FILTER KATEGORI
+    ===================================================== */
+
+    const searchInput =
+        document.getElementById('searchKategori');
+
+    const filterWarna =
+        document.getElementById('filterWarna');
+
+    const rows =
+        document.querySelectorAll('.kategori-row');
 
 
     function filterKategori() {
 
-        const search = searchInput.value.toLowerCase();
-        const warna = filterWarna.value;
+        const search =
+            searchInput
+                ? searchInput.value.toLowerCase().trim()
+                : '';
+
+        const warna =
+            filterWarna
+                ? filterWarna.value
+                : '';
 
 
         rows.forEach(function (row) {
 
-            const nama = row.dataset.nama;
-            const rowWarna = row.dataset.warna;
+            const nama =
+                row.dataset.nama || '';
+
+            const rowWarna =
+                row.dataset.warna || '';
 
 
             const cocokNama =
@@ -1061,16 +2632,101 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    searchInput.addEventListener(
-        'input',
-        filterKategori
-    );
+    if (searchInput) {
+
+        searchInput.addEventListener(
+            'input',
+            filterKategori
+        );
+
+    }
 
 
-    filterWarna.addEventListener(
-        'change',
-        filterKategori
-    );
+    if (filterWarna) {
+
+        filterWarna.addEventListener(
+            'change',
+            filterKategori
+        );
+
+    }
+
+
+
+    /* =====================================================
+       ANIMASI ANGKA KATEGORI AKTIF
+    ===================================================== */
+
+    const counter =
+        document.querySelector('.kategori-hero-number');
+
+
+    if (counter) {
+
+        const target =
+            parseInt(
+                counter.dataset.count,
+                10
+            ) || 0;
+
+
+        const duration = 1000;
+
+        const startTime =
+            performance.now();
+
+
+        function animateCounter(currentTime) {
+
+            const elapsed =
+                currentTime - startTime;
+
+
+            const progress =
+                Math.min(
+                    elapsed / duration,
+                    1
+                );
+
+
+            /*
+             * Easing supaya gerakannya
+             * halus dan tidak kaku.
+             */
+            const eased =
+                1 - Math.pow(
+                    1 - progress,
+                    3
+                );
+
+
+            counter.textContent =
+                Math.floor(
+                    eased * target
+                );
+
+
+            if (progress < 1) {
+
+                requestAnimationFrame(
+                    animateCounter
+                );
+
+            } else {
+
+                counter.textContent =
+                    target;
+
+            }
+
+        }
+
+
+        requestAnimationFrame(
+            animateCounter
+        );
+
+    }
 
 });
 
