@@ -603,17 +603,13 @@
 
                                 <div>
 
-                                    <strong>Kategori yang dinonaktifkan</strong>
+                                   <strong>Kategori Dinonaktifkan</strong>
 
-                                    <div class="small mt-1">
-
-                                        Kategori yang dinonaktifkan tidak dapat digunakan
-                                        untuk dokumen baru, tetapi dokumen lama tetap aman.
-
-                                        Kategori dapat dipulihkan kapan saja.
-
-                                    </div>
-
+<div class="small mt-1">
+    Kategori yang dinonaktifkan tidak dapat digunakan untuk dokumen baru.
+    Dokumen yang sudah menggunakan kategori tersebut tetap aman dan tidak terpengaruh.
+    Kategori dapat dipulihkan kembali melalui menu <strong>Kategori Terhapus</strong>.
+</div>
                                 </div>
 
                             </div>
@@ -691,52 +687,51 @@
 
                                         </td>
 
-                                        <td class="text-end">
+
+<td class="text-end pe-4">
+
+    <div class="kategori-trash-actions">
+
+        {{-- PULIHKAN --}}
+        <form action="{{ route('kategori.restore', $kategori->id) }}"
+              method="POST">
+
+            @csrf
+            @method('PATCH')
+
+            <button type="submit"
+                    class="kategori-btn kategori-btn-restore"
+                    title="Pulihkan">
+
+                <i class="bi bi-arrow-counterclockwise"></i>
+
+            </button>
+
+        </form>
 
 
-                                            {{-- RESTORE --}}
+        {{-- HAPUS PERMANEN --}}
+        <form action="{{ route('kategori.forceDelete', $kategori->id) }}"
+              method="POST"
+              onsubmit="return confirm('Hapus kategori ini secara permanen? Data yang sudah dihapus tidak dapat dikembalikan.')">
 
-                                            <form action="{{ route('kategori.restore', $kategori->id) }}"
-                                                  method="POST"
-                                                  class="d-inline">
+            @csrf
+            @method('DELETE')
 
-                                                @csrf
+            <button type="submit"
+                    class="kategori-btn kategori-btn-delete"
+                    title="Hapus permanen">
 
-                                                @method('PATCH')
+                <i class="bi bi-trash3"></i>
 
-                                                <button type="submit"
-                                                        class="btn btn-sm btn-outline-success">
+            </button>
 
-                                                    <i class="bi bi-arrow-counterclockwise me-1"></i>
+        </form>
 
-                                                    Pulihkan
+    </div>
 
-                                                </button>
+</td>
 
-                                            </form>
-
-
-                                            {{-- FORCE DELETE --}}
-
-                                            <form action="{{ route('kategori.forceDelete', $kategori->id) }}"
-                                                  method="POST"
-                                                  class="d-inline"
-                                                  onsubmit="return confirm('Hapus kategori ini secara permanen? Data yang sudah dihapus tidak dapat dikembalikan.')">
-
-                                                @csrf
-
-                                                @method('DELETE')
-
-                                                <button type="submit"
-                                                        class="btn btn-sm btn-outline-danger">
-
-                                                    <i class="bi bi-trash3"></i>
-
-                                                </button>
-
-                                            </form>
-
-                                        </td>
 
                                     </tr>
 
@@ -774,194 +769,6 @@
     </div>
 
 
-    {{-- ============================= --}}
-    {{-- INFORMASI --}}
-    {{-- ============================= --}}
-
-    <div class="row g-3 mt-3">
-
-        <div class="col-md-8">
-
-            <div class="card border-0 shadow-sm h-100">
-
-                <div class="card-body p-4">
-
-                    <h5 class="fw-bold mb-4">
-                        <i class="bi bi-diagram-3 me-2 text-primary"></i>
-                        Alur Kelola Kategori
-                    </h5>
-
-
-                    <div class="row g-3">
-
-
-                        {{-- TAMBAH --}}
-
-                        <div class="col-md-3">
-
-                            <div class="border rounded-3 p-3 h-100">
-
-                                <div class="d-flex align-items-center mb-3">
-
-                                    <span class="badge rounded-pill bg-primary me-2">
-                                        1
-                                    </span>
-
-                                    <strong class="small">
-                                        Tambah
-                                    </strong>
-
-                                </div>
-
-                                <p class="small text-muted mb-0">
-
-                                    Tambahkan kategori dokumen baru
-                                    melalui tombol <strong>Tambah Kategori</strong>.
-
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        {{-- EDIT --}}
-
-                        <div class="col-md-3">
-
-                            <div class="border rounded-3 p-3 h-100">
-
-                                <div class="d-flex align-items-center mb-3">
-
-                                    <span class="badge rounded-pill bg-primary me-2">
-                                        2
-                                    </span>
-
-                                    <strong class="small">
-                                        Edit
-                                    </strong>
-
-                                </div>
-
-                                <p class="small text-muted mb-0">
-
-                                    Ubah nama, icon, atau warna
-                                    kategori yang sudah tersedia.
-
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        {{-- NONAKTIFKAN --}}
-
-                        <div class="col-md-3">
-
-                            <div class="border rounded-3 p-3 h-100">
-
-                                <div class="d-flex align-items-center mb-3">
-
-                                    <span class="badge rounded-pill bg-warning text-dark me-2">
-                                        3
-                                    </span>
-
-                                    <strong class="small">
-                                        Nonaktifkan
-                                    </strong>
-
-                                </div>
-
-                                <p class="small text-muted mb-0">
-
-                                    Kategori tidak digunakan untuk
-                                    dokumen baru, tetapi data tetap aman.
-
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        {{-- RESTORE --}}
-
-                        <div class="col-md-3">
-
-                            <div class="border rounded-3 p-3 h-100">
-
-                                <div class="d-flex align-items-center mb-3">
-
-                                    <span class="badge rounded-pill bg-success me-2">
-                                        4
-                                    </span>
-
-                                    <strong class="small">
-                                        Pulihkan
-                                    </strong>
-
-                                </div>
-
-                                <p class="small text-muted mb-0">
-
-                                    Kategori yang dinonaktifkan
-                                    dapat dipulihkan kembali.
-
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        {{-- INFO --}}
-
-        <div class="col-md-4">
-
-            <div class="card border-0 shadow-sm h-100">
-
-                <div class="card-body p-4">
-
-                    <h6 class="fw-bold text-primary mb-3">
-
-                        <i class="bi bi-info-circle me-2"></i>
-
-                        Informasi
-
-                    </h6>
-
-                    <p class="small text-muted mb-0">
-
-                        Kategori yang dinonaktifkan tidak dapat digunakan
-                        pada dokumen baru.
-
-                        Namun dokumen lama tetap aman dan masih menggunakan
-                        kategori tersebut.
-
-                        Kategori juga dapat dikembalikan melalui menu
-                        <strong>Kategori Terhapus</strong>.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
 
 {{-- ================================================= --}}
 {{-- MODAL EDIT KATEGORI --}}
@@ -996,11 +803,11 @@
                   method="POST">
 
                 @csrf
-
                 @method('PUT')
 
                 <div class="modal-body">
 
+                    {{-- NAMA --}}
                     <div class="mb-3">
 
                         <label class="form-label fw-semibold">
@@ -1016,6 +823,7 @@
                     </div>
 
 
+                    {{-- ICON --}}
                     <div class="mb-3">
 
                         <label class="form-label fw-semibold">
@@ -1025,78 +833,76 @@
                         <input type="text"
                                name="icon"
                                class="form-control"
-                               value="{{ $kategori->icon }}">
+                               value="{{ $kategori->icon }}"
+                               placeholder="Contoh: bi-folder-fill">
 
                     </div>
 
 
-                    <div>
+                    {{-- WARNA --}}
+                    <div class="mb-3">
 
                         <label class="form-label fw-semibold">
                             Warna
                         </label>
 
- 
-@php
-    $warnaTersedia = [
-        'primary'   => 'Navy',
-        'warning'   => 'Kuning',
-        'info'      => 'Biru Muda',
-        'secondary' => 'Abu-abu',
-        'success'   => 'Hijau',
-        'danger'    => 'Merah',
-        'purple'    => 'Ungu',
-        'pink'      => 'Pink',
-        'teal'      => 'Teal',
-        'orange'    => 'Orange',
-        'indigo'    => 'Indigo',
-        'cyan'      => 'Cyan',
-    ];
+                        @php
 
-    $warnaTerpakai = $kategoris
-        ->where('id', '!=', $kategori->id)
-        ->pluck('warna')
-        ->filter()
-        ->toArray();
-@endphp
+                            $warnaTersedia = [
+                                'primary'   => 'Navy',
+                                'warning'   => 'Kuning',
+                                'info'      => 'Biru Muda',
+                                'secondary' => 'Abu-abu',
+                                'success'   => 'Hijau',
+                                'danger'    => 'Merah',
+                                'purple'    => 'Ungu',
+                                'pink'      => 'Pink',
+                                'teal'      => 'Teal',
+                                'orange'    => 'Orange',
+                                'indigo'    => 'Indigo',
+                                'cyan'      => 'Cyan',
+                            ];
 
-<select name="warna" class="form-select">
+                            $warnaTerpakai = $kategoris
+                                ->where('id', '!=', $kategori->id)
+                                ->pluck('warna')
+                                ->filter()
+                                ->toArray();
 
-    @foreach ($warnaTersedia as $value => $label)
+                        @endphp
 
-        <option value="{{ $value }}"
-            {{ $kategori->warna === $value ? 'selected' : '' }}
-            {{ in_array($value, $warnaTerpakai) ? 'disabled' : '' }}>
 
-            {{ $label }}
+                        <select name="warna"
+                                class="form-select">
 
-            @if (in_array($value, $warnaTerpakai))
-                (sudah digunakan)
-            @endif
+                            @foreach ($warnaTersedia as $value => $label)
 
-        </option>
+                                <option value="{{ $value }}"
+                                    {{ $kategori->warna === $value ? 'selected' : '' }}
+                                    {{ in_array($value, $warnaTerpakai) ? 'disabled' : '' }}>
 
-    @endforeach
+                                    {{ $label }}
 
-</select>
+                                    @if (in_array($value, $warnaTerpakai))
+                                        — sudah digunakan
+                                    @endif
 
-        <option value="{{ $value }}"
-            {{ $kategori->warna === $value ? 'selected' : '' }}>
+                                </option>
 
-            {{ $label }}
+                            @endforeach
 
-        </option>
+                        </select>
 
-    @endforeach
-
-</select>
-
+                        <small class="text-muted">
+                            Warna yang sudah digunakan kategori lain tidak dapat dipilih.
+                        </small>
 
                     </div>
 
                 </div>
 
 
+                {{-- FOOTER --}}
                 <div class="modal-footer">
 
                     <button type="button"
@@ -1126,7 +932,7 @@
 
 </div>
 
-</div>
+@endforeach
 
 {{-- MODAL TAMBAH KATEGORI --}}
 <div class="modal fade" id="modalTambahKategori" tabindex="-1">

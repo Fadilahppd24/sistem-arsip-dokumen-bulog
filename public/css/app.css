@@ -4893,3 +4893,79 @@ body.dark-mode .export-hero::before,
 body.dark-mode .export-hero::after {
     border-color: rgba(255,255,255,.08) !important;
 }
+
+
+/* =========================================================
+   AKSI KATEGORI TERHAPUS
+========================================================= */
+
+.kategori-trash-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.kategori-trash-actions form {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* TOMBOL BULAT */
+
+.kategori-btn {
+    width: 40px;
+    height: 40px;
+
+    padding: 0;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    font-size: 18px;
+    line-height: 1;
+
+    transition: all .2s ease;
+}
+
+
+/* PULIHKAN */
+
+.kategori-btn-restore {
+    border: 2px solid #198754;
+    color: #198754;
+}
+
+.kategori-btn-restore:hover {
+    background: #198754;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+
+/* HAPUS */
+
+.kategori-btn-delete {
+    border: 2px solid #dc3545;
+    color: #dc3545;
+}
+
+.kategori-btn-delete:hover {
+    background: #dc3545;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+
+/* ICON */
+
+.kategori-btn i {
+    font-size: 18px;
+    line-height: 1;
+}
