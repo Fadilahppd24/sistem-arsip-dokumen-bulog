@@ -721,6 +721,190 @@
 }
 
 
+
+/* ================= DARK MODE KATEGORI ================= */
+
+body.dark-mode .kategori-hero {
+    border-color:#334155;
+    background:linear-gradient(110deg,#202b3d 0%,#263449 48%,#202b3d 100%);
+}
+body.dark-mode .kategori-hero::after { background:rgba(148,163,184,.16); }
+body.dark-mode .kategori-hero h2 { color:#f8fafc !important; }
+body.dark-mode .kategori-hero p { color:#9fb0c7 !important; }
+body.dark-mode .kategori-hero-number { color:#60a5fa; }
+body.dark-mode .kategori-hero-label { color:#91a1b7; }
+
+body.dark-mode .kategori-hero-icon {
+    background:#243b5b;
+    box-shadow:0 7px 18px rgba(0,0,0,.25);
+}
+
+body.dark-mode .card,
+body.dark-mode .card-body {
+    background:#1f2b3d;
+    color:#e5edf7;
+    border-color:#334155;
+}
+
+body.dark-mode .nav-tabs { border-color:#334155 !important; }
+body.dark-mode .nav-tabs .nav-link {
+    color:#9fb0c7;
+    background:transparent;
+    border-color:transparent;
+}
+body.dark-mode .nav-tabs .nav-link.active {
+    color:#f8fafc;
+    background:#1f2b3d;
+    border-color:#334155 #334155 #1f2b3d;
+}
+
+body.dark-mode .input-group-text,
+body.dark-mode .form-control,
+body.dark-mode .form-select {
+    background:#111827 !important;
+    border-color:#334155 !important;
+    color:#e5edf7 !important;
+}
+body.dark-mode .form-control::placeholder { color:#718096 !important; }
+body.dark-mode .form-select { color-scheme:dark; }
+body.dark-mode .form-select option {
+    background:#111827;
+    color:#e5edf7;
+}
+
+body.dark-mode .table {
+    --bs-table-bg:#1f2b3d;
+    --bs-table-color:#e5edf7;
+    --bs-table-border-color:#334155;
+    color:#e5edf7;
+    background:#1f2b3d;
+}
+body.dark-mode .table > :not(caption) > * > * {
+    background:#1f2b3d;
+    color:#e5edf7;
+    border-bottom-color:#334155;
+}
+body.dark-mode .table thead,
+body.dark-mode .table-light,
+body.dark-mode .table-light > * {
+    background:#111827 !important;
+    color:#aebed2 !important;
+}
+body.dark-mode .table-hover > tbody > tr:hover > * {
+    background:#263449 !important;
+    color:#f8fafc;
+}
+body.dark-mode .table .text-muted,
+body.dark-mode .table small.text-muted {
+    color:#91a1b7 !important;
+}
+
+body.dark-mode .fw-semibold { color:#f1f5f9; }
+body.dark-mode .warna-label { color:#e5edf7; }
+
+body.dark-mode .badge.bg-light {
+    background:#334155 !important;
+    color:#e5edf7 !important;
+    border-color:#475569 !important;
+}
+body.dark-mode .badge.bg-success-subtle {
+    background:rgba(34,160,90,.18) !important;
+    color:#6ee7a0 !important;
+    border-color:rgba(34,160,90,.35) !important;
+}
+
+body.dark-mode .btn-light {
+    background:#263449 !important;
+    border-color:#475569 !important;
+    color:#e5edf7 !important;
+}
+body.dark-mode .btn-light:hover {
+    background:#334155 !important;
+    color:#fff !important;
+}
+
+body.dark-mode .btn-outline-success { color:#4ade80; border-color:#22c55e; }
+body.dark-mode .btn-outline-success:hover { background:#22c55e; color:#0f172a; }
+body.dark-mode .btn-outline-danger { color:#f87171; border-color:#ef4444; }
+body.dark-mode .btn-outline-danger:hover { background:#ef4444; color:#fff; }
+
+body.dark-mode .border-top,
+body.dark-mode .border-bottom { border-color:#334155 !important; }
+
+body.dark-mode .alert-info {
+    background:rgba(37,99,235,.14) !important;
+    color:#bfdbfe !important;
+    border:1px solid rgba(96,165,250,.22) !important;
+}
+body.dark-mode .alert-info .small { color:#9fb0c7 !important; }
+
+body.dark-mode .alert-success {
+    background:rgba(34,160,90,.15) !important;
+    color:#86efac !important;
+}
+body.dark-mode .alert-danger {
+    background:rgba(220,53,69,.15) !important;
+    color:#fca5a5 !important;
+}
+
+body.dark-mode .modal-content,
+body.dark-mode .confirm-modal {
+    background:#1f2b3d;
+    color:#e5edf7;
+    border:1px solid #334155 !important;
+}
+body.dark-mode .modal-header,
+body.dark-mode .modal-footer { border-color:#334155; }
+body.dark-mode .modal-title,
+body.dark-mode .modal-content .form-label { color:#f8fafc; }
+body.dark-mode .modal-content .text-muted { color:#94a3b8 !important; }
+body.dark-mode .modal-content .bg-light {
+    background:#111827 !important;
+    color:#94a3b8 !important;
+    border-color:#334155 !important;
+}
+body.dark-mode .modal-content .btn-close {
+    filter:invert(1) grayscale(100%) brightness(200%);
+}
+
+body.dark-mode .confirm-warning {
+    background:#2b3342 !important;
+    color:#cbd5e1;
+    border-color:#475569 !important;
+}
+
+body.dark-mode .container-fluid > .mb-4 .text-muted {
+    color:#94a3b8 !important;
+}
+body.dark-mode .container-fluid > .mb-4 a {
+    color:#60a5fa !important;
+}
+
+body.dark-mode .text-center.py-5.text-muted {
+    color:#94a3b8 !important;
+}
+
+body.dark-mode .kategori-icon-box.kategori-primary { background:rgba(29,78,216,.18); }
+body.dark-mode .kategori-icon-box.kategori-warning { background:rgba(245,158,11,.16); }
+body.dark-mode .kategori-icon-box.kategori-info { background:rgba(56,165,229,.16); }
+body.dark-mode .kategori-icon-box.kategori-secondary { background:rgba(107,114,128,.18); }
+body.dark-mode .kategori-icon-box.kategori-success { background:rgba(25,135,84,.18); }
+body.dark-mode .kategori-icon-box.kategori-danger { background:rgba(220,53,69,.18); }
+body.dark-mode .kategori-icon-box.kategori-purple { background:rgba(124,58,237,.18); }
+body.dark-mode .kategori-icon-box.kategori-pink { background:rgba(236,72,153,.18); }
+body.dark-mode .kategori-icon-box.kategori-teal { background:rgba(15,118,110,.18); }
+body.dark-mode .kategori-icon-box.kategori-orange { background:rgba(234,88,12,.18); }
+body.dark-mode .kategori-icon-box.kategori-indigo { background:rgba(79,70,229,.18); }
+body.dark-mode .kategori-icon-box.kategori-cyan { background:rgba(8,145,178,.18); }
+
+body.dark-mode .d-inline-flex .btn.btn-light.border {
+    background:#263449 !important;
+    border-color:#475569 !important;
+}
+body.dark-mode .d-inline-flex .btn.btn-light.border i { color:#dbeafe; }
+body.dark-mode .d-inline-flex .btn.btn-light.border.text-danger i { color:#f87171; }
+
+
 /* =========================================================
    RESPONSIVE
 ========================================================= */
@@ -921,7 +1105,7 @@
         <div class="kategori-hero-stat">
 
 
-            <div
+           <div
     class="kategori-hero-number"
     data-count="{{ $kategoris->count() }}"
 >
@@ -1782,7 +1966,7 @@
                                     <td class="text-end">
 
 
-  {{-- RESTORE --}}
+{{-- RESTORE --}}
 <form action="{{ route('kategori.restore', $kategori->id) }}"
       method="POST"
       class="d-inline-flex">
@@ -1800,26 +1984,24 @@
 
 </form>
 
+{{-- HAPUS PERMANEN --}}
+<form action="{{ route('kategori.forceDelete', $kategori->id) }}"
+      method="POST"
+      class="d-inline form-hapus-permanen"
+      data-nama="{{ $kategori->nama }}">
 
+    @csrf
+    @method('DELETE')
 
+    <button type="submit"
+            class="btn btn-sm btn-outline-danger"
+            title="Hapus permanen">
 
-                                            @csrf
+        <i class="bi bi-trash3"></i>
 
-                                            @method('DELETE')
+    </button>
 
-
-                                            <button
-                                                type="submit"
-                                                class="btn btn-sm btn-outline-danger"
-                                            >
-
-                                                <i
-                                                    class="bi bi-trash3"
-                                                ></i>
-
-                                            </button>
-
-                                        </form>
+</form>
 
                                     </td>
 
@@ -2393,21 +2575,63 @@
 @push('scripts')
 
 <script>
-
 document.addEventListener('DOMContentLoaded', function () {
 
-    const modalElement = document.getElementById('modalKonfirmasi');
+    /* =====================================================
+       ANIMASI JUMLAH KATEGORI
+       0 → 1 → 2 → 3 → 4
+    ===================================================== */
 
-    const modal = new bootstrap.Modal(modalElement);
+    const kategoriCounter =
+        document.querySelector('.kategori-hero-number');
+
+    if (kategoriCounter) {
+
+        const target = parseInt(
+            kategoriCounter.dataset.count || 0,
+            10
+        );
+
+        let current = 0;
+
+        kategoriCounter.textContent = current;
+
+        if (target > 0) {
+
+            function countUp() {
+
+                current++;
+
+                kategoriCounter.textContent = current;
+
+                if (current < target) {
+
+                    setTimeout(countUp, 150);
+
+                }
+
+            }
+
+            setTimeout(countUp, 150);
+        }
+    }
+
+
+    /* =====================================================
+       MODAL KONFIRMASI
+    ===================================================== */
+
+    const modalElement =
+        document.getElementById('modalKonfirmasi');
+
+    const modal =
+        new bootstrap.Modal(modalElement);
 
     const confirmTitle =
         document.getElementById('confirmTitle');
 
     const confirmMessage =
         document.getElementById('confirmMessage');
-
-    const confirmWarning =
-        document.getElementById('confirmWarning');
 
     const confirmWarningText =
         document.getElementById('confirmWarningText');
@@ -2421,9 +2645,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let formTarget = null;
 
 
-    /* =====================================================
-       NONAKTIFKAN KATEGORI
-    ===================================================== */
+    /* NONAKTIFKAN KATEGORI */
 
     document.querySelectorAll('.form-nonaktifkan')
         .forEach(function (form) {
@@ -2436,7 +2658,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 const nama =
                     form.dataset.nama;
-
 
                 confirmTitle.textContent =
                     'Nonaktifkan kategori?';
@@ -2474,9 +2695,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
 
-    /* =====================================================
-       HAPUS PERMANEN
-    ===================================================== */
+    /* HAPUS PERMANEN */
 
     document.querySelectorAll('.form-hapus-permanen')
         .forEach(function (form) {
@@ -2486,7 +2705,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 e.preventDefault();
 
                 formTarget = form;
-
 
                 confirmTitle.textContent =
                     'Hapus kategori secara permanen?';
@@ -2522,9 +2740,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
 
-    /* =====================================================
-       TOMBOL KONFIRMASI
-    ===================================================== */
+    /* TOMBOL KONFIRMASI */
 
     confirmButton.addEventListener('click', function () {
 
@@ -2539,18 +2755,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-    /* =====================================================
-       RESET
-    ===================================================== */
+    /* RESET */
 
-    modalElement.addEventListener('hidden.bs.modal', function () {
+    modalElement.addEventListener(
+        'hidden.bs.modal',
+        function () {
 
-        formTarget = null;
+            formTarget = null;
 
-    });
+        }
+    );
 
 });
-
 </script>
 
 @endpush

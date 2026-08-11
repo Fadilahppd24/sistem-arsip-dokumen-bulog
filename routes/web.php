@@ -9,6 +9,7 @@ use App\Http\Controllers\BackupController;
 use App\Http\Controllers\AuditLogController;
 use App\Http\Controllers\TrashController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 
 
 Route::redirect('/', '/login');
@@ -21,7 +22,17 @@ Route::middleware('guest')->group(function () {
 
 // ==== Wajib login (Admin & User) ====
 Route::middleware('auth')->group(function () {
-    Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
+     Route::post('/logout', [LoginController::class, 'destroy'])
+        ->name('logout');
+
+         // =================================================
+    // PROFILE
+    // Bisa digunakan Admin maupun User
+    // =================================================
+
+    Route::post('/profile/photo', [ProfileController::class, 'updatePhoto'])
+        ->name('profile.photo.update');
+
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
