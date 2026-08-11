@@ -5,7 +5,7 @@
 <header class="topbar d-flex align-items-center justify-content-between">
 
     {{-- =====================================================
-         LEFT
+        LEFT
     ====================================================== --}}
     <div>
 
@@ -13,22 +13,20 @@
             class="btn btn-sm btn-light d-lg-none"
             type="button"
         >
-
             <i class="bi bi-list fs-5"></i>
-
         </button>
 
     </div>
 
 
     {{-- =====================================================
-         RIGHT
+        RIGHT
     ====================================================== --}}
     <div class="d-flex align-items-center gap-3">
 
 
         {{-- =================================================
-             TANGGAL
+            TANGGAL
         ================================================== --}}
         <div class="date-box">
 
@@ -39,9 +37,8 @@
         </div>
 
 
-
         {{-- =================================================
-             DARK MODE
+            DARK MODE
         ================================================== --}}
         <button
             class="btn btn-sm btn-light"
@@ -58,9 +55,8 @@
         </button>
 
 
-
         {{-- =================================================
-             PROFILE
+            PROFILE
         ================================================== --}}
         <div class="dropdown">
 
@@ -98,7 +94,6 @@
                 </div>
 
 
-
                 {{-- NAMA + ROLE --}}
                 <div class="d-none d-md-block text-start">
 
@@ -125,7 +120,7 @@
 
 
             {{-- =================================================
-                 DROPDOWN PROFILE
+                DROPDOWN PROFILE
             ================================================== --}}
             <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
 
@@ -190,7 +185,7 @@
 
 
                 {{-- =================================================
-                     GANTI FOTO PROFIL
+                    GANTI FOTO PROFIL
                 ================================================== --}}
                 <li>
 
@@ -202,7 +197,6 @@
                     >
 
                         @csrf
-
 
                         <input
                             type="file"
@@ -232,7 +226,46 @@
 
 
                 {{-- =================================================
-                     LOGOUT
+                    HAPUS FOTO PROFIL
+                    HANYA MUNCUL JIKA ADA FOTO
+                ================================================== --}}
+                @if ($user->profile_photo_path)
+
+                    <li>
+
+                        <form
+                            action="{{ route('profile.photo.delete') }}"
+                            method="POST"
+                            id="formHapusFoto"
+                        >
+
+                            @csrf
+
+                            @method('DELETE')
+
+
+                            <button
+                                type="button"
+                                class="dropdown-item text-danger"
+                                id="btnHapusFoto"
+                            >
+
+                                <i class="bi bi-trash3 me-2"></i>
+
+                                Hapus Foto Profil
+
+                            </button>
+
+                        </form>
+
+                    </li>
+
+                @endif
+
+
+
+                {{-- =================================================
+                    LOGOUT
                 ================================================== --}}
                 <li>
 
@@ -267,10 +300,10 @@
 </header>
 
 
-{{-- =========================================================
-     STYLE PROFILE
-========================================================= --}}
 
+{{-- =========================================================
+    STYLE PROFILE
+========================================================= --}}
 <style>
 
 .navbar-avatar-wrapper {
@@ -297,7 +330,9 @@
 }
 
 
-/* DEFAULT HURUF */
+/* =========================================================
+   DEFAULT HURUF
+========================================================= */
 
 .navbar-avatar-wrapper .avatar-circle {
 
@@ -325,7 +360,9 @@
 }
 
 
-/* DROPDOWN */
+/* =========================================================
+   DROPDOWN AVATAR
+========================================================= */
 
 .profile-dropdown-avatar {
 
@@ -339,6 +376,7 @@
     flex-shrink: 0;
 
     border: 2px solid #fff;
+
 }
 
 
@@ -355,6 +393,10 @@
 
 }
 
+
+/* =========================================================
+   DROPDOWN
+========================================================= */
 
 .dropdown-menu {
 
@@ -373,6 +415,10 @@
 
     padding: 9px 10px;
 
+    transition:
+        background-color .15s ease,
+        color .15s ease;
+
 }
 
 
@@ -383,23 +429,36 @@
 }
 
 
+.dropdown-item.text-danger:hover {
+
+    background: #fff1f2;
+
+    color: #dc3545 !important;
+
+}
+
+
 .user-dropdown::after {
 
     margin-left: 2px;
 
 }
 
-
 </style>
 
 
-{{-- =========================================================
-     JAVASCRIPT GANTI FOTO
-========================================================= --}}
 
+{{-- =========================================================
+    JAVASCRIPT PROFILE
+========================================================= --}}
 <script>
 
 document.addEventListener('DOMContentLoaded', function () {
+
+
+    /* =====================================================
+       GANTI FOTO PROFIL
+    ====================================================== */
 
     const btnGantiFoto =
         document.getElementById('btnGantiFoto');
@@ -426,9 +485,44 @@ document.addEventListener('DOMContentLoaded', function () {
 
         profilePhotoInput.addEventListener('change', function () {
 
-            if (this.files.length > 0) {
+            if (this.files && this.files.length > 0) {
 
                 formGantiFoto.submit();
+
+            }
+
+        });
+
+    }
+
+
+
+    /* =====================================================
+       HAPUS FOTO PROFIL
+    ====================================================== */
+
+    const btnHapusFoto =
+        document.getElementById('btnHapusFoto');
+
+    const formHapusFoto =
+        document.getElementById('formHapusFoto');
+
+
+    if (
+        btnHapusFoto &&
+        formHapusFoto
+    ) {
+
+        btnHapusFoto.addEventListener('click', function () {
+
+            const yakin = confirm(
+                'Apakah kamu yakin ingin menghapus foto profil?'
+            );
+
+
+            if (yakin) {
+
+                formHapusFoto.submit();
 
             }
 
