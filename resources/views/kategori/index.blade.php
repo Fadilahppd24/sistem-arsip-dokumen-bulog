@@ -556,9 +556,15 @@
                                         ];
                                     @endphp
 
-                                    <div class="kategori-icon-box {{ $warnaIcon[$kategori->warna] ?? 'kategori-secondary' }}">
-                                        <i class="bi {{ $kategori->icon ?? 'bi-folder-fill' }}"></i>
-                                    </div>
+                                   <div class="kategori-icon-box {{ $warnaIcon[$kategori->warna] ?? 'kategori-secondary' }}">
+    @if ($kategori->icon && str_starts_with($kategori->icon, 'bi-'))
+        <i class="bi {{ $kategori->icon }}"></i>
+    @else
+        <span style="font-size: 20px; line-height: 1;">
+            {{ $kategori->icon ?? '📁' }}
+        </span>
+    @endif
+</div>
                                 </td>
 
                                 <td>
@@ -874,7 +880,13 @@
                                     data-preview="#iconPreviewEdit{{ $kategori->id }}"
                                     data-text="#iconTextEdit{{ $kategori->id }}"
                                     style="height:48px;">
-                                <i class="bi {{ $kategori->icon ?? 'bi-folder-fill' }} fs-5" id="iconPreviewEdit{{ $kategori->id }}"></i>
+@if ($kategori->icon && str_starts_with($kategori->icon, 'bi-'))
+    <i class="bi {{ $kategori->icon }} fs-5"
+       id="iconPreviewEdit{{ $kategori->id }}"></i>
+@else
+    <span class="fs-5"
+          id="iconPreviewEdit{{ $kategori->id }}">{{ $kategori->icon ?? '📁' }}</span>
+@endif
                                 <span id="iconTextEdit{{ $kategori->id }}">{{ $kategori->icon ?? 'Pilih Icon' }}</span>
                                 <i class="bi bi-chevron-down ms-auto"></i>
                             </button>
@@ -1128,8 +1140,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             iconCategories[cat].forEach(function (item) {
 
-  iconCategories[cat].forEach(function (item) {
-
     if (typeof item === 'string') {
 
         html += `
@@ -1161,9 +1171,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 });
-
-});
-
             html += '</div></div>';
         });
 
@@ -1194,8 +1201,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 let catHasMatch = false;
 
                 catEl.querySelectorAll('.icon-picker-option').forEach(function (opt) {
-                    const iconName = opt.dataset.icon.replace('bi-', '').replace(/-/g, ' ');
-                    const match = term === '' || iconName.indexOf(term) !== -1;
+                   const iconName = (
+    (opt.dataset.icon || '') + ' ' +
+    (opt.dataset.name || '')
+).toLowerCase();
+
+const match = term === '' || iconName.indexOf(term) !== -1;
+                   
 
                     opt.style.display = match ? '' : 'none';
 
