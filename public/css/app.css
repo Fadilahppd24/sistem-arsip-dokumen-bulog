@@ -6094,3 +6094,76 @@ body.dark-mode .sampah-breadcrumb span:last-child {
 
 }
 
+
+@keyframes confirmModalIn {
+
+    from {
+        opacity: 0;
+        transform: scale(.94) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+
+}
+
+
+/* =========================================
+   ICON PICKER KATEGORI
+========================================= */
+
+.icon-picker {
+    display: none;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    padding: 15px;
+    background: #fff;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.icon-picker.show {
+    display: block;
+}
+
+.icon-category {
+    margin-bottom: 15px;
+}
+
+.icon-category strong {
+    display: block;
+    margin-bottom: 8px;
+    color: #1d3557;
+    font-size: 13px;
+}
+
+.icon-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.icon-option {
+    width: 44px;
+    height: 44px;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    background: white;
+    font-size: 20px;
+    color: #1d4ed8;
+    cursor: pointer;
+}
+
+.icon-option:hover {
+    background: #e8f1ff;
+    border-color: #1d4ed8;
+}
+
+.icon-option.selected {
+    background: #1d4ed8;
+    color: white;
+    border-color: #1d4ed8;
+}
+
