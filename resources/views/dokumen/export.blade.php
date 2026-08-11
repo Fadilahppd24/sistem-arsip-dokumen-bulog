@@ -8,7 +8,7 @@
 
 /* =========================================================
    EXPORT PAGE
-   FONT DISESUAIKAN DENGAN HALAMAN UPLOAD DOKUMEN
+   FONT DISESUAIKAN DENGAN HALAMAN UPLOAD / KELOLA DOKUMEN
 ========================================================= */
 
 .export-page,
@@ -197,31 +197,34 @@
 
 /* =========================================================
    HERO CONTENT
+   DISESUAIKAN DENGAN KELOLA / UPLOAD DOKUMEN
 ========================================================= */
 
-.ekspor-hero-content {
+.export-hero-content {
     position: relative;
     z-index: 2;
 }
 
 
-.ekspor-hero-content h2 {
-    margin: 0 0 5px;
+.export-hero-content h2 {
+    margin: 0 0 6px;
 
-    color: #18345f;
+    color: #253657;
 
-    font-size: 28px;
+    font-size: 32px;
 
     font-weight: 700;
 
     line-height: 1.25;
+
+    letter-spacing: -0.3px;
 }
 
 
-.ekspor-hero-content p {
+.export-hero-content p {
     margin: 0;
 
-    color: #607797;
+    color: #60708a;
 
     font-size: 15px;
 
@@ -908,13 +911,13 @@
 
 /* =========================================================
    AIR DATEPICKER
-   RAPIIH - TIDAK MENGUBAH DESAIN UTAMA
+   BIRU - PUTIH GRADASI
 ========================================================= */
 
 .air-datepicker {
     width: 310px !important;
 
-    border: 1px solid #e2e8f0 !important;
+    border: 1px solid #dbe5f1 !important;
 
     border-radius: 18px !important;
 
@@ -932,7 +935,7 @@
 
 
 /* =========================================================
-   HEADER
+   HEADER KALENDER
 ========================================================= */
 
 .air-datepicker-nav {
@@ -1573,11 +1576,9 @@ body.dark-mode .air-datepicker-button:hover {
         grid-template-columns: 1fr;
     }
 
-
     .export-preview {
         min-height: 360px;
     }
-
 
     .export-filter-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1596,7 +1597,7 @@ body.dark-mode .air-datepicker-button:hover {
 
 
     .export-hero-content h2 {
-        font-size: 23px;
+        font-size: 25px;
     }
 
 
@@ -1726,7 +1727,7 @@ body.dark-mode .air-datepicker-button:hover {
 
         <div class="export-hero-content">
 
-            <h2>
+            <h2 class="fw-bold">
                 Ekspor Dokumen
             </h2>
 
@@ -1863,9 +1864,7 @@ body.dark-mode .air-datepicker-button:hover {
                     <div class="export-filter-grid">
 
 
-                        {{-- =================================================
-                             TAHUN
-                        ================================================== --}}
+                        {{-- TAHUN --}}
 
                         <div class="export-filter-item">
 
@@ -1911,9 +1910,7 @@ body.dark-mode .air-datepicker-button:hover {
                         </div>
 
 
-                        {{-- =================================================
-                             BULAN
-                        ================================================== --}}
+                        {{-- BULAN --}}
 
                         <div class="export-filter-item">
 
@@ -1966,9 +1963,7 @@ body.dark-mode .air-datepicker-button:hover {
                         </div>
 
 
-                        {{-- =================================================
-                             TANGGAL
-                        ================================================== --}}
+                        {{-- TANGGAL --}}
 
                         <div class="export-filter-item">
 
@@ -1998,9 +1993,7 @@ body.dark-mode .air-datepicker-button:hover {
                         </div>
 
 
-                        {{-- =================================================
-                             RESET
-                        ================================================== --}}
+                        {{-- RESET --}}
 
                         <div class="export-filter-item d-flex align-items-end">
 
