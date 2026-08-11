@@ -34,77 +34,55 @@ class KategoriController extends Controller
      * Warna dipilih otomatis dari 12 warna yang tersedia.
      */
     public function store(Request $request): RedirectResponse
-    {
-        $validated = $request->validate([
-            'nama' => [
-                'required',
-                'string',
-                'max:255',
-                'unique:kategoris,nama',
-            ],
-            'icon' => [
-                'nullable',
-                'string',
-                'max:100',
-            ],
-        ], [
-            'nama.required' => 'Nama kategori wajib diisi.',
-            'nama.unique' => 'Nama kategori sudah digunakan.',
-        ]);
+{
+    $validated = $request->validate([
+        'nama' => [
+            'required',
+            'string',
+            'max:255',
+            'unique:kategoris,nama',
+        ],
+        'icon' => [
+            'nullable',
+            'string',
+            'max:100',
+        ],
+        'warna' => [
+            'required',
+            'in:primary,warning,info,secondary,success,danger,purple,pink,teal,orange,indigo,cyan',
+        ],
+    ], [
+        'nama.required' => 'Nama kategori wajib diisi.',
+        'nama.unique' => 'Nama kategori sudah digunakan.',
+        'warna.required' => 'Silakan pilih warna kategori.',
+    ]);
 
-        // 12 warna kategori
-        $warnaTersedia = [
-            'primary',
-            'warning',
-            'info',
-            'secondary',
-            'success',
-            'danger',
-            'purple',
-            'pink',
-            'teal',
-            'orange',
-            'indigo',
-            'cyan',
-        ];
+    // Cek apakah warna sudah digunakan kategori aktif
+    $warnaDipakai = Kategori::whereNull('deleted_at')
+        ->where('warna', $validated['warna'])
+        ->exists();
 
-        // Ambil warna yang sedang dipakai
-        // hanya dari kategori aktif
-        $warnaTerpakai = Kategori::whereNull('deleted_at')
-            ->pluck('warna')
-            ->filter()
-            ->unique()
-            ->toArray();
-
-        // Cari warna pertama yang belum dipakai
-        $warna = collect($warnaTersedia)
-            ->first(function ($item) use ($warnaTerpakai) {
-                return !in_array($item, $warnaTerpakai);
-            });
-
-        // Kalau semua 12 warna sudah dipakai
-        if (!$warna) {
-            return redirect()
-                ->route('kategori.index')
-                ->with(
-                    'error',
-                    'Semua 12 warna sudah digunakan. Silakan ubah warna kategori yang sudah ada terlebih dahulu.'
-                );
-        }
-
-        // Masukkan warna otomatis
-        $validated['warna'] = $warna;
-
-        // Simpan kategori
-        Kategori::create($validated);
-
+    if ($warnaDipakai) {
         return redirect()
             ->route('kategori.index')
             ->with(
-                'success',
-                'Kategori berhasil ditambahkan dengan warna ' . ucfirst($warna) . '.'
+                'error',
+                'Warna tersebut sudah digunakan oleh kategori lain. Silakan pilih warna lain.'
             );
     }
+
+    // Simpan kategori
+    Kategori::create($validated);
+
+    return redirect()
+        ->route('kategori.index')
+        ->with(
+            'success',
+            'Kategori berhasil ditambahkan dengan warna ' .
+            ucfirst($validated['warna']) .
+            '.'
+        );
+}
 
     /**
      * Mengubah kategori.
