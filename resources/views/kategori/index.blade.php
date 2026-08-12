@@ -2068,7 +2068,7 @@ body.dark-mode .d-inline-flex .btn.btn-light.border.text-danger i { color:#f8717
 
                 <h5 class="modal-title fw-bold">
                     Tambah Kategori
-                </h5>
+                </h                                                                                                                                                                                                                                                                                                                                                                                                                                5>
 
                 <button
                     type="button"

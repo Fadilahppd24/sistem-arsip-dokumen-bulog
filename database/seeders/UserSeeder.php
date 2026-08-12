@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
         User::firstOrCreate(
             ['email' => 'minkuimy@gmail.com'],
             [
-                'name' => 'Dean',
+                'name' => 'Admin',
                 'password' => Hash::make('indramayu'),
                 'role' => 'admin',
             ]

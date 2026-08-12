@@ -7,91 +7,135 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    
-<link rel="stylesheet"
-href="https://cdn.jsdelivr.net/npm/air-datepicker@3.6.0/air-datepicker.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/air-datepicker@3.6.0/air-datepicker.css"
+    >
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     @stack('styles')
 </head>
+
 <body>
+
 <div class="d-flex">
 
     @include('partials.sidebar')
 
     <div class="flex-grow-1" style="min-width: 0;">
+
         @include('partials.navbar')
 
         <main class="p-4">
 
-    @yield('content')
+            @yield('content')
 
-</main>
+        </main>
 
     </div>
+
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+
     const body = document.body;
     const toggle = document.getElementById('themeToggle');
     const icon = document.getElementById('themeIcon');
 
     if (localStorage.getItem('theme') === 'dark') {
+
         body.classList.add('dark-mode');
+
         icon.classList.remove('bi-moon-fill');
         icon.classList.add('bi-sun-fill');
+
     }
 
     toggle.addEventListener('click', function () {
+
         body.classList.toggle('dark-mode');
 
         if (body.classList.contains('dark-mode')) {
+
             localStorage.setItem('theme', 'dark');
+
             icon.classList.remove('bi-moon-fill');
             icon.classList.add('bi-sun-fill');
+
         } else {
+
             localStorage.setItem('theme', 'light');
+
             icon.classList.remove('bi-sun-fill');
             icon.classList.add('bi-moon-fill');
+
         }
+
     });
+
 });
 </script>
+
 
 <script>
 @if(session('play_welcome_audio'))
+
 document.addEventListener('DOMContentLoaded', function () {
 
     const audio = new Audio("{{ asset('audio/welcome.mp3') }}");
+
     audio.volume = 1;
 
     setTimeout(() => {
+
         audio.play().catch(err => {
+
             console.warn('Autoplay diblokir browser:', err);
+
         });
+
     }, 1000);
 
 });
+
 @endif
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.6.0/air-datepicker.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.6.0/air-datepicker.js"></script>
 
 @stack('scripts')
 
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 <script>
 
 @if(session('success'))
+
 Swal.fire({
     icon: 'success',
     title: 'Berhasil',
@@ -99,14 +143,18 @@ Swal.fire({
     timer: 3000,
     showConfirmButton: false
 });
+
 @endif
 
+
 @if(session('error'))
+
 Swal.fire({
     icon: 'error',
     title: 'Gagal',
     text: "{{ session('error') }}"
 });
+
 @endif
 
 </script>
