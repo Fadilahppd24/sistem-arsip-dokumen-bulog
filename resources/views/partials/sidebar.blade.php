@@ -105,7 +105,21 @@
     </nav>
 
     <div class="sidebar-footer d-flex align-items-center gap-2">
-        <div class="avatar-circle">{{ strtoupper(substr($user->name, 0, 1)) }}</div>
+        <div class="avatar-circle sidebar-avatar">
+    @if ($user->profile_photo_path)
+
+        <img
+            src="{{ asset('storage/' . $user->profile_photo_path) }}"
+            alt="Foto Profil {{ $user->name }}"
+            class="sidebar-profile-photo"
+        >
+
+    @else
+
+        {{ strtoupper(substr($user->name, 0, 1)) }}
+
+    @endif
+</div>
         <div class="flex-grow-1" style="min-width: 0;">
             <div class="text-white small fw-semibold text-truncate">{{ $user->name }}</div>
             <div class="small" style="color:#9db3d9;">{{ $user->isAdmin() ? 'Administrator' : 'User' }}</div>
