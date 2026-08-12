@@ -299,12 +299,114 @@
 
 </header>
 
+{{-- MODAL KONFIRMASI HAPUS FOTO --}}
+<div class="modal fade" id="modalHapusFoto" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-hapus-foto">
 
+            <div class="modal-body text-center p-4">
+
+                {{-- ICON --}}
+                <div class="hapus-foto-icon mx-auto mb-3">
+                    <i class="bi bi-trash3"></i>
+                </div>
+
+                {{-- JUDUL --}}
+                <h5 class="fw-bold mb-2">
+                    Hapus Foto Profil?
+                </h5>
+
+                {{-- KETERANGAN --}}
+                <p class="text-muted mb-4">
+                    Foto profil kamu akan dihapus dan
+                    avatar akan kembali menggunakan huruf awal nama.
+                </p>
+
+                {{-- BUTTON --}}
+                <div class="d-flex justify-content-center gap-2">
+
+                    <button
+                        type="button"
+                        class="btn btn-light px-4"
+                        data-bs-dismiss="modal"
+                    >
+                        Batal
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn btn-danger px-4"
+                        id="btnKonfirmasiHapus"
+                    >
+                        <i class="bi bi-trash3 me-1"></i>
+                        Ya, Hapus
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
 
 {{-- =========================================================
     STYLE PROFILE
 ========================================================= --}}
 <style>
+
+/* =========================================================
+   MODAL HAPUS FOTO PROFIL
+========================================================= */
+
+.modal-hapus-foto {
+    border: none;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, .20);
+}
+
+.hapus-foto-icon {
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fff1f2;
+    color: #dc3545;
+
+    font-size: 30px;
+}
+
+.modal-hapus-foto h5 {
+    color: #1e293b;
+}
+
+.modal-hapus-foto p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.modal-hapus-foto .btn {
+    border-radius: 9px;
+    font-weight: 600;
+}
+
+.modal-hapus-foto .btn-danger {
+    background: #dc3545;
+    border-color: #dc3545;
+}
+
+.modal-hapus-foto .btn-danger:hover {
+    background: #bb2d3b;
+    border-color: #bb2d3b;
+}
+
+
 
 .navbar-avatar-wrapper {
     width: 42px;
@@ -497,39 +599,54 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-    /* =====================================================
-       HAPUS FOTO PROFIL
-    ====================================================== */
+/* =====================================================
+   HAPUS FOTO PROFIL
+====================================================== */
 
-    const btnHapusFoto =
-        document.getElementById('btnHapusFoto');
+const btnHapusFoto =
+    document.getElementById('btnHapusFoto');
 
-    const formHapusFoto =
-        document.getElementById('formHapusFoto');
+const formHapusFoto =
+    document.getElementById('formHapusFoto');
 
+const modalHapusFoto =
+    document.getElementById('modalHapusFoto');
 
-    if (
-        btnHapusFoto &&
-        formHapusFoto
-    ) {
-
-        btnHapusFoto.addEventListener('click', function () {
-
-            const yakin = confirm(
-                'Apakah kamu yakin ingin menghapus foto profil?'
-            );
+const btnKonfirmasiHapus =
+    document.getElementById('btnKonfirmasiHapus');
 
 
-            if (yakin) {
+if (
+    btnHapusFoto &&
+    formHapusFoto &&
+    modalHapusFoto
+) {
 
-                formHapusFoto.submit();
+    // Buka modal konfirmasi
+    btnHapusFoto.addEventListener('click', function () {
 
-            }
+        const modal = new bootstrap.Modal(modalHapusFoto);
+
+        modal.show();
+
+    });
+
+
+    // Konfirmasi hapus
+    if (btnKonfirmasiHapus) {
+
+        btnKonfirmasiHapus.addEventListener('click', function () {
+
+            formHapusFoto.submit();
 
         });
 
     }
 
-});
+}
+
+    }
+
+);
 
 </script>
