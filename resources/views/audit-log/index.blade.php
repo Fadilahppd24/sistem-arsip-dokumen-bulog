@@ -180,7 +180,9 @@
 }
 
 
-/* LINGKARAN RADAR LUAR */
+/* =========================================================
+   LINGKARAN RADAR LUAR
+========================================================= */
 
 .audit-hero-icon-ring::before {
 
@@ -199,7 +201,9 @@
 }
 
 
-/* LINGKARAN RADAR DALAM */
+/* =========================================================
+   LINGKARAN RADAR DALAM
+========================================================= */
 
 .audit-hero-icon-ring::after {
 
@@ -925,6 +929,601 @@
 
 
 /* =========================================================
+   =========================================================
+   DARK MODE
+   =========================================================
+========================================================= */
+
+
+/* =========================================================
+   BREADCRUMB
+========================================================= */
+
+body.dark-mode .audit-breadcrumb a {
+    color: #60a5fa;
+}
+
+body.dark-mode .audit-breadcrumb .text-muted {
+    color: #94a3b8 !important;
+}
+
+
+/* =========================================================
+   HERO DARK
+========================================================= */
+
+body.dark-mode .audit-hero {
+
+    border-color: #3b4d66;
+
+    background:
+        linear-gradient(
+            110deg,
+            #202d42 0%,
+            #202c3e 48%,
+            #26354b 100%
+        );
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.18);
+}
+
+
+/* =========================================================
+   LINGKARAN BESAR HERO DARK
+========================================================= */
+
+body.dark-mode .audit-hero::after {
+
+    background:
+        rgba(148,163,184,.13);
+
+}
+
+
+/* =========================================================
+   BUBBLE DARK
+========================================================= */
+
+body.dark-mode .audit-bubble {
+
+    background:
+        rgba(255,255,255,.24);
+
+}
+
+
+/* =========================================================
+   RING ICON DARK
+========================================================= */
+
+body.dark-mode .audit-hero-icon-ring {
+
+    background:
+        rgba(37,52,75,.55);
+
+    box-shadow:
+        0 0 0 1px rgba(96,165,250,.08);
+
+}
+
+
+/* =========================================================
+   RING PUTIH DIGANTI WARNA DARK
+========================================================= */
+
+body.dark-mode .audit-hero-icon-ring::before {
+
+    border-color:
+        rgba(96,165,250,.35);
+
+}
+
+
+body.dark-mode .audit-hero-icon-ring::after {
+
+    border-color:
+        rgba(96,165,250,.22);
+
+}
+
+
+/* =========================================================
+   PULSE DARK
+========================================================= */
+
+@keyframes auditRingPulseDark {
+
+    0% {
+        box-shadow:
+            0 0 0 0 rgba(96,165,250,.28);
+    }
+
+    70% {
+        box-shadow:
+            0 0 0 13px rgba(96,165,250,0);
+    }
+
+    100% {
+        box-shadow:
+            0 0 0 0 rgba(96,165,250,0);
+    }
+
+}
+
+
+body.dark-mode .audit-hero-icon-ring {
+
+    animation:
+        auditRingPulseDark 2.2s ease-out infinite;
+
+}
+
+
+/* =========================================================
+   ICON UTAMA DARK
+========================================================= */
+
+body.dark-mode .audit-hero-icon {
+
+    background: #1769e8;
+
+    color: white;
+
+    border: 4px solid #263449;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.32),
+        inset 0 -4px 10px rgba(0,0,0,.14);
+
+}
+
+
+/* =========================================================
+   HERO TEXT DARK
+========================================================= */
+
+body.dark-mode .audit-hero-content h2 {
+
+    color: #f8fafc;
+
+}
+
+
+body.dark-mode .audit-hero-content p {
+
+    color: #9fb0c7;
+
+}
+
+
+/* =========================================================
+   HERO NUMBER DARK
+========================================================= */
+
+body.dark-mode .audit-hero-number {
+
+    background:
+        linear-gradient(
+            135deg,
+            #60a5fa,
+            #93c5fd
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+
+}
+
+
+body.dark-mode .audit-hero-label {
+
+    color: #94a3b8;
+
+}
+
+
+/* =========================================================
+   CARD DARK
+========================================================= */
+
+body.dark-mode .audit-card {
+
+    background: #202c3e;
+
+    border: 1px solid #334155;
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.20);
+
+}
+
+
+/* =========================================================
+   CARD HEADER DARK
+========================================================= */
+
+body.dark-mode .audit-card-header {
+
+    background: #263449;
+
+    border-bottom-color: #334155;
+
+}
+
+
+body.dark-mode .audit-header-icon {
+
+    background:
+        rgba(59,130,246,.16);
+
+    color: #60a5fa;
+
+}
+
+
+body.dark-mode .audit-header-title {
+
+    color: #f1f5f9;
+
+}
+
+
+body.dark-mode .audit-header-text {
+
+    color: #9fb0c7;
+
+}
+
+
+/* =========================================================
+   TABLE DARK
+========================================================= */
+
+body.dark-mode .audit-table {
+
+    --bs-table-bg: transparent;
+    --bs-table-color: #dbe5f2;
+    --bs-table-border-color: #334155;
+
+}
+
+
+/* =========================================================
+   TABLE HEADER DARK
+========================================================= */
+
+body.dark-mode .audit-table thead th {
+
+    background: #111827 !important;
+
+    color: #aebdd0 !important;
+
+    border-bottom-color:
+        #334155 !important;
+
+}
+
+
+/* =========================================================
+   TABLE BODY DARK
+========================================================= */
+
+body.dark-mode .audit-table tbody td {
+
+    background: #202c3e !important;
+
+    color: #dbe5f2;
+
+    border-bottom-color:
+        #334155 !important;
+
+}
+
+
+/* =========================================================
+   TABLE HOVER DARK
+========================================================= */
+
+body.dark-mode .audit-table tbody tr:hover td {
+
+    background: #26364b !important;
+
+}
+
+
+/* =========================================================
+   NOMOR DARK
+========================================================= */
+
+body.dark-mode .audit-number {
+
+    background: #263449;
+
+    color: #b7c7da;
+
+    border: 1px solid #3d4c61;
+
+}
+
+
+/* =========================================================
+   USER DARK
+========================================================= */
+
+body.dark-mode .audit-user-name {
+
+    color: #f1f5f9;
+
+}
+
+
+body.dark-mode .audit-user-email {
+
+    color: #91a1b7;
+
+}
+
+
+body.dark-mode .audit-avatar {
+
+    background: #17488f;
+
+    color: white;
+
+    box-shadow:
+        0 4px 10px rgba(0,0,0,.25);
+
+}
+
+
+/* =========================================================
+   BADGE UPLOAD DARK
+========================================================= */
+
+body.dark-mode .audit-badge-success {
+
+    background:
+        rgba(34,160,90,.18);
+
+    color: #6ee7a0;
+
+}
+
+
+/* =========================================================
+   BADGE EDIT DARK
+========================================================= */
+
+body.dark-mode .audit-badge-warning {
+
+    background:
+        rgba(245,158,11,.18);
+
+    color: #fcd34d;
+
+}
+
+
+/* =========================================================
+   BADGE HAPUS DARK
+========================================================= */
+
+body.dark-mode .audit-badge-danger {
+
+    background:
+        rgba(220,53,69,.18);
+
+    color: #f87171;
+
+}
+
+
+/* =========================================================
+   BADGE DOWNLOAD DARK
+========================================================= */
+
+body.dark-mode .audit-badge-primary {
+
+    background:
+        rgba(37,99,235,.20);
+
+    color: #7db4ff;
+
+}
+
+
+/* =========================================================
+   BADGE BACKUP DARK
+========================================================= */
+
+body.dark-mode .audit-badge-dark {
+
+    background: #334155;
+
+    color: #dbe5f2;
+
+}
+
+
+/* =========================================================
+   BADGE DEFAULT DARK
+========================================================= */
+
+body.dark-mode .audit-badge-secondary {
+
+    background: #334155;
+
+    color: #aebdd0;
+
+}
+
+
+/* =========================================================
+   MODUL DARK
+========================================================= */
+
+body.dark-mode .audit-module {
+
+    background: #263449;
+
+    color: #c5d3e4;
+
+    border: 1px solid #3a4a60;
+
+}
+
+
+/* =========================================================
+   DETAIL DARK
+========================================================= */
+
+body.dark-mode .audit-detail {
+
+    color: #c0ccda;
+
+}
+
+
+/* =========================================================
+   WAKTU DARK
+========================================================= */
+
+body.dark-mode .audit-time {
+
+    color: #9fb0c7;
+
+}
+
+
+body.dark-mode .audit-time i {
+
+    color: #60a5fa;
+
+}
+
+
+/* =========================================================
+   EMPTY STATE DARK
+========================================================= */
+
+body.dark-mode .audit-empty-icon {
+
+    background:
+        rgba(37,99,235,.16);
+
+    color: #60a5fa;
+
+}
+
+
+body.dark-mode .audit-empty-title {
+
+    color: #f1f5f9;
+
+}
+
+
+body.dark-mode .audit-empty-text {
+
+    color: #91a1b7;
+
+}
+
+
+/* =========================================================
+   FOOTER DARK
+========================================================= */
+
+body.dark-mode .audit-footer {
+
+    background: #202c3e;
+
+    border-top-color: #334155;
+
+}
+
+
+body.dark-mode .audit-footer-text {
+
+    color: #91a1b7;
+
+}
+
+
+/* =========================================================
+   PAGINATION DARK
+========================================================= */
+
+body.dark-mode .audit-footer .pagination .page-link {
+
+    background: #202c3e;
+
+    border-color: #46566d;
+
+    color: #aebdd0;
+
+}
+
+
+body.dark-mode .audit-footer .pagination .page-link:hover {
+
+    background: #2b3b52;
+
+    border-color: #60718a;
+
+    color: white;
+
+}
+
+
+body.dark-mode .audit-footer .pagination .page-item.active .page-link {
+
+    background: #1769e8;
+
+    border-color: #1769e8;
+
+    color: white;
+
+}
+
+
+body.dark-mode .audit-footer .pagination .page-item.disabled .page-link {
+
+    background: #182334;
+
+    border-color: #344256;
+
+    color: #5f6d80;
+
+}
+
+
+/* =========================================================
+   TEXT MUTED DARK
+========================================================= */
+
+body.dark-mode .audit-card .text-muted {
+
+    color: #91a1b7 !important;
+
+}
+
+
+/* =========================================================
+   FOOTER WEBSITE DARK
+========================================================= */
+
+body.dark-mode .audit-page-footer {
+
+    color: #91a1b7 !important;
+
+}
+
+
+/* =========================================================
    RESPONSIVE
 ========================================================= */
 
@@ -1423,9 +2022,9 @@
          FOOTER WEBSITE
     ====================================================== --}}
 
-    <div class="text-center py-4">
+    <div class="audit-page-footer text-center py-4">
 
-        <small class="text-muted">
+        <small>
 
             © 2026 BULOG. All rights reserved.
 
@@ -1456,7 +2055,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     const target =
-        Math.max(0, parseInt(counter.dataset.count, 10) || 0);
+        Math.max(
+            0,
+            parseInt(counter.dataset.count, 10) || 0
+        );
 
 
     const duration = 1000;
@@ -1471,19 +2073,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         const progress =
-            Math.min(elapsed / duration, 1);
+            Math.min(
+                elapsed / duration,
+                1
+            );
 
 
         const eased =
-            1 - Math.pow(1 - progress, 3);
+            1 - Math.pow(
+                1 - progress,
+                3
+            );
 
 
         const currentValue =
-            Math.floor(eased * target);
+            Math.floor(
+                eased * target
+            );
 
 
         counter.textContent =
-            Math.max(0, currentValue);
+            Math.max(
+                0,
+                currentValue
+            );
 
 
         if (progress < 1) {
@@ -1492,7 +2105,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         } else {
 
-            counter.textContent = target;
+            counter.textContent =
+                target;
 
         }
 

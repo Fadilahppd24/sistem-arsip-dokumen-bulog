@@ -908,6 +908,292 @@
 
 }
 
+
+/* =========================================================
+   DARK MODE - KELOLA PENGGUNA
+   Mengikuti tampilan dark mode Kelola Dokumen
+========================================================= */
+
+body.dark-mode .pengguna-hero {
+    border-color: #334155;
+    background: linear-gradient(
+        110deg,
+        #202b3d 0%,
+        #1f2a3d 48%,
+        #253249 100%
+    );
+    box-shadow: 0 8px 28px rgba(0,0,0,.18);
+}
+
+body.dark-mode .pengguna-hero::after {
+    background: rgba(148,163,184,.16);
+}
+
+body.dark-mode .pengguna-sparkle {
+    color: rgba(255,255,255,.55);
+}
+
+body.dark-mode .pengguna-hero-icon-ring {
+    background: #263b5a;
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.22),
+        inset 0 0 0 1px rgba(255,255,255,.08);
+}
+
+body.dark-mode .pengguna-hero-icon-ring::before {
+    border-color: rgba(96,165,250,.42);
+}
+
+body.dark-mode .pengguna-hero-icon-ring::after {
+    border-color: rgba(96,165,250,.28);
+}
+
+body.dark-mode .pengguna-hero-icon {
+    background: #1769e8;
+    color: #fff;
+}
+
+body.dark-mode .pengguna-hero-text h2 {
+    color: #f8fafc;
+}
+
+body.dark-mode .pengguna-hero-text p {
+    color: #9fb0c7;
+}
+
+body.dark-mode .pengguna-hero-counter-number {
+    color: #60a5fa;
+}
+
+body.dark-mode .pengguna-hero-counter-label {
+    color: #93a4bb;
+}
+
+/* Tombol tambah */
+body.dark-mode .btn-primary {
+    box-shadow: 0 5px 15px rgba(23,105,232,.18);
+}
+
+/* Card utama */
+body.dark-mode .pengguna-card {
+    background: #202c3e;
+    border: 1px solid #334155;
+    box-shadow: 0 8px 30px rgba(0,0,0,.20);
+}
+
+/* Filter */
+body.dark-mode .pengguna-filter {
+    background: #202c3e;
+    border-bottom-color: #334155;
+}
+
+body.dark-mode .pengguna-filter .input-group-text,
+body.dark-mode .pengguna-filter .form-control,
+body.dark-mode .pengguna-filter .form-select {
+    background: #111827;
+    border-color: #3a485d;
+    color: #e5edf7;
+}
+
+body.dark-mode .pengguna-filter .input-group-text {
+    color: #9fb0c7;
+}
+
+body.dark-mode .pengguna-filter .form-control::placeholder {
+    color: #7f8da3;
+}
+
+body.dark-mode .pengguna-filter .form-control:focus,
+body.dark-mode .pengguna-filter .form-select:focus {
+    border-color: #4d8eea;
+    box-shadow: 0 0 0 .15rem rgba(59,130,246,.12);
+}
+
+body.dark-mode .pengguna-filter .form-select {
+    color-scheme: dark;
+}
+
+body.dark-mode .pengguna-filter .form-select option {
+    background: #111827;
+    color: #e5edf7;
+}
+
+body.dark-mode .btn-cari-pengguna {
+    background: #202c3e;
+    border-color: #526176;
+    color: #dbe7f5;
+}
+
+body.dark-mode .btn-cari-pengguna:hover {
+    background: #29384d;
+    border-color: #66758b;
+    color: #fff;
+}
+
+/* Tabel */
+body.dark-mode .pengguna-table {
+    --bs-table-bg: transparent;
+    --bs-table-color: #dbe5f2;
+}
+
+body.dark-mode .pengguna-table thead th {
+    background: #111827;
+    border-bottom-color: #334155;
+    color: #aebdd0;
+}
+
+body.dark-mode .pengguna-table tbody td {
+    background: #202c3e;
+    border-bottom-color: #334155;
+    color: #dbe5f2;
+}
+
+body.dark-mode .pengguna-table tbody tr:hover td {
+    background: #26364b;
+}
+
+body.dark-mode .nomor-pengguna {
+    color: #aebdd0;
+}
+
+body.dark-mode .nama-pengguna {
+    color: #f1f5f9;
+}
+
+body.dark-mode .email-pengguna {
+    color: #9fb0c7;
+}
+
+body.dark-mode .avatar-circle-pengguna {
+    background: #17488f;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,.22);
+}
+
+body.dark-mode .pengguna-table tbody tr:hover .avatar-circle-pengguna {
+    box-shadow: 0 7px 15px rgba(0,0,0,.28);
+}
+
+body.dark-mode .badge-role-admin {
+    background: #17427f;
+    color: #dbeafe;
+}
+
+body.dark-mode .badge-role-user {
+    background: #596579;
+    color: #f1f5f9;
+}
+
+body.dark-mode .badge-anda {
+    background: #164b36;
+    color: #86efac;
+}
+
+/* Tombol aksi */
+body.dark-mode .btn-aksi-pengguna {
+    background: #202c3e;
+    border-color: #46566d;
+    color: #8fc0ff;
+}
+
+body.dark-mode .btn-aksi-pengguna:hover {
+    background: #2b3b52;
+    border-color: #60718a;
+    color: #b8d7ff;
+}
+
+body.dark-mode .btn-aksi-hapus {
+    color: #ff6b78;
+}
+
+body.dark-mode .btn-aksi-hapus:hover {
+    color: #ff8791;
+    background: #3a2026;
+    border-color: #70404a;
+}
+
+/* Footer tabel */
+body.dark-mode .pengguna-table-footer {
+    background: #202c3e;
+    border-top-color: #334155;
+}
+
+body.dark-mode .pengguna-table-footer .text-muted {
+    color: #8fa1b8 !important;
+}
+
+body.dark-mode .pengguna-table-footer .page-link {
+    background: #202c3e;
+    border-color: #46566d;
+    color: #aebdd0;
+}
+
+body.dark-mode .pengguna-table-footer .page-link:hover {
+    background: #2b3b52;
+    border-color: #60718a;
+    color: #fff;
+}
+
+body.dark-mode .pengguna-table-footer .page-item.active .page-link {
+    background: #1769e8;
+    border-color: #1769e8;
+    color: #fff;
+}
+
+body.dark-mode .pengguna-table-footer .page-item.disabled .page-link {
+    background: #182334;
+    border-color: #344256;
+    color: #5f6d80;
+}
+
+/* Modal hapus */
+body.dark-mode .modal-content {
+    background: #202c3e;
+    color: #e5edf7;
+    border: 1px solid #3a485d !important;
+}
+
+body.dark-mode .modal-header,
+body.dark-mode .modal-footer {
+    border-color: #334155;
+}
+
+body.dark-mode .modal-title {
+    color: #f8fafc;
+}
+
+body.dark-mode .modal-body {
+    color: #dbe5f2;
+}
+
+body.dark-mode .modal-body .text-muted {
+    color: #9fb0c7 !important;
+}
+
+body.dark-mode .btn-close {
+    filter: invert(1) grayscale(100%) brightness(180%);
+}
+
+body.dark-mode .modal-footer .btn-light {
+    background: #2b3749;
+    border-color: #46566d;
+    color: #e5edf7;
+}
+
+body.dark-mode .modal-footer .btn-light:hover {
+    background: #35445a;
+    color: #fff;
+}
+
+/* Breadcrumb + footer halaman */
+body.dark-mode .breadcrumb-item.active {
+    color: #9fb0c7;
+}
+
+body.dark-mode .text-muted {
+    color: #91a1b7 !important;
+}
+
 </style>
 
 

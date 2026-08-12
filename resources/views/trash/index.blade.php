@@ -153,8 +153,6 @@
 
 /* =========================================================
    ICON HERO
-   TIDAK NAIK TURUN
-   ADA EFEK RING / SINYAL
 ========================================================= */
 
 .sampah-hero-icon {
@@ -789,6 +787,384 @@
 
 }
 
+
+/* =========================================================
+   DARK MODE - SAMPAH DOKUMEN
+========================================================= */
+
+body.dark-mode .sampah-hero {
+    border-color: #385477;
+
+    background: linear-gradient(
+        110deg,
+        #202d42 0%,
+        #25344a 48%,
+        #202d42 100%
+    );
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, .18);
+}
+
+
+/* =========================================================
+   BULATAN HERO DARK MODE
+========================================================= */
+
+body.dark-mode .sampah-hero::after {
+    background: rgba(148, 163, 184, .18);
+}
+
+
+body.dark-mode .sampah-bubble {
+    background: rgba(203, 213, 225, .35);
+}
+
+
+/* =========================================================
+   ICON HERO DARK MODE
+   RING SUDAH DISAMAKAN DENGAN ICON
+========================================================= */
+
+body.dark-mode .sampah-hero-icon {
+
+    background: #1769e8;
+
+    box-shadow:
+        0 0 0 3px #29476d,
+        0 0 0 5px #1769e8,
+        0 7px 18px rgba(0, 0, 0, .30);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| RING ANIMASI DARK MODE
+|--------------------------------------------------------------------------
+| Dibuat biru, bukan putih.
+*/
+
+body.dark-mode .sampah-hero-icon::before,
+body.dark-mode .sampah-hero-icon::after {
+
+    border-color: rgba(96, 165, 250, .35);
+
+    box-shadow:
+        0 0 0 1px rgba(23, 105, 232, .15);
+}
+
+
+/* =========================================================
+   LINGKARAN DALAM ICON DARK MODE
+========================================================= */
+
+body.dark-mode .sampah-hero-icon-inner {
+
+    background: #1769e8;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 0 0 2px #4b8ff5,
+        inset 0 0 0 2px rgba(255,255,255,.12),
+        0 5px 14px rgba(23,105,232,.35);
+}
+
+
+/* =========================================================
+   JUDUL HERO
+========================================================= */
+
+body.dark-mode .sampah-hero-content h2 {
+    color: #f1f5f9;
+}
+
+
+body.dark-mode .sampah-hero-content p {
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   STATISTIK
+========================================================= */
+
+body.dark-mode .sampah-hero-number {
+    color: #60a5fa;
+}
+
+
+body.dark-mode .sampah-hero-label {
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   CARD UTAMA
+========================================================= */
+
+body.dark-mode .sampah-card {
+
+    background: #202c3f;
+
+    border: 1px solid #34445a;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, .18);
+}
+
+
+/* =========================================================
+   INFO BAR
+========================================================= */
+
+body.dark-mode .sampah-info {
+
+    background: #253348;
+
+    border-bottom-color: #39495e;
+}
+
+
+body.dark-mode .sampah-info-icon {
+
+    background: #29476d;
+
+    color: #60a5fa;
+}
+
+
+body.dark-mode .sampah-info-title {
+    color: #e5edf7;
+}
+
+
+body.dark-mode .sampah-info-text {
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   TABLE DARK MODE
+========================================================= */
+
+body.dark-mode .sampah-table {
+
+    --bs-table-bg: transparent;
+    --bs-table-color: #dbe4ef;
+}
+
+
+body.dark-mode .sampah-table thead th {
+
+    background: #182436;
+
+    border-bottom-color: #3b4b61;
+
+    color: #aebbd0;
+}
+
+
+body.dark-mode .sampah-table tbody td {
+
+    background: #202c3f;
+
+    border-bottom-color: #35465b;
+
+    color: #dbe4ef;
+}
+
+
+body.dark-mode .sampah-table tbody tr:hover td {
+
+    background: #26364b;
+}
+
+
+/* =========================================================
+   NOMOR
+========================================================= */
+
+body.dark-mode .sampah-table tbody td:first-child {
+    color: #d5deea;
+}
+
+
+/* =========================================================
+   ICON DOKUMEN
+========================================================= */
+
+body.dark-mode .sampah-dokumen-icon {
+
+    background: #3a2930;
+
+    color: #f87171;
+}
+
+
+/* =========================================================
+   NAMA DOKUMEN
+========================================================= */
+
+body.dark-mode .sampah-nama-dokumen {
+    color: #f1f5f9;
+}
+
+
+body.dark-mode .sampah-keterangan {
+    color: #8fa0b5;
+}
+
+
+/* =========================================================
+   KATEGORI
+========================================================= */
+
+body.dark-mode .sampah-kategori {
+
+    background: #293e5d;
+
+    color: #9bc3ff;
+}
+
+
+/* =========================================================
+   TEXT
+========================================================= */
+
+body.dark-mode .sampah-text {
+    color: #a8b6c8;
+}
+
+
+/* =========================================================
+   TOMBOL RESTORE
+========================================================= */
+
+body.dark-mode .btn-restore {
+
+    background: #202c3f;
+
+    border-color: #35b779;
+
+    color: #4ade80;
+}
+
+
+body.dark-mode .btn-restore:hover {
+
+    background: #198754;
+
+    border-color: #198754;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   TOMBOL HAPUS PERMANEN
+========================================================= */
+
+body.dark-mode .btn-hapus-permanen {
+
+    background: #202c3f;
+
+    border-color: #f05260;
+
+    color: #ff6b78;
+}
+
+
+body.dark-mode .btn-hapus-permanen:hover {
+
+    background: #dc3545;
+
+    border-color: #dc3545;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+body.dark-mode .sampah-empty-icon {
+
+    background: #293e5d;
+
+    color: #60a5fa;
+}
+
+
+body.dark-mode .sampah-empty-title {
+    color: #e5edf7;
+}
+
+
+body.dark-mode .sampah-empty-text {
+    color: #8fa0b5;
+}
+
+
+/* =========================================================
+   FOOTER TABLE
+========================================================= */
+
+body.dark-mode .sampah-table-footer {
+
+    background: #202c3f;
+
+    border-top-color: #35465b;
+}
+
+
+body.dark-mode .sampah-table-footer-text {
+    color: #8fa0b5;
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+body.dark-mode .pagination .page-link {
+
+    background: #26364b;
+
+    border-color: #43546a;
+
+    color: #b7c4d5;
+}
+
+
+body.dark-mode .pagination .page-link:hover {
+
+    background: #30435b;
+
+    color: #ffffff;
+}
+
+
+body.dark-mode .pagination .page-item.active .page-link {
+
+    background: #1769e8;
+
+    border-color: #1769e8;
+
+    color: #ffffff;
+}
+
+
+body.dark-mode .pagination .page-item.disabled .page-link {
+
+    background: #1d293a;
+
+    border-color: #34445a;
+
+    color: #59687c;
+}
+
 </style>
 
 
@@ -798,7 +1174,6 @@
 
     {{-- =====================================================
          BREADCRUMB
-         JUDUL BESAR DI ATAS SUDAH DIHAPUS
     ====================================================== --}}
 
     <div class="d-flex align-items-center gap-2 mb-3 small">
@@ -818,9 +1193,7 @@
 
 
         <span class="text-muted">
-
             Sampah Dokumen
-
         </span>
 
     </div>
@@ -834,9 +1207,7 @@
     <div class="sampah-hero">
 
 
-        {{-- =================================================
-             DEKORASI BULAT
-        ================================================== --}}
+        {{-- DEKORASI --}}
 
         <span class="sampah-bubble sampah-bubble-1"></span>
 
@@ -848,9 +1219,7 @@
 
 
 
-        {{-- =================================================
-             ICON
-        ================================================== --}}
+        {{-- ICON --}}
 
         <div class="sampah-hero-icon">
 
@@ -864,9 +1233,7 @@
 
 
 
-        {{-- =================================================
-             CONTENT
-        ================================================== --}}
+        {{-- CONTENT --}}
 
         <div class="sampah-hero-content">
 
@@ -882,9 +1249,7 @@
 
 
 
-        {{-- =================================================
-             JUMLAH
-        ================================================== --}}
+        {{-- JUMLAH --}}
 
         <div class="sampah-hero-stat">
 
@@ -915,9 +1280,7 @@
     <div class="sampah-card">
 
 
-        {{-- =================================================
-             INFO BAR
-        ================================================== --}}
+        {{-- INFO BAR --}}
 
         <div class="sampah-info">
 
@@ -950,9 +1313,7 @@
 
 
 
-        {{-- =================================================
-             TABLE
-        ================================================== --}}
+        {{-- TABLE --}}
 
         <div class="table-responsive">
 
@@ -966,26 +1327,21 @@
                             No
                         </th>
 
-
                         <th>
                             Nama Dokumen
                         </th>
-
 
                         <th>
                             Kategori
                         </th>
 
-
                         <th>
                             Diupload Oleh
                         </th>
 
-
                         <th>
                             Dihapus Pada
                         </th>
-
 
                         <th class="text-end pe-4">
                             Aksi
@@ -1001,13 +1357,10 @@
 
                 @forelse ($dokumens as $i => $dokumen)
 
-
                     <tr>
 
 
-                        {{-- =================================================
-                             NO
-                        ================================================== --}}
+                        {{-- NO --}}
 
                         <td>
 
@@ -1017,14 +1370,11 @@
 
 
 
-                        {{-- =================================================
-                             NAMA DOKUMEN
-                        ================================================== --}}
+                        {{-- NAMA DOKUMEN --}}
 
                         <td>
 
                             <div class="d-flex align-items-center">
-
 
                                 <div class="sampah-dokumen-icon me-3">
 
@@ -1056,9 +1406,7 @@
 
 
 
-                        {{-- =================================================
-                             KATEGORI
-                        ================================================== --}}
+                        {{-- KATEGORI --}}
 
                         <td>
 
@@ -1072,9 +1420,7 @@
 
 
 
-                        {{-- =================================================
-                             UPLOADER
-                        ================================================== --}}
+                        {{-- UPLOADER --}}
 
                         <td>
 
@@ -1088,9 +1434,7 @@
 
 
 
-                        {{-- =================================================
-                             DIHAPUS PADA
-                        ================================================== --}}
+                        {{-- DIHAPUS PADA --}}
 
                         <td>
 
@@ -1104,9 +1448,7 @@
 
 
 
-                        {{-- =================================================
-                             AKSI
-                        ================================================== --}}
+                        {{-- AKSI --}}
 
                         <td class="text-end pe-4">
 
@@ -1180,10 +1522,7 @@
 
                 @empty
 
-
-                    {{-- =================================================
-                         EMPTY STATE
-                    ================================================== --}}
+                    {{-- EMPTY STATE --}}
 
                     <tr>
 
@@ -1216,7 +1555,6 @@
                         </td>
 
                     </tr>
-
 
                 @endforelse
 
@@ -1316,7 +1654,9 @@ document.addEventListener('DOMContentLoaded', function () {
     counter.textContent = '0';
 
     const duration = 1000;
+
     const startTime = performance.now();
+
 
     function animateCounter(currentTime) {
 
@@ -1327,9 +1667,11 @@ document.addEventListener('DOMContentLoaded', function () {
             1
         );
 
+
         // Easing halus
         const eased =
             1 - Math.pow(1 - progress, 3);
+
 
         // Pastikan tidak pernah kurang dari 0
         const currentValue = Math.max(
@@ -1337,7 +1679,9 @@ document.addEventListener('DOMContentLoaded', function () {
             Math.floor(eased * target)
         );
 
+
         counter.textContent = currentValue;
+
 
         if (progress < 1) {
 
@@ -1347,8 +1691,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Pastikan hasil akhir tepat
             counter.textContent = target;
+
         }
+
     }
+
 
     requestAnimationFrame(animateCounter);
 

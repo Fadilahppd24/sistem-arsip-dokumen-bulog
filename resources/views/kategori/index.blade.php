@@ -10,1303 +10,2729 @@
    HERO KELOLA KATEGORI
 ========================================================= */
 
+.select-icon-option {
+    font-size: 15px;
+    padding: 6px 10px;
+}
+
 .kategori-hero {
     position: relative;
+
     min-height: 138px;
+
     padding: 25px 30px;
+
     display: flex;
     align-items: center;
+
     gap: 24px;
+
     border: 1px solid #8bbcff;
+
     border-radius: 20px;
-    background: linear-gradient(110deg, #e8f1ff 0%, #dceaff 48%, #edf5ff 100%);
+
+    background: linear-gradient(
+        110deg,
+        #e8f1ff 0%,
+        #dceaff 48%,
+        #edf5ff 100%
+    );
+
     overflow: hidden;
 }
 
+
+/* =========================================================
+   GARIS OREN DI PALING ATAS
+========================================================= */
+
 .kategori-hero::before {
+
     content: "";
+
     position: absolute;
+
     top: 0;
     left: 0;
+
     width: 100%;
     height: 2px;
+
     background: #f5a800;
+
     border-radius: 20px 20px 0 0;
+
     z-index: 20;
+
     pointer-events: none;
 }
 
+
+/* =========================================================
+   BULATAN BESAR BACKGROUND KANAN
+========================================================= */
+
 .kategori-hero::after {
+
     content: "";
+
     position: absolute;
+
     width: 230px;
     height: 230px;
+
     right: 70px;
     top: -125px;
+
     border-radius: 50%;
+
     background: rgba(255,255,255,.45);
+
     pointer-events: none;
+
     z-index: 1;
 }
 
+
+/* =========================================================
+   SPARKLE
+========================================================= */
+
 .kategori-sparkle {
+
     position: absolute;
+
     color: rgba(255,255,255,.85);
+
     pointer-events: none;
+
     z-index: 2;
+
     animation: kategoriSparkle 3s ease-in-out infinite;
 }
 
-.kategori-sparkle-1 { right: 28%; top: 23px; font-size: 14px; animation-delay: 0s; }
-.kategori-sparkle-2 { right: 40%; bottom: 25px; font-size: 9px; animation-delay: .8s; }
-.kategori-sparkle-3 { right: 54%; top: 38px; font-size: 7px; animation-delay: 1.5s; }
-.kategori-sparkle-4 { right: 22%; bottom: 38px; font-size: 10px; animation-delay: 2s; }
+
+.kategori-sparkle-1 {
+
+    right: 28%;
+
+    top: 23px;
+
+    font-size: 14px;
+
+    animation-delay: 0s;
+}
+
+
+.kategori-sparkle-2 {
+
+    right: 40%;
+
+    bottom: 25px;
+
+    font-size: 9px;
+
+    animation-delay: .8s;
+}
+
+
+.kategori-sparkle-3 {
+
+    right: 54%;
+
+    top: 38px;
+
+    font-size: 7px;
+
+    animation-delay: 1.5s;
+}
+
+
+.kategori-sparkle-4 {
+
+    right: 22%;
+
+    bottom: 38px;
+
+    font-size: 10px;
+
+    animation-delay: 2s;
+}
+
 
 @keyframes kategoriSparkle {
-    0%, 100% { opacity: .25; transform: scale(.75); }
-    50% { opacity: 1; transform: scale(1.25); }
+
+    0%,
+    100% {
+
+        opacity: .25;
+
+        transform: scale(.75);
+
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform: scale(1.25);
+
+    }
+
 }
+
+
+/* =========================================================
+   ICON HERO
+========================================================= */
 
 .kategori-hero-icon {
+
     position: relative;
+
     z-index: 5;
+
     width: 82px;
     height: 82px;
+
     flex-shrink: 0;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
     border-radius: 50%;
+
     background: #dbeafe;
-    box-shadow: 0 7px 18px rgba(29,78,216,.15);
+
+    box-shadow:
+        0 7px 18px rgba(29,78,216,.15);
 }
+
+
+/* =========================================================
+   RADAR / GELOMBANG 1
+========================================================= */
 
 .kategori-hero-icon::before {
+
     content: "";
+
     position: absolute;
+
     inset: 0;
+
     border-radius: 50%;
+
     border: 2px solid rgba(37,99,235,.48);
-    animation: kategoriRadar 2.8s ease-out infinite;
+
+    animation:
+        kategoriRadar 2.8s ease-out infinite;
+
     pointer-events: none;
 }
+
+
+/* =========================================================
+   RADAR / GELOMBANG 2
+========================================================= */
 
 .kategori-hero-icon::after {
+
     content: "";
+
     position: absolute;
+
     inset: 0;
+
     border-radius: 50%;
+
     border: 2px solid rgba(37,99,235,.32);
-    animation: kategoriRadar 2.8s ease-out infinite;
+
+    animation:
+        kategoriRadar 2.8s ease-out infinite;
+
     animation-delay: 1.4s;
+
     pointer-events: none;
 }
+
+
+/* =========================================================
+   ANIMASI RADAR
+========================================================= */
 
 @keyframes kategoriRadar {
-    0% { transform: scale(.85); opacity: .85; }
-    60% { transform: scale(1.35); opacity: .28; }
-    100% { transform: scale(1.75); opacity: 0; }
+
+    0% {
+
+        transform: scale(.85);
+
+        opacity: .85;
+
+    }
+
+    60% {
+
+        transform: scale(1.35);
+
+        opacity: .28;
+
+    }
+
+    100% {
+
+        transform: scale(1.75);
+
+        opacity: 0;
+
+    }
+
 }
+
+
+/* =========================================================
+   LINGKARAN ICON DALAM
+========================================================= */
 
 .kategori-hero-icon-inner {
+
     position: relative;
+
     z-index: 6;
+
     width: 68px;
     height: 68px;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
     border-radius: 50%;
+
     background: #1769e8;
+
     color: white;
+
     font-size: 30px;
-    box-shadow: 0 5px 15px rgba(29,78,216,.25), inset 0 0 0 2px rgba(255,255,255,.18);
+
+    box-shadow:
+        0 5px 15px rgba(29,78,216,.25),
+        inset 0 0 0 2px rgba(255,255,255,.18);
 }
+
+
+/* =========================================================
+   TITIK SINYAL / KELAP-KELIP
+========================================================= */
 
 .kategori-signal-dot {
+
     position: absolute;
+
     z-index: 8;
+
     display: block;
+
     border-radius: 50%;
+
     background: white;
-    box-shadow: 0 0 8px rgba(255,255,255,.95);
+
+    box-shadow:
+        0 0 8px rgba(255,255,255,.95);
+
     pointer-events: none;
-    animation: kategoriSignalBlink 1.8s ease-in-out infinite;
+
+    animation:
+        kategoriSignalBlink 1.8s ease-in-out infinite;
 }
 
-.kategori-signal-dot.dot-1 { width: 7px; height: 7px; top: 3px; right: 15px; animation-delay: 0s; }
-.kategori-signal-dot.dot-2 { width: 5px; height: 5px; bottom: 10px; left: 7px; animation-delay: .6s; }
-.kategori-signal-dot.dot-3 { width: 4px; height: 4px; top: 19px; left: 1px; animation-delay: 1.1s; }
-.kategori-signal-dot.dot-4 { width: 5px; height: 5px; right: 2px; bottom: 22px; animation-delay: 1.5s; }
+
+/* TITIK 1 */
+
+.kategori-signal-dot.dot-1 {
+
+    width: 7px;
+    height: 7px;
+
+    top: 3px;
+    right: 15px;
+
+    animation-delay: 0s;
+}
+
+
+/* TITIK 2 */
+
+.kategori-signal-dot.dot-2 {
+
+    width: 5px;
+    height: 5px;
+
+    bottom: 10px;
+    left: 7px;
+
+    animation-delay: .6s;
+}
+
+
+/* TITIK 3 */
+
+.kategori-signal-dot.dot-3 {
+
+    width: 4px;
+    height: 4px;
+
+    top: 19px;
+    left: 1px;
+
+    animation-delay: 1.1s;
+}
+
+
+/* TITIK 4 */
+
+.kategori-signal-dot.dot-4 {
+
+    width: 5px;
+    height: 5px;
+
+    right: 2px;
+    bottom: 22px;
+
+    animation-delay: 1.5s;
+}
+
+
+/* =========================================================
+   ANIMASI TITIK
+========================================================= */
 
 @keyframes kategoriSignalBlink {
-    0%, 100% { opacity: .25; transform: scale(.7); }
-    50% { opacity: 1; transform: scale(1.35); }
+
+    0%,
+    100% {
+
+        opacity: .25;
+
+        transform: scale(.7);
+
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform: scale(1.35);
+
+    }
+
 }
 
+
+/* =========================================================
+   JUDUL HERO
+========================================================= */
+
 .kategori-hero h2 {
+
     position: relative;
+
     z-index: 4;
+
     margin: 0 0 6px;
+
     color: #102a56;
+
     font-size: 29px;
+
     font-weight: 700;
 }
 
+
 .kategori-hero p {
+
     position: relative;
+
     z-index: 4;
+
     margin: 0;
+
     color: #526987;
+
     font-size: 15px;
 }
 
+
+/* =========================================================
+   STATISTIK HERO
+========================================================= */
+
 .kategori-hero-stat {
+
     position: relative;
+
     z-index: 4;
+
     min-width: 120px;
+
     text-align: center;
 }
 
+
 .kategori-hero-number {
+
     color: #2f6fe4;
+
     font-size: 40px;
+
     line-height: 1;
+
     font-weight: 800;
 }
 
+
 .kategori-hero-label {
+
     margin-top: 7px;
+
     color: #687993;
+
     font-size: 11px;
+
     font-weight: 700;
+
     letter-spacing: .8px;
 }
 
-.kategori-hero-action { position: relative; z-index: 5; }
 
-.kategori-hero-action .btn {
-    border-radius: 9px;
-    font-weight: 600;
-    box-shadow: 0 5px 12px rgba(29,78,216,.15);
+/* =========================================================
+   BUTTON HERO
+========================================================= */
+
+.kategori-hero-action {
+
+    position: relative;
+
+    z-index: 5;
 }
 
+
+.kategori-hero-action .btn {
+
+    border-radius: 9px;
+
+    font-weight: 600;
+
+    box-shadow:
+        0 5px 12px rgba(29,78,216,.15);
+}
+
+
+/* =========================================================
+   ICON TABLE KATEGORI
+========================================================= */
+
 .kategori-icon-box {
+
     width: 42px;
     height: 42px;
+
     display: flex;
+
     align-items: center;
     justify-content: center;
+
     border-radius: 11px;
+
     font-size: 18px;
 }
 
-.kategori-primary { background: #e8f0ff; color: #1d4ed8; }
-.kategori-warning { background: #fff3d6; color: #f59e0b; }
-.kategori-info { background: #e2f3ff; color: #38a5e5; }
-.kategori-secondary { background: #edf0f3; color: #6b7280; }
-.kategori-success { background: #e3f7eb; color: #198754; }
-.kategori-danger { background: #ffe5e8; color: #dc3545; }
-.kategori-purple { background: #f0e7ff; color: #7c3aed; }
-.kategori-pink { background: #ffe5f0; color: #ec4899; }
-.kategori-teal { background: #e1f7f5; color: #0f766e; }
-.kategori-orange { background: #fff0df; color: #ea580c; }
-.kategori-indigo { background: #e8e9ff; color: #4f46e5; }
-.kategori-cyan { background: #dff8ff; color: #0891b2; }
-
-.warna-kategori { display: flex; align-items: center; gap: 8px; }
-.warna-dot { width: 10px; height: 10px; display: inline-block; border-radius: 50%; }
-.warna-navy { background: #1d4ed8; }
-.warna-kuning { background: #f5b400; }
-.warna-biru-muda { background: #60b5ee; }
-.warna-abu { background: #8b96a3; }
-.warna-hijau { background: #22a05a; }
-.warna-merah { background: #ef4444; }
-.warna-ungu { background: #8b5cf6; }
-.warna-pink { background: #ec4899; }
-.warna-teal { background: #0f766e; }
-.warna-orange { background: #f97316; }
-.warna-indigo { background: #4f46e5; }
-.warna-cyan { background: #06b6d4; }
 
 /* =========================================================
-   ICON PICKER (BULOG NAVY THEME)
+   WARNA ICON
 ========================================================= */
 
-.icon-picker-wrapper {
-    position: relative;
-}
+.kategori-primary {
 
-.icon-picker-panel {
-    display: none;
-    position: absolute;
-    top: calc(100% + 6px);
-    left: 0;
-    width: 100%;
-    min-width: 320px;
-    max-width: 440px;
-    background: #ffffff;
-    border: 1px solid #dbe4f3;
-    border-radius: 14px;
-    box-shadow: 0 14px 32px rgba(16,42,86,.18);
-    z-index: 1080;
-    overflow: hidden;
-}
-
-.icon-picker-panel.show {
-    display: block;
-}
-
-.icon-picker-search {
-    padding: 10px;
-    border-bottom: 1px solid #eef2f8;
-    background: #f8faff;
-}
-
-.icon-picker-search input {
-    width: 100%;
-    border: 1px solid #dbe4f3;
-    border-radius: 9px;
-    padding: 8px 12px;
-    font-size: 13px;
-    outline: none;
-    background: #fff;
-}
-
-.icon-picker-search input:focus {
-    border-color: #1d4ed8;
-    box-shadow: 0 0 0 3px rgba(29,78,216,.12);
-}
-
-.icon-picker-body {
-    max-height: 300px;
-    overflow-y: auto;
-    padding: 12px 12px 14px;
-}
-
-.icon-picker-category {
-    margin-bottom: 14px;
-}
-
-.icon-picker-category:last-child {
-    margin-bottom: 0;
-}
-
-.icon-picker-category-title {
-    font-size: 10.5px;
-    font-weight: 700;
-    letter-spacing: .7px;
-    text-transform: uppercase;
-    color: #687993;
-    margin-bottom: 7px;
-}
-
-.icon-picker-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
-    gap: 6px;
-}
-
-.icon-picker-option {
-    width: 36px;
-    height: 36px;
-    border: 1px solid transparent;
-    border-radius: 9px;
-    background: #f5f8fd;
-    color: #33445e;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 15px;
-    cursor: pointer;
-    transition: all .15s ease;
-}
-
-.icon-picker-custom {
-    font-size: 22px;
-}
-
-.custom-icon {
-    font-size: 21px;
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.icon-picker-option:hover {
     background: #e8f0ff;
     color: #1d4ed8;
-    transform: translateY(-1px);
 }
 
-.icon-picker-option.active {
+
+.kategori-warning {
+
+    background: #fff3d6;
+    color: #f59e0b;
+}
+
+
+.kategori-info {
+
+    background: #e2f3ff;
+    color: #38a5e5;
+}
+
+
+.kategori-secondary {
+
+    background: #edf0f3;
+    color: #6b7280;
+}
+
+
+.kategori-success {
+
+    background: #e3f7eb;
+    color: #198754;
+}
+
+
+.kategori-danger {
+
+    background: #ffe5e8;
+    color: #dc3545;
+}
+
+
+.kategori-purple {
+
+    background: #f0e7ff;
+    color: #7c3aed;
+}
+
+
+.kategori-pink {
+
+    background: #ffe5f0;
+    color: #ec4899;
+}
+
+
+.kategori-teal {
+
+    background: #e1f7f5;
+    color: #0f766e;
+}
+
+
+.kategori-orange {
+
+    background: #fff0df;
+    color: #ea580c;
+}
+
+
+.kategori-indigo {
+
+    background: #e8e9ff;
+    color: #4f46e5;
+}
+
+
+.kategori-cyan {
+
+    background: #dff8ff;
+    color: #0891b2;
+}
+
+
+/* =========================================================
+   WARNA DOT
+========================================================= */
+
+.warna-kategori {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.warna-dot {
+
+    width: 10px;
+    height: 10px;
+
+    display: inline-block;
+
+    border-radius: 50%;
+}
+
+
+.warna-navy {
     background: #1d4ed8;
-    color: #fff;
-    border-color: #1d4ed8;
 }
 
-.icon-picker-empty {
-    text-align: center;
-    color: #94a3b8;
-    font-size: 13px;
-    padding: 20px 0;
+
+.warna-kuning {
+    background: #f5b400;
 }
 
-.icon-picker-body::-webkit-scrollbar {
-    width: 7px;
+
+.warna-biru-muda {
+    background: #60b5ee;
 }
 
-.icon-picker-body::-webkit-scrollbar-thumb {
-    background: #c6d4e8;
-    border-radius: 10px;
+
+.warna-abu {
+    background: #8b96a3;
 }
+
+
+.warna-hijau {
+    background: #22a05a;
+}
+
+
+.warna-merah {
+    background: #ef4444;
+}
+
+
+.warna-ungu {
+    background: #8b5cf6;
+}
+
+
+.warna-pink {
+    background: #ec4899;
+}
+
+
+.warna-teal {
+    background: #0f766e;
+}
+
+
+.warna-orange {
+    background: #f97316;
+}
+
+
+.warna-indigo {
+    background: #4f46e5;
+}
+
+
+.warna-cyan {
+    background: #06b6d4;
+}
+
+
+
+/* ================= DARK MODE KATEGORI ================= */
+
+body.dark-mode .kategori-hero {
+    border-color:#334155;
+    background:linear-gradient(110deg,#202b3d 0%,#263449 48%,#202b3d 100%);
+}
+body.dark-mode .kategori-hero::after { background:rgba(148,163,184,.16); }
+body.dark-mode .kategori-hero h2 { color:#f8fafc !important; }
+body.dark-mode .kategori-hero p { color:#9fb0c7 !important; }
+body.dark-mode .kategori-hero-number { color:#60a5fa; }
+body.dark-mode .kategori-hero-label { color:#91a1b7; }
+
+body.dark-mode .kategori-hero-icon {
+    background:#243b5b;
+    box-shadow:0 7px 18px rgba(0,0,0,.25);
+}
+
+body.dark-mode .card,
+body.dark-mode .card-body {
+    background:#1f2b3d;
+    color:#e5edf7;
+    border-color:#334155;
+}
+
+body.dark-mode .nav-tabs { border-color:#334155 !important; }
+body.dark-mode .nav-tabs .nav-link {
+    color:#9fb0c7;
+    background:transparent;
+    border-color:transparent;
+}
+body.dark-mode .nav-tabs .nav-link.active {
+    color:#f8fafc;
+    background:#1f2b3d;
+    border-color:#334155 #334155 #1f2b3d;
+}
+
+body.dark-mode .input-group-text,
+body.dark-mode .form-control,
+body.dark-mode .form-select {
+    background:#111827 !important;
+    border-color:#334155 !important;
+    color:#e5edf7 !important;
+}
+body.dark-mode .form-control::placeholder { color:#718096 !important; }
+body.dark-mode .form-select { color-scheme:dark; }
+body.dark-mode .form-select option {
+    background:#111827;
+    color:#e5edf7;
+}
+
+body.dark-mode .table {
+    --bs-table-bg:#1f2b3d;
+    --bs-table-color:#e5edf7;
+    --bs-table-border-color:#334155;
+    color:#e5edf7;
+    background:#1f2b3d;
+}
+body.dark-mode .table > :not(caption) > * > * {
+    background:#1f2b3d;
+    color:#e5edf7;
+    border-bottom-color:#334155;
+}
+body.dark-mode .table thead,
+body.dark-mode .table-light,
+body.dark-mode .table-light > * {
+    background:#111827 !important;
+    color:#aebed2 !important;
+}
+body.dark-mode .table-hover > tbody > tr:hover > * {
+    background:#263449 !important;
+    color:#f8fafc;
+}
+body.dark-mode .table .text-muted,
+body.dark-mode .table small.text-muted {
+    color:#91a1b7 !important;
+}
+
+body.dark-mode .fw-semibold { color:#f1f5f9; }
+body.dark-mode .warna-label { color:#e5edf7; }
+
+body.dark-mode .badge.bg-light {
+    background:#334155 !important;
+    color:#e5edf7 !important;
+    border-color:#475569 !important;
+}
+body.dark-mode .badge.bg-success-subtle {
+    background:rgba(34,160,90,.18) !important;
+    color:#6ee7a0 !important;
+    border-color:rgba(34,160,90,.35) !important;
+}
+
+body.dark-mode .btn-light {
+    background:#263449 !important;
+    border-color:#475569 !important;
+    color:#e5edf7 !important;
+}
+body.dark-mode .btn-light:hover {
+    background:#334155 !important;
+    color:#fff !important;
+}
+
+body.dark-mode .btn-outline-success { color:#4ade80; border-color:#22c55e; }
+body.dark-mode .btn-outline-success:hover { background:#22c55e; color:#0f172a; }
+body.dark-mode .btn-outline-danger { color:#f87171; border-color:#ef4444; }
+body.dark-mode .btn-outline-danger:hover { background:#ef4444; color:#fff; }
+
+body.dark-mode .border-top,
+body.dark-mode .border-bottom { border-color:#334155 !important; }
+
+body.dark-mode .alert-info {
+    background:rgba(37,99,235,.14) !important;
+    color:#bfdbfe !important;
+    border:1px solid rgba(96,165,250,.22) !important;
+}
+body.dark-mode .alert-info .small { color:#9fb0c7 !important; }
+
+body.dark-mode .alert-success {
+    background:rgba(34,160,90,.15) !important;
+    color:#86efac !important;
+}
+body.dark-mode .alert-danger {
+    background:rgba(220,53,69,.15) !important;
+    color:#fca5a5 !important;
+}
+
+body.dark-mode .modal-content,
+body.dark-mode .confirm-modal {
+    background:#1f2b3d;
+    color:#e5edf7;
+    border:1px solid #334155 !important;
+}
+body.dark-mode .modal-header,
+body.dark-mode .modal-footer { border-color:#334155; }
+body.dark-mode .modal-title,
+body.dark-mode .modal-content .form-label { color:#f8fafc; }
+body.dark-mode .modal-content .text-muted { color:#94a3b8 !important; }
+body.dark-mode .modal-content .bg-light {
+    background:#111827 !important;
+    color:#94a3b8 !important;
+    border-color:#334155 !important;
+}
+body.dark-mode .modal-content .btn-close {
+    filter:invert(1) grayscale(100%) brightness(200%);
+}
+
+body.dark-mode .confirm-warning {
+    background:#2b3342 !important;
+    color:#cbd5e1;
+    border-color:#475569 !important;
+}
+
+body.dark-mode .container-fluid > .mb-4 .text-muted {
+    color:#94a3b8 !important;
+}
+body.dark-mode .container-fluid > .mb-4 a {
+    color:#60a5fa !important;
+}
+
+body.dark-mode .text-center.py-5.text-muted {
+    color:#94a3b8 !important;
+}
+
+body.dark-mode .kategori-icon-box.kategori-primary { background:rgba(29,78,216,.18); }
+body.dark-mode .kategori-icon-box.kategori-warning { background:rgba(245,158,11,.16); }
+body.dark-mode .kategori-icon-box.kategori-info { background:rgba(56,165,229,.16); }
+body.dark-mode .kategori-icon-box.kategori-secondary { background:rgba(107,114,128,.18); }
+body.dark-mode .kategori-icon-box.kategori-success { background:rgba(25,135,84,.18); }
+body.dark-mode .kategori-icon-box.kategori-danger { background:rgba(220,53,69,.18); }
+body.dark-mode .kategori-icon-box.kategori-purple { background:rgba(124,58,237,.18); }
+body.dark-mode .kategori-icon-box.kategori-pink { background:rgba(236,72,153,.18); }
+body.dark-mode .kategori-icon-box.kategori-teal { background:rgba(15,118,110,.18); }
+body.dark-mode .kategori-icon-box.kategori-orange { background:rgba(234,88,12,.18); }
+body.dark-mode .kategori-icon-box.kategori-indigo { background:rgba(79,70,229,.18); }
+body.dark-mode .kategori-icon-box.kategori-cyan { background:rgba(8,145,178,.18); }
+
+body.dark-mode .d-inline-flex .btn.btn-light.border {
+    background:#263449 !important;
+    border-color:#475569 !important;
+}
+body.dark-mode .d-inline-flex .btn.btn-light.border i { color:#dbeafe; }
+body.dark-mode .d-inline-flex .btn.btn-light.border.text-danger i { color:#f87171; }
+
 
 /* =========================================================
    RESPONSIVE
 ========================================================= */
 
 @media (max-width: 900px) {
-    .kategori-hero { flex-wrap: wrap; padding: 22px; }
-    .kategori-hero-stat { text-align: left; }
+
+    .kategori-hero {
+
+        flex-wrap: wrap;
+
+        padding: 22px;
+
+    }
+
+
+    .kategori-hero-stat {
+
+        text-align: left;
+
+    }
+
 }
 
+
 @media (max-width: 576px) {
-    .kategori-hero { gap: 15px; }
-    .kategori-hero-icon { width: 72px; height: 72px; }
-    .kategori-hero-icon-inner { width: 60px; height: 60px; font-size: 26px; }
-    .kategori-hero h2 { font-size: 24px; }
+
+    .kategori-hero {
+
+        gap: 15px;
+
+    }
+
+
+    .kategori-hero-icon {
+
+        width: 72px;
+        height: 72px;
+
+    }
+
+
+    .kategori-hero-icon-inner {
+
+        width: 60px;
+        height: 60px;
+
+        font-size: 26px;
+
+    }
+
+
+    .kategori-hero h2 {
+
+        font-size: 24px;
+
+    }
+
 }
 
 </style>
 
 
+
 <div class="container-fluid px-0">
 
-{{-- BREADCRUMB + HERO --}}
+
+{{-- =========================================================
+     BREADCRUMB + HERO
+========================================================= --}}
+
 <div class="mb-4">
 
+
+    {{-- BREADCRUMB --}}
+
     <div class="d-flex align-items-center gap-2 mb-3 small">
-        <a href="{{ route('dashboard') }}" class="text-decoration-none" style="color:#1d4ed8;">Beranda</a>
-        <span class="text-muted">&gt;</span>
-        <span class="text-muted">Kelola Kategori</span>
+
+        <a
+            href="{{ route('dashboard') }}"
+            class="text-decoration-none"
+            style="color:#1d4ed8;"
+        >
+
+            Beranda
+
+        </a>
+
+
+        <span class="text-muted">
+            >
+        </span>
+
+
+        <span class="text-muted">
+
+            Kelola Kategori
+
+        </span>
+
     </div>
+
+
+
+    {{-- =====================================================
+         HERO
+    ====================================================== --}}
 
     <div class="kategori-hero">
 
-        <span class="kategori-sparkle kategori-sparkle-1">&#10022;</span>
-        <span class="kategori-sparkle kategori-sparkle-2">&#10022;</span>
-        <span class="kategori-sparkle kategori-sparkle-3">&#10022;</span>
-        <span class="kategori-sparkle kategori-sparkle-4">&#10022;</span>
+
+        {{-- SPARKLE --}}
+
+        <span class="kategori-sparkle kategori-sparkle-1">
+            ✦
+        </span>
+
+        <span class="kategori-sparkle kategori-sparkle-2">
+            ✦
+        </span>
+
+        <span class="kategori-sparkle kategori-sparkle-3">
+            ✦
+        </span>
+
+        <span class="kategori-sparkle kategori-sparkle-4">
+            ✦
+        </span>
+
+
+
+        {{-- =================================================
+             ICON DENGAN RADAR
+        ================================================== --}}
 
         <div class="kategori-hero-icon">
-            <span class="kategori-signal-dot dot-1"></span>
-            <span class="kategori-signal-dot dot-2"></span>
-            <span class="kategori-signal-dot dot-3"></span>
-            <span class="kategori-signal-dot dot-4"></span>
+
+
+            {{-- TITIK KELAP-KELIP --}}
+
+            <span
+                class="kategori-signal-dot dot-1"
+            ></span>
+
+            <span
+                class="kategori-signal-dot dot-2"
+            ></span>
+
+            <span
+                class="kategori-signal-dot dot-3"
+            ></span>
+
+            <span
+                class="kategori-signal-dot dot-4"
+            ></span>
+
+
+
+            {{-- ICON --}}
 
             <div class="kategori-hero-icon-inner">
+
                 <i class="bi bi-folder-fill"></i>
+
             </div>
+
         </div>
+
+
+
+        {{-- =================================================
+             JUDUL + DESKRIPSI
+        ================================================== --}}
 
         <div class="flex-grow-1">
-            <h2 class="fw-bold">Kelola Kategori</h2>
-            <p>Kelola dan atur kategori dokumen sistem dengan mudah.</p>
+
+
+            <h2 class="fw-bold">
+
+                Kelola Kategori
+
+            </h2>
+
+
+            <p>
+
+                Kelola dan atur kategori dokumen sistem dengan mudah.
+
+            </p>
+
         </div>
+
+
+
+        {{-- =================================================
+             JUMLAH KATEGORI
+        ================================================== --}}
 
         <div class="kategori-hero-stat">
-            <div class="kategori-hero-number" data-count="{{ $kategoris->count() }}">0</div>
-            <div class="kategori-hero-label">KATEGORI AKTIF</div>
-        </div>
 
-        <div class="kategori-hero-action">
-            <button type="button" class="btn btn-primary px-4 py-2" data-bs-toggle="modal" data-bs-target="#modalTambahKategori">
-                <i class="bi bi-plus-lg me-1"></i> Tambah Kategori
-            </button>
-        </div>
 
-    </div>
+           <div
+    class="kategori-hero-number"
+    data-count="{{ $kategoris->count() }}"
+>
+    0
 </div>
 
 
-{{-- ALERT SUCCESS --}}
+            <div class="kategori-hero-label">
+
+                KATEGORI AKTIF
+
+            </div>
+
+        </div>
+
+
+
+        {{-- =================================================
+             TOMBOL TAMBAH
+        ================================================== --}}
+
+        <div class="kategori-hero-action">
+
+            <button
+                type="button"
+                class="btn btn-primary px-4 py-2"
+                data-bs-toggle="modal"
+                data-bs-target="#modalTambahKategori"
+            >
+
+                <i class="bi bi-plus-lg me-1"></i>
+
+                Tambah Kategori
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+{{-- =========================================================
+     ALERT SUCCESS
+========================================================= --}}
+
 @if (session('success'))
-    <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm" role="alert">
-        <i class="bi bi-check-circle-fill me-2"></i>{{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+
+    <div
+        class="alert alert-success alert-dismissible fade show border-0 shadow-sm"
+        role="alert"
+    >
+
+        <i class="bi bi-check-circle-fill me-2"></i>
+
+        {{ session('success') }}
+
+
+        <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+        ></button>
+
     </div>
+
 @endif
 
-{{-- ALERT ERROR --}}
+
+
+{{-- =========================================================
+     ALERT ERROR
+========================================================= --}}
+
 @if (session('error'))
-    <div class="alert alert-danger alert-dismissible fade show border-0 shadow-sm" role="alert">
-        <i class="bi bi-exclamation-circle-fill me-2"></i>{{ session('error') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+
+    <div
+        class="alert alert-danger alert-dismissible fade show border-0 shadow-sm"
+        role="alert"
+    >
+
+        <i class="bi bi-exclamation-circle-fill me-2"></i>
+
+        {{ session('error') }}
+
+
+        <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+        ></button>
+
     </div>
+
 @endif
 
-{{-- VALIDATION ERROR --}}
+
+
+{{-- =========================================================
+     VALIDATION ERROR
+========================================================= --}}
+
 @if ($errors->any())
+
     <div class="alert alert-danger border-0 shadow-sm">
-        <strong>Terdapat kesalahan:</strong>
+
+        <strong>
+            Terdapat kesalahan:
+        </strong>
+
+
         <ul class="mb-0 mt-2">
+
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+
+                <li>
+                    {{ $error }}
+                </li>
+
             @endforeach
+
         </ul>
+
     </div>
+
 @endif
 
 
-{{-- CARD UTAMA --}}
+
+{{-- =========================================================
+     CARD UTAMA
+========================================================= --}}
+
 <div class="card border-0 shadow-sm">
+
     <div class="card-body p-0">
 
+
+        {{-- =================================================
+             TAB
+        ================================================== --}}
+
         <div class="px-4 pt-3 border-bottom">
+
             <ul class="nav nav-tabs border-0">
+
+
+                {{-- KATEGORI AKTIF --}}
+
                 <li class="nav-item">
-                    <button class="nav-link active fw-semibold" data-bs-toggle="tab" data-bs-target="#kategoriAktif">
+
+                    <button
+                        class="nav-link active fw-semibold"
+                        data-bs-toggle="tab"
+                        data-bs-target="#kategoriAktif"
+                    >
+
                         Kategori Aktif
-                        <span class="badge bg-primary ms-1">{{ $kategoris->count() }}</span>
+
+
+                        <span class="badge bg-primary ms-1">
+
+                            {{ $kategoris->count() }}
+
+                        </span>
+
                     </button>
+
                 </li>
+
+
+
+                {{-- KATEGORI TERHAPUS --}}
+
                 <li class="nav-item">
-                    <button class="nav-link fw-semibold" data-bs-toggle="tab" data-bs-target="#kategoriTerhapus">
+
+                    <button
+                        class="nav-link fw-semibold"
+                        data-bs-toggle="tab"
+                        data-bs-target="#kategoriTerhapus"
+                    >
+
                         Kategori Terhapus
-                        <span class="badge bg-secondary ms-1">{{ $kategoriTerhapus->count() }}</span>
+
+
+                        <span class="badge bg-secondary ms-1">
+
+                            {{ $kategoriTerhapus->count() }}
+
+                        </span>
+
                     </button>
+
                 </li>
+
             </ul>
+
         </div>
+
+
 
         <div class="tab-content">
 
-            {{-- TAB AKTIF --}}
-            <div class="tab-pane fade show active" id="kategoriAktif">
+
+            {{-- =================================================
+                 TAB AKTIF
+            ================================================== --}}
+
+            <div
+                class="tab-pane fade show active"
+                id="kategoriAktif"
+            >
+
+
+                {{-- SEARCH + FILTER --}}
 
                 <div class="p-4">
+
                     <div class="row g-2">
 
+
+                        {{-- SEARCH --}}
+
                         <div class="col-md-6">
+
                             <div class="input-group">
-                                <span class="input-group-text bg-white"><i class="bi bi-search text-muted"></i></span>
-                                <input type="text" id="searchKategori" class="form-control" placeholder="Cari kategori...">
+
+                                <span class="input-group-text bg-white">
+
+                                    <i class="bi bi-search text-muted"></i>
+
+                                </span>
+
+
+                                <input
+                                    type="text"
+                                    id="searchKategori"
+                                    class="form-control"
+                                    placeholder="Cari kategori..."
+                                >
+
                             </div>
+
                         </div>
 
+
+
+                        {{-- FILTER WARNA --}}
+
                         <div class="col-md-3">
-                            <select id="filterWarna" class="form-select">
-                                <option value="">Semua Warna</option>
-                                <option value="primary">Navy</option>
-                                <option value="warning">Kuning</option>
-                                <option value="info">Biru Muda</option>
-                                <option value="secondary">Abu-abu</option>
-                                <option value="success">Hijau</option>
-                                <option value="danger">Merah</option>
-                                <option value="purple">Ungu</option>
-                                <option value="pink">Pink</option>
-                                <option value="teal">Teal</option>
-                                <option value="orange">Orange</option>
-                                <option value="indigo">Indigo</option>
-                                <option value="cyan">Cyan</option>
+
+                            <select
+                                id="filterWarna"
+                                class="form-select"
+                            >
+
+                                <option value="">
+                                    Semua Warna
+                                </option>
+
+                                <option value="primary">
+                                    Navy
+                                </option>
+
+                                <option value="warning">
+                                    Kuning
+                                </option>
+
+                                <option value="info">
+                                    Biru Muda
+                                </option>
+
+                                <option value="secondary">
+                                    Abu-abu
+                                </option>
+
+                                <option value="success">
+                                    Hijau
+                                </option>
+
+                                <option value="danger">
+                                    Merah
+                                </option>
+
+                                <option value="purple">
+                                    Ungu
+                                </option>
+
+                                <option value="pink">
+                                    Pink
+                                </option>
+
+                                <option value="teal">
+                                    Teal
+                                </option>
+
+                                <option value="orange">
+                                    Orange
+                                </option>
+
+                                <option value="indigo">
+                                    Indigo
+                                </option>
+
+                                <option value="cyan">
+                                    Cyan
+                                </option>
+
                             </select>
+
                         </div>
 
                     </div>
+
                 </div>
 
+
+
+                {{-- =================================================
+                     TABLE KATEGORI
+                ================================================== --}}
+
                 <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0" id="tabelKategori">
+
+                    <table
+                        class="table table-hover align-middle mb-0"
+                        id="tabelKategori"
+                    >
+
                         <thead class="table-light">
+
                             <tr class="small text-muted">
-                                <th class="ps-4" style="width:70px;">No</th>
-                                <th style="width:90px;">Icon</th>
-                                <th>Nama Kategori</th>
-                                <th>Jumlah Dokumen</th>
-                                <th>Dibuat Pada</th>
-                                <th>Warna</th>
-                                <th class="text-end pe-4">Aksi</th>
+
+
+                                <th
+                                    class="ps-4"
+                                    style="width:70px;"
+                                >
+                                    No
+                                </th>
+
+
+                                <th style="width:90px;">
+                                    Icon
+                                </th>
+
+
+                                <th>
+                                    Nama Kategori
+                                </th>
+
+
+                                <th>
+                                    Jumlah Dokumen
+                                </th>
+
+
+                                <th>
+                                    Dibuat Pada
+                                </th>
+
+
+                                <th>
+                                    Warna
+                                </th>
+
+
+                                <th class="text-end pe-4">
+                                    Aksi
+                                </th>
+
                             </tr>
+
                         </thead>
+
+
 
                         <tbody>
 
+
                         @forelse ($kategoris as $i => $kategori)
 
-                            <tr class="kategori-row" data-nama="{{ strtolower($kategori->nama) }}" data-warna="{{ $kategori->warna ?? 'secondary' }}">
 
-                                <td class="ps-4">{{ $i + 1 }}</td>
+                            <tr
+                                class="kategori-row"
+                                data-nama="{{ strtolower($kategori->nama) }}"
+                                data-warna="{{ $kategori->warna ?? 'secondary' }}"
+                            >
+
+
+                                {{-- NO --}}
+
+                                <td class="ps-4">
+
+                                    {{ $i + 1 }}
+
+                                </td>
+
+
+
+                                {{-- ICON --}}
 
                                 <td>
+
                                     @php
+
                                         $warnaIcon = [
-                                            'primary' => 'kategori-primary',
-                                            'warning' => 'kategori-warning',
-                                            'info' => 'kategori-info',
-                                            'secondary' => 'kategori-secondary',
-                                            'success' => 'kategori-success',
-                                            'danger' => 'kategori-danger',
-                                            'purple' => 'kategori-purple',
-                                            'pink' => 'kategori-pink',
-                                            'teal' => 'kategori-teal',
-                                            'orange' => 'kategori-orange',
-                                            'indigo' => 'kategori-indigo',
-                                            'cyan' => 'kategori-cyan',
+
+                                            'primary' =>
+                                                'kategori-primary',
+
+                                            'warning' =>
+                                                'kategori-warning',
+
+                                            'info' =>
+                                                'kategori-info',
+
+                                            'secondary' =>
+                                                'kategori-secondary',
+
+                                            'success' =>
+                                                'kategori-success',
+
+                                            'danger' =>
+                                                'kategori-danger',
+
+                                            'purple' =>
+                                                'kategori-purple',
+
+                                            'pink' =>
+                                                'kategori-pink',
+
+                                            'teal' =>
+                                                'kategori-teal',
+
+                                            'orange' =>
+                                                'kategori-orange',
+
+                                            'indigo' =>
+                                                'kategori-indigo',
+
+                                            'cyan' =>
+                                                'kategori-cyan',
+
                                         ];
+
                                     @endphp
 
-                                   <div class="kategori-icon-box {{ $warnaIcon[$kategori->warna] ?? 'kategori-secondary' }}">
-    @if ($kategori->icon && str_starts_with($kategori->icon, 'bi-'))
-        <i class="bi {{ $kategori->icon }}"></i>
-    @else
-        <span style="font-size: 20px; line-height: 1;">
-            {{ $kategori->icon ?? '📁' }}
-        </span>
-    @endif
-</div>
+
+                                    <div
+                                        class="kategori-icon-box {{ $warnaIcon[$kategori->warna] ?? 'kategori-secondary' }}"
+                                    >
+
+                                        <i
+                                            class="bi {{ $kategori->icon ?? 'bi-folder-fill' }}"
+                                        ></i>
+
+                                    </div>
+
                                 </td>
 
-                                <td>
-                                    <div class="fw-semibold">{{ $kategori->nama }}</div>
-                                </td>
+
+
+                                {{-- NAMA KATEGORI --}}
 
                                 <td>
+
+                                    <div class="fw-semibold">
+
+                                        {{ $kategori->nama }}
+
+                                    </div>
+
+                                </td>
+
+
+
+                                {{-- JUMLAH DOKUMEN --}}
+
+                                <td>
+
                                     @if ($kategori->dokumens_count > 0)
-                                        <span class="badge bg-light text-dark border">{{ $kategori->dokumens_count }} dokumen</span>
+
+                                        <span class="badge bg-light text-dark border">
+
+                                            {{ $kategori->dokumens_count }}
+
+                                            dokumen
+
+                                        </span>
+
                                     @else
-                                        <span class="badge bg-success-subtle text-success border">0 dokumen</span>
+
+                                        <span
+                                            class="badge bg-success-subtle text-success border"
+                                        >
+
+                                            0 dokumen
+
+                                        </span>
+
                                     @endif
+
                                 </td>
 
-                                <td>
-                                    <small class="text-muted">{{ $kategori->created_at?->format('d M Y H:i') }}</small>
-                                </td>
+
+
+                                {{-- DIBUAT PADA --}}
 
                                 <td>
+
+                                    <small class="text-muted">
+
+                                        {{ $kategori->created_at?->format('d M Y H:i') }}
+
+                                    </small>
+
+                                </td>
+
+
+
+                                {{-- WARNA --}}
+
+                                <td>
+
                                     @php
+
                                         $warnaLabel = [
-                                            'primary' => 'Navy',
-                                            'warning' => 'Kuning',
-                                            'info' => 'Biru Muda',
-                                            'secondary' => 'Abu-abu',
-                                            'success' => 'Hijau',
-                                            'danger' => 'Merah',
-                                            'purple' => 'Ungu',
-                                            'pink' => 'Pink',
-                                            'teal' => 'Teal',
-                                            'orange' => 'Orange',
-                                            'indigo' => 'Indigo',
-                                            'cyan' => 'Cyan',
+
+                                            'primary' =>
+                                                'Navy',
+
+                                            'warning' =>
+                                                'Kuning',
+
+                                            'info' =>
+                                                'Biru Muda',
+
+                                            'secondary' =>
+                                                'Abu-abu',
+
+                                            'success' =>
+                                                'Hijau',
+
+                                            'danger' =>
+                                                'Merah',
+
+                                            'purple' =>
+                                                'Ungu',
+
+                                            'pink' =>
+                                                'Pink',
+
+                                            'teal' =>
+                                                'Teal',
+
+                                            'orange' =>
+                                                'Orange',
+
+                                            'indigo' =>
+                                                'Indigo',
+
+                                            'cyan' =>
+                                                'Cyan',
+
                                         ];
+
 
                                         $warnaClass = [
-                                            'primary' => 'warna-navy',
-                                            'warning' => 'warna-kuning',
-                                            'info' => 'warna-biru-muda',
-                                            'secondary' => 'warna-abu',
-                                            'success' => 'warna-hijau',
-                                            'danger' => 'warna-merah',
-                                            'purple' => 'warna-ungu',
-                                            'pink' => 'warna-pink',
-                                            'teal' => 'warna-teal',
-                                            'orange' => 'warna-orange',
-                                            'indigo' => 'warna-indigo',
-                                            'cyan' => 'warna-cyan',
+
+                                            'primary' =>
+                                                'warna-navy',
+
+                                            'warning' =>
+                                                'warna-kuning',
+
+                                            'info' =>
+                                                'warna-biru-muda',
+
+                                            'secondary' =>
+                                                'warna-abu',
+
+                                            'success' =>
+                                                'warna-hijau',
+
+                                            'danger' =>
+                                                'warna-merah',
+
+                                            'purple' =>
+                                                'warna-ungu',
+
+                                            'pink' =>
+                                                'warna-pink',
+
+                                            'teal' =>
+                                                'warna-teal',
+
+                                            'orange' =>
+                                                'warna-orange',
+
+                                            'indigo' =>
+                                                'warna-indigo',
+
+                                            'cyan' =>
+                                                'warna-cyan',
+
                                         ];
+
                                     @endphp
 
+
                                     <div class="warna-kategori">
-                                        <span class="warna-dot {{ $warnaClass[$kategori->warna] ?? 'warna-abu' }}"></span>
-                                        <span class="warna-label">{{ $warnaLabel[$kategori->warna] ?? 'Abu-abu' }}</span>
-                                    </div>
-                                </td>
 
-                                <td class="text-end pe-4">
-                                    <div class="d-inline-flex align-items-center gap-1">
+                                        <span
+                                            class="warna-dot {{ $warnaClass[$kategori->warna] ?? 'warna-abu' }}"
+                                        ></span>
 
-                                        <button type="button" class="btn btn-sm btn-light border" data-bs-toggle="modal" data-bs-target="#modalEdit{{ $kategori->id }}" title="Edit kategori">
-                                            <i class="bi bi-pencil"></i>
-                                        </button>
 
-                                        <form action="{{ route('kategori.destroy', $kategori) }}" method="POST" class="d-inline form-nonaktifkan" data-nama="{{ $kategori->nama }}">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-light border text-danger" title="Nonaktifkan kategori">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </form>
+                                        <span class="warna-label">
+
+                                            {{ $warnaLabel[$kategori->warna] ?? 'Abu-abu' }}
+
+                                        </span>
 
                                     </div>
+
                                 </td>
+
+
+
+{{-- AKSI --}}
+<td class="text-end pe-4">
+
+    <div class="d-inline-flex align-items-center gap-1">
+
+        {{-- EDIT --}}
+        <button type="button"
+                class="btn btn-sm btn-light border"
+                data-bs-toggle="modal"
+                data-bs-target="#modalEdit{{ $kategori->id }}"
+                title="Edit kategori">
+
+            <i class="bi bi-pencil"></i>
+
+        </button>
+
+
+        {{-- NONAKTIFKAN --}}
+        <form action="{{ route('kategori.destroy', $kategori) }}"
+              method="POST"
+              class="d-inline form-nonaktifkan"
+              data-nama="{{ $kategori->nama }}">
+
+            @csrf
+            @method('DELETE')
+
+            <button type="submit"
+                    class="btn btn-sm btn-light border text-danger"
+                    title="Nonaktifkan kategori">
+
+                <i class="bi bi-trash"></i>
+
+            </button>
+
+        </form>
+
+    </div>
+
+</td>
 
                             </tr>
+
 
                         @empty
 
+
                             <tr>
-                                <td colspan="7" class="text-center py-5 text-muted">
-                                    <i class="bi bi-folder-x fs-1 d-block mb-2"></i>
+
+                                <td
+                                    colspan="7"
+                                    class="text-center py-5 text-muted"
+                                >
+
+                                    <i
+                                        class="bi bi-folder-x fs-1 d-block mb-2"
+                                    ></i>
+
                                     Belum ada kategori.
+
                                 </td>
+
                             </tr>
+
 
                         @endforelse
 
+
                         </tbody>
+
                     </table>
+
                 </div>
+
+
+
+                {{-- FOOTER TABLE --}}
 
                 <div class="px-4 py-3 border-top">
-                    <small class="text-muted">Menampilkan {{ $kategoris->count() }} kategori aktif</small>
+
+                    <small class="text-muted">
+
+                        Menampilkan
+
+                        {{ $kategoris->count() }}
+
+                        kategori aktif
+
+                    </small>
+
                 </div>
+
             </div>
 
-            {{-- TAB KATEGORI TERHAPUS --}}
-            <div class="tab-pane fade" id="kategoriTerhapus">
+
+
+            {{-- =================================================
+                 TAB KATEGORI TERHAPUS
+            ================================================== --}}
+
+            <div
+                class="tab-pane fade"
+                id="kategoriTerhapus"
+            >
+
                 <div class="p-4">
 
+
                     <div class="alert alert-info border-0">
+
                         <div class="d-flex align-items-start">
-                            <i class="bi bi-info-circle-fill me-2 mt-1"></i>
+
+                            <i
+                                class="bi bi-info-circle-fill me-2 mt-1"
+                            ></i>
+
+
                             <div>
-                                <strong>Kategori yang dinonaktifkan</strong>
+
+                                <strong>
+                                    Kategori yang dinonaktifkan
+                                </strong>
+
+
                                 <div class="small mt-1">
-                                    Kategori yang dinonaktifkan tidak dapat digunakan untuk dokumen baru, tetapi
-                                    dokumen lama tetap aman. Kategori dapat dipulihkan kapan saja.
+
+                                    Kategori yang dinonaktifkan tidak dapat
+                                    digunakan untuk dokumen baru, tetapi
+                                    dokumen lama tetap aman.
+
+                                    Kategori dapat dipulihkan kapan saja.
+
                                 </div>
+
                             </div>
+
                         </div>
+
                     </div>
 
+
+
                     <div class="table-responsive">
+
                         <table class="table table-hover align-middle">
+
                             <thead class="table-light">
+
                                 <tr class="small text-muted">
-                                    <th style="width:70px;">No</th>
-                                    <th>Nama Kategori</th>
-                                    <th>Jumlah Dokumen</th>
-                                    <th>Dinonaktifkan</th>
-                                    <th class="text-end">Aksi</th>
+
+                                    <th style="width:70px;">
+                                        No
+                                    </th>
+
+                                    <th>
+                                        Nama Kategori
+                                    </th>
+
+                                    <th>
+                                        Jumlah Dokumen
+                                    </th>
+
+                                    <th>
+                                        Dinonaktifkan
+                                    </th>
+
+                                    <th class="text-end">
+                                        Aksi
+                                    </th>
+
                                 </tr>
+
                             </thead>
+
+
 
                             <tbody>
 
+
                             @forelse ($kategoriTerhapus as $i => $kategori)
 
+
                                 <tr>
-                                    <td>{{ $i + 1 }}</td>
-                                    <td><span class="fw-semibold text-muted">{{ $kategori->nama }}</span></td>
-                                    <td>{{ $kategori->dokumens_count }} dokumen</td>
-                                    <td><small class="text-muted">{{ $kategori->deleted_at?->format('d M Y H:i') }}</small></td>
+
+
+                                    <td>
+
+                                        {{ $i + 1 }}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <span
+                                            class="fw-semibold text-muted"
+                                        >
+
+                                            {{ $kategori->nama }}
+
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        {{ $kategori->dokumens_count }}
+
+                                        dokumen
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <small class="text-muted">
+
+                                            {{ $kategori->deleted_at?->format('d M Y H:i') }}
+
+                                        </small>
+
+                                    </td>
+
 
                                     <td class="text-end">
-                                        <div class="d-inline-flex align-items-center gap-1">
 
-                                            <form action="{{ route('kategori.restore', $kategori->id) }}" method="POST" class="d-inline-flex">
-                                                @csrf
-                                                @method('PATCH')
-                                                <button type="submit" class="btn btn-sm btn-outline-success" title="Pulihkan kategori">
-                                                    <i class="bi bi-arrow-counterclockwise"></i>
-                                                </button>
-                                            </form>
 
-                                            {{-- Sesuaikan nama route 'kategori.forceDelete' dengan route hapus permanen pada routes/web.php Anda --}}
-                                            <form action="{{ route('kategori.forceDelete', $kategori->id) }}" method="POST" class="d-inline-flex form-hapus-permanen" data-nama="{{ $kategori->nama }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Hapus permanen">
-                                                    <i class="bi bi-trash3"></i>
-                                                </button>
-                                            </form>
+{{-- RESTORE --}}
+<form action="{{ route('kategori.restore', $kategori->id) }}"
+      method="POST"
+      class="d-inline-flex">
 
-                                        </div>
+    @csrf
+    @method('PATCH')
+
+    <button type="submit"
+            class="btn btn-sm btn-outline-success action-icon-btn"
+            title="Pulihkan kategori">
+
+        <i class="bi bi-arrow-counterclockwise"></i>
+
+    </button>
+
+</form>
+
+{{-- HAPUS PERMANEN --}}
+<form action="{{ route('kategori.forceDelete', $kategori->id) }}"
+      method="POST"
+      class="d-inline form-hapus-permanen"
+      data-nama="{{ $kategori->nama }}">
+
+    @csrf
+    @method('DELETE')
+
+    <button type="submit"
+            class="btn btn-sm btn-outline-danger"
+            title="Hapus permanen">
+
+        <i class="bi bi-trash3"></i>
+
+    </button>
+
+</form>
+
                                     </td>
+
                                 </tr>
+
 
                             @empty
 
+
                                 <tr>
-                                    <td colspan="5" class="text-center py-5 text-muted">
-                                        <i class="bi bi-check-circle fs-1 d-block mb-2"></i>
+
+                                    <td
+                                        colspan="5"
+                                        class="text-center py-5 text-muted"
+                                    >
+
+                                        <i
+                                            class="bi bi-check-circle fs-1 d-block mb-2"
+                                        ></i>
+
                                         Tidak ada kategori yang dinonaktifkan.
+
                                     </td>
+
                                 </tr>
+
 
                             @endforelse
 
+
                             </tbody>
+
                         </table>
+
                     </div>
 
                 </div>
+
             </div>
 
         </div>
+
     </div>
+
 </div>
 
 
-{{-- MODAL TAMBAH KATEGORI --}}
-<div class="modal fade" id="modalTambahKategori" tabindex="-1" aria-hidden="true">
+
+{{-- =========================================================
+     MODAL TAMBAH KATEGORI
+========================================================= --}}
+
+<div
+    class="modal fade"
+    id="modalTambahKategori"
+    tabindex="-1"
+    aria-hidden="true"
+>
     <div class="modal-dialog modal-dialog-centered">
+
         <div class="modal-content border-0 shadow">
 
             <div class="modal-header">
-                <h5 class="modal-title fw-bold">Tambah Kategori</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+
+                <h5 class="modal-title fw-bold">
+                    Tambah Kategori
+                </h5>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                ></button>
+
             </div>
 
-            <form action="{{ route('kategori.store') }}" method="POST">
+            <form
+                action="{{ route('kategori.store') }}"
+                method="POST"
+            >
+
                 @csrf
 
                 <div class="modal-body">
 
+                    {{-- NAMA --}}
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Nama Kategori</label>
-                        <input type="text" name="nama" class="form-control" placeholder="Masukkan nama kategori" required>
+
+                        <label class="form-label fw-semibold">
+                            Nama Kategori
+                        </label>
+
+                        <input
+                            type="text"
+                            name="nama"
+                            class="form-control"
+                            placeholder="Masukkan nama kategori"
+                            required
+                        >
+
                     </div>
 
-                    {{-- ICON PICKER TAMBAH --}}
+                    {{-- ICON --}}
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Icon</label>
+    <label class="form-label fw-semibold">
+        Pilih Icon
+    </label>
 
-                        <input type="hidden" name="icon" id="iconInputTambah" value="bi-folder-fill">
+    @php
+        $daftarIcon = [
+            'bi-flower1'              => 'Padi / Pertanian / Tanaman',
+            'bi-box-seam'             => 'Karung Beras / Kemasan Dokumen',
+            'bi-building'             => 'Gudang / Kompleks Pergudangan',
+            'bi-shop'                 => 'RPA / Outlet Penjualan Beras',
+            'bi-truck'                => 'Pengangkutan / Logistik / Distribusi',
+            'bi-gear-fill'            => 'Pengolahan / Penggilingan / Mesin',
+            'bi-clipboard-data-fill'  => 'Stok Operasional / Laporan Beras',
+            'bi-shield-check'         => 'Pengawasan Mutu / Kualitas Beras',
+            'bi-basket2-fill'         => 'Pangan / Kebutuhan Pokok',
+            'bi-cash-stack'           => 'Anggaran / Harga HPP / Keuangan',
+            'bi-file-earmark-text'    => 'Dokumen Administrasi / Arsip',
+            'bi-archive-fill'         => 'Penyimpanan Arsip / Berkas Logistik',
+            'bi-tags-fill'            => 'Klasifikasi Kategori Pangan',
+            'bi-folder-fill'          => 'Folder Umum Kategori',
+        ];
+    @endphp
 
-                        <div class="icon-picker-wrapper">
-                            <button type="button"
-                                    class="form-control d-flex align-items-center gap-2 text-start icon-picker-trigger"
-                                    id="btnIconTambah"
-                                    data-input="#iconInputTambah"
-                                    data-panel="#iconPanelTambah"
-                                    data-preview="#iconPreviewTambah"
-                                    data-text="#iconTextTambah"
-                                    style="height:48px;">
-                                <i class="bi bi-folder-fill fs-5" id="iconPreviewTambah"></i>
-                                <span id="iconTextTambah">Pilih Icon</span>
-                                <i class="bi bi-chevron-down ms-auto"></i>
-                            </button>
+    <select name="icon" class="form-select" required>
+        <option value="">-- Pilih Icon --</option>
+        @foreach ($daftarIcon as $iconValue => $iconLabel)
+            <option value="{{ $iconValue }}">
+                &#x25A1; {{ $iconLabel }} ({{ $iconValue }})
+            </option>
+        @endforeach
+    </select>
+    <small class="text-muted">
+        Pilih ikon yang paling sesuai dengan kategori.
+    </small>
+</div>
 
-                            <div class="icon-picker-panel" id="iconPanelTambah"></div>
-                        </div>
-                    </div>
+{{-- WARNA --}}
+<div class="mb-3">
 
-                    {{-- WARNA --}}
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold">Warna</label>
+    <label class="form-label fw-semibold">
+        Warna
+    </label>
 
-                        @php
-                            $warnaTersedia = [
-                                'primary' => 'Navy',
-                                'warning' => 'Kuning',
-                                'info' => 'Biru Muda',
-                                'secondary' => 'Abu-abu',
-                                'success' => 'Hijau',
-                                'danger' => 'Merah',
-                                'purple' => 'Ungu',
-                                'pink' => 'Pink',
-                                'teal' => 'Teal',
-                                'orange' => 'Orange',
-                                'indigo' => 'Indigo',
-                                'cyan' => 'Cyan',
-                            ];
+    @php
+        $warnaTersedia = [
+            'primary' => 'Navy',
+            'warning' => 'Kuning',
+            'info' => 'Biru Muda',
+            'secondary' => 'Abu-abu',
+            'success' => 'Hijau',
+            'danger' => 'Merah',
+            'purple' => 'Ungu',
+            'pink' => 'Pink',
+            'teal' => 'Teal',
+            'orange' => 'Orange',
+            'indigo' => 'Indigo',
+            'cyan' => 'Cyan',
+        ];
 
-                            $warnaTerpakai = $kategoris->pluck('warna')->filter()->unique()->toArray();
-                        @endphp
+        $warnaTerpakai = $kategoris
+            ->pluck('warna')
+            ->filter()
+            ->unique()
+            ->toArray();
+    @endphp
 
-                        <select name="warna" class="form-select" required>
-                            <option value="">-- Pilih Warna --</option>
-                            @foreach ($warnaTersedia as $value => $label)
-                                <option value="{{ $value }}" {{ in_array($value, $warnaTerpakai) ? 'disabled' : '' }}>
-                                    {{ $label }} @if (in_array($value, $warnaTerpakai)) (sudah digunakan) @endif
-                                </option>
-                            @endforeach
-                        </select>
+    <select
+        name="warna"
+        class="form-select"
+        required
+    >
 
-                        <small class="text-muted">Warna yang sudah digunakan tidak dapat dipilih.</small>
-                    </div>
+        <option value="">
+            -- Pilih Warna --
+        </option>
+
+        @foreach ($warnaTersedia as $value => $label)
+
+            <option
+                value="{{ $value }}"
+                {{ in_array($value, $warnaTerpakai) ? 'disabled' : '' }}
+            >
+                {{ $label }}
+
+                @if (in_array($value, $warnaTerpakai))
+                    (sudah digunakan)
+                @endif
+            </option>
+
+        @endforeach
+
+    </select>
+
+    <small class="text-muted">
+        Warna yang sudah digunakan tidak dapat dipilih.
+    </small>
+
+</div>
 
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-check-lg me-1"></i> Simpan Kategori
+
+                    <button
+                        type="button"
+                        class="btn btn-light"
+                        data-bs-dismiss="modal"
+                    >
+                        Batal
                     </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        <i class="bi bi-check-lg me-1"></i>
+                        Simpan Kategori
+                    </button>
+
                 </div>
 
             </form>
+
         </div>
     </div>
 </div>
 
 
-{{-- MODAL EDIT KATEGORI --}}
+   
+
+
+{{-- =========================================================
+     MODAL EDIT KATEGORI
+========================================================= --}}
+
 @foreach ($kategoris as $kategori)
 
-<div class="modal fade" id="modalEdit{{ $kategori->id }}" tabindex="-1" aria-hidden="true">
+
+<div
+    class="modal fade"
+    id="modalEdit{{ $kategori->id }}"
+    tabindex="-1"
+    aria-hidden="true"
+>
+
+
     <div class="modal-dialog modal-dialog-centered">
+
         <div class="modal-content border-0 shadow">
 
+
             <div class="modal-header">
-                <h5 class="modal-title fw-bold">Edit Kategori</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+
+                <h5 class="modal-title fw-bold">
+
+                    Edit Kategori
+
+                </h5>
+
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                ></button>
+
             </div>
 
-            <form action="{{ route('kategori.update', $kategori) }}" method="POST">
+
+
+            <form
+                action="{{ route('kategori.update', $kategori) }}"
+                method="POST"
+            >
+
                 @csrf
+
                 @method('PUT')
+
 
                 <div class="modal-body">
 
+
+                    {{-- NAMA --}}
+
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Nama Kategori</label>
-                        <input type="text" name="nama" class="form-control" value="{{ $kategori->nama }}" required>
+
+                        <label
+                            class="form-label fw-semibold"
+                        >
+
+                            Nama Kategori
+
+                        </label>
+
+
+                        <input
+                            type="text"
+                            name="nama"
+                            class="form-control"
+                            value="{{ $kategori->nama }}"
+                            required
+                        >
+
                     </div>
 
-                    {{-- ICON PICKER EDIT --}}
+
+
+                    {{-- ICON --}}
+
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Icon</label>
+    <label class="form-label fw-semibold">
+        Pilih Icon
+    </label>
 
-                        <input type="hidden" name="icon" id="iconInputEdit{{ $kategori->id }}" value="{{ $kategori->icon ?? 'bi-folder-fill' }}">
+    <select name="icon" class="form-select" required>
+        <option value="">-- Pilih Icon --</option>
+        @foreach ($daftarIcon as $iconValue => $iconLabel)
+            <option value="{{ $iconValue }}" {{ ($kategori->icon == $iconValue) ? 'selected' : '' }}>
+                {{ $iconLabel }} ({{ $iconValue }})
+            </option>
+        @endforeach
+    </select>
+</div>
 
-                        <div class="icon-picker-wrapper">
-                            <button type="button"
-                                    class="form-control d-flex align-items-center gap-2 text-start icon-picker-trigger"
-                                    id="btnIconEdit{{ $kategori->id }}"
-                                    data-input="#iconInputEdit{{ $kategori->id }}"
-                                    data-panel="#iconPanelEdit{{ $kategori->id }}"
-                                    data-preview="#iconPreviewEdit{{ $kategori->id }}"
-                                    data-text="#iconTextEdit{{ $kategori->id }}"
-                                    style="height:48px;">
-@if ($kategori->icon && str_starts_with($kategori->icon, 'bi-'))
-    <i class="bi {{ $kategori->icon }} fs-5"
-       id="iconPreviewEdit{{ $kategori->id }}"></i>
-@else
-    <span class="fs-5"
-          id="iconPreviewEdit{{ $kategori->id }}">{{ $kategori->icon ?? '📁' }}</span>
-@endif
-                                <span id="iconTextEdit{{ $kategori->id }}">{{ $kategori->icon ?? 'Pilih Icon' }}</span>
-                                <i class="bi bi-chevron-down ms-auto"></i>
-                            </button>
 
-                            <div class="icon-picker-panel" id="iconPanelEdit{{ $kategori->id }}"></div>
-                        </div>
-                    </div>
 
-                    {{-- WARNA --}}
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold">Warna</label>
+ {{-- WARNA --}}
 
-                        @php
-                            $warnaTersedia = [
-                                'primary' => 'Navy',
-                                'warning' => 'Kuning',
-                                'info' => 'Biru Muda',
-                                'secondary' => 'Abu-abu',
-                                'success' => 'Hijau',
-                                'danger' => 'Merah',
-                                'purple' => 'Ungu',
-                                'pink' => 'Pink',
-                                'teal' => 'Teal',
-                                'orange' => 'Orange',
-                                'indigo' => 'Indigo',
-                                'cyan' => 'Cyan',
-                            ];
+<div class="mb-3">
 
-                            $warnaTerpakai = $kategoris->pluck('warna')->filter()->toArray();
-                        @endphp
+    <label class="form-label fw-semibold">
+        Warna
+    </label>
 
-                        <select name="warna" class="form-select" required>
-                            <option value="">-- Pilih Warna --</option>
-                            @foreach ($warnaTersedia as $value => $label)
-                                <option value="{{ $value }}" {{ in_array($value, $warnaTerpakai) ? 'disabled' : '' }}>
-                                    {{ $label }} @if (in_array($value, $warnaTerpakai)) (sudah digunakan) @endif
-                                </option>
-                            @endforeach
-                        </select>
+    @php
 
-                        <small class="text-muted">Warna yang sudah digunakan oleh kategori lain tidak dapat dipilih.</small>
-                    </div>
+        $warnaTersedia = [
+
+            'primary' => 'Navy',
+            'warning' => 'Kuning',
+            'info' => 'Biru Muda',
+            'secondary' => 'Abu-abu',
+            'success' => 'Hijau',
+            'danger' => 'Merah',
+            'purple' => 'Ungu',
+            'pink' => 'Pink',
+            'teal' => 'Teal',
+            'orange' => 'Orange',
+            'indigo' => 'Indigo',
+            'cyan' => 'Cyan',
+
+        ];
+
+        // Warna yang sudah digunakan kategori aktif
+        $warnaTerpakai = $kategoris
+            ->pluck('warna')
+            ->filter()
+            ->toArray();
+
+    @endphp
+
+    <select
+        name="warna"
+        class="form-select"
+        required
+    >
+
+        <option value="">
+            -- Pilih Warna --
+        </option>
+
+        @foreach ($warnaTersedia as $value => $label)
+
+            <option
+                value="{{ $value }}"
+                {{ in_array($value, $warnaTerpakai) ? 'disabled' : '' }}
+            >
+
+                {{ $label }}
+
+                @if (in_array($value, $warnaTerpakai))
+                    (sudah digunakan)
+                @endif
+
+            </option>
+
+        @endforeach
+
+    </select>
+
+    <small class="text-muted">
+        Warna yang sudah digunakan oleh kategori lain tidak dapat dipilih.
+    </small>
+
+
+</div>
 
                 </div>
 
+
+
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-check-lg me-1"></i> Simpan Kategori
+
+
+                    <button
+                        type="button"
+                        class="btn btn-light"
+                        data-bs-dismiss="modal"
+                    >
+
+                        Batal
+
                     </button>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+
+                        <i
+                            class="bi bi-check-lg me-1"
+                        ></i>
+
+                        Simpan Kategori
+
+                    </button>
+
+
                 </div>
 
             </form>
-        </div>
-    </div>
-</div>
 
+        </div>
+
+    </div>
+
+</div>
 @endforeach
 
-
+{{-- ================================================= --}}
 {{-- MODAL KONFIRMASI --}}
-<div class="modal fade" id="modalKonfirmasi" tabindex="-1" aria-hidden="true">
+{{-- ================================================= --}}
+
+<div class="modal fade"
+     id="modalKonfirmasi"
+     tabindex="-1"
+     aria-hidden="true">
+
     <div class="modal-dialog modal-dialog-centered modal-dialog-confirm">
+
         <div class="modal-content confirm-modal">
+
             <div class="modal-body text-center p-4 p-md-5">
 
+                {{-- ICON --}}
                 <div class="confirm-icon" id="confirmIcon">
                     <i class="bi bi-exclamation-lg"></i>
                 </div>
 
-                <h4 class="fw-bold mb-2" id="confirmTitle">Konfirmasi</h4>
+                {{-- JUDUL --}}
+                <h4 class="fw-bold mb-2"
+                    id="confirmTitle">
+                    Konfirmasi
+                </h4>
 
-                <p class="text-muted mb-4" id="confirmMessage">Apakah Anda yakin?</p>
+                {{-- PESAN --}}
+                <p class="text-muted mb-4"
+                   id="confirmMessage">
+                    Apakah Anda yakin?
+                </p>
 
-                <div class="confirm-warning" id="confirmWarning">
+                {{-- PERINGATAN --}}
+                <div class="confirm-warning"
+                     id="confirmWarning">
+
                     <i class="bi bi-exclamation-triangle-fill"></i>
-                    <span id="confirmWarningText">Tindakan ini tidak dapat dibatalkan.</span>
+
+                    <span id="confirmWarningText">
+                        Tindakan ini tidak dapat dibatalkan.
+                    </span>
+
                 </div>
 
+                {{-- BUTTON --}}
                 <div class="d-flex gap-2 justify-content-center mt-4">
-                    <button type="button" class="btn btn-confirm-cancel" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-confirm-danger" id="btnConfirmAction">
-                        <i class="bi bi-trash3 me-1"></i> Ya, Hapus Permanen
+
+                    <button type="button"
+                            class="btn btn-confirm-cancel"
+                            data-bs-dismiss="modal">
+
+                        Batal
+
                     </button>
+
+                    <button type="button"
+                            class="btn btn-confirm-danger"
+                            id="btnConfirmAction">
+
+                        <i class="bi bi-trash3 me-1"></i>
+
+                        Ya, Hapus Permanen
+
+                    </button>
+
                 </div>
 
             </div>
+
         </div>
+
     </div>
+
 </div>
 
 @endsection
 
 
+
 {{-- =========================================================
-     JAVASCRIPT (SATU BLOK @push('scripts') SAJA)
+     JAVASCRIPT SEARCH + FILTER
 ========================================================= --}}
 
 @push('scripts')
+
 <script>
 document.addEventListener('DOMContentLoaded', function () {
 
     /* =====================================================
-       MODAL KONFIRMASI (Nonaktifkan & Hapus Permanen)
+       ANIMASI JUMLAH KATEGORI
+       0 → 1 → 2 → 3 → 4
     ===================================================== */
 
-    const modalElement = document.getElementById('modalKonfirmasi');
-    const modal = new bootstrap.Modal(modalElement);
+    const kategoriCounter =
+        document.querySelector('.kategori-hero-number');
 
-    const confirmTitle = document.getElementById('confirmTitle');
-    const confirmMessage = document.getElementById('confirmMessage');
-    const confirmWarningText = document.getElementById('confirmWarningText');
-    const confirmIcon = document.getElementById('confirmIcon');
-    const confirmButton = document.getElementById('btnConfirmAction');
+    if (kategoriCounter) {
 
-    let formTarget = null;
+        const target = parseInt(
+            kategoriCounter.dataset.count || 0,
+            10
+        );
 
-    document.querySelectorAll('.form-nonaktifkan').forEach(function (form) {
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            formTarget = form;
+        let current = 0;
 
-            const nama = form.dataset.nama;
+        kategoriCounter.textContent = current;
 
-            confirmTitle.textContent = 'Nonaktifkan kategori?';
-            confirmMessage.innerHTML = 'Kategori <strong>' + nama + '</strong> akan dinonaktifkan.';
-            confirmWarningText.textContent = 'Kategori tidak dapat digunakan untuk dokumen baru, tetapi dokumen lama tetap aman.';
-            confirmIcon.innerHTML = '<i class="bi bi-folder-x"></i>';
-            confirmIcon.style.background = '#fff7ed';
-            confirmIcon.style.borderColor = '#fed7aa';
-            confirmIcon.style.color = '#f97316';
-            confirmButton.innerHTML = '<i class="bi bi-folder-x me-1"></i> Ya, Nonaktifkan';
-            confirmButton.style.background = '#f97316';
+        if (target > 0) {
 
-            modal.show();
-        });
-    });
+            function countUp() {
 
-    document.querySelectorAll('.form-hapus-permanen').forEach(function (form) {
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            formTarget = form;
+                current++;
 
-            const nama = form.dataset.nama || '';
+                kategoriCounter.textContent = current;
 
-            confirmTitle.textContent = 'Hapus kategori secara permanen?';
-            confirmMessage.innerHTML = nama
-                ? 'Kategori <strong>' + nama + '</strong> akan dihapus permanen dan tidak dapat dikembalikan.'
-                : 'Data kategori yang sudah dihapus tidak dapat dikembalikan.';
-            confirmWarningText.textContent = 'Tindakan ini akan menghapus kategori secara permanen dari sistem.';
-            confirmIcon.innerHTML = '<i class="bi bi-trash3"></i>';
-            confirmIcon.style.background = '#fef2f2';
-            confirmIcon.style.borderColor = '#fecaca';
-            confirmIcon.style.color = '#dc3545';
-            confirmButton.innerHTML = '<i class="bi bi-trash3 me-1"></i> Ya, Hapus Permanen';
-            confirmButton.style.background = '#dc3545';
+                if (current < target) {
 
-            modal.show();
-        });
-    });
+                    setTimeout(countUp, 150);
 
-    confirmButton.addEventListener('click', function () {
-        if (formTarget) {
-            modal.hide();
-            formTarget.submit();
+                }
+
+            }
+
+            setTimeout(countUp, 150);
         }
-    });
-
-    modalElement.addEventListener('hidden.bs.modal', function () {
-        formTarget = null;
-    });
+    }
 
 
     /* =====================================================
-       ICON PICKER (Bootstrap Icons) - dipakai bersama oleh
-       modal Tambah dan setiap modal Edit
+       MODAL KONFIRMASI
     ===================================================== */
 
- const iconCategories = {
-"Pertanian & Pangan": [
-    {
-        icon: "🌱",
-        name: "Tanaman / Pertanian"
-    },
-    {
-        icon: "🧺",
-        name: "Hasil Panen"
-    },
-    {
-        icon: "📦",
-        name: "Beras / Bahan Pangan"
-    },
-    {
-        icon: "🌾",
-        name: "Padi / Gandum"
-    },
-    {
-        icon: "🌽",
-        name: "Jagung"
-    },
-    {
-        icon: "🌿",
-        name: "Tanaman"
-    }
-],
+    const modalElement =
+        document.getElementById('modalKonfirmasi');
 
-    "Dokumen & Arsip": ["bi-file-earmark","bi-file-earmark-fill","bi-file-earmark-text","bi-file-earmark-text-fill","bi-file-earmark-check","bi-file-earmark-check-fill","bi-file-earmark-post","bi-file-earmark-richtext","bi-file-earmark-ruled","bi-file-earmark-ruled-fill","bi-file-earmark-medical","bi-file-earmark-medical-fill","bi-file-earmark-pdf","bi-file-earmark-pdf-fill","bi-file-earmark-word","bi-file-earmark-word-fill","bi-file-earmark-excel","bi-file-earmark-excel-fill","bi-file-earmark-spreadsheet","bi-file-earmark-spreadsheet-fill","bi-file-earmark-bar-graph","bi-file-earmark-bar-graph-fill","bi-file-earmark-lock","bi-file-earmark-lock-fill","bi-file-earmark-person","bi-file-earmark-diff","bi-file-earmark-diff-fill","bi-files","bi-files-alt","bi-folder","bi-folder-fill","bi-folder2","bi-folder2-open","bi-folder-check","bi-folder-plus","bi-folder-minus","bi-folder-symlink","bi-folder-symlink-fill","bi-folder-x","bi-archive","bi-archive-fill","bi-clipboard","bi-clipboard-fill","bi-clipboard-check","bi-clipboard-check-fill","bi-clipboard-data","bi-clipboard-data-fill","bi-clipboard2","bi-clipboard2-fill","bi-clipboard2-check","bi-clipboard2-check-fill","bi-clipboard2-data","bi-clipboard2-data-fill","bi-clipboard2-plus","bi-clipboard2-plus-fill","bi-journal","bi-journal-text","bi-journal-bookmark","bi-journal-bookmark-fill","bi-journals","bi-book","bi-book-fill","bi-book-half","bi-books","bi-envelope","bi-envelope-fill","bi-envelope-open","bi-envelope-open-fill","bi-postcard","bi-postcard-fill","bi-sticky","bi-sticky-fill","bi-award","bi-award-fill","bi-patch-check","bi-patch-check-fill"],
+    const modal =
+        new bootstrap.Modal(modalElement);
 
-    "Hewan & Peternakan": ["bi-bug","bi-bug-fill","bi-egg","bi-egg-fill","bi-egg-fried","bi-feather","bi-fish"],
+    const confirmTitle =
+        document.getElementById('confirmTitle');
 
-    "Tumbuhan & Alam": ["bi-tree","bi-tree-fill","bi-flower1","bi-flower2","bi-flower3","bi-sun","bi-sun-fill","bi-moon","bi-moon-fill","bi-moon-stars","bi-moon-stars-fill","bi-stars","bi-cloud","bi-cloud-fill","bi-droplet","bi-droplet-fill","bi-droplet-half","bi-water","bi-wind","bi-snow","bi-snow2","bi-snow3","bi-rainbow","bi-globe","bi-globe-americas","bi-globe-asia-australia","bi-globe-central-south-asia","bi-globe-europe-africa","bi-brightness-high","bi-brightness-high-fill","bi-brightness-low","bi-brightness-low-fill"],
+    const confirmMessage =
+        document.getElementById('confirmMessage');
 
-    "Gudang & Pergudangan BULOG": ["bi-box","bi-box-fill","bi-box2","bi-box2-fill","bi-box2-heart","bi-box2-heart-fill","bi-box-seam","bi-box-seam-fill","bi-boxes","bi-archive","bi-archive-fill","bi-building","bi-building-fill","bi-buildings","bi-buildings-fill","bi-inbox","bi-inbox-fill","bi-inboxes","bi-inboxes-fill","bi-database","bi-database-fill","bi-database-add","bi-database-check","bi-database-gear","bi-hdd","bi-hdd-fill","bi-hdd-stack","bi-hdd-stack-fill","bi-truck-flatbed","bi-basket3","bi-basket3-fill"],
+    const confirmWarningText =
+        document.getElementById('confirmWarningText');
 
-    "Logistik & Distribusi": ["bi-truck","bi-truck-front","bi-truck-front-fill","bi-truck-flatbed","bi-car-front","bi-car-front-fill","bi-bus-front","bi-bus-front-fill","bi-train-front","bi-train-front-fill","bi-train-freight-front","bi-train-freight-front-fill","bi-train-lightrail-front","bi-train-lightrail-front-fill","bi-airplane","bi-airplane-fill","bi-airplane-engines","bi-airplane-engines-fill","bi-geo-alt","bi-geo-alt-fill","bi-pin-map","bi-pin-map-fill","bi-signpost","bi-signpost-fill","bi-signpost-2","bi-signpost-2-fill","bi-signpost-split","bi-signpost-split-fill","bi-send","bi-send-fill","bi-send-check","bi-send-check-fill","bi-send-plus","bi-send-plus-fill","bi-compass","bi-compass-fill","bi-arrow-repeat"],
+    const confirmIcon =
+        document.getElementById('confirmIcon');
 
-    "Keuangan & Administrasi": ["bi-cash","bi-cash-coin","bi-cash-stack","bi-currency-dollar","bi-currency-exchange","bi-wallet","bi-wallet2","bi-wallet-fill","bi-credit-card","bi-credit-card-fill","bi-credit-card-2-back","bi-credit-card-2-back-fill","bi-credit-card-2-front","bi-credit-card-2-front-fill","bi-receipt","bi-receipt-cutoff","bi-calculator","bi-calculator-fill","bi-bank","bi-bank2","bi-piggy-bank","bi-piggy-bank-fill","bi-graph-up","bi-graph-up-arrow","bi-graph-down","bi-bar-chart","bi-bar-chart-fill","bi-bar-chart-line","bi-bar-chart-line-fill","bi-pie-chart","bi-pie-chart-fill","bi-percent","bi-coin"],
+    const confirmButton =
+        document.getElementById('btnConfirmAction');
 
-    "Kantor & Organisasi": ["bi-building","bi-building-fill","bi-buildings","bi-buildings-fill","bi-briefcase","bi-briefcase-fill","bi-person","bi-person-fill","bi-person-badge","bi-person-badge-fill","bi-people","bi-people-fill","bi-person-workspace","bi-diagram-2","bi-diagram-2-fill","bi-diagram-3","bi-diagram-3-fill","bi-kanban","bi-kanban-fill","bi-calendar","bi-calendar-fill","bi-calendar-event","bi-calendar-event-fill","bi-calendar-check","bi-calendar-check-fill","bi-clock","bi-clock-fill","bi-pc-display","bi-pc-display-horizontal","bi-laptop","bi-laptop-fill","bi-printer","bi-printer-fill","bi-display","bi-display-fill","bi-easel","bi-easel-fill","bi-chat-square-text","bi-chat-square-text-fill","bi-person-video","bi-person-video2","bi-person-video3"],
+    let formTarget = null;
 
-    "Keamanan & Verifikasi": ["bi-lock","bi-lock-fill","bi-unlock","bi-unlock-fill","bi-shield","bi-shield-fill","bi-shield-check","bi-shield-lock","bi-shield-lock-fill","bi-shield-exclamation","bi-shield-x","bi-key","bi-key-fill","bi-fingerprint","bi-patch-check","bi-patch-check-fill","bi-patch-exclamation","bi-patch-exclamation-fill","bi-check-circle","bi-check-circle-fill","bi-exclamation-triangle","bi-exclamation-triangle-fill","bi-exclamation-octagon","bi-exclamation-octagon-fill","bi-eye","bi-eye-fill","bi-eye-slash","bi-eye-slash-fill","bi-incognito"],
 
-    "Lokasi & Wilayah": ["bi-map","bi-map-fill","bi-geo","bi-geo-fill","bi-geo-alt","bi-geo-alt-fill","bi-pin","bi-pin-fill","bi-pin-map","bi-pin-map-fill","bi-pin-angle","bi-pin-angle-fill","bi-compass","bi-compass-fill","bi-signpost","bi-signpost-fill","bi-house","bi-house-fill","bi-house-door","bi-house-door-fill","bi-buildings","bi-buildings-fill","bi-globe","bi-globe-americas","bi-globe-asia-australia","bi-globe-central-south-asia","bi-globe-europe-africa"],
+    /* NONAKTIFKAN KATEGORI */
 
-    "Komunikasi": ["bi-telephone","bi-telephone-fill","bi-telephone-plus","bi-telephone-plus-fill","bi-telephone-inbound","bi-telephone-inbound-fill","bi-telephone-outbound","bi-telephone-outbound-fill","bi-envelope","bi-envelope-fill","bi-envelope-open","bi-envelope-open-fill","bi-envelope-check","bi-envelope-check-fill","bi-chat","bi-chat-fill","bi-chat-dots","bi-chat-dots-fill","bi-chat-left-text","bi-chat-left-text-fill","bi-chat-square-text","bi-chat-square-text-fill","bi-megaphone","bi-megaphone-fill","bi-bell","bi-bell-fill","bi-broadcast","bi-broadcast-pin","bi-send","bi-send-fill"],
+    document.querySelectorAll('.form-nonaktifkan')
+        .forEach(function (form) {
 
-    "Transportasi": ["bi-truck","bi-truck-front","bi-truck-front-fill","bi-car-front","bi-car-front-fill","bi-bicycle","bi-moped","bi-moped2","bi-scooter","bi-bus-front","bi-bus-front-fill","bi-train-front","bi-train-front-fill","bi-airplane","bi-airplane-fill","bi-fuel-pump","bi-fuel-pump-fill","bi-fuel-pump-diesel","bi-fuel-pump-diesel-fill"],
+            form.addEventListener('submit', function (e) {
 
-    "Teknologi & Sistem": ["bi-database","bi-database-fill","bi-database-gear","bi-server","bi-cpu","bi-cpu-fill","bi-cloud","bi-cloud-fill","bi-cloud-upload","bi-cloud-upload-fill","bi-cloud-download","bi-cloud-download-fill","bi-gear","bi-gear-fill","bi-gear-wide","bi-gear-wide-connected","bi-code","bi-code-slash","bi-terminal","bi-terminal-fill","bi-hdd","bi-hdd-fill","bi-hdd-stack","bi-hdd-stack-fill","bi-laptop","bi-laptop-fill","bi-pc-display","bi-speedometer","bi-speedometer2","bi-grid","bi-grid-fill","bi-grid-1x2","bi-grid-1x2-fill","bi-kanban","bi-kanban-fill","bi-printer","bi-printer-fill"],
+                e.preventDefault();
 
-    "Umum": ["bi-star","bi-star-fill","bi-heart","bi-heart-fill","bi-bookmark","bi-bookmark-fill","bi-bell","bi-bell-fill","bi-tag","bi-tag-fill","bi-tags","bi-tags-fill","bi-calendar","bi-calendar-fill","bi-clock","bi-clock-fill","bi-search","bi-funnel","bi-funnel-fill","bi-bar-chart","bi-bar-chart-fill","bi-pie-chart","bi-pie-chart-fill","bi-graph-up","bi-list-check","bi-grid","bi-grid-fill","bi-check-circle","bi-check-circle-fill","bi-info-circle","bi-info-circle-fill"]
-};
+                formTarget = form;
 
-    function closeIconPanel(panel) {
-        panel.classList.remove('show');
-    }
+                const nama =
+                    form.dataset.nama;
 
-    function closeAllIconPanels() {
-        document.querySelectorAll('.icon-picker-panel.show').forEach(closeIconPanel);
-    }
+                confirmTitle.textContent =
+                    'Nonaktifkan kategori?';
 
-    function buildIconPanel(panel, input, preview, text) {
+                confirmMessage.innerHTML =
+                    'Kategori <strong>' +
+                    nama +
+                    '</strong> akan dinonaktifkan.';
 
-        let html = '<div class="icon-picker-search"><input type="text" placeholder="Cari icon..." autocomplete="off"></div>';
-        html += '<div class="icon-picker-body">';
+                confirmWarningText.textContent =
+                    'Kategori tidak dapat digunakan untuk dokumen baru, tetapi dokumen lama tetap aman.';
 
-        Object.keys(iconCategories).forEach(function (cat) {
-            html += '<div class="icon-picker-category" data-cat="' + cat + '">';
-            html += '<div class="icon-picker-category-title">' + cat + '</div>';
-            html += '<div class="icon-picker-grid">';
+                confirmIcon.innerHTML =
+                    '<i class="bi bi-folder-x"></i>';
 
-            iconCategories[cat].forEach(function (item) {
+                confirmIcon.style.background =
+                    '#fff7ed';
 
-    if (typeof item === 'string') {
+                confirmIcon.style.borderColor =
+                    '#fed7aa';
 
-        html += `
-            <button
-                type="button"
-                class="icon-picker-option"
-                data-icon="${item}"
-                data-name="${item}"
-                title="${item}"
-            >
-                <i class="bi ${item}"></i>
-            </button>
-        `;
+                confirmIcon.style.color =
+                    '#f97316';
 
-    } else {
+                confirmButton.innerHTML =
+                    '<i class="bi bi-folder-x me-1"></i> Ya, Nonaktifkan';
 
-        html += `
-            <button
-                type="button"
-                class="icon-picker-option icon-picker-custom"
-                data-icon="${item.icon}"
-                data-name="${item.name}"
-                title="${item.name}"
-            >
-                <span class="custom-icon">${item.icon}</span>
-            </button>
-        `;
+                confirmButton.style.background =
+                    '#f97316';
 
-    }
+                modal.show();
 
-});
-            html += '</div></div>';
-        });
-
-        html += '<div class="icon-picker-empty" style="display:none;">Icon tidak ditemukan.</div>';
-        html += '</div>';
-
-        panel.innerHTML = html;
-        panel.dataset.built = '1';
-
-        const currentIcon = input.value;
-        const activeBtn = panel.querySelector('.icon-picker-option[data-icon="' + currentIcon + '"]');
-        if (activeBtn) {
-            activeBtn.classList.add('active');
-        }
-
-        const searchInput = panel.querySelector('.icon-picker-search input');
-        const emptyMsg = panel.querySelector('.icon-picker-empty');
-
-        searchInput.addEventListener('click', function (e) {
-            e.stopPropagation();
-        });
-
-        searchInput.addEventListener('input', function () {
-            const term = this.value.trim().toLowerCase();
-            let anyVisible = false;
-
-            panel.querySelectorAll('.icon-picker-category').forEach(function (catEl) {
-                let catHasMatch = false;
-
-                catEl.querySelectorAll('.icon-picker-option').forEach(function (opt) {
-                   const iconName = (
-    (opt.dataset.icon || '') + ' ' +
-    (opt.dataset.name || '')
-).toLowerCase();
-
-const match = term === '' || iconName.indexOf(term) !== -1;
-                   
-
-                    opt.style.display = match ? '' : 'none';
-
-                    if (match) {
-                        catHasMatch = true;
-                        anyVisible = true;
-                    }
-                });
-
-                catEl.style.display = catHasMatch ? '' : 'none';
             });
 
-            emptyMsg.style.display = anyVisible ? 'none' : 'block';
         });
 
-        panel.querySelectorAll('.icon-picker-option').forEach(function (opt) {
-            opt.addEventListener('click', function (e) {
-                e.stopPropagation();
 
+    /* HAPUS PERMANEN */
 
-const icon = this.dataset.icon;
-const name = this.dataset.name;
+    document.querySelectorAll('.form-hapus-permanen')
+        .forEach(function (form) {
 
-input.value = icon;
+            form.addEventListener('submit', function (e) {
 
-if (typeof icon === 'string' && icon.startsWith('bi-')) {
-    preview.innerHTML = '';
-    preview.className = 'bi ' + icon + ' fs-5';
-} else {
-    preview.className = 'fs-5';
-    preview.innerHTML = icon;
-}
+                e.preventDefault();
 
-text.textContent = name;
+                formTarget = form;
 
+                confirmTitle.textContent =
+                    'Hapus kategori secara permanen?';
 
-                panel.querySelectorAll('.icon-picker-option.active').forEach(function (a) {
-                    a.classList.remove('active');
-                });
+                confirmMessage.textContent =
+                    'Data kategori yang sudah dihapus tidak dapat dikembalikan.';
 
-                this.classList.add('active');
+                confirmWarningText.textContent =
+                    'Tindakan ini akan menghapus kategori secara permanen dari sistem.';
 
-                closeIconPanel(panel);
+                confirmIcon.innerHTML =
+                    '<i class="bi bi-trash3"></i>';
+
+                confirmIcon.style.background =
+                    '#fef2f2';
+
+                confirmIcon.style.borderColor =
+                    '#fecaca';
+
+                confirmIcon.style.color =
+                    '#dc3545';
+
+                confirmButton.innerHTML =
+                    '<i class="bi bi-trash3 me-1"></i> Ya, Hapus Permanen';
+
+                confirmButton.style.background =
+                    '#dc3545';
+
+                modal.show();
+
             });
+
         });
-    }
 
-    function initIconPicker(trigger) {
 
-        const input = document.querySelector(trigger.dataset.input);
-        const panel = document.querySelector(trigger.dataset.panel);
-        const preview = document.querySelector(trigger.dataset.preview);
-        const text = document.querySelector(trigger.dataset.text);
+    /* TOMBOL KONFIRMASI */
 
-        if (!input || !panel || !preview || !text) {
-            return;
+    confirmButton.addEventListener('click', function () {
+
+        if (formTarget) {
+
+            modal.hide();
+
+            formTarget.submit();
+
         }
 
-        if (!panel.dataset.built) {
-            buildIconPanel(panel, input, preview, text);
-        }
-
-        trigger.addEventListener('click', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            const isOpen = panel.classList.contains('show');
-
-            closeAllIconPanels();
-
-            if (!isOpen) {
-                panel.classList.add('show');
-
-                const searchInput = panel.querySelector('.icon-picker-search input');
-                if (searchInput) {
-                    searchInput.value = '';
-                    searchInput.dispatchEvent(new Event('input'));
-                    setTimeout(function () {
-                        searchInput.focus();
-                    }, 50);
-                }
-            }
-        });
-    }
-
-    document.querySelectorAll('.icon-picker-trigger').forEach(initIconPicker);
-
-    document.addEventListener('click', function (e) {
-        if (!e.target.closest('.icon-picker-wrapper')) {
-            closeAllIconPanels();
-        }
     });
 
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') {
-            closeAllIconPanels();
+
+    /* RESET */
+
+    modalElement.addEventListener(
+        'hidden.bs.modal',
+        function () {
+
+            formTarget = null;
+
         }
-    });
+    );
 
 });
 </script>
+
+
+
+
 @endpush
