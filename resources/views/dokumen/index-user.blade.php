@@ -4,77 +4,77 @@
 
 @section('content')
 
-<div class="d-flex justify-content-end mb-3">
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb small mb-0">
+            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}" class="text-decoration-none">Beranda</a></li>
+            <li class="breadcrumb-item active">Dokumen</li>
+        </ol>
+    </nav>
+
     <a href="{{ route('dokumen.export') }}" class="btn btn-primary">
         <i class="bi bi-file-earmark-zip me-1"></i>
         Ekspor Dokumen
     </a>
 </div>
 
-<div class="table-responsive">
-    <table class="table table-hover align-middle mb-0">
-        
-<nav aria-label="breadcrumb" class="mb-2">
-    <ol class="breadcrumb small mb-0">
-        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}" class="text-decoration-none">Beranda</a></li>
-        <li class="breadcrumb-item active">Dokumen</li>
-    </ol>
-</nav>
-
 <h3 class="fw-bold mb-3">Daftar Dokumen</h3>
 
 <div class="card-panel p-3">
-    <form method="GET" class="row g-2 mb-3">
-        <div class="col-md-4">
+    {{-- Form Filter Kesamping --}}
+    <form method="GET" class="row g-2 align-items-center mb-3">
+        <div class="col-lg-4 col-md-3">
             <div class="input-group">
                 <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
                 <input type="text" name="q" class="form-control" placeholder="Cari dokumen..." value="{{ request('q') }}">
             </div>
         </div>
-       <div class="col-md-2">
-    <select name="tanggal" class="form-select" onchange="this.form.submit()">
-        <option value="">Tanggal</option>
-        @for ($d = 1; $d <= 31; $d++)
-            <option value="{{ $d }}"
-                {{ request('tanggal') == $d ? 'selected' : '' }}>
-                {{ $d }}
-            </option>
-        @endfor
-    </select>
-</div>
 
-<div class="col-md-2">
-    <select name="bulan" class="form-select" onchange="this.form.submit()">
-        <option value="">Bulan</option>
-        @foreach ([
-            1=>'Januari',2=>'Februari',3=>'Maret',4=>'April',
-            5=>'Mei',6=>'Juni',7=>'Juli',8=>'Agustus',
-            9=>'September',10=>'Oktober',11=>'November',12=>'Desember'
-        ] as $val => $label)
-            <option value="{{ $val }}"
-                {{ request('bulan') == $val ? 'selected' : '' }}>
-                {{ $label }}
-            </option>
-        @endforeach
-    </select>
-</div>
+        <div class="col-lg-2 col-md-2">
+            <select name="tanggal" class="form-select" onchange="this.form.submit()">
+                <option value="">Tanggal</option>
+                @for ($d = 1; $d <= 31; $d++)
+                    <option value="{{ $d }}" {{ request('tanggal') == $d ? 'selected' : '' }}>
+                        {{ $d }}
+                    </option>
+                @endfor
+            </select>
+        </div>
 
-<div class="col-md-2">
-    <select name="tahun" class="form-select" onchange="this.form.submit()">
-        <option value="">Tahun</option>
-        @for ($y = now()->year; $y >= now()->year - 5; $y--)
-            <option value="{{ $y }}"
-                {{ request('tahun') == $y ? 'selected' : '' }}>
-                {{ $y }}
-            </option>
-        @endfor
-    </select>
-</div>
-        <div class="col-md-2 d-grid">
-            <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-funnel"></i> Filter</button>
+        <div class="col-lg-2 col-md-2">
+            <select name="bulan" class="form-select" onchange="this.form.submit()">
+                <option value="">Bulan</option>
+                @foreach ([
+                    1=>'Januari',2=>'Februari',3=>'Maret',4=>'April',
+                    5=>'Mei',6=>'Juni',7=>'Juli',8=>'Agustus',
+                    9=>'September',10=>'Oktober',11=>'November',12=>'Desember'
+                ] as $val => $label)
+                    <option value="{{ $val }}" {{ request('bulan') == $val ? 'selected' : '' }}>
+                        {{ $label }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="col-lg-2 col-md-2">
+            <select name="tahun" class="form-select" onchange="this.form.submit()">
+                <option value="">Tahun</option>
+                @for ($y = now()->year; $y >= now()->year - 5; $y--)
+                    <option value="{{ $y }}" {{ request('tahun') == $y ? 'selected' : '' }}>
+                        {{ $y }}
+                    </option>
+                @endfor
+            </select>
+        </div>
+
+        <div class="col-lg-2 col-md-3 d-grid">
+            <button class="btn btn-outline-secondary" type="submit">
+                <i class="bi bi-funnel"></i> Filter
+            </button>
         </div>
     </form>
 
+    {{-- Tabel Dokumen --}}
     <div class="table-responsive">
         <table class="table table-hover align-middle mb-0">
             <thead>
@@ -92,7 +92,11 @@
                     <tr>
                         <td>{{ $dokumens->firstItem() + $i }}</td>
                         <td class="fw-semibold">{{ $dokumen->nama_dokumen }}</td>
-                        <td><span class="badge bg-light text-dark border badge-kategori">{{ $dokumen->kategori->nama }}</span></td>
+                        <td>
+                            <span class="badge bg-light text-dark border badge-kategori">
+                                {{ $dokumen->kategori->nama ?? 'Tanpa Kategori' }}
+                            </span>
+                        </td>
                         <td>{{ $dokumen->tanggal_dokumen->format('d M Y') }}</td>
                         <td class="text-muted">{{ $dokumen->ukuran_format }}</td>
                         <td class="text-end">
@@ -107,6 +111,7 @@
         </table>
     </div>
 
+    {{-- Pagination --}}
     <div class="d-flex justify-content-between align-items-center mt-3">
         <div class="text-muted small">
             Menampilkan {{ $dokumens->firstItem() ?? 0 }} hingga {{ $dokumens->lastItem() ?? 0 }} dari {{ $dokumens->total() }} data
