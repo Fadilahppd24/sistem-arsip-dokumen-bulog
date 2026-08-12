@@ -2112,11 +2112,11 @@ body.dark-mode .d-inline-flex .btn.btn-light.border.text-danger i { color:#f8717
                     {{-- ICON --}}
                     <div class="mb-3">
     <label class="form-label fw-semibold">
-        Pilih Icon
+        Pilih Icon Kategori
     </label>
 
     @php
-        $daftarIcon = [
+        $iconsBulog = [
             'bi-flower1'              => 'Padi / Pertanian / Tanaman',
             'bi-box-seam'             => 'Karung Beras / Kemasan Dokumen',
             'bi-building'             => 'Gudang / Kompleks Pergudangan',
@@ -2132,18 +2132,43 @@ body.dark-mode .d-inline-flex .btn.btn-light.border.text-danger i { color:#f8717
             'bi-tags-fill'            => 'Klasifikasi Kategori Pangan',
             'bi-folder-fill'          => 'Folder Umum Kategori',
         ];
+
+        // Ambil semua daftar ikon yang sudah digunakan oleh kategori aktif
+        $iconTerpakai = $kategoris
+            ->pluck('icon')
+            ->filter()
+            ->unique()
+            ->toArray();
     @endphp
 
-    <select name="icon" class="form-select" required>
-        <option value="">-- Pilih Icon --</option>
-        @foreach ($daftarIcon as $iconValue => $iconLabel)
-            <option value="{{ $iconValue }}">
-                &#x25A1; {{ $iconLabel }} ({{ $iconValue }})
-            </option>
-        @endforeach
-    </select>
+    <div class="input-group">
+        <span class="input-group-text bg-light">
+            <i class="bi bi-folder-fill fs-5" id="previewIconTambah"></i>
+        </span>
+        <select
+            name="icon"
+            class="form-select"
+            id="selectIconTambah"
+            required
+            onchange="document.getElementById('previewIconTambah').className = 'bi ' + this.value + ' fs-5'"
+        >
+            <option value="">-- Pilih Icon Beras / Logistik --</option>
+            @foreach ($iconsBulog as $iconClass => $iconLabel)
+                @php $isUsed = in_array($iconClass, $iconTerpakai); @endphp
+                <option 
+                    value="{{ $iconClass }}" 
+                    {{ $isUsed ? 'disabled' : '' }}
+                >
+                    {{ $iconLabel }} ({{ $iconClass }})
+                    @if ($isUsed)
+                        (sudah digunakan)
+                    @endif
+                </option>
+            @endforeach
+        </select>
+    </div>
     <small class="text-muted">
-        Pilih ikon yang paling sesuai dengan kategori.
+        Icon yang sudah digunakan oleh kategori lain tidak dapat dipilih.
     </small>
 </div>
 
@@ -2320,20 +2345,53 @@ body.dark-mode .d-inline-flex .btn.btn-light.border.text-danger i { color:#f8717
 
 
                     {{-- ICON --}}
-
-                    <div class="mb-3">
+<div class="mb-3">
     <label class="form-label fw-semibold">
-        Pilih Icon
+        Pilih Icon Kategori
     </label>
 
-    <select name="icon" class="form-select" required>
-        <option value="">-- Pilih Icon --</option>
-        @foreach ($daftarIcon as $iconValue => $iconLabel)
-            <option value="{{ $iconValue }}" {{ ($kategori->icon == $iconValue) ? 'selected' : '' }}>
-                {{ $iconLabel }} ({{ $iconValue }})
-            </option>
-        @endforeach
-    </select>
+    @php
+        // Ambil daftar ikon terpakai oleh kategori LAIN
+        $iconTerpakaiLain = $kategoris
+            ->where('id', '!=', $kategori->id)
+            ->pluck('icon')
+            ->filter()
+            ->unique()
+            ->toArray();
+    @endphp
+
+    <div class="input-group">
+        <span class="input-group-text bg-light">
+            <i class="bi {{ $kategori->icon ?? 'bi-folder-fill' }} fs-5" id="previewIconEdit{{ $kategori->id }}"></i>
+        </span>
+        <select
+            name="icon"
+            class="form-select"
+            required
+            onchange="document.getElementById('previewIconEdit{{ $kategori->id }}').className = 'bi ' + this.value + ' fs-5'"
+        >
+            <option value="">-- Pilih Icon Beras / Logistik --</option>
+            @foreach ($iconsBulog as $iconClass => $iconLabel)
+                @php 
+                    $isUsedByOther = in_array($iconClass, $iconTerpakaiLain);
+                    $isSelected = ($kategori->icon == $iconClass);
+                @endphp
+                <option 
+                    value="{{ $iconClass }}" 
+                    {{ $isSelected ? 'selected' : '' }}
+                    {{ $isUsedByOther ? 'disabled' : '' }}
+                >
+                    {{ $iconLabel }} ({{ $iconClass }})
+                    @if ($isUsedByOther)
+                        (sudah digunakan)
+                    @endif
+                </option>
+            @endforeach
+        </select>
+    </div>
+    <small class="text-muted">
+        Icon yang sudah digunakan oleh kategori lain tidak dapat dipilih.
+    </small>
 </div>
 
 
