@@ -7,7 +7,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\BackupController;
 use App\Http\Controllers\AuditLogController;
 use App\Http\Controllers\TrashController;
 use App\Http\Controllers\ProfileController;
@@ -170,19 +169,7 @@ Route::middleware('auth')->group(function () {
             ->name('kategori.forceDelete');
 
 
-        /*
-        |--------------------------------------------------------------------------
-        | Backup
-        |--------------------------------------------------------------------------
-        */
-
-        Route::get('/backup', function () {
-            return view('backup.index');
-        })->name('backup.index');
-
-        Route::get('/backup/database', [BackupController::class, 'database'])
-            ->name('backup.database');
-
+       
 
         /*
         |--------------------------------------------------------------------------

@@ -1165,6 +1165,189 @@ body.dark-mode .pagination .page-item.disabled .page-link {
     color: #59687c;
 }
 
+
+/* =========================================================
+   SWEETALERT - HAPUS PERMANEN DOKUMEN
+========================================================= */
+
+.swal-hapus-permanen {
+    width: 430px !important;
+    max-width: calc(100% - 30px) !important;
+
+    border-radius: 20px !important;
+
+    padding: 30px 30px 26px !important;
+
+    background: #ffffff !important;
+
+    box-shadow:
+        0 20px 60px rgba(15, 23, 42, 0.25) !important;
+}
+
+
+/* ICON WARNING */
+
+.swal-hapus-permanen .swal2-icon.swal2-warning {
+
+    width: 72px !important;
+    height: 72px !important;
+
+    margin: 0 auto 18px !important;
+
+    border-width: 4px !important;
+
+    font-size: 38px !important;
+}
+
+
+/* JUDUL */
+
+.swal-hapus-title {
+
+    margin-top: 0 !important;
+    margin-bottom: 10px !important;
+
+    font-size: 21px !important;
+    font-weight: 700 !important;
+
+    color: #172033 !important;
+}
+
+
+/* DESKRIPSI */
+
+.swal-hapus-text {
+
+    margin: 0 auto !important;
+
+    max-width: 330px;
+
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+
+    color: #64748b !important;
+}
+
+
+/* TOMBOL */
+
+.swal-hapus-permanen .swal2-actions {
+
+    width: 100%;
+
+    display: flex !important;
+
+    justify-content: center !important;
+
+    gap: 10px !important;
+
+    margin-top: 24px !important;
+}
+
+
+/* BATAL */
+
+.swal-hapus-permanen .swal2-cancel {
+
+    min-width: 105px !important;
+
+    margin: 0 !important;
+
+    padding: 10px 18px !important;
+
+    border-radius: 9px !important;
+
+    background: #f1f5f9 !important;
+
+    border: 1px solid #cbd5e1 !important;
+
+    color: #475569 !important;
+
+    font-size: 14px !important;
+
+    font-weight: 600 !important;
+}
+
+
+.swal-hapus-permanen .swal2-cancel:hover {
+
+    background: #e2e8f0 !important;
+
+    color: #334155 !important;
+}
+
+
+/* HAPUS */
+
+.swal-hapus-permanen .swal2-confirm {
+
+    min-width: 155px !important;
+
+    margin: 0 !important;
+
+    padding: 10px 18px !important;
+
+    border-radius: 9px !important;
+
+    background: #dc3545 !important;
+
+    color: #ffffff !important;
+
+    font-size: 14px !important;
+
+    font-weight: 600 !important;
+
+    box-shadow: none !important;
+}
+
+
+.swal-hapus-permanen .swal2-confirm:hover {
+
+    background: #bb2d3b !important;
+}
+
+
+/* =========================================================
+   DARK MODE POPUP
+========================================================= */
+
+body.dark-mode .swal-hapus-permanen {
+
+    background: #1d2939 !important;
+
+}
+
+
+body.dark-mode .swal-hapus-title {
+
+    color: #f1f5f9 !important;
+
+}
+
+
+body.dark-mode .swal-hapus-text {
+
+    color: #94a3b8 !important;
+
+}
+
+
+body.dark-mode .swal-hapus-permanen .swal2-cancel {
+
+    background: #26364b !important;
+
+    border-color: #43546a !important;
+
+    color: #dbe4ef !important;
+}
+
+
+body.dark-mode .swal-hapus-permanen .swal2-cancel:hover {
+
+    background: #30435b !important;
+
+}
+
 </style>
 
 
@@ -1486,12 +1669,17 @@ body.dark-mode .pagination .page-item.disabled .page-link {
 
                                 {{-- HAPUS PERMANEN --}}
 
-                                <form
-                                    action="{{ route('dokumen.forceDelete', $dokumen->id) }}"
-                                    method="POST"
-                                    class="d-inline"
-                                    onsubmit="return confirm('Yakin ingin menghapus permanen dokumen ini? Data tidak dapat dikembalikan.')"
-                                >
+                                {{-- =========================================================
+     HAPUS PERMANEN
+========================================================= --}}
+
+<form
+    action="{{ route('dokumen.forceDelete', $dokumen->id) }}"
+    method="POST"
+    class="d-inline form-hapus-permanen"
+>
+    @csrf
+
 
                                     @csrf
 
@@ -1702,6 +1890,81 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    document
+        .querySelectorAll('.form-hapus-permanen')
+        .forEach(function (form) {
+
+            form.addEventListener('submit', function (event) {
+
+                event.preventDefault();
+
+                Swal.fire({
+
+                    icon: 'warning',
+
+                    title: 'Hapus dokumen ini?',
+
+                    html: `
+                        <div>
+                            Dokumen akan dihapus
+                            <strong>secara permanen</strong>
+                            dan tidak dapat dikembalikan.
+                        </div>
+                    `,
+
+                    showCancelButton: true,
+
+                    confirmButtonText:
+                        '<i class="bi bi-trash3-fill me-1"></i> Ya, Hapus Permanen',
+
+                    cancelButtonText:
+                        'Batal',
+
+                    reverseButtons: true,
+
+                    focusCancel: true,
+
+                    buttonsStyling: true,
+
+                    customClass: {
+
+                        popup:
+                            'swal-hapus-permanen',
+
+                        title:
+                            'swal-hapus-title',
+
+                        htmlContainer:
+                            'swal-hapus-text',
+
+                        confirmButton:
+                            'swal2-confirm',
+
+                        cancelButton:
+                            'swal2-cancel'
+
+                    }
+
+                }).then(function (result) {
+
+                    if (result.isConfirmed) {
+
+                        form.submit();
+
+                    }
+
+                });
+
+            });
+
+        });
+
+});
+</script>
 @endpush
 
 @endsection

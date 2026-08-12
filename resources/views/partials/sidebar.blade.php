@@ -89,13 +89,7 @@
         </a>
     </li>
 
-    <li class="nav-item">
-    <a href="{{ route('backup.index') }}" 
-       class="nav-link {{ request()->routeIs('backup.*') ? 'active' : '' }}">
-        <i class="bi bi-database-fill-down"></i>
-        Backup Database
-    </a>
-</li>
+    
 
 </ul>
         @else
