@@ -6167,3 +6167,30 @@ body.dark-mode .sampah-breadcrumb span:last-child {
     border-color: #1d4ed8;
 }
 
+
+/* Modal Tambah Kategori */
+.modal-content {
+    position: relative;
+}
+
+/* Tombol X di pojok kanan atas */
+.modal-content .btn-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    width: 24px;
+    height: 24px;
+
+    margin: 0;
+    padding: 0;
+
+    z-index: 10;
+
+    filter: invert(1);
+    opacity: 0.8;
+}
+
+.modal-content .btn-close:hover {
+    opacity: 1;
+}
