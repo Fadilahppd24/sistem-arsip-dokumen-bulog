@@ -39,11 +39,31 @@
             @error('role') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
 
-        <div class="mb-4">
-            <label class="form-label fw-semibold">Password Baru <span class="text-muted fw-normal">(kosongkan jika tidak diganti)</span></label>
-            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror">
-            @error('password') <div class="invalid-feedback">{{ $message }}</div> @enderror
-        </div>
+<div class="mb-4">
+    <label class="form-label fw-semibold">
+        Password Baru
+        <span class="text-muted fw-normal">(kosongkan jika tidak diganti)</span>
+    </label>
+
+    <div class="input-group">
+        <input type="password"
+               name="password"
+               id="password"
+               class="form-control @error('password') is-invalid @enderror"
+               autocomplete="new-password">
+
+        <button type="button"
+                class="btn btn-outline-secondary"
+                id="togglePassword"
+                tabindex="-1">
+            <i class="bi bi-eye" id="passwordIcon"></i>
+        </button>
+    </div>
+
+    @error('password')
+        <div class="invalid-feedback d-block">{{ $message }}</div>
+    @enderror
+</div>
 
         <div class="d-flex justify-content-end gap-2">
             <a href="{{ route('users.index') }}" class="btn btn-light">Batal</a>
@@ -51,4 +71,21 @@
         </div>
     </form>
 </div>
+
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        const password = document.getElementById('password');
+        const icon = document.getElementById('passwordIcon');
+
+        if (password.type === 'password') {
+            password.type = 'text';
+            icon.classList.remove('bi-eye');
+            icon.classList.add('bi-eye-slash');
+        } else {
+            password.type = 'password';
+            icon.classList.remove('bi-eye-slash');
+            icon.classList.add('bi-eye');
+        }
+    });
+</script>
 @endsection

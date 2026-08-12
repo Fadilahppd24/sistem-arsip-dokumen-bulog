@@ -10,6 +10,11 @@
    HERO KELOLA KATEGORI
 ========================================================= */
 
+.select-icon-option {
+    font-size: 15px;
+    padding: 6px 10px;
+}
+
 .kategori-hero {
     position: relative;
 
@@ -2106,23 +2111,66 @@ body.dark-mode .d-inline-flex .btn.btn-light.border.text-danger i { color:#f8717
 
                     {{-- ICON --}}
                     <div class="mb-3">
+    <label class="form-label fw-semibold">
+        Pilih Icon Kategori
+    </label>
 
-                        <label class="form-label fw-semibold">
-                            Icon
-                        </label>
+    @php
+        $iconsBulog = [
+            'bi-flower1'              => 'Padi / Pertanian / Tanaman',
+            'bi-box-seam'             => 'Karung Beras / Kemasan Dokumen',
+            'bi-building'             => 'Gudang / Kompleks Pergudangan',
+            'bi-shop'                 => 'RPA / Outlet Penjualan Beras',
+            'bi-truck'                => 'Pengangkutan / Logistik / Distribusi',
+            'bi-gear-fill'            => 'Pengolahan / Penggilingan / Mesin',
+            'bi-clipboard-data-fill'  => 'Stok Operasional / Laporan Beras',
+            'bi-shield-check'         => 'Pengawasan Mutu / Kualitas Beras',
+            'bi-basket2-fill'         => 'Pangan / Kebutuhan Pokok',
+            'bi-cash-stack'           => 'Anggaran / Harga HPP / Keuangan',
+            'bi-file-earmark-text'    => 'Dokumen Administrasi / Arsip',
+            'bi-archive-fill'         => 'Penyimpanan Arsip / Berkas Logistik',
+            'bi-tags-fill'            => 'Klasifikasi Kategori Pangan',
+            'bi-folder-fill'          => 'Folder Umum Kategori',
+        ];
 
-                        <input
-                            type="text"
-                            name="icon"
-                            class="form-control"
-                            placeholder="Contoh: bi-folder-fill"
-                        >
+        // Ambil semua daftar ikon yang sudah digunakan oleh kategori aktif
+        $iconTerpakai = $kategoris
+            ->pluck('icon')
+            ->filter()
+            ->unique()
+            ->toArray();
+    @endphp
 
-                        <small class="text-muted">
-                            Gunakan nama icon Bootstrap Icons.
-                        </small>
-
-                    </div>
+    <div class="input-group">
+        <span class="input-group-text bg-light">
+            <i class="bi bi-folder-fill fs-5" id="previewIconTambah"></i>
+        </span>
+        <select
+            name="icon"
+            class="form-select"
+            id="selectIconTambah"
+            required
+            onchange="document.getElementById('previewIconTambah').className = 'bi ' + this.value + ' fs-5'"
+        >
+            <option value="">-- Pilih Icon Beras / Logistik --</option>
+            @foreach ($iconsBulog as $iconClass => $iconLabel)
+                @php $isUsed = in_array($iconClass, $iconTerpakai); @endphp
+                <option 
+                    value="{{ $iconClass }}" 
+                    {{ $isUsed ? 'disabled' : '' }}
+                >
+                    {{ $iconLabel }} ({{ $iconClass }})
+                    @if ($isUsed)
+                        (sudah digunakan)
+                    @endif
+                </option>
+            @endforeach
+        </select>
+    </div>
+    <small class="text-muted">
+        Icon yang sudah digunakan oleh kategori lain tidak dapat dipilih.
+    </small>
+</div>
 
 {{-- WARNA --}}
 <div class="mb-3">
@@ -2297,27 +2345,54 @@ body.dark-mode .d-inline-flex .btn.btn-light.border.text-danger i { color:#f8717
 
 
                     {{-- ICON --}}
+<div class="mb-3">
+    <label class="form-label fw-semibold">
+        Pilih Icon Kategori
+    </label>
 
-                    <div class="mb-3">
+    @php
+        // Ambil daftar ikon terpakai oleh kategori LAIN
+        $iconTerpakaiLain = $kategoris
+            ->where('id', '!=', $kategori->id)
+            ->pluck('icon')
+            ->filter()
+            ->unique()
+            ->toArray();
+    @endphp
 
-                        <label
-                            class="form-label fw-semibold"
-                        >
-
-                            Icon
-
-                        </label>
-
-
-                        <input
-                            type="text"
-                            name="icon"
-                            class="form-control"
-                            value="{{ $kategori->icon }}"
-                            placeholder="Contoh: bi-folder-fill"
-                        >
-
-                    </div>
+    <div class="input-group">
+        <span class="input-group-text bg-light">
+            <i class="bi {{ $kategori->icon ?? 'bi-folder-fill' }} fs-5" id="previewIconEdit{{ $kategori->id }}"></i>
+        </span>
+        <select
+            name="icon"
+            class="form-select"
+            required
+            onchange="document.getElementById('previewIconEdit{{ $kategori->id }}').className = 'bi ' + this.value + ' fs-5'"
+        >
+            <option value="">-- Pilih Icon Beras / Logistik --</option>
+            @foreach ($iconsBulog as $iconClass => $iconLabel)
+                @php 
+                    $isUsedByOther = in_array($iconClass, $iconTerpakaiLain);
+                    $isSelected = ($kategori->icon == $iconClass);
+                @endphp
+                <option 
+                    value="{{ $iconClass }}" 
+                    {{ $isSelected ? 'selected' : '' }}
+                    {{ $isUsedByOther ? 'disabled' : '' }}
+                >
+                    {{ $iconLabel }} ({{ $iconClass }})
+                    @if ($isUsedByOther)
+                        (sudah digunakan)
+                    @endif
+                </option>
+            @endforeach
+        </select>
+    </div>
+    <small class="text-muted">
+        Icon yang sudah digunakan oleh kategori lain tidak dapat dipilih.
+    </small>
+</div>
 
 
 
