@@ -10,6 +10,11 @@
    HERO KELOLA KATEGORI
 ========================================================= */
 
+.select-icon-option {
+    font-size: 15px;
+    padding: 6px 10px;
+}
+
 .kategori-hero {
     position: relative;
 
@@ -2106,23 +2111,41 @@ body.dark-mode .d-inline-flex .btn.btn-light.border.text-danger i { color:#f8717
 
                     {{-- ICON --}}
                     <div class="mb-3">
+    <label class="form-label fw-semibold">
+        Pilih Icon
+    </label>
 
-                        <label class="form-label fw-semibold">
-                            Icon
-                        </label>
+    @php
+        $daftarIcon = [
+            'bi-flower1'              => 'Padi / Pertanian / Tanaman',
+            'bi-box-seam'             => 'Karung Beras / Kemasan Dokumen',
+            'bi-building'             => 'Gudang / Kompleks Pergudangan',
+            'bi-shop'                 => 'RPA / Outlet Penjualan Beras',
+            'bi-truck'                => 'Pengangkutan / Logistik / Distribusi',
+            'bi-gear-fill'            => 'Pengolahan / Penggilingan / Mesin',
+            'bi-clipboard-data-fill'  => 'Stok Operasional / Laporan Beras',
+            'bi-shield-check'         => 'Pengawasan Mutu / Kualitas Beras',
+            'bi-basket2-fill'         => 'Pangan / Kebutuhan Pokok',
+            'bi-cash-stack'           => 'Anggaran / Harga HPP / Keuangan',
+            'bi-file-earmark-text'    => 'Dokumen Administrasi / Arsip',
+            'bi-archive-fill'         => 'Penyimpanan Arsip / Berkas Logistik',
+            'bi-tags-fill'            => 'Klasifikasi Kategori Pangan',
+            'bi-folder-fill'          => 'Folder Umum Kategori',
+        ];
+    @endphp
 
-                        <input
-                            type="text"
-                            name="icon"
-                            class="form-control"
-                            placeholder="Contoh: bi-folder-fill"
-                        >
-
-                        <small class="text-muted">
-                            Gunakan nama icon Bootstrap Icons.
-                        </small>
-
-                    </div>
+    <select name="icon" class="form-select" required>
+        <option value="">-- Pilih Icon --</option>
+        @foreach ($daftarIcon as $iconValue => $iconLabel)
+            <option value="{{ $iconValue }}">
+                &#x25A1; {{ $iconLabel }} ({{ $iconValue }})
+            </option>
+        @endforeach
+    </select>
+    <small class="text-muted">
+        Pilih ikon yang paling sesuai dengan kategori.
+    </small>
+</div>
 
 {{-- WARNA --}}
 <div class="mb-3">
@@ -2299,25 +2322,19 @@ body.dark-mode .d-inline-flex .btn.btn-light.border.text-danger i { color:#f8717
                     {{-- ICON --}}
 
                     <div class="mb-3">
+    <label class="form-label fw-semibold">
+        Pilih Icon
+    </label>
 
-                        <label
-                            class="form-label fw-semibold"
-                        >
-
-                            Icon
-
-                        </label>
-
-
-                        <input
-                            type="text"
-                            name="icon"
-                            class="form-control"
-                            value="{{ $kategori->icon }}"
-                            placeholder="Contoh: bi-folder-fill"
-                        >
-
-                    </div>
+    <select name="icon" class="form-select" required>
+        <option value="">-- Pilih Icon --</option>
+        @foreach ($daftarIcon as $iconValue => $iconLabel)
+            <option value="{{ $iconValue }}" {{ ($kategori->icon == $iconValue) ? 'selected' : '' }}>
+                {{ $iconLabel }} ({{ $iconValue }})
+            </option>
+        @endforeach
+    </select>
+</div>
 
 
 
