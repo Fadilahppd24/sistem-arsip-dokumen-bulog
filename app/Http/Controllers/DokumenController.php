@@ -350,6 +350,19 @@ class DokumenController extends Controller
                 'nullable',
                 'exists:kategoris,id'
             ],
+            'tahun' => [
+                'nullable',
+                'integer'
+            ],
+            'bulan' => [
+                'nullable',
+                'integer',
+                'between:1,12'
+            ],
+            'tanggal' => [
+                'nullable',
+                'string'
+            ],
         ]);
 
         $query = Dokumen::with('kategori');
@@ -358,6 +371,32 @@ class DokumenController extends Controller
             $query->where(
                 'kategori_id',
                 $request->kategori_id
+            );
+        }
+
+        if ($request->filled('tahun')) {
+            $query->whereYear(
+                'tanggal_dokumen',
+                $request->tahun
+            );
+        }
+
+        if ($request->filled('bulan')) {
+            $query->whereMonth(
+                'tanggal_dokumen',
+                $request->bulan
+            );
+        }
+
+        if ($request->filled('tanggal')) {
+            $tanggalParsed = \Carbon\Carbon::createFromFormat(
+                'd/m/Y',
+                $request->tanggal
+            );
+
+            $query->whereDate(
+                'tanggal_dokumen',
+                $tanggalParsed->format('Y-m-d')
             );
         }
 
