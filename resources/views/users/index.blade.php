@@ -1656,111 +1656,135 @@ body.dark-mode .text-muted {
 
 
 
-                            {{-- MODAL HAPUS --}}
+{{-- =========================================================
+     MODAL HAPUS PENGGUNA
+========================================================= --}}
 
-                            @if ($user->id !== auth()->id())
+@if ($user->id !== auth()->id())
 
-                                <div
-                                    class="modal fade"
-                                    id="hapusUser{{ $user->id }}"
-                                    tabindex="-1"
-                                    aria-hidden="true"
-                                >
+<div
+    class="modal fade"
+    id="hapusUser{{ $user->id }}"
+    tabindex="-1"
+    aria-labelledby="hapusUserLabel{{ $user->id }}"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-dialog-centered modal-user-delete-dialog">
 
-                                    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-user-delete">
 
-                                        <div class="modal-content border-0 shadow">
-
-
-                                            <div class="modal-header">
-
-                                                <h5 class="modal-title fw-bold">
-
-                                                    Hapus Pengguna
-
-                                                </h5>
-
-
-                                                <button
-                                                    type="button"
-                                                    class="btn-close"
-                                                    data-bs-dismiss="modal"
-                                                ></button>
-
-                                            </div>
+            {{-- ICON --}}
+            <div class="user-delete-icon-wrap">
+                <div class="user-delete-icon">
+                    <i class="bi bi-person-x-fill"></i>
+                </div>
+            </div>
 
 
+            {{-- BODY --}}
+            <div class="modal-body user-delete-body text-center">
 
-                                            <div class="modal-body">
+                <h5
+                    class="user-delete-title"
+                    id="hapusUserLabel{{ $user->id }}"
+                >
+                    Hapus Pengguna?
+                </h5>
 
-                                                <p class="mb-1">
-
-                                                    Apakah kamu yakin ingin
-                                                    menghapus pengguna ini?
-
-                                                </p>
-
-
-                                                <p class="text-muted small mb-0">
-
-                                                    Akun
-
-                                                    <strong>
-                                                        {{ $user->name }}
-                                                    </strong>
-
-                                                    akan dihapus.
-
-                                                </p>
-
-                                            </div>
+                <p class="user-delete-description">
+                    Apakah kamu yakin ingin menghapus pengguna ini?
+                </p>
 
 
+                {{-- DATA PENGGUNA --}}
+                <div class="user-delete-card">
 
-                                            <div class="modal-footer">
+                    <div class="user-delete-avatar">
+                        {{ strtoupper(substr($user->name, 0, 1)) }}
+                    </div>
 
-                                                <button
-                                                    type="button"
-                                                    class="btn btn-light"
-                                                    data-bs-dismiss="modal"
-                                                >
+                    <div class="user-delete-info text-start">
 
-                                                    Batal
+                        <div class="user-delete-name">
+                            {{ $user->name }}
+                        </div>
 
-                                                </button>
+                        <div class="user-delete-email">
+                            <i class="bi bi-envelope"></i>
+                            {{ $user->email }}
+                        </div>
 
+                        <div class="user-delete-role">
+                            <i class="bi bi-shield-check"></i>
 
-                                                <form
-                                                    method="POST"
-                                                    action="{{ route('users.destroy', $user) }}"
-                                                >
+                            {{ $user->role === 'admin' ? 'Administrator' : 'User' }}
+                        </div>
 
-                                                    @csrf
+                    </div>
 
-                                                    @method('DELETE')
-
-
-                                                    <button
-                                                        type="submit"
-                                                        class="btn btn-danger"
-                                                    >
-
-                                                        Ya, Hapus
-
-                                                    </button>
-
-                                                </form>
-
-                                            </div>
+                </div>
 
 
-                                        </div>
+                {{-- PERINGATAN --}}
+                <div class="user-delete-warning">
 
-                                    </div>
+                    <div class="user-delete-warning-icon">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                    </div>
 
-                                </div>
+                    <div class="user-delete-warning-text">
 
-                            @endif
+                        <strong>Perhatian</strong>
+
+                        <span>
+                            Akun pengguna ini akan dihapus dari sistem
+                            dan tidak dapat digunakan untuk login lagi.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            {{-- FOOTER --}}
+            <div class="user-delete-footer">
+
+                <button
+                    type="button"
+                    class="btn-user-delete-cancel"
+                    data-bs-dismiss="modal"
+                >
+                    <i class="bi bi-x-lg"></i>
+                    Batal
+                </button>
+
+                <form
+                    method="POST"
+                    action="{{ route('users.destroy', $user) }}"
+                >
+                    @csrf
+                    @method('DELETE')
+
+                    <button
+                        type="submit"
+                        class="btn-user-delete-confirm"
+                    >
+                        <i class="bi bi-trash3-fill"></i>
+                        Ya, Hapus
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@endif
 
                         </td>
 
@@ -2095,6 +2119,369 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 </script>
+
+
+<style>
+/* =========================================================
+   POPUP HAPUS PENGGUNA
+========================================================= */
+
+.modal-user-delete-dialog {
+    max-width: 470px !important;
+    width: calc(100% - 30px) !important;
+}
+
+.modal-user-delete {
+    border: 0 !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    background: #fff !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .20) !important;
+}
+
+
+/* ICON */
+
+.user-delete-icon-wrap {
+    display: flex !important;
+    justify-content: center !important;
+    padding-top: 28px !important;
+}
+
+.user-delete-icon {
+    width: 68px !important;
+    height: 68px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    border-radius: 50% !important;
+
+    background: #fff1f2 !important;
+    border: 1px solid #fecdd3 !important;
+
+    color: #dc3545 !important;
+    font-size: 27px !important;
+}
+
+
+/* BODY */
+
+.user-delete-body {
+    padding: 18px 30px 24px !important;
+}
+
+.user-delete-title {
+    margin: 0 0 7px !important;
+
+    color: #1f2937 !important;
+
+    font-size: 21px !important;
+    font-weight: 700 !important;
+}
+
+.user-delete-description {
+    margin: 0 0 20px !important;
+
+    color: #6b7280 !important;
+
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+}
+
+
+/* DATA PENGGUNA */
+
+.user-delete-card {
+    display: flex !important;
+    align-items: center !important;
+
+    gap: 12px !important;
+
+    padding: 13px 14px !important;
+    margin-bottom: 15px !important;
+
+    background: #f8fafc !important;
+
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 13px !important;
+
+    text-align: left !important;
+}
+
+.user-delete-avatar {
+    width: 46px !important;
+    min-width: 46px !important;
+    height: 46px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    border-radius: 50% !important;
+
+    background: #e8f1ff !important;
+    color: #1769e8 !important;
+
+    font-size: 18px !important;
+    font-weight: 700 !important;
+}
+
+.user-delete-info {
+    min-width: 0 !important;
+}
+
+.user-delete-name {
+    margin-bottom: 4px !important;
+
+    color: #1f2937 !important;
+
+    font-size: 14px !important;
+    font-weight: 700 !important;
+}
+
+.user-delete-email,
+.user-delete-role {
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+
+    color: #64748b !important;
+
+    font-size: 12px !important;
+}
+
+
+/* PERINGATAN */
+
+.user-delete-warning {
+    display: flex !important;
+    align-items: flex-start !important;
+
+    gap: 10px !important;
+
+    padding: 12px 13px !important;
+
+    background: #fff8e7 !important;
+
+    border: 1px solid #fde7a9 !important;
+    border-radius: 12px !important;
+
+    text-align: left !important;
+}
+
+.user-delete-warning-icon {
+    width: 28px !important;
+    min-width: 28px !important;
+    height: 28px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    border-radius: 8px !important;
+
+    background: #fff0c2 !important;
+    color: #d97706 !important;
+}
+
+.user-delete-warning-text {
+    display: flex !important;
+    flex-direction: column !important;
+
+    gap: 2px !important;
+
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+}
+
+.user-delete-warning-text strong {
+    color: #92400e !important;
+}
+
+.user-delete-warning-text span {
+    color: #92400e !important;
+}
+
+
+/* FOOTER */
+
+.user-delete-footer {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+
+    gap: 9px !important;
+
+    padding: 15px 25px !important;
+
+    background: #fff !important;
+
+    border-top: 1px solid #e5e7eb !important;
+}
+
+.user-delete-footer form {
+    margin: 0 !important;
+}
+
+
+/* TOMBOL BATAL */
+
+.btn-user-delete-cancel {
+    height: 40px !important;
+
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    gap: 6px !important;
+
+    padding: 0 16px !important;
+
+    border-radius: 9px !important;
+
+    border: 1px solid #d1d9e4 !important;
+
+    background: #fff !important;
+    color: #475569 !important;
+
+    font-size: 13px !important;
+    font-weight: 600 !important;
+
+    cursor: pointer !important;
+}
+
+.btn-user-delete-cancel:hover {
+    background: #f1f5f9 !important;
+}
+
+
+/* TOMBOL HAPUS */
+
+.btn-user-delete-confirm {
+    height: 40px !important;
+
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    gap: 6px !important;
+
+    padding: 0 17px !important;
+
+    border: 0 !important;
+    border-radius: 9px !important;
+
+    background: #dc3545 !important;
+    color: #fff !important;
+
+    font-size: 13px !important;
+    font-weight: 600 !important;
+
+    cursor: pointer !important;
+}
+
+.btn-user-delete-confirm:hover {
+    background: #c82333 !important;
+    color: #fff !important;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-mode .modal-user-delete,
+body.dark .modal-user-delete,
+.dark-mode .modal-user-delete {
+    background: #1f2b3d !important;
+}
+
+body.dark-mode .user-delete-title,
+body.dark .user-delete-title,
+.dark-mode .user-delete-title {
+    color: #f1f5f9 !important;
+}
+
+body.dark-mode .user-delete-description,
+body.dark .user-delete-description,
+.dark-mode .user-delete-description {
+    color: #aebdd0 !important;
+}
+
+body.dark-mode .user-delete-card,
+body.dark .user-delete-card,
+.dark-mode .user-delete-card {
+    background: #172235 !important;
+    border-color: #334155 !important;
+}
+
+body.dark-mode .user-delete-name,
+body.dark .user-delete-name,
+.dark-mode .user-delete-name {
+    color: #f1f5f9 !important;
+}
+
+body.dark-mode .user-delete-email,
+body.dark-mode .user-delete-role,
+body.dark .user-delete-email,
+body.dark .user-delete-role,
+.dark-mode .user-delete-email,
+.dark-mode .user-delete-role {
+    color: #9fb0c7 !important;
+}
+
+body.dark-mode .user-delete-warning,
+body.dark .user-delete-warning,
+.dark-mode .user-delete-warning {
+    background: #302817 !important;
+    border-color: #59451c !important;
+}
+
+body.dark-mode .user-delete-warning-text strong,
+body.dark .user-delete-warning-text strong,
+.dark-mode .user-delete-warning-text strong {
+    color: #fbbf24 !important;
+}
+
+body.dark-mode .user-delete-warning-text span,
+body.dark .user-delete-warning-text span,
+.dark-mode .user-delete-warning-text span {
+    color: #d8bd79 !important;
+}
+
+body.dark-mode .user-delete-footer,
+body.dark .user-delete-footer,
+.dark-mode .user-delete-footer {
+    background: #1f2b3d !important;
+    border-top-color: #334155 !important;
+}
+
+body.dark-mode .btn-user-delete-cancel,
+body.dark .btn-user-delete-cancel,
+.dark-mode .btn-user-delete-cancel {
+    background: #29374b !important;
+    border-color: #46566d !important;
+    color: #dbe5f2 !important;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 576px) {
+    .modal-user-delete-dialog {
+        width: calc(100% - 20px) !important;
+    }
+
+    .user-delete-body {
+        padding: 18px 20px 20px !important;
+    }
+
+    .user-delete-footer {
+        padding: 14px 20px !important;
+    }
+}
+</style>
 
 
 @endsection
