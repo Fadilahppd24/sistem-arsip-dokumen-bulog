@@ -14,7 +14,7 @@
 <div class="row g-3">
     <div class="col-lg-8">
         <div class="card-panel p-0 overflow-hidden">
-            <div class="d-flex align-items-center justify-content-between p-3 border-bottom bg-white">
+            <div class="document-header d-flex align-items-center justify-content-between p-3 border-bottom">
                 <div class="d-flex align-items-center gap-2">
                     <i class="bi bi-file-earmark-pdf-fill text-danger fs-4"></i>
                     <span class="fw-semibold text-truncate">{{ $dokumen->nama_dokumen }}</span>
@@ -74,4 +74,89 @@
         </div>
     </div>
 </div>
+
+
+<style>
+/* =========================================================
+   HEADER DOKUMEN - MODE TERANG
+========================================================= */
+
+.document-header {
+    background: #ffffff !important;
+    color: #1f2937 !important;
+    border-color: #e5e7eb !important;
+}
+
+.document-header .fw-semibold {
+    color: #1f2937 !important;
+}
+
+
+/* =========================================================
+   HEADER DOKUMEN - MODE GELAP
+========================================================= */
+
+body.dark-mode .document-header,
+body.dark .document-header,
+.dark-mode .document-header {
+    background: #1f2937 !important;
+    color: #f1f5f9 !important;
+    border-color: #334155 !important;
+}
+
+body.dark-mode .document-header .fw-semibold,
+body.dark .document-header .fw-semibold,
+.dark-mode .document-header .fw-semibold {
+    color: #f1f5f9 !important;
+}
+</style>
+
+
+            @if (auth()->user()->isAdmin())
+                <hr>
+                <div class="d-grid gap-2">
+                    <a href="{{ route('dokumen.edit', $dokumen) }}" class="btn btn-light">
+                        <i class="bi bi-pencil"></i> Edit Dokumen
+                    </a>
+                </div>
+            @endif
+        </div>
+    </div>
+</div>
+
+
+<style>
+/* =========================================================
+   HEADER DOKUMEN - MODE TERANG
+========================================================= */
+
+.document-header {
+    background: #ffffff !important;
+    color: #1f2937 !important;
+    border-color: #e5e7eb !important;
+}
+
+.document-header .fw-semibold {
+    color: #1f2937 !important;
+}
+
+
+/* =========================================================
+   HEADER DOKUMEN - MODE GELAP
+========================================================= */
+
+body.dark-mode .document-header,
+body.dark .document-header,
+.dark-mode .document-header {
+    background: #1f2937 !important;
+    color: #f1f5f9 !important;
+    border-color: #334155 !important;
+}
+
+body.dark-mode .document-header .fw-semibold,
+body.dark .document-header .fw-semibold,
+.dark-mode .document-header .fw-semibold {
+    color: #f1f5f9 !important;
+}
+</style>
 @endsection
