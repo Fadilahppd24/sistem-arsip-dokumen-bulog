@@ -12,18 +12,25 @@ use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    public function index(Request $request): View
-    {
-        $users = User::when($request->q, function ($query) use ($request) {
-            $query->where('name', 'like', "%{$request->q}%")
-                ->orWhere('email', 'like', "%{$request->q}%");
-        })
-            ->latest()
-            ->paginate(10)
-            ->withQueryString();
+   public function index(Request $request): View
+{
+    $perPage = (int) $request->input('per_page', 10);
 
-        return view('users.index', compact('users'));
+    // Batasi pilihan agar aman
+    if (!in_array($perPage, [10, 20, 50, 100])) {
+        $perPage = 10;
     }
+
+    $users = User::when($request->q, function ($query) use ($request) {
+        $query->where('name', 'like', "%{$request->q}%")
+            ->orWhere('email', 'like', "%{$request->q}%");
+    })
+        ->latest()
+        ->paginate($perPage)
+        ->withQueryString();
+
+    return view('users.index', compact('users'));
+}
 
     public function create(): View
     {

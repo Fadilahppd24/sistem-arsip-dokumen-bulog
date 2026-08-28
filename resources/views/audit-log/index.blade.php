@@ -878,6 +878,66 @@
     font-size: 13px;
 }
 
+/* =========================================================
+   FOOTER PAGINATION
+========================================================= */
+
+.audit-footer-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.audit-page-size {
+    width: 58px;
+    height: 38px;
+
+    padding: 0 10px;
+
+    border: 1px solid #dbe2ea;
+    border-radius: 8px;
+
+    background: white;
+
+    color: #475569;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    outline: none;
+}
+
+
+.audit-page-size:focus {
+    border-color: #1769e8;
+}
+
+
+.audit-footer-text {
+    color: #687588;
+    font-size: 13px;
+}
+
+
+.audit-pagination .pagination {
+    margin: 0;
+    gap: 5px;
+}
+
+body.dark-mode .audit-page-size {
+    background: #202c3e;
+    border-color: #46566d;
+    color: #dbe5f2;
+}
+
+
+body.dark-mode .audit-page-size:focus {
+    border-color: #60a5fa;
+}
+
 
 /* =========================================================
    PAGINATION
@@ -1976,46 +2036,54 @@ body.dark-mode .audit-page-footer {
 
 
         {{-- =================================================
-             FOOTER
-        ================================================== --}}
+     FOOTER
+================================================== --}}
 
-        <div class="audit-footer">
+<div class="audit-footer">
+
+    {{-- KIRI: JUMLAH DATA --}}
+    <div class="audit-footer-left">
+
+        <select
+            class="audit-page-size"
+            onchange="window.location.href = this.value"
+        >
+
+            @foreach([10, 20, 50, 100, 500, 1000] as $size)
+
+                <option
+                    value="{{ request()->fullUrlWithQuery([
+                        'perPage' => $size,
+                        'page' => 1
+                    ]) }}"
+                    {{ request('perPage', 10) == $size ? 'selected' : '' }}
+                >
+                    {{ $size }}
+                </option>
+
+            @endforeach
+
+        </select>
+
+        <span class="audit-footer-text">
+            dari {{ number_format($logs->total(), 0, ',', '.') }} aktivitas
+        </span>
+
+    </div>
 
 
-            <div class="audit-footer-text">
+    {{-- KANAN: PAGINATION --}}
+    @if(method_exists($logs, 'links'))
 
-                Menampilkan
+        <div class="audit-pagination">
 
-                {{ $logs->firstItem() ?? 0 }}
-
-                hingga
-
-                {{ $logs->lastItem() ?? 0 }}
-
-                dari
-
-                {{ $logs->total() }}
-
-                aktivitas
-
-            </div>
-
-
-            @if(method_exists($logs, 'links'))
-
-                <div>
-
-                    {{ $logs->links('pagination::bootstrap-5') }}
-
-                </div>
-
-            @endif
-
+            {{ $logs->appends(request()->query())->links('pagination::bootstrap-5') }}
 
         </div>
 
+    @endif
 
-    </div>
+</div>
 
 
     {{-- =====================================================

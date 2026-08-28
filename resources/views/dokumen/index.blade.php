@@ -744,10 +744,31 @@
 
 
     {{-- PAGINATION --}}
-    <div class="d-flex justify-content-between align-items-center mt-3">
+<div class="d-flex justify-content-between align-items-center mt-3 flex-wrap gap-3">
 
-        <div class="text-muted small">
+    {{-- KIRI --}}
+    <div class="d-flex align-items-center gap-2">
 
+        <select
+            class="form-select form-select-sm"
+            style="width: 80px;"
+            onchange="ubahPerPage(this.value)"
+        >
+
+            @foreach ([10, 20, 50, 100, 200, 500, 1000] as $jumlah)
+
+                <option
+                    value="{{ $jumlah }}"
+                    {{ request('perPage', 10) == $jumlah ? 'selected' : '' }}
+                >
+                    {{ $jumlah }}
+                </option>
+
+            @endforeach
+
+        </select>
+
+        <span class="text-muted small">
             Menampilkan
             {{ $dokumens->firstItem() ?? 0 }}
             hingga
@@ -755,12 +776,47 @@
             dari
             {{ $dokumens->total() }}
             data
-
-        </div>
-
-        {{ $dokumens->links('pagination::bootstrap-5') }}
+        </span>
 
     </div>
+
+
+    {{-- KANAN --}}
+    <div>
+        {{ $dokumens->links('pagination::bootstrap-5') }}
+    </div>
+
+</div>
+
+
+<script>
+function ubahPerPage(value) {
+
+    const url = new URL(window.location.href);
+
+    url.searchParams.set('perPage', value);
+
+    // Kembali ke halaman 1
+    url.searchParams.set('page', 1);
+
+    window.location.href = url.toString();
+}
+</script>
+
+
+<script>
+function ubahPerPage(value) {
+
+    const url = new URL(window.location.href);
+
+    url.searchParams.set('perPage', value);
+
+    // balik ke halaman 1 setelah jumlah data diubah
+    url.searchParams.set('page', 1);
+
+    window.location.href = url.toString();
+}
+</script>
 
 </div>
 

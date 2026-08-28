@@ -38,10 +38,16 @@ class DokumenController extends Controller
             $query->whereMonth('tanggal_dokumen', $request->bulan);
         }
 
-        $dokumens = $query
-            ->latest('tanggal_dokumen')
-            ->paginate(10)
-            ->withQueryString();
+        $perPage = (int) $request->get('perPage', 10);
+
+if (!in_array($perPage, [10, 20, 50, 100, 200, 500, 1000])) {
+    $perPage = 10;
+}
+
+$dokumens = $query
+    ->latest('tanggal_dokumen')
+    ->paginate($perPage)
+    ->withQueryString();
 
         $kategoris = Kategori::orderBy('nama')->get();
 
