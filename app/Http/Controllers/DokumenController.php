@@ -307,6 +307,53 @@ $dokumens = $query
             );
     }
 
+    public function bulkForceDelete(Request $request): RedirectResponse
+    {
+        $ids = $request->input('ids', []);
+
+        if (empty($ids)) {
+            return back()->with(
+                'error',
+                'Tidak ada dokumen yang dipilih.'
+            );
+        }
+
+        $dokumens = Dokumen::withTrashed()
+            ->whereIn('id', $ids)
+            ->get();
+
+        foreach ($dokumens as $dokumen) {
+
+            if (
+                $dokumen->file_path &&
+                Storage::disk('public')->exists($dokumen->file_path)
+            ) {
+                Storage::disk('public')->delete(
+                    $dokumen->file_path
+                );
+            }
+
+            $dokumen->forceDelete();
+        }
+
+        $jumlah = $dokumens->count();
+
+        AuditHelper::catat(
+            'Hapus Permanen Dokumen (Bulk)',
+            'Dokumen',
+            null,
+            "Menghapus permanen {$jumlah} dokumen sekaligus"
+        );
+
+        return redirect()
+            ->route('dokumen.index')
+            ->with(
+                'success',
+                "{$jumlah} dokumen berhasil dihapus permanen."
+            );
+    }
+
+    
     /**
      * Download dokumen.
      */

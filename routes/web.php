@@ -140,9 +140,11 @@ Route::middleware('auth')->group(function () {
         Route::put('/dokumen/{dokumen}', [DokumenController::class, 'update'])
             ->name('dokumen.update');
 
+        Route::delete('dokumen/bulk-force-delete', [DokumenController::class, 'bulkForceDelete'])
+            ->name('dokumen.bulkForceDelete');
+
         Route::delete('/dokumen/{dokumen}', [DokumenController::class, 'destroy'])
             ->name('dokumen.destroy');
-
 
         /*
         |--------------------------------------------------------------------------
@@ -186,6 +188,8 @@ Route::middleware('auth')->group(function () {
         Route::delete('/dokumen/{dokumen}/force-delete', [DokumenController::class, 'forceDelete'])
             ->name('dokumen.forceDelete');
 
+        Route::delete('dokumen/bulk-force-delete', [DokumenController::class, 'bulkForceDelete'])
+            ->name('dokumen.bulkForceDelete');
 
         /*
         |--------------------------------------------------------------------------

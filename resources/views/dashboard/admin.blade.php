@@ -43,7 +43,7 @@
         <img src="{{ asset('images/dashboard/logobulog-white-ribbon.png') }}" alt="BULOG" class="hero-logo-img hero-logo-dark">
     </div>
 
-</div>
+</div> 
 </div>
 
 <div class="row g-3 mb-4">

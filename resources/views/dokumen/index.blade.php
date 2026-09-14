@@ -882,10 +882,25 @@
 
     width: 100%;
     min-width: 0;
+    display: flex;
+    flex-wrap: nowrap;
 
 }
 
-.dokumen-filter-search .form-control,
+.dokumen-filter-search .input-group-text {
+
+    flex: 0 0 auto;
+
+}
+
+.dokumen-filter-search .form-control {
+
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+
+}
+
 .dokumen-filter-item .form-select {
 
     width: 100%;
@@ -902,8 +917,6 @@
     white-space: nowrap;
 
 }
-
-
 
 /* =========================================================
    CARD TABEL
