@@ -956,18 +956,132 @@
 
 }
 
+/* =========================================================
+   KOLOM NAMA DOKUMEN + ICON PDF
+========================================================= */
+
 .dokumen-name-cell {
 
-    min-width: 220px;
-    max-width: 360px;
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    min-width: 300px;
+    max-width: 420px;
+
+    width: 100%;
 
 }
 
+
+/* =========================================================
+   ICON FILE PDF
+========================================================= */
+
+.dokumen-name-cell .file-icon {
+
+    width: 44px;
+    height: 44px;
+
+    min-width: 44px;
+    max-width: 44px;
+
+    flex: 0 0 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background: #fff1f2;
+
+    box-shadow:
+        0 4px 12px rgba(15, 23, 42, .08);
+
+}
+
+
+/* ICON PDF */
+
+.dokumen-name-cell .file-icon i {
+
+    font-size: 20px;
+
+    line-height: 1;
+
+}
+
+
+/* =========================================================
+   NAMA DOKUMEN
+========================================================= */
+
 .dokumen-name-text {
 
+    display: block;
+
+    min-width: 0;
+
+    max-width: 100%;
+
     overflow: hidden;
+
     text-overflow: ellipsis;
+
     white-space: nowrap;
+
+    line-height: 1.4;
+
+}
+
+
+/* =========================================================
+   TABEL SUPAYA POSISI VERTIKAL RAPI
+========================================================= */
+
+.dokumen-table tbody td {
+
+    vertical-align: middle;
+
+}
+
+
+/* Kolom nama jangan membuat icon ikut bergeser */
+
+.dokumen-table tbody td:nth-child(2) {
+
+    vertical-align: middle;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .dokumen-name-cell {
+
+        min-width: 260px;
+
+        gap: 12px;
+
+    }
+
+    .dokumen-name-cell .file-icon {
+
+        width: 42px;
+        height: 42px;
+
+        min-width: 42px;
+        max-width: 42px;
+
+        flex-basis: 42px;
+
+    }
 
 }
 
