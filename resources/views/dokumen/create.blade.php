@@ -401,26 +401,31 @@
     class="upload-form-actions d-flex justify-content-end align-items-center gap-2 p-3 border-top"
 >
 
-                <a
-                    href="{{ route('dokumen.index') }}"
-                    class="btn btn-light"
-                >
-                    Batal
-                </a>
+    <a
+        href="{{ route('dokumen.index') }}"
+        class="btn btn-light"
+    >
+        Batal
+    </a>
 
+    {{-- UPLOAD BANYAK --}}
+    <a
+        href="{{ route('dokumen.upload-banyak') }}"
+        class="btn btn-outline-primary"
+    >
+        <i class="bi bi-files me-1"></i>
+        Upload Banyak
+    </a>
 
-                <button
-                    type="submit"
-                    class="upload-submit"
-                >
+    <button
+        type="submit"
+        class="upload-submit"
+    >
+        <i class="bi bi-check-lg"></i>
+        Simpan Dokumen
+    </button>
 
-                    <i class="bi bi-check-lg"></i>
-
-                    Simpan Dokumen
-
-                </button>
-
-            </div>
+</div>
 
         </form>
 

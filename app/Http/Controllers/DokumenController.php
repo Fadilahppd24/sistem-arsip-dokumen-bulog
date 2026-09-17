@@ -137,6 +137,581 @@ $dokumens = $query
     }
 
     /**
+ * Form upload banyak dokumen.
+ */
+public function uploadBanyak(): View
+{
+    return view('dokumen.upload-banyak');
+}
+
+
+public function storeBanyak(Request $request): RedirectResponse
+{
+    $request->validate([
+        'files' => [
+            'required',
+            'array',
+            'min:1',
+        ],
+        'files.*' => [
+            'required',
+            'file',
+            'mimes:pdf',
+            'max:102400',
+        ],
+    ], [
+        'files.required' => 'Pilih minimal satu file PDF.',
+        'files.array' => 'Format file tidak valid.',
+        'files.min' => 'Pilih minimal satu file PDF.',
+        'files.*.required' => 'File PDF wajib diunggah.',
+        'files.*.mimes' => 'Semua file harus berformat PDF.',
+        'files.*.max' => 'Ukuran setiap file maksimal 100 MB.',
+    ]);
+
+    $jumlahBerhasil = 0;
+    $jumlahGagal = 0;
+
+    /*
+    |--------------------------------------------------------------------------
+    | Lokasi aplikasi OCR
+    |--------------------------------------------------------------------------
+    */
+
+    $pdftoppm = 'C:\Users\Papad Cantik\AppData\Local\Microsoft\WinGet\Packages\oschwartz10612.Poppler_Microsoft.Winget.Source_8wekyb3d8bbwe\poppler-25.07.0\Library\bin\pdftoppm.exe';
+
+    $tesseract = 'C:\Program Files\Tesseract-OCR\tesseract.exe';
+
+    foreach ($request->file('files') as $file) {
+
+        $ocrFolder = null;
+
+        try {
+
+            /*
+            |--------------------------------------------------------------------------
+            | 1. Simpan PDF
+            |--------------------------------------------------------------------------
+            */
+
+            $path = $file->store('dokumen', 'public');
+
+            $pdfPath = storage_path('app/public/' . $path);
+
+            /*
+            |--------------------------------------------------------------------------
+            | 2. Nama dokumen dari nama file
+            |--------------------------------------------------------------------------
+            */
+
+            $namaFile = pathinfo(
+                $file->getClientOriginalName(),
+                PATHINFO_FILENAME
+            );
+
+            $namaDokumen = $namaFile;
+
+            /*
+            |--------------------------------------------------------------------------
+            | 3. Folder sementara OCR
+            |--------------------------------------------------------------------------
+            */
+
+            $ocrFolder = storage_path(
+                'app/ocr/' . uniqid('dokumen_', true)
+            );
+
+            if (!is_dir($ocrFolder)) {
+                mkdir($ocrFolder, 0777, true);
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | 4. PDF -> JPG resolusi tinggi
+            |--------------------------------------------------------------------------
+            |
+            | 200 DPI cukup untuk OCR umum.
+            | Tanggal TTD akan dibaca ulang pada halaman yang
+            | terdeteksi memiliki blok "Mengetahui".
+            |--------------------------------------------------------------------------
+            */
+
+            $outputPrefix = $ocrFolder . DIRECTORY_SEPARATOR . 'page';
+
+            $commandPdf = '"' . $pdftoppm . '"'
+                . ' -jpeg'
+                . ' -r 200'
+                . ' "' . $pdfPath . '"'
+                . ' "' . $outputPrefix . '"';
+
+            shell_exec($commandPdf);
+
+            /*
+            |--------------------------------------------------------------------------
+            | 5. Ambil seluruh halaman
+            |--------------------------------------------------------------------------
+            */
+
+            $gambar = glob($outputPrefix . '-*.jpg');
+
+            if (empty($gambar)) {
+                throw new \Exception(
+                    'PDF tidak berhasil dikonversi menjadi gambar.'
+                );
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | 6. OCR setiap halaman
+            |--------------------------------------------------------------------------
+            */
+
+            $hasilOCR = '';
+            $ocrPages = [];
+
+            foreach ($gambar as $gambarPath) {
+
+                $namaHalaman = pathinfo(
+                    $gambarPath,
+                    PATHINFO_FILENAME
+                );
+
+                $outputText = $ocrFolder
+                    . DIRECTORY_SEPARATOR
+                    . 'hasil_' . $namaHalaman;
+
+                $commandOcr = '"' . $tesseract . '"'
+                    . ' "' . $gambarPath . '"'
+                    . ' "' . $outputText . '"'
+                    . ' -l ind'
+                    . ' --psm 6';
+
+                shell_exec($commandOcr);
+
+                $textFile = $outputText . '.txt';
+
+                $teksHalaman = '';
+
+                if (file_exists($textFile)) {
+                    $teksHalaman = file_get_contents($textFile);
+                }
+
+                $ocrPages[] = $teksHalaman;
+
+                $hasilOCR .= "\n\n" . $teksHalaman;
+            }
+
+            \Log::info('HASIL OCR DOKUMEN', [
+                'file' => $file->getClientOriginalName(),
+                'jumlah_halaman' => count($ocrPages),
+                'ocr' => $hasilOCR,
+            ]);
+
+            /*
+            |--------------------------------------------------------------------------
+            | 7. Cari tanggal TTD
+            |--------------------------------------------------------------------------
+            |
+            | Tanggal yang dicari adalah tanggal pada blok tanda tangan,
+            | bukan tanggal invoice, printed date, tanggal pemeriksaan,
+            | atau tanggal dokumen pendukung.
+            |
+            | Contoh:
+            |
+            | Indramayu, 29-05-2026
+            | Mengetahui,
+            | Pimpinan Cabang
+            |
+            |--------------------------------------------------------------------------
+            */
+
+            $tanggalDokumen = null;
+
+            foreach ($ocrPages as $nomorHalaman => $teksHalaman) {
+
+                if (trim($teksHalaman) === '') {
+                    continue;
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | Bersihkan spasi OCR tanpa menghilangkan newline.
+                |--------------------------------------------------------------------------
+                */
+
+                $teksNormal = preg_replace(
+                    '/[ \t]+/',
+                    ' ',
+                    $teksHalaman
+                );
+
+                /*
+                |--------------------------------------------------------------------------
+                | Prioritas 1:
+                | tanggal + Mengetahui + Pimpinan
+                |--------------------------------------------------------------------------
+                */
+
+                $polaTTD = [
+                    '/(\d{1,2})\s*[-\/\.]\s*(\d{1,2})\s*[-\/\.]\s*(\d{4}).{0,400}\bMengetahui\b.{0,300}\bPimpinan\b/is',
+
+                    '/(?:Indramayu|Cirebon|Subang|Karawang|Majalengka|Sumedang)\s*,?\s*(\d{1,2})\s*[-\/\.]\s*(\d{1,2})\s*[-\/\.]\s*(\d{4}).{0,400}\bMengetahui\b/is',
+
+                    '/(\d{1,2})\s*[-\/\.]\s*(\d{1,2})\s*[-\/\.]\s*(\d{4}).{0,250}\bMengetahui\b/is',
+                ];
+
+                foreach ($polaTTD as $pola) {
+
+                    if (preg_match($pola, $teksNormal, $match)) {
+
+                        $hari  = (int) $match[1];
+                        $bulan = (int) $match[2];
+                        $tahun = (int) $match[3];
+
+                        if (checkdate($bulan, $hari, $tahun)) {
+
+                            $tanggalDokumen = sprintf(
+                                '%04d-%02d-%02d',
+                                $tahun,
+                                $bulan,
+                                $hari
+                            );
+
+                            \Log::info(
+                                'Tanggal TTD berhasil ditemukan',
+                                [
+                                    'file' => $file->getClientOriginalName(),
+                                    'halaman' => $nomorHalaman + 1,
+                                    'tanggal_ttd' => $tanggalDokumen,
+                                    'sumber' => 'OCR halaman TTD',
+                                ]
+                            );
+
+                            break 2;
+                        }
+                    }
+                }
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | 8. Kalau tanggal TTD belum ketemu,
+            |    lakukan OCR ulang pada halaman yang mengandung
+            |    "Mengetahui" dengan PSM berbeda.
+            |--------------------------------------------------------------------------
+            */
+
+            if (!$tanggalDokumen) {
+
+                foreach ($ocrPages as $nomorHalaman => $teksHalaman) {
+
+                    if (
+                        stripos($teksHalaman, 'Mengetahui') === false &&
+                        stripos($teksHalaman, 'Mengetahu') === false
+                    ) {
+                        continue;
+                    }
+
+                    $gambarPath = $gambar[$nomorHalaman] ?? null;
+
+                    if (!$gambarPath) {
+                        continue;
+                    }
+
+                    $namaHalaman = pathinfo(
+                        $gambarPath,
+                        PATHINFO_FILENAME
+                    );
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | OCR ulang halaman TTD dengan PSM 11.
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $outputTextTTD = $ocrFolder
+                        . DIRECTORY_SEPARATOR
+                        . 'ttd_' . $namaHalaman;
+
+                    $commandOcrTTD = '"' . $tesseract . '"'
+                        . ' "' . $gambarPath . '"'
+                        . ' "' . $outputTextTTD . '"'
+                        . ' -l ind'
+                        . ' --psm 11';
+
+                    shell_exec($commandOcrTTD);
+
+                    $textFileTTD = $outputTextTTD . '.txt';
+
+                    if (!file_exists($textFileTTD)) {
+                        continue;
+                    }
+
+                    $teksTTD = file_get_contents($textFileTTD);
+
+                    \Log::info(
+                        'HASIL OCR ULANG HALAMAN TTD',
+                        [
+                            'file' => $file->getClientOriginalName(),
+                            'halaman' => $nomorHalaman + 1,
+                            'ocr_ttd' => $teksTTD,
+                        ]
+                    );
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Normalisasi kesalahan OCR umum pada tanggal.
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $teksTTD = preg_replace(
+                        '/[ \t]+/',
+                        ' ',
+                        $teksTTD
+                    );
+
+                    if (preg_match(
+                        '/(\d{1,2})\s*[-\/\.]\s*(\d{1,2})\s*[-\/\.]\s*(\d{4}).{0,400}\bMengetahui\b/is',
+                        $teksTTD,
+                        $match
+                    )) {
+
+                        $hari  = (int) $match[1];
+                        $bulan = (int) $match[2];
+                        $tahun = (int) $match[3];
+
+                        if (checkdate($bulan, $hari, $tahun)) {
+
+                            $tanggalDokumen = sprintf(
+                                '%04d-%02d-%02d',
+                                $tahun,
+                                $bulan,
+                                $hari
+                            );
+
+                            \Log::info(
+                                'Tanggal TTD berhasil ditemukan dari OCR ulang',
+                                [
+                                    'file' => $file->getClientOriginalName(),
+                                    'halaman' => $nomorHalaman + 1,
+                                    'tanggal_ttd' => $tanggalDokumen,
+                                ]
+                            );
+
+                            break;
+                        }
+                    }
+                }
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | 9. Jangan pernah menggunakan tanggal hari ini.
+            |--------------------------------------------------------------------------
+            */
+
+            if (!$tanggalDokumen) {
+
+                \Log::warning(
+                    'Tanggal TTD tidak ditemukan',
+                    [
+                        'file' => $file->getClientOriginalName(),
+                        'keterangan' =>
+                            'Dokumen tidak disimpan karena tanggal TTD tidak berhasil dibaca.',
+                    ]
+                );
+
+                throw new \Exception(
+                    'Tanggal TTD tidak ditemukan dari OCR.'
+                );
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | 10. Ambil Alamat Mitra dari OCR
+            |--------------------------------------------------------------------------
+            */
+
+            $namaMitra = null;
+
+            if (preg_match(
+                '/Alamat\s*Mitra\s*[:\-]?\s*(.+)/i',
+                $hasilOCR,
+                $match
+            )) {
+
+                $namaMitra = trim($match[1]);
+
+                $namaMitra = preg_split(
+                    '/\r?\n/',
+                    $namaMitra
+                )[0];
+
+                $namaMitra = trim($namaMitra);
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | 11. Pecah nama file
+            |--------------------------------------------------------------------------
+            */
+
+            $nomorKeterangan = null;
+            $deskripsi = null;
+
+            $kataKategori = [
+                'ANGKUTAN',
+                'PENGOLAHAN',
+                'GKP',
+            ];
+
+            $posisiKategori = null;
+
+            foreach ($kataKategori as $kata) {
+
+                $posisi = stripos($namaFile, $kata);
+
+                if ($posisi !== false) {
+
+                    if (
+                        $posisiKategori === null ||
+                        $posisi < $posisiKategori
+                    ) {
+                        $posisiKategori = $posisi;
+                    }
+                }
+            }
+
+            if ($posisiKategori !== null) {
+
+                $bagianAwal = trim(
+                    substr($namaFile, 0, $posisiKategori)
+                );
+
+                $deskripsi = trim(
+                    substr($namaFile, $posisiKategori)
+                );
+
+                $nomorKeterangan = $bagianAwal;
+
+            } else {
+
+                $nomorKeterangan = $namaFile;
+                $deskripsi = null;
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | 12. Tentukan kategori
+            |--------------------------------------------------------------------------
+            */
+
+            $deskripsiUpper = strtoupper($deskripsi ?? '');
+
+            if (str_contains($deskripsiUpper, 'ANGKUTAN')) {
+
+                $namaKategori = 'Angkutan';
+
+            } elseif (str_contains($deskripsiUpper, 'PENGOLAHAN')) {
+
+                $namaKategori = 'Pengolahan';
+
+            } elseif (str_contains($deskripsiUpper, 'GKP')) {
+
+                $namaKategori = 'GKP';
+
+            } else {
+
+                $namaKategori = 'Lainnya';
+            }
+
+            $kategoriId = Kategori::where(
+                'nama',
+                $namaKategori
+            )->value('id');
+
+            /*
+            |--------------------------------------------------------------------------
+            | 13. Tambahkan nama mitra ke Nomor/Keterangan
+            |--------------------------------------------------------------------------
+            */
+
+            if (
+                $namaMitra &&
+                !str_contains(
+                    strtoupper($nomorKeterangan ?? ''),
+                    strtoupper($namaMitra)
+                )
+            ) {
+                $nomorKeterangan = trim(
+                    ($nomorKeterangan ?? '') . ' ' . $namaMitra
+                );
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | 14. Simpan database
+            |--------------------------------------------------------------------------
+            */
+
+            Dokumen::create([
+                'kategori_id' => $kategoriId,
+                'nama_dokumen' => $namaDokumen,
+                'nomor_keterangan' => $nomorKeterangan,
+                'tanggal_dokumen' => $tanggalDokumen,
+                'deskripsi' => $deskripsi,
+                'file_path' => $path,
+                'file_size' => $file->getSize(),
+                'user_id' => Auth::id(),
+            ]);
+
+            $jumlahBerhasil++;
+
+        } catch (\Throwable $e) {
+
+            $jumlahGagal++;
+
+            \Log::error(
+                'Gagal memproses upload dokumen banyak',
+                [
+                    'file' => $file->getClientOriginalName(),
+                    'error' => $e->getMessage(),
+                ]
+            );
+
+        } finally {
+
+            /*
+            |--------------------------------------------------------------------------
+            | Hapus folder sementara OCR
+            |--------------------------------------------------------------------------
+            */
+
+            if ($ocrFolder && is_dir($ocrFolder)) {
+
+                foreach (glob($ocrFolder . DIRECTORY_SEPARATOR . '*') as $temporaryFile) {
+
+                    if (is_file($temporaryFile)) {
+                        @unlink($temporaryFile);
+                    }
+                }
+
+                @rmdir($ocrFolder);
+            }
+        }
+    }
+
+    return redirect()
+        ->route('dokumen.index')
+        ->with(
+            'success',
+            "{$jumlahBerhasil} dokumen berhasil diproses."
+            . ($jumlahGagal > 0
+                ? " {$jumlahGagal} dokumen gagal diproses."
+                : '')
+        );
+}
+
+    /**
      * Menampilkan detail dokumen.
      */
     public function show(Dokumen $dokumen): View

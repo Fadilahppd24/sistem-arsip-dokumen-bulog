@@ -11,15 +11,16 @@ class Dokumen extends Model
      use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'kategori_id',
-        'nama_dokumen',
-        'nomor_keterangan',
-        'tanggal_dokumen',
-        'deskripsi',
-        'file_path',
-        'file_size',
-        'user_id',
-    ];
+    'kategori_id',
+    'nama_dokumen',
+    'nomor_keterangan',
+    'tanggal_dokumen',
+    'nama_mitra',
+    'deskripsi',
+    'file_path',
+    'file_size',
+    'user_id',
+];
 
     protected function casts(): array
     {

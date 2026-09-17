@@ -134,6 +134,12 @@ Route::middleware('auth')->group(function () {
         Route::post('/dokumen', [DokumenController::class, 'store'])
             ->name('dokumen.store');
 
+        Route::get('/dokumen/upload-banyak', [DokumenController::class, 'uploadBanyak'])
+    ->name('dokumen.upload-banyak');
+
+Route::post('/dokumen/upload-banyak', [DokumenController::class, 'storeBanyak'])
+    ->name('dokumen.upload-banyak.store');
+
         Route::get('/dokumen/{dokumen}/edit', [DokumenController::class, 'edit'])
             ->name('dokumen.edit');
 
@@ -146,6 +152,8 @@ Route::middleware('auth')->group(function () {
         Route::delete('/dokumen/{dokumen}', [DokumenController::class, 'destroy'])
             ->name('dokumen.destroy');
 
+        Route::post('/dokumen/{dokumen}/hapus', [DokumenController::class, 'destroy'])
+    ->name('dokumen.destroy.post');
         /*
         |--------------------------------------------------------------------------
         | Kelola Kategori

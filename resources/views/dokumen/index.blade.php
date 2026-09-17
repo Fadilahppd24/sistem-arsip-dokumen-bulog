@@ -99,137 +99,6 @@
 
 
 
-{{-- =========================================================
-     INFORMASI DOKUMEN TERBARU
-========================================================= --}}
-<div class="dokumen-info-card">
-
-    @if($dokumenTerbaru)
-
-        {{-- ICON --}}
-        <div class="dokumen-info-icon dokumen-info-icon-document">
-
-            @php
-                $ext = strtolower(
-                    pathinfo(
-                        $dokumenTerbaru->file_path,
-                        PATHINFO_EXTENSION
-                    )
-                );
-            @endphp
-
-            @if($ext === 'pdf')
-
-                <i class="bi bi-file-earmark-pdf-fill"></i>
-
-            @elseif(in_array($ext, ['doc', 'docx']))
-
-                <i class="bi bi-file-earmark-word-fill"></i>
-
-            @elseif(in_array($ext, ['xls', 'xlsx']))
-
-                <i class="bi bi-file-earmark-excel-fill"></i>
-
-            @else
-
-                <i class="bi bi-file-earmark-fill"></i>
-
-            @endif
-
-        </div>
-
-
-        {{-- INFORMASI --}}
-        <div class="dokumen-info-content">
-
-            <div class="dokumen-info-label">
-                <i class="bi bi-clock-history"></i>
-                Dokumen terbaru
-            </div>
-
-            <h6 class="dokumen-info-title">
-                {{ $dokumenTerbaru->nama_dokumen }}
-            </h6>
-
-            <div class="dokumen-info-meta">
-
-                <span>
-                    <i class="bi bi-calendar3"></i>
-
-                    {{ $dokumenTerbaru->tanggal_dokumen
-                        ? $dokumenTerbaru->tanggal_dokumen->format('d M Y')
-                        : '-' }}
-                </span>
-
-                <span class="dokumen-info-dot">
-                    •
-                </span>
-
-                <span>
-                    <i class="bi bi-person"></i>
-
-                    {{ $dokumenTerbaru->uploader->name ?? '-' }}
-                </span>
-
-            </div>
-
-        </div>
-
-    @else
-
-        {{-- ICON --}}
-        <div class="dokumen-info-icon dokumen-info-icon-empty">
-
-            <i class="bi bi-folder-plus"></i>
-
-        </div>
-
-
-        {{-- INFORMASI --}}
-        <div class="dokumen-info-content">
-
-            <div class="dokumen-info-label">
-                <i class="bi bi-info-circle"></i>
-                Belum ada dokumen
-            </div>
-
-            <h6 class="dokumen-info-title">
-
-                Belum ada dokumen di
-                {{ $kategoriAktif->nama ?? 'kategori ini' }}
-
-            </h6>
-
-            <div class="dokumen-info-meta">
-
-                Tambahkan dokumen pertama untuk mulai
-                mengarsipkan dan mengelola dokumen.
-
-            </div>
-
-        </div>
-
-    @endif
-
-
-    {{-- UPLOAD --}}
-    <div class="dokumen-info-action">
-
-        <a
-            href="{{ route('dokumen.create', ['kategori_id' => $kategoriAktif->id ?? null]) }}"
-            class="btn btn-upload-quick"
-        >
-
-            <i class="bi bi-plus-lg"></i>
-
-            Upload Dokumen
-
-        </a>
-
-    </div>
-
-</div>
-
 
 
 {{-- =========================================================
@@ -637,15 +506,13 @@
                                             </button>
 
 
-                                            <form
-                                                method="POST"
-                                                action="{{ route('dokumen.destroy', $dokumen) }}"
-                                                class="modal-hapus-form"
-                                            >
+                            <form
+    method="POST"
+    action="{{ route('dokumen.destroy.post', $dokumen) }}"
+    class="modal-hapus-form"
+>
 
-                                                @csrf
-
-                                                @method('DELETE')
+    @csrf
 
                                                 <button
                                                     type="submit"
@@ -1822,10 +1689,11 @@
 
     display: flex;
     align-items: flex-start;
-
     gap: 10px;
 
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
 
     padding: 12px 14px;
 
@@ -1838,6 +1706,8 @@
     border: 1px solid #dbeafe !important;
 
     border-radius: 11px !important;
+
+    overflow: hidden;
 
 }
 
@@ -1867,8 +1737,18 @@
 
     line-height: 1.5 !important;
 
-}
+    width: 0;
+    min-width: 0;
 
+    flex: 1 1 auto;
+
+    white-space: normal !important;
+
+    overflow-wrap: break-word !important;
+
+    word-break: normal !important;
+
+}
 
 .modal-info-text strong {
 
