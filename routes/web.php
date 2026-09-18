@@ -146,6 +146,9 @@ Route::post('/dokumen/upload-banyak', [DokumenController::class, 'storeBanyak'])
         Route::put('/dokumen/{dokumen}', [DokumenController::class, 'update'])
             ->name('dokumen.update');
 
+        Route::post('/dokumen/bulk-delete', [DokumenController::class, 'bulkDelete'])
+    ->name('dokumen.bulkDelete');
+
         Route::delete('dokumen/bulk-force-delete', [DokumenController::class, 'bulkForceDelete'])
             ->name('dokumen.bulkForceDelete');
 
@@ -196,8 +199,6 @@ Route::post('/dokumen/upload-banyak', [DokumenController::class, 'storeBanyak'])
         Route::delete('/dokumen/{dokumen}/force-delete', [DokumenController::class, 'forceDelete'])
             ->name('dokumen.forceDelete');
 
-        Route::delete('dokumen/bulk-force-delete', [DokumenController::class, 'bulkForceDelete'])
-            ->name('dokumen.bulkForceDelete');
 
         /*
         |--------------------------------------------------------------------------

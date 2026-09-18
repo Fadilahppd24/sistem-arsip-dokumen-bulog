@@ -270,13 +270,41 @@
 
     <div class="table-responsive dokumen-table-responsive">
 
+    <div style="margin-bottom: 15px;">
+    <button
+        type="button"
+        id="btnBulkDelete"
+        class="btn btn-danger"
+        style="display: none;"
+        onclick="hapusTerpilih()"
+    >
+        <i class="bi bi-trash3"></i>
+        Hapus Terpilih
+        (<span id="jumlahTerpilih">0</span>)
+    </button>
+</div>
+
+<form
+    id="bulkDeleteForm"
+    method="POST"
+    action="{{ route('dokumen.bulkDelete') }}"
+>
+    @csrf
+
+    <div id="bulkDeleteInputs"></div>
+</form>
+
         <table class="table table-hover align-middle mb-0 dokumen-table">
 
             <thead>
 
                 <tr class="text-muted small">
 
-                    <th>No</th>
+    <th style="width: 40px;">
+        <input type="checkbox" id="selectAllDokumen">
+    </th>
+
+    <th>No</th>
 
                     <th>Nama Dokumen</th>
 
@@ -299,10 +327,19 @@
 
                 @forelse ($dokumens as $i => $dokumen)
 
-                    <tr>
+    <tr>
 
-                        {{-- NO --}}
-                        <td>
+        {{-- CHECKBOX --}}
+        <td>
+            <input
+                type="checkbox"
+                class="dokumen-checkbox"
+                value="{{ $dokumen->id }}"
+            >
+        </td>
+
+        {{-- NO --}}
+        <td>
                             {{ $dokumens->firstItem() + $i }}
                         </td>
 
@@ -653,6 +690,114 @@
 {{-- =========================================================
      IFRAME DOWNLOAD
 ========================================================= --}}
+{{-- =========================================================
+     MODAL HAPUS TERPILIH
+========================================================= --}}
+<div
+    class="modal fade bulk-hapus-modal-wrapper"
+    id="bulkHapusModal"
+    tabindex="-1"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-dialog-centered bulk-hapus-dialog">
+
+        <div class="modal-content bulk-hapus-modal">
+
+            {{-- TOMBOL CLOSE --}}
+            <button
+                type="button"
+                class="bulk-hapus-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+            >
+                <i class="bi bi-x-lg"></i>
+            </button>
+
+
+            {{-- ICON --}}
+            <div class="bulk-hapus-icon-wrapper">
+
+                <div class="bulk-hapus-icon">
+
+                    <i class="bi bi-trash3-fill"></i>
+
+                </div>
+
+            </div>
+
+
+            {{-- BODY --}}
+            <div class="bulk-hapus-body">
+
+                <h4 class="bulk-hapus-title">
+                    Pindahkan ke Sampah Dokumen?
+                </h4>
+
+
+                <p class="bulk-hapus-text">
+                    Yakin ingin memindahkan
+                    <strong>
+                        <span id="jumlahDokumenHapus">0</span> dokumen
+                    </strong>
+                    yang dipilih ke Sampah Dokumen?
+                </p>
+
+
+                {{-- INFO --}}
+                <div class="bulk-hapus-info">
+
+                    <div class="bulk-hapus-info-icon">
+
+                        <i class="bi bi-info-circle-fill"></i>
+
+                    </div>
+
+
+                    <div class="bulk-hapus-info-text">
+
+                        Dokumen akan dipindahkan ke
+                        <strong>Sampah Dokumen</strong>
+                        dan masih dapat dipulihkan kembali.
+                        Dokumen tidak akan terhapus secara permanen.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            {{-- FOOTER --}}
+            <div class="bulk-hapus-footer">
+
+                <button
+                    type="button"
+                    class="btn-bulk-batal"
+                    data-bs-dismiss="modal"
+                >
+                    Batal
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn-bulk-hapus"
+                    onclick="lanjutHapusTerpilih()"
+                >
+
+                    <i class="bi bi-trash3-fill"></i>
+
+                    Pindahkan ke Sampah
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
 <iframe
     name="downloadFrame"
     style="display:none;"
@@ -1955,6 +2100,287 @@ body.dark-mode .dokumen-pagination-right
 
 }
 
+/* =========================================================
+   MODAL HAPUS TERPILIH
+========================================================= */
+
+.bulk-hapus-modal-wrapper {
+    z-index: 1070 !important;
+}
+
+.bulk-hapus-dialog {
+    max-width: 560px !important;
+    width: calc(100% - 30px);
+}
+
+.bulk-hapus-modal {
+    position: relative;
+    border: none !important;
+    border-radius: 22px !important;
+    overflow: hidden;
+    background: #ffffff !important;
+    box-shadow:
+        0 25px 80px rgba(15, 23, 42, .30) !important;
+}
+
+.bulk-hapus-close {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    background: transparent;
+
+    color: #64748b;
+    font-size: 16px;
+
+    border-radius: 50%;
+    cursor: pointer;
+
+    z-index: 5;
+}
+
+.bulk-hapus-close:hover {
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+
+/* ICON */
+
+.bulk-hapus-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding-top: 40px;
+    padding-bottom: 8px;
+}
+
+.bulk-hapus-icon {
+    width: 86px;
+    height: 86px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fff1f2;
+    border: 1px solid #fecdd3;
+
+    color: #dc3545;
+
+    font-size: 34px;
+}
+
+.bulk-hapus-icon i {
+    color: #dc3545;
+}
+
+
+/* BODY */
+
+.bulk-hapus-body {
+    padding: 18px 40px 25px;
+
+    text-align: center;
+}
+
+.bulk-hapus-title {
+    margin: 0 0 10px;
+
+    color: #172033;
+
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.bulk-hapus-text {
+    margin: 0 auto 22px;
+
+    max-width: 430px;
+
+    color: #64748b;
+
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.bulk-hapus-text strong {
+    color: #334155;
+}
+
+
+/* INFO */
+
+.bulk-hapus-info {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 12px;
+
+    width: 100%;
+
+    padding: 15px 17px;
+
+    box-sizing: border-box;
+
+    text-align: left;
+
+    background: #fff1f2;
+
+    border: 1px solid #fecdd3;
+
+    border-radius: 13px;
+}
+
+.bulk-hapus-info-icon {
+    width: 22px;
+    height: 22px;
+
+    flex: 0 0 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #dc3545;
+
+    font-size: 17px;
+}
+
+.bulk-hapus-info-text {
+    flex: 1 1 auto;
+
+    min-width: 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+    line-height: 1.55;
+
+    overflow-wrap: break-word;
+}
+
+.bulk-hapus-info-text strong {
+    color: #991b1b;
+}
+
+
+/* FOOTER */
+
+.bulk-hapus-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    padding: 17px 28px 23px;
+
+    border-top: 1px solid #eef2f7;
+
+    background: #ffffff;
+}
+
+.btn-bulk-batal,
+.btn-bulk-hapus {
+    height: 44px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0 20px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.btn-bulk-batal {
+    min-width: 100px;
+
+    background: #ffffff;
+
+    border: 1px solid #d1d5db;
+
+    color: #475569;
+}
+
+.btn-bulk-batal:hover {
+    background: #f8fafc;
+}
+
+.btn-bulk-hapus {
+    min-width: 190px;
+
+    background: #dc3545;
+
+    border: 1px solid #dc3545;
+
+    color: #ffffff;
+}
+
+.btn-bulk-hapus:hover {
+    background: #bb2d3b;
+    border-color: #bb2d3b;
+}
+
+.btn-bulk-hapus i {
+    color: #ffffff;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 576px) {
+
+    .bulk-hapus-dialog {
+        width: calc(100% - 20px);
+        max-width: none !important;
+    }
+
+    .bulk-hapus-body {
+        padding: 18px 20px 22px;
+    }
+
+    .bulk-hapus-title {
+        font-size: 21px;
+    }
+
+    .bulk-hapus-text {
+        font-size: 14px;
+    }
+
+    .bulk-hapus-footer {
+        padding: 15px 20px 20px;
+
+        flex-direction: column-reverse;
+    }
+
+    .btn-bulk-batal,
+    .btn-bulk-hapus {
+        width: 100%;
+    }
+
+}
+
+
 </style>
 
 
@@ -1962,6 +2388,126 @@ body.dark-mode .dokumen-pagination-right
 @push('scripts')
 
 <script>
+
+
+/* =========================================================
+   BULK SELECT & HAPUS
+========================================================= */
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const selectAll = document.getElementById('selectAllDokumen');
+    const checkboxes = document.querySelectorAll('.dokumen-checkbox');
+    const btnBulkDelete = document.getElementById('btnBulkDelete');
+    const jumlahTerpilih = document.getElementById('jumlahTerpilih');
+
+    if (!selectAll || !btnBulkDelete) return;
+
+
+    function updateBulkDelete() {
+
+        const terpilih =
+            document.querySelectorAll('.dokumen-checkbox:checked');
+
+        const jumlah = terpilih.length;
+
+        jumlahTerpilih.textContent = jumlah;
+
+        if (jumlah > 0) {
+            btnBulkDelete.style.display = 'inline-block';
+        } else {
+            btnBulkDelete.style.display = 'none';
+        }
+
+        selectAll.checked =
+            checkboxes.length > 0 &&
+            jumlah === checkboxes.length;
+
+    }
+
+
+    // SELECT ALL
+    selectAll.addEventListener('change', function () {
+
+        checkboxes.forEach(function (checkbox) {
+            checkbox.checked = selectAll.checked;
+        });
+
+        updateBulkDelete();
+
+    });
+
+
+    // CHECKBOX SATUAN
+    checkboxes.forEach(function (checkbox) {
+
+        checkbox.addEventListener('change', function () {
+            updateBulkDelete();
+        });
+
+    });
+
+
+    updateBulkDelete();
+
+});
+
+
+function hapusTerpilih() {
+
+    const terpilih =
+        document.querySelectorAll('.dokumen-checkbox:checked');
+
+    if (terpilih.length === 0) {
+        return;
+    }
+
+    const jumlah = terpilih.length;
+
+    document.getElementById('jumlahDokumenHapus').textContent = jumlah;
+
+    const modalElement =
+        document.getElementById('bulkHapusModal');
+
+    const modal =
+        new bootstrap.Modal(modalElement);
+
+    modal.show();
+}
+
+
+function lanjutHapusTerpilih() {
+
+    const terpilih =
+        document.querySelectorAll('.dokumen-checkbox:checked');
+
+    if (terpilih.length === 0) {
+        return;
+    }
+
+    const form =
+        document.getElementById('bulkDeleteForm');
+
+    const container =
+        document.getElementById('bulkDeleteInputs');
+
+    container.innerHTML = '';
+
+    terpilih.forEach(function (checkbox) {
+
+        const input =
+            document.createElement('input');
+
+        input.type = 'hidden';
+        input.name = 'ids[]';
+        input.value = checkbox.value;
+
+        container.appendChild(input);
+
+    });
+
+    form.submit();
+}
 
 /* =========================================================
    PAGINATION

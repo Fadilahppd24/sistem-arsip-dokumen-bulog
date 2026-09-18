@@ -882,6 +882,45 @@ public function storeBanyak(Request $request): RedirectResponse
             );
     }
 
+    /**
+ * Menghapus banyak dokumen ke Sampah.
+ */
+public function bulkDelete(Request $request): RedirectResponse
+{
+    $ids = $request->input('ids', []);
+
+    if (empty($ids)) {
+        return back()->with(
+            'error',
+            'Tidak ada dokumen yang dipilih.'
+        );
+    }
+
+    $dokumens = Dokumen::whereIn('id', $ids)->get();
+
+    foreach ($dokumens as $dokumen) {
+
+        AuditHelper::catat(
+            'Hapus Dokumen (Bulk)',
+            'Dokumen',
+            $dokumen->id,
+            'Memindahkan dokumen ke Sampah: ' . $dokumen->nama_dokumen
+        );
+
+        // Soft delete → masuk Sampah Dokumen
+        $dokumen->delete();
+    }
+
+    $jumlah = $dokumens->count();
+
+    return redirect()
+        ->route('dokumen.index')
+        ->with(
+            'success',
+            "{$jumlah} dokumen berhasil dipindahkan ke Sampah Dokumen."
+        );
+}
+    
     public function bulkForceDelete(Request $request): RedirectResponse
     {
         $ids = $request->input('ids', []);
