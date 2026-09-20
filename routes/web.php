@@ -149,7 +149,7 @@ Route::post('/dokumen/upload-banyak', [DokumenController::class, 'storeBanyak'])
         Route::post('/dokumen/bulk-delete', [DokumenController::class, 'bulkDelete'])
     ->name('dokumen.bulkDelete');
 
-        Route::delete('dokumen/bulk-force-delete', [DokumenController::class, 'bulkForceDelete'])
+        Route::post('/dokumen/bulk-force-delete', [DokumenController::class, 'bulkForceDelete'])
             ->name('dokumen.bulkForceDelete');
 
         Route::delete('/dokumen/{dokumen}', [DokumenController::class, 'destroy'])
@@ -164,13 +164,16 @@ Route::post('/dokumen/upload-banyak', [DokumenController::class, 'storeBanyak'])
         */
 
         Route::get('/kategori', [KategoriController::class, 'index'])
-            ->name('kategori.index');
+    ->name('kategori.index');
 
-        Route::post('/kategori', [KategoriController::class, 'store'])
-            ->name('kategori.store');
+Route::post('/kategori', [KategoriController::class, 'store'])
+    ->name('kategori.store');
 
-        Route::put('/kategori/{kategori}', [KategoriController::class, 'update'])
-            ->name('kategori.update');
+Route::post('/kategori/bulk-delete', [KategoriController::class, 'bulkDelete'])
+    ->name('kategori.bulkDelete');
+
+Route::put('/kategori/{kategori}', [KategoriController::class, 'update'])
+    ->name('kategori.update');
 
         Route::delete('/kategori/{kategori}', [KategoriController::class, 'destroy'])
             ->name('kategori.destroy');
@@ -180,7 +183,9 @@ Route::post('/dokumen/upload-banyak', [DokumenController::class, 'storeBanyak'])
 
         Route::delete('/kategori/{id}/force-delete', [KategoriController::class, 'forceDelete'])
             ->name('kategori.forceDelete');
-
+        
+        Route::post('/kategori/bulk-force-delete', [KategoriController::class, 'bulkForceDelete'])
+    ->name('kategori.bulkForceDelete');
 
        
 

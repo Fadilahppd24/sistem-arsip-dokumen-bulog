@@ -296,6 +296,10 @@
                     </th>
 
                     <th>
+                        Kategori
+                    </th>
+
+                    <th>
                         Nomor / Keterangan
                     </th>
 
@@ -349,6 +353,19 @@
 
                             </div>
 
+                        </td>
+
+
+                        {{-- KATEGORI --}}
+                        <td>
+                            @if($dokumen->kategori)
+                                <span class="dokumen-kategori-badge">
+                                    <i class="bi bi-folder-fill"></i>
+                                    {{ $dokumen->kategori->nama }}
+                                </span>
+                            @else
+                                <span class="text-muted">-</span>
+                            @endif
                         </td>
 
 
@@ -416,7 +433,7 @@
                     <tr>
 
                         <td
-                            colspan="6"
+                            colspan="7"
                             class="text-center py-5"
                         >
 
@@ -642,6 +659,100 @@
 }
 
 
+
+/* =========================================================
+   FIX SEARCH + FILTER SEJAJAR
+========================================================= */
+
+.dokumen-filter-grid {
+    display: grid !important;
+    grid-template-columns:
+        minmax(280px, 2fr)
+        minmax(140px, 1fr)
+        minmax(140px, 1fr)
+        minmax(140px, 1fr)
+        minmax(110px, 1fr) !important;
+    gap: 10px !important;
+    align-items: center !important;
+}
+
+.dokumen-filter-grid .filter-search {
+    grid-column: auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+.dokumen-filter-grid .filter-search .input-group {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+.dokumen-filter-grid .filter-search .input-group-text {
+    flex: 0 0 40px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+}
+
+.dokumen-filter-grid .filter-search .form-control {
+    flex: 1 1 auto !important;
+    width: 1% !important;
+    min-width: 0 !important;
+    height: 40px !important;
+    margin: 0 !important;
+}
+
+/* Badge kategori */
+.dokumen-kategori-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: #eaf2ff;
+    border: 1px solid #d5e4ff;
+    color: #1769e8;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.dokumen-kategori-badge i {
+    font-size: 12px;
+}
+
+body.dark-mode .dokumen-kategori-badge {
+    background: #23395d;
+    border-color: #365581;
+    color: #9fc2f5;
+}
+
+
+/* =========================================================
+   RESPONSIVE FILTER
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .dokumen-filter-grid {
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(0, 1fr) !important;
+    }
+
+    .dokumen-filter-grid .filter-search {
+        grid-column: 1 / -1 !important;
+    }
+
+}
 
 /* =========================================================
    PAGINATION
@@ -1143,7 +1254,7 @@ body.dark-mode .dokumen-pagination-right
 
     .filter-search {
 
-        grid-column: 1 / -1;
+        grid-column: 1 / -1 !important;
 
     }
 

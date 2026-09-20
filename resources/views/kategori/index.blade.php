@@ -969,6 +969,143 @@ body.dark-mode .d-inline-flex .btn.btn-light.border.text-danger i { color:#f8717
 
 }
 
+
+
+/* =========================================================
+   BULK DELETE KATEGORI
+========================================================= */
+.bulk-kategori-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 24px 16px;
+}
+
+.bulk-kategori-select-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.bulk-kategori-select-all input,
+.kategori-checkbox {
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+    accent-color: #1769e8;
+}
+
+#btnBulkDeleteKategori {
+    display: none;
+    border: 0;
+    border-radius: 8px;
+    padding: 9px 15px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    background: #dc3545;
+    box-shadow: 0 4px 10px rgba(220,53,69,.16);
+}
+
+#btnBulkDeleteKategori:hover {
+    background: #bb2d3b;
+}
+
+#btnBulkForceDeleteKategori {
+    display: none;
+    border: 0;
+    border-radius: 8px;
+    padding: 9px 15px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    background: #dc3545;
+    box-shadow: 0 4px 10px rgba(220,53,69,.16);
+}
+
+#btnBulkForceDeleteKategori:hover {
+    background: #bb2d3b;
+}
+
+.bulk-kategori-modal {
+    border: 0;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.bulk-kategori-icon {
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #fef2f2;
+    color: #dc3545;
+    font-size: 28px;
+}
+
+.bulk-kategori-info {
+    display: flex;
+    gap: 10px;
+    text-align: left;
+    padding: 12px 14px;
+    margin-top: 18px;
+    border-radius: 10px;
+    background: #fff7ed;
+    color: #9a3412;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.bulk-kategori-footer {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 24px 24px;
+}
+
+.bulk-kategori-footer .btn {
+    min-width: 130px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+body.dark-mode .bulk-kategori-select-all {
+    color: #aebed2;
+}
+
+body.dark-mode .bulk-kategori-modal {
+    background: #1f2b3d;
+    color: #e5edf7;
+}
+
+body.dark-mode .bulk-kategori-info {
+    background: rgba(249,115,22,.12);
+    color: #fdba74;
+}
+
+body.dark-mode .bulk-kategori-modal .text-muted {
+    color: #94a3b8 !important;
+}
+
+@media (max-width: 576px) {
+    .bulk-kategori-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 0 16px 16px;
+    }
+
+    #btnBulkDeleteKategori {
+        width: 100%;
+    }
+}
+
 </style>
 
 
@@ -1353,6 +1490,40 @@ body.dark-mode .d-inline-flex .btn.btn-light.border.text-danger i { color:#f8717
                      TABLE KATEGORI
                 ================================================== --}}
 
+                <div class="bulk-kategori-toolbar">
+
+                    <label class="bulk-kategori-select-all mb-0">
+
+                        <input
+                            type="checkbox"
+                            id="selectAllKategori"
+                        >
+
+                        <span>Pilih Semua</span>
+
+                    </label>
+
+                    <button
+                        type="button"
+                        id="btnBulkDeleteKategori"
+                        onclick="hapusKategoriTerpilih()"
+                    >
+                        <i class="bi bi-trash3 me-1"></i>
+                        Hapus Terpilih
+                        (<span id="jumlahKategoriTerpilih">0</span>)
+                    </button>
+
+                </div>
+
+                <form
+                    id="bulkDeleteKategoriForm"
+                    method="POST"
+                    action="{{ route('kategori.bulkDelete') }}"
+                >
+                    @csrf
+                    <div id="bulkDeleteKategoriInputs"></div>
+                </form>
+
                 <div class="table-responsive">
 
                     <table
@@ -1367,8 +1538,17 @@ body.dark-mode .d-inline-flex .btn.btn-light.border.text-danger i { color:#f8717
 
                                 <th
                                     class="ps-4"
-                                    style="width:70px;"
+                                    style="width:55px;"
                                 >
+                                    <input
+                                        type="checkbox"
+                                        id="selectAllKategoriTable"
+                                        class="kategori-checkbox"
+                                        title="Pilih semua kategori"
+                                    >
+                                </th>
+
+                                <th style="width:70px;">
                                     No
                                 </th>
 
@@ -1421,9 +1601,23 @@ body.dark-mode .d-inline-flex .btn.btn-light.border.text-danger i { color:#f8717
                             >
 
 
-                                {{-- NO --}}
+                                {{-- CHECKBOX --}}
 
                                 <td class="ps-4">
+
+                                    <input
+                                        type="checkbox"
+                                        class="kategori-checkbox kategori-row-checkbox"
+                                        value="{{ $kategori->id }}"
+                                        aria-label="Pilih kategori {{ $kategori->nama }}"
+                                    >
+
+                                </td>
+
+
+                                {{-- NO --}}
+
+                                <td>
 
                                     {{ $i + 1 }}
 
@@ -1802,6 +1996,33 @@ body.dark-mode .d-inline-flex .btn.btn-light.border.text-danger i { color:#f8717
 
 
 
+                    {{-- BULK HAPUS PERMANEN KATEGORI TERHAPUS --}}
+
+                    <div class="bulk-kategori-toolbar">
+
+                        <label class="bulk-kategori-select-all mb-0">
+
+                            <input
+                                type="checkbox"
+                                id="selectAllKategoriTerhapus"
+                            >
+
+                            <span>Pilih Semua</span>
+
+                        </label>
+
+                        <button
+                            type="button"
+                            id="btnBulkForceDeleteKategori"
+                            onclick="hapusKategoriTerhapusTerpilih()"
+                        >
+                            <i class="bi bi-trash3-fill me-1"></i>
+                            Hapus Permanen Terpilih
+                            (<span id="jumlahKategoriTerhapusTerpilih">0</span>)
+                        </button>
+
+                    </div>
+
                     <div class="table-responsive">
 
                         <table class="table table-hover align-middle">
@@ -1809,6 +2030,15 @@ body.dark-mode .d-inline-flex .btn.btn-light.border.text-danger i { color:#f8717
                             <thead class="table-light">
 
                                 <tr class="small text-muted">
+
+                                    <th style="width:55px;">
+                                        <input
+                                            type="checkbox"
+                                            id="selectAllKategoriTerhapusTable"
+                                            class="kategori-checkbox"
+                                            title="Pilih semua kategori terhapus"
+                                        >
+                                    </th>
 
                                     <th style="width:70px;">
                                         No
@@ -1843,6 +2073,20 @@ body.dark-mode .d-inline-flex .btn.btn-light.border.text-danger i { color:#f8717
 
 
                                 <tr>
+
+
+                                    {{-- CHECKBOX --}}
+
+                                    <td>
+
+                                        <input
+                                            type="checkbox"
+                                            class="kategori-terhapus-checkbox kategori-checkbox"
+                                            value="{{ $kategori->id }}"
+                                            aria-label="Pilih kategori terhapus {{ $kategori->nama }}"
+                                        >
+
+                                    </td>
 
 
                                     <td>
@@ -1936,7 +2180,7 @@ body.dark-mode .d-inline-flex .btn.btn-light.border.text-danger i { color:#f8717
                                 <tr>
 
                                     <td
-                                        colspan="5"
+                                        colspan="6"
                                         class="text-center py-5 text-muted"
                                     >
 
@@ -2427,6 +2671,73 @@ body.dark-mode .d-inline-flex .btn.btn-light.border.text-danger i { color:#f8717
 </div>
 @endforeach
 
+{{-- =========================================================
+     MODAL BULK DELETE KATEGORI
+========================================================= --}}
+
+<div
+    class="modal fade"
+    id="modalBulkDeleteKategori"
+    tabindex="-1"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content bulk-kategori-modal shadow">
+
+            <div class="modal-body text-center p-4 p-md-5">
+
+                <div class="bulk-kategori-icon">
+                    <i class="bi bi-trash3-fill"></i>
+                </div>
+
+                <h4 class="fw-bold mb-2">
+                    Nonaktifkan kategori terpilih?
+                </h4>
+
+                <p class="text-muted mb-0">
+                    Kamu akan memindahkan
+                    <strong><span id="jumlahKategoriHapus">0</span> kategori</strong>
+                    ke Kategori Terhapus.
+                </p>
+
+                <div class="bulk-kategori-info">
+                    <i class="bi bi-info-circle-fill mt-1"></i>
+                    <span>
+                        Kategori tidak dihapus permanen. Kategori masih dapat
+                        dipulihkan kembali dari tab Kategori Terhapus.
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="bulk-kategori-footer">
+
+                <button
+                    type="button"
+                    class="btn btn-light border"
+                    data-bs-dismiss="modal"
+                >
+                    Batal
+                </button>
+
+                <button
+                    type="button"
+                    class="btn btn-danger"
+                    onclick="lanjutHapusKategoriTerpilih()"
+                >
+                    <i class="bi bi-trash3-fill me-1"></i>
+                    Ya, Nonaktifkan
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
 {{-- ================================================= --}}
 {{-- MODAL KONFIRMASI --}}
 {{-- ================================================= --}}
@@ -2693,11 +3004,291 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
+    /* =====================================================
+       BULK DELETE KATEGORI
+    ===================================================== */
+
+    const selectAllKategori =
+        document.getElementById('selectAllKategori');
+
+    const selectAllKategoriTable =
+        document.getElementById('selectAllKategoriTable');
+
+    const kategoriCheckboxes =
+        document.querySelectorAll('.kategori-row-checkbox');
+
+    const btnBulkDeleteKategori =
+        document.getElementById('btnBulkDeleteKategori');
+
+    const jumlahKategoriTerpilih =
+        document.getElementById('jumlahKategoriTerpilih');
+
+    function updateBulkKategoriButton() {
+
+        const terpilih =
+            document.querySelectorAll('.kategori-row-checkbox:checked');
+
+        const jumlah = terpilih.length;
+
+        jumlahKategoriTerpilih.textContent = jumlah;
+
+        if (jumlah > 0) {
+            btnBulkDeleteKategori.style.display = 'inline-flex';
+        } else {
+            btnBulkDeleteKategori.style.display = 'none';
+        }
+
+        const total = kategoriCheckboxes.length;
+
+        if (selectAllKategori) {
+            selectAllKategori.checked =
+                total > 0 && jumlah === total;
+
+            selectAllKategori.indeterminate =
+                jumlah > 0 && jumlah < total;
+        }
+
+        if (selectAllKategoriTable) {
+            selectAllKategoriTable.checked =
+                total > 0 && jumlah === total;
+
+            selectAllKategoriTable.indeterminate =
+                jumlah > 0 && jumlah < total;
+        }
+    }
+
+    function setSemuaKategori(checked) {
+
+        kategoriCheckboxes.forEach(function (checkbox) {
+            checkbox.checked = checked;
+        });
+
+        updateBulkKategoriButton();
+    }
+
+    if (selectAllKategori) {
+        selectAllKategori.addEventListener('change', function () {
+            setSemuaKategori(this.checked);
+        });
+    }
+
+    if (selectAllKategoriTable) {
+        selectAllKategoriTable.addEventListener('change', function () {
+            setSemuaKategori(this.checked);
+        });
+    }
+
+    kategoriCheckboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', updateBulkKategoriButton);
+    });
+
+    window.hapusKategoriTerpilih = function () {
+
+        const terpilih =
+            document.querySelectorAll('.kategori-row-checkbox:checked');
+
+        if (terpilih.length === 0) {
+            return;
+        }
+
+        document.getElementById('jumlahKategoriHapus').textContent =
+            terpilih.length;
+
+        const bulkModalElement =
+            document.getElementById('modalBulkDeleteKategori');
+
+        const bulkModal =
+            bootstrap.Modal.getOrCreateInstance(bulkModalElement);
+
+        bulkModal.show();
+    };
+
+    window.lanjutHapusKategoriTerpilih = function () {
+
+        const terpilih =
+            document.querySelectorAll('.kategori-row-checkbox:checked');
+
+        if (terpilih.length === 0) {
+            return;
+        }
+
+        const form =
+            document.getElementById('bulkDeleteKategoriForm');
+
+        const container =
+            document.getElementById('bulkDeleteKategoriInputs');
+
+        container.innerHTML = '';
+
+        terpilih.forEach(function (checkbox) {
+
+            const input =
+                document.createElement('input');
+
+            input.type = 'hidden';
+            input.name = 'ids[]';
+            input.value = checkbox.value;
+
+            container.appendChild(input);
+        });
+
+        form.submit();
+    };
+
+
+    /* =====================================================
+       BULK HAPUS PERMANEN KATEGORI TERHAPUS
+    ===================================================== */
+
+    const selectAllKategoriTerhapus =
+        document.getElementById('selectAllKategoriTerhapus');
+
+    const selectAllKategoriTerhapusTable =
+        document.getElementById('selectAllKategoriTerhapusTable');
+
+    const kategoriTerhapusCheckboxes =
+        document.querySelectorAll('.kategori-terhapus-checkbox');
+
+    const btnBulkForceDeleteKategori =
+        document.getElementById('btnBulkForceDeleteKategori');
+
+    const jumlahKategoriTerhapusTerpilih =
+        document.getElementById('jumlahKategoriTerhapusTerpilih');
+
+    function updateBulkForceDeleteKategori() {
+
+        const terpilih =
+            document.querySelectorAll('.kategori-terhapus-checkbox:checked');
+
+        const jumlah = terpilih.length;
+
+        if (jumlahKategoriTerhapusTerpilih) {
+            jumlahKategoriTerhapusTerpilih.textContent = jumlah;
+        }
+
+        if (btnBulkForceDeleteKategori) {
+            btnBulkForceDeleteKategori.style.display =
+                jumlah > 0 ? 'inline-flex' : 'none';
+        }
+
+        const total = kategoriTerhapusCheckboxes.length;
+
+        if (selectAllKategoriTerhapus) {
+            selectAllKategoriTerhapus.checked =
+                total > 0 && jumlah === total;
+
+            selectAllKategoriTerhapus.indeterminate =
+                jumlah > 0 && jumlah < total;
+        }
+
+        if (selectAllKategoriTerhapusTable) {
+            selectAllKategoriTerhapusTable.checked =
+                total > 0 && jumlah === total;
+
+            selectAllKategoriTerhapusTable.indeterminate =
+                jumlah > 0 && jumlah < total;
+        }
+    }
+
+    function setSemuaKategoriTerhapus(checked) {
+
+        kategoriTerhapusCheckboxes.forEach(function (checkbox) {
+            checkbox.checked = checked;
+        });
+
+        updateBulkForceDeleteKategori();
+    }
+
+    if (selectAllKategoriTerhapus) {
+        selectAllKategoriTerhapus.addEventListener('change', function () {
+            setSemuaKategoriTerhapus(this.checked);
+        });
+    }
+
+    if (selectAllKategoriTerhapusTable) {
+        selectAllKategoriTerhapusTable.addEventListener('change', function () {
+            setSemuaKategoriTerhapus(this.checked);
+        });
+    }
+
+    kategoriTerhapusCheckboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', updateBulkForceDeleteKategori);
+    });
+
+    window.hapusKategoriTerhapusTerpilih = function () {
+
+        const terpilih =
+            document.querySelectorAll('.kategori-terhapus-checkbox:checked');
+
+        if (terpilih.length === 0) {
+            return;
+        }
+
+        formTarget = document.createElement('form');
+        formTarget.method = 'POST';
+        formTarget.action = "{{ route('kategori.bulkForceDelete') }}";
+        formTarget.style.display = 'none';
+
+        const csrf = document.createElement('input');
+        csrf.type = 'hidden';
+        csrf.name = '_token';
+        csrf.value = "{{ csrf_token() }}";
+        formTarget.appendChild(csrf);
+
+        terpilih.forEach(function (checkbox) {
+
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'ids[]';
+            input.value = checkbox.value;
+
+            formTarget.appendChild(input);
+        });
+
+        document.body.appendChild(formTarget);
+
+        confirmTitle.textContent =
+            'Hapus kategori secara permanen?';
+
+        confirmMessage.innerHTML =
+            'Sebanyak <strong>' +
+            terpilih.length +
+            ' kategori</strong> akan dihapus secara permanen.';
+
+        confirmWarningText.textContent =
+            'Tindakan ini tidak dapat dibatalkan. Kategori yang masih memiliki dokumen akan dilewati.';
+
+        confirmIcon.innerHTML =
+            '<i class="bi bi-trash3"></i>';
+
+        confirmIcon.style.background =
+            '#fef2f2';
+
+        confirmIcon.style.borderColor =
+            '#fecaca';
+
+        confirmIcon.style.color =
+            '#dc3545';
+
+        confirmButton.innerHTML =
+            '<i class="bi bi-trash3 me-1"></i> Ya, Hapus Permanen';
+
+        confirmButton.style.background =
+            '#dc3545';
+
+        modal.show();
+    };
+
+
     /* RESET */
 
     modalElement.addEventListener(
         'hidden.bs.modal',
         function () {
+
+            if (formTarget && formTarget.parentNode) {
+                formTarget.parentNode.removeChild(formTarget);
+            }
 
             formTarget = null;
 

@@ -122,20 +122,16 @@
         {{-- SEARCH --}}
         <div class="dokumen-filter-search">
 
-            <div class="input-group">
-
-                <span class="input-group-text">
+            <div class="search-box-horizontal">
+                <div class="search-icon">
                     <i class="bi bi-search"></i>
-                </span>
+                </div>
 
-                <input
-                    type="text"
-                    name="q"
-                    class="form-control"
-                    placeholder="Cari dokumen..."
-                    value="{{ request('q') }}"
-                >
-
+                <input type="text"
+                       name="q"
+                       class="search-input"
+                       placeholder="Cari dokumen..."
+                       value="{{ request('q') }}">
             </div>
 
         </div>
@@ -905,26 +901,38 @@
 
 }
 
-.dokumen-filter-search .input-group {
+\.dokumen-filter-search .input-group {
 
     width: 100%;
     min-width: 0;
-    display: flex;
-    flex-wrap: nowrap;
+
+    display: grid !important;
+    grid-template-columns: 38px minmax(0, 1fr) !important;
+    align-items: stretch;
 
 }
 
 .dokumen-filter-search .input-group-text {
 
-    flex: 0 0 auto;
+    width: 38px !important;
+    min-width: 38px !important;
+    height: 40px;
+
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 !important;
 
 }
 
 .dokumen-filter-search .form-control {
 
-    flex: 1 1 auto;
-    width: 1%;
-    min-width: 0;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 40px;
+
+    margin: 0 !important;
 
 }
 
@@ -1490,6 +1498,55 @@ body.dark-mode .dokumen-kategori-badge {
 }
 
 
+
+/* =========================================================
+   FIX FILTER SEARCH SEJAJAR
+========================================================= */
+
+.dokumen-filter-form {
+    display: grid !important;
+    grid-template-columns:
+        minmax(260px, 2fr)
+        minmax(120px, 1fr)
+        minmax(120px, 1fr)
+        minmax(120px, 1fr)
+        minmax(100px, auto) !important;
+    gap: 10px !important;
+    width: 100%;
+    min-width: 0;
+    align-items: center;
+}
+
+.dokumen-filter-search,
+.dokumen-filter-item,
+.dokumen-filter-button {
+    min-width: 0 !important;
+    width: 100% !important;
+}
+
+.dokumen-filter-search .input-group {
+    display: grid !important;
+    grid-template-columns: 38px minmax(0, 1fr) !important;
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+.dokumen-filter-search .input-group-text {
+    width: 38px !important;
+    min-width: 38px !important;
+    height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+}
+
+.dokumen-filter-search .form-control {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 40px !important;
+    margin: 0 !important;
+}
 
 /* =========================================================
    RESPONSIVE PAGINATION
@@ -2424,6 +2481,142 @@ body.dark-mode .dokumen-pagination-right
 
 }
 
+/* =========================================================
+   FIX FILTER DOKUMEN - SEARCH HARUS SEJAJAR
+   ========================================================= */
+
+.dokumen-filter-card .dokumen-filter-form {
+    display: grid !important;
+    grid-template-columns:
+        minmax(260px, 2fr)
+        minmax(120px, 1fr)
+        minmax(120px, 1fr)
+        minmax(120px, 1fr)
+        minmax(100px, 1fr) !important;
+    gap: 10px !important;
+    align-items: center !important;
+    width: 100% !important;
+}
+
+.dokumen-filter-card .dokumen-filter-search {
+    width: 100% !important;
+    min-width: 0 !important;
+    grid-column: auto !important;
+}
+
+/* PENTING: icon + input WAJIB satu baris */
+.dokumen-filter-card .dokumen-filter-search .input-group {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+/* Kotak icon */
+.dokumen-filter-card .dokumen-filter-search .input-group-text {
+    display: flex !important;
+    flex: 0 0 40px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+}
+
+/* Input pencarian */
+.dokumen-filter-card .dokumen-filter-search .form-control {
+    display: block !important;
+    flex: 1 1 auto !important;
+    width: 1% !important;
+    min-width: 0 !important;
+    height: 40px !important;
+    margin: 0 !important;
+}
+
+/* Tahun, Bulan, Tanggal, Filter */
+.dokumen-filter-card .dokumen-filter-item,
+.dokumen-filter-card .dokumen-filter-button {
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+.dokumen-filter-card .dokumen-filter-button .btn {
+    width: 100% !important;
+    height: 40px !important;
+}
+
+
+/* SEARCH DOKUMEN - FIX FINAL */
+.dokumen-filter-card .search-box-horizontal {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    height: 40px !important;
+}
+
+.dokumen-filter-card .search-icon {
+    flex: 0 0 40px !important;
+    width: 40px !important;
+    height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #111827 !important;
+    border: 1px solid #334155 !important;
+    border-right: 0 !important;
+    border-radius: 8px 0 0 8px !important;
+    color: #cbd5e1 !important;
+}
+
+.dokumen-filter-card .search-input {
+    flex: 1 1 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    height: 40px !important;
+    margin: 0 !important;
+    background: #111827 !important;
+    border: 1px solid #334155 !important;
+    border-radius: 0 6px 6px 0 !important;
+    color: #fff !important;
+    padding: 0 12px !important;
+}
+
+.dokumen-filter-card .search-input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+
+
+.dokumen-filter-card .dokumen-filter-form {
+    display: grid !important;
+    grid-template-columns:
+        minmax(300px, 2fr)
+        minmax(150px, 1fr)
+        minmax(150px, 1fr)
+        minmax(150px, 1fr)
+        minmax(120px, 1fr) !important;
+    gap: 10px !important;
+    align-items: center !important;
+}
+
+.dokumen-filter-card .dokumen-filter-search {
+    grid-column: 1 !important;
+    width: 100% !important;
+}
+
+.dokumen-filter-card .dokumen-filter-item {
+    width: 100% !important;
+}
+
+.dokumen-filter-card .dokumen-filter-button {
+    width: 100% !important;
+}
 
 </style>
 
