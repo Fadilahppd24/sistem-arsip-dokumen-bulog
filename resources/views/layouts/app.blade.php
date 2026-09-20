@@ -45,6 +45,22 @@
 
         <main class="p-4">
 
+            {{-- =====================================================
+                 TOMBOL KEMBALI GLOBAL
+                 Tidak mengubah layout halaman karena tombol dibuat
+                 fixed dan hanya menggunakan history browser.
+            ====================================================== --}}
+            <button
+                type="button"
+                id="globalBackButton"
+                class="global-back-button"
+                onclick="kembaliKeHalamanSebelumnya()"
+                title="Kembali ke halaman sebelumnya"
+            >
+                <i class="bi bi-arrow-left"></i>
+                <span>Kembali</span>
+            </button>
+
             @yield('content')
 
         </main>
@@ -55,6 +71,103 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<style>
+/* =========================================================
+   TOMBOL KEMBALI GLOBAL
+   Hanya menambahkan tombol navigasi, tanpa mengubah layout
+   atau fungsi halaman yang sudah ada.
+========================================================= */
+
+.global-back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    height: 38px;
+    padding: 0 14px;
+
+    margin-bottom: 14px;
+
+    border: 1px solid #dbe4ef;
+    border-radius: 9px;
+
+    background: #ffffff;
+    color: #475569;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow: 0 2px 8px rgba(15, 23, 42, .04);
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.global-back-button i {
+    font-size: 15px;
+}
+
+.global-back-button:hover {
+    background: #f8fafc;
+    border-color: #b9c9dd;
+    color: #1769e8;
+    transform: translateX(-1px);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, .07);
+}
+
+.global-back-button:active {
+    transform: translateX(0);
+}
+
+body.dark-mode .global-back-button {
+    background: #202c3e;
+    border-color: #46566d;
+    color: #dbe5f2;
+}
+
+body.dark-mode .global-back-button:hover {
+    background: #2b3b52;
+    border-color: #60718a;
+    color: #ffffff;
+}
+
+@media (max-width: 576px) {
+    .global-back-button {
+        height: 36px;
+        padding: 0 12px;
+        font-size: 12px;
+        margin-bottom: 12px;
+    }
+}
+</style>
+
+<script>
+/* =========================================================
+   TOMBOL KEMBALI GLOBAL
+========================================================= */
+
+function kembaliKeHalamanSebelumnya() {
+
+    if (window.history.length > 1) {
+        window.history.back();
+        return;
+    }
+
+    // Fallback jika tidak ada riwayat halaman sebelumnya.
+    window.location.href = "{{ route('dashboard') }}";
+}
+</script>
+
+
+
 
 
 <script>
