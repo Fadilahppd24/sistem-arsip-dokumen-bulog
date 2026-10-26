@@ -88,29 +88,6 @@
     @endforeach
 </div>
 
-<div class="storage-card mb-4">
-    <div class="d-flex align-items-center gap-4 flex-wrap position-relative" style="z-index:1;">
-        <div class="storage-icon">
-            <i class="bi bi-hdd-stack-fill"></i>
-        </div>
-        <div class="flex-grow-1" style="min-width:240px;">
-            <h6 class="fw-bold mb-1">Penyimpanan Arsip</h6>
-            <p class="text-muted small mb-0">Kapasitas penyimpanan dokumen yang telah digunakan</p>
-        </div>
-        <div class="text-end">
-            <div class="fw-bold storage-usage-text">{{ $storageUsedGB }} GB / {{ $storageTotalGB }} GB</div>
-        </div>
-        <span class="storage-status storage-status-{{ Str::slug($storageStatus) }}">
-            <i class="bi bi-circle-fill"></i> Status : {{ $storageStatus }}
-        </span>
-    </div>
-
-    <div class="storage-progress mt-3">
-        <div class="storage-progress-bar" style="width: {{ min($storagePercent, 100) }}%;"></div>
-    </div>
-    <div class="text-muted small mt-2">{{ $storagePercent }}% Terpakai</div>
-</div>
-
 <div class="row g-3">
     <div class="col-lg-8">
         <div class="card-panel p-3">

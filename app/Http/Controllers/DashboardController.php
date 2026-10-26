@@ -39,20 +39,6 @@ class DashboardController extends Controller
             ->whereYear('created_at', now()->year)
             ->count();
 
-        $diskTotal = disk_total_space(base_path());
-        $diskFree  = disk_free_space(base_path());
-        $diskUsed  = $diskTotal - $diskFree;
-
-        $storageTotalGB = round($diskTotal / 1073741824, 1);
-        $storageUsedGB  = round($diskUsed / 1073741824, 1);
-        $storagePercent = $diskTotal > 0 ? round(($diskUsed / $diskTotal) * 100, 1) : 0;
-
-        $storageStatus = match(true) {
-            $storagePercent < 80 => 'Aman',
-            $storagePercent < 95 => 'Perhatian',
-            default => 'Penuh',
-        };
-
         $view = Auth::user()->isAdmin() ? 'dashboard.admin' : 'dashboard.user';
 
         return view($view, compact(
@@ -60,10 +46,6 @@ class DashboardController extends Controller
             'totalDokumen',
             'dokumenTerbaru',
             'statistikBulanIni',
-            'storageTotalGB',
-            'storageUsedGB',
-            'storagePercent',
-            'storageStatus',
             'warnaIkon'
         ));
     }
