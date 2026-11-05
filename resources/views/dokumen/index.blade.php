@@ -2549,7 +2549,10 @@ body.dark-mode .dokumen-pagination-right
 }
 
 
-/* SEARCH DOKUMEN - FIX FINAL */
+/* =========================================================
+   SEARCH DOKUMEN - MODE NORMAL
+========================================================= */
+
 .dokumen-filter-card .search-box-horizontal {
     display: flex !important;
     flex-direction: row !important;
@@ -2563,14 +2566,18 @@ body.dark-mode .dokumen-pagination-right
     flex: 0 0 40px !important;
     width: 40px !important;
     height: 40px !important;
+
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    background: #111827 !important;
-    border: 1px solid #334155 !important;
+
+    background: #ffffff !important;
+    border: 1px solid #d1d5db !important;
     border-right: 0 !important;
+
     border-radius: 8px 0 0 8px !important;
-    color: #cbd5e1 !important;
+
+    color: #374151 !important;
 }
 
 .dokumen-filter-card .search-input {
@@ -2579,11 +2586,19 @@ body.dark-mode .dokumen-pagination-right
     min-width: 0 !important;
     height: 40px !important;
     margin: 0 !important;
-    background: #111827 !important;
-    border: 1px solid #334155 !important;
+
+    background: #ffffff !important;
+    border: 1px solid #d1d5db !important;
+
     border-radius: 0 6px 6px 0 !important;
-    color: #fff !important;
+
+    color: #1f2937 !important;
     padding: 0 12px !important;
+}
+
+.dokumen-filter-card .search-input::placeholder {
+    color: #6b7280 !important;
+    opacity: 1 !important;
 }
 
 .dokumen-filter-card .search-input:focus {
@@ -2592,6 +2607,25 @@ body.dark-mode .dokumen-pagination-right
 }
 
 
+/* =========================================================
+   SEARCH DOKUMEN - MODE GELAP
+========================================================= */
+
+body.dark-mode .dokumen-filter-card .search-icon {
+    background: #111827 !important;
+    border-color: #374151 !important;
+    color: #cbd5e1 !important;
+}
+
+body.dark-mode .dokumen-filter-card .search-input {
+    background: #111827 !important;
+    border-color: #374151 !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .dokumen-filter-card .search-input::placeholder {
+    color: #9ca3af !important;
+}
 
 .dokumen-filter-card .dokumen-filter-form {
     display: grid !important;
@@ -2616,6 +2650,42 @@ body.dark-mode .dokumen-pagination-right
 
 .dokumen-filter-card .dokumen-filter-button {
     width: 100% !important;
+}
+
+
+/* FIX WARNA KOTAK CARI DOKUMEN - MODE NORMAL */
+.dokumen-filter-grid .filter-search .input-group {
+    background: #ffffff !important;
+}
+
+.dokumen-filter-grid .filter-search .input-group-text {
+    background: #ffffff !important;
+    color: #374151 !important;
+    border-color: #d1d5db !important;
+}
+
+.dokumen-filter-grid .filter-search .form-control {
+    background: #ffffff !important;
+    color: #1f2937 !important;
+    border-color: #d1d5db !important;
+}
+
+.dokumen-filter-grid .filter-search .form-control::placeholder {
+    color: #6b7280 !important;
+    opacity: 1 !important;
+}
+
+/* MODE GELAP */
+body.dark-mode .dokumen-filter-grid .filter-search .input-group,
+body.dark-mode .dokumen-filter-grid .filter-search .input-group-text,
+body.dark-mode .dokumen-filter-grid .filter-search .form-control {
+    background: #111827 !important;
+    color: #ffffff !important;
+    border-color: #374151 !important;
+}
+
+body.dark-mode .dokumen-filter-grid .filter-search .form-control::placeholder {
+    color: #9ca3af !important;
 }
 
 </style>

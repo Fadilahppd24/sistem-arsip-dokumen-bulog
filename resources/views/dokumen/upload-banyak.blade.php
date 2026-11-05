@@ -70,6 +70,35 @@
         </div>
     @endif
 
+    {{-- ================= RINCIAN HASIL UPLOAD ================= --}}
+    @if (session('upload_results'))
+        <div class="card mb-4 shadow-sm" style="border-radius: 14px; overflow: hidden;">
+            <div class="card-header bg-transparent fw-semibold py-3">
+                <i class="bi bi-clipboard-check me-2"></i>Rincian Hasil Upload per File
+            </div>
+            <div class="card-body p-3">
+                <p class="text-muted small mb-3">Periksa daftar berikut untuk mengetahui dokumen yang berhasil dan yang perlu diunggah ulang.</p>
+                <div class="d-flex flex-column gap-2">
+                    @foreach (session('upload_results') as $hasil)
+                        @php
+                            $sukses = $hasil['status'] === 'berhasil';
+                            $duplikat = $hasil['status'] === 'duplikat';
+                            $warna = $sukses ? 'success' : ($duplikat ? 'warning' : 'danger');
+                        @endphp
+                        <div class="border rounded-3 p-3 d-flex align-items-start gap-3" style="min-width:0;">
+                            <i class="bi {{ $sukses ? 'bi-check-circle-fill' : ($duplikat ? 'bi-exclamation-triangle-fill' : 'bi-x-circle-fill') }} text-{{ $warna }} fs-5"></i>
+                            <div style="min-width:0; overflow-wrap:anywhere;" class="flex-grow-1">
+                                <div class="fw-semibold">{{ $hasil['nama'] }}</div>
+                                <div class="small text-muted mt-1">{{ $hasil['keterangan'] }}</div>
+                            </div>
+                            <span class="badge text-bg-{{ $warna }}">{{ $sukses ? 'Berhasil' : ($duplikat ? 'Duplikat' : 'Gagal') }}</span>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    @endif
+
     {{-- ================= MAIN CARD ================= --}}
     <div class="upload-card upload-many-card">
 
@@ -123,19 +152,19 @@
                     </div>
 
                     <div class="upload-many-limit">
-                        <span>
-                            <i class="bi bi-file-earmark-pdf-fill"></i>
-                            PDF
-                        </span>
+    <span>
+        <i class="bi bi-file-earmark-pdf-fill"></i>
+        PDF
+    </span>
 
-                        <span>•</span>
+    <span>•</span>
 
-                        <span>Maks. 100 MB per file</span>
+    <span>Ukuran maksimal 100 MB per PDF</span>
 
-                        <span>•</span>
+    <span>•</span>
 
-                        <span>Bisa beberapa file</span>
-                    </div>
+    <span>Maksimal 100 PDF dalam satu kali upload</span>
+</div>
 
                     <input
                         type="file"
@@ -269,6 +298,13 @@
                     <strong id="bulogProgressPercent">0%</strong>
                 </div>
             </div>
+
+
+            <div id="bulogUploadResults"
+     style="display:none; margin-top:16px; max-height:220px;
+            overflow-y:auto; text-align:left;">
+</div>
+
 
             <div class="bulog-processing-note">
                 <i class="bi bi-info-circle-fill"></i>
@@ -733,6 +769,17 @@ body.dark-mode .upload-many-file-number {
     cursor: not-allowed;
 }
 
+.bulog-processing-close:not(:disabled) {
+    cursor: pointer;
+    color: #123b78;
+    background: #e2edff;
+    z-index: 10;
+}
+
+.bulog-processing-close:not(:disabled):hover {
+    background: #cfe0ff;
+}
+
 .bulog-scene {
     position: relative;
     height: 150px;
@@ -1122,12 +1169,31 @@ document.addEventListener('DOMContentLoaded', function () {
             number.className = 'upload-many-file-number';
             number.textContent = index + 1;
 
-            item.appendChild(icon);
-            item.appendChild(info);
-            item.appendChild(number);
+const btnHapus = document.createElement('button');
+btnHapus.type = 'button';
+btnHapus.className = 'btn btn-sm btn-outline-danger';
+btnHapus.innerHTML = '<i class="bi bi-trash3"></i>';
+btnHapus.title = 'Hapus file ini';
 
-            preview.appendChild(item);
-        });
+btnHapus.addEventListener('click', function () {
+    const dt = new DataTransfer();
+
+    Array.from(fileInput.files).forEach(function (f, i) {
+        if (i !== index) {
+            dt.items.add(f);
+        }
+    });
+
+    fileInput.files = dt.files;
+    renderFiles();
+});
+
+item.appendChild(icon);
+item.appendChild(info);
+item.appendChild(number);
+item.appendChild(btnHapus);
+
+preview.appendChild(item);        });
     }
 
     fileInput.addEventListener('change', renderFiles);
@@ -1161,69 +1227,221 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    form.addEventListener('submit', function () {
+    form.addEventListener('submit', async function (event) {
+    event.preventDefault();
 
-        btnUpload.disabled = true;
+    if (btnUpload.disabled || fileInput.files.length === 0) {
+        return;
+    }
 
-        btnUpload.innerHTML =
-            '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>' +
-            'Memproses Dokumen...';
+    const overlay = document.getElementById('bulogProcessingOverlay');
+    const btnCancelProcessing = document.getElementById('btnCancelProcessing');
 
-        const overlay = document.getElementById('bulogProcessingOverlay');
-        const progressBar = document.getElementById('bulogProgressBar');
-        const progressPercent = document.getElementById('bulogProgressPercent');
-        const processingText = document.getElementById('bulogProcessingText');
-        const steps = document.querySelectorAll('.bulog-step');
+btnCancelProcessing.addEventListener('click', function () {
+    if (!selesai) return;
 
-        overlay.classList.add('show');
-        overlay.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
+    overlay.classList.remove('show');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
 
-        const jumlahFile = fileInput.files.length || 1;
-        const stages = [
-            { percent: 18, text: 'Mengunggah dokumen...', step: 0 },
-            { percent: 42, text: 'Membaca file PDF...', step: 1 },
-            { percent: 72, text: 'Menjalankan OCR dan membaca informasi...', step: 2 },
-            { percent: 90, text: 'Menyimpan dokumen ke arsip BULOG...', step: 3 }
-        ];
+    window.location.reload();
+});
+    
+    const progressBar = document.getElementById('bulogProgressBar');
+    const progressPercent = document.getElementById('bulogProgressPercent');
+    const processingText = document.getElementById('bulogProcessingText');
+    const uploadResults = document.getElementById('bulogUploadResults');
 
-        let stageIndex = 0;
-        let progress = 0;
+function tampilkanHasilUpload(items) {
+    uploadResults.innerHTML = '';
 
-        function updateProcessingStage() {
-            if (stageIndex >= stages.length) return;
+    const bermasalah = (items || []).filter(item =>
+    ['failed', 'gagal', 'duplicate', 'duplikat'].includes(item.status)
+);
 
-            const stage = stages[stageIndex];
-            progress = stage.percent;
-            progressBar.style.width = progress + '%';
-            progressPercent.textContent = progress + '%';
-            processingText.textContent = stage.text;
+    if (bermasalah.length === 0) {
+        uploadResults.style.display = 'none';
+        return;
+    }
 
-            steps.forEach(function (step, index) {
-                step.classList.remove('active', 'done');
-                if (index < stage.step) step.classList.add('done');
-                if (index === stage.step) step.classList.add('active');
-            });
+    bermasalah.forEach(item => {
+        const kotak = document.createElement('div');
+        kotak.style.cssText =
+            'padding:10px 12px; margin-bottom:8px; border-radius:8px;' +
+            'background:#fff; border:1px solid #e5e7eb;';
 
-            stageIndex++;
+        const nama = document.createElement('strong');
+nama.style.cssText = 'display:block; font-size:13px; font-weight:700; color:#1e293b; overflow-wrap:anywhere; line-height:1.6;';        nama.textContent =
+(['failed', 'gagal'].includes(item.status) ? '❌ Gagal: ' : '⚠️ Duplikat: ') +            item.original_filename;
+
+        const alasan = document.createElement('div');
+        alasan.style.cssText = 'font-size:12px; color:#64748b; margin-top:4px;';
+        alasan.textContent = item.message || 'Tidak ada keterangan tambahan.';
+
+        kotak.appendChild(nama);
+        kotak.appendChild(alasan);
+        uploadResults.appendChild(kotak);
+    });
+
+    uploadResults.style.display = 'block';
+}
+    const steps = document.querySelectorAll('.bulog-step');
+
+    const originalButtonHtml = btnUpload.innerHTML;
+    let selesai = false;
+
+    function updateProgress(percent, message, activeStep) {
+        const value = Math.max(0, Math.min(100, Number(percent) || 0));
+
+        progressBar.style.width = value + '%';
+        progressPercent.textContent = value + '%';
+        processingText.textContent = message;
+
+        steps.forEach(function (step, index) {
+            step.classList.remove('active', 'done');
+
+            if (index < activeStep) {
+                step.classList.add('done');
+            } else if (index === activeStep) {
+                step.classList.add('active');
+            }
+        });
+    }
+
+    function tunggu(ms) {
+        return new Promise(function (resolve) {
+            setTimeout(resolve, ms);
+        });
+    }
+
+    btnUpload.disabled = true;
+    btnUpload.textContent = 'Memproses Dokumen...';
+
+    overlay.classList.add('show');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+
+    updateProgress(0, 'Mengunggah PDF ke server...', 0);
+
+    try {
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            credentials: 'same-origin'
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            const firstError = result.errors
+                ? Object.values(result.errors).flat()[0]
+                : null;
+
+            throw new Error(firstError || result.message || 'Upload gagal.');
         }
 
-        updateProcessingStage();
+        if (!result.progress_url) {
+            throw new Error('Alamat pemantauan progres tidak tersedia.');
+        }
 
-        // Animasi hanya sebagai indikator visual selama request Laravel berjalan.
-        // Progress nyata tetap ditentukan oleh proses upload/OCR di server.
-        const stageTimer = setInterval(function () {
-            if (stageIndex < stages.length) {
-                updateProcessingStage();
-            } else {
-                clearInterval(stageTimer);
-                progressBar.style.width = '96%';
-                progressPercent.textContent = '96%';
-                processingText.textContent = 'Menunggu proses selesai...';
+        updateProgress(0, 'PDF masuk antrean OCR...', 2);
+
+        let gagalBerturut = 0;
+
+        while (!selesai) {
+            await tunggu(2000);
+
+            let progressResponse;
+
+            try {
+                progressResponse = await fetch(result.progress_url, {
+                    headers: {
+                        'Accept': 'application/json'
+                    },
+                    credentials: 'same-origin',
+                    cache: 'no-store'
+                });
+
+                if (!progressResponse.ok) {
+                    throw new Error('Gagal membaca progres.');
+                }
+
+                gagalBerturut = 0;
+            } catch (error) {
+                gagalBerturut++;
+
+                if (gagalBerturut >= 5) {
+                    throw new Error(
+                        'Koneksi pemantauan terputus. ' +
+                        'Proses OCR mungkin masih berjalan di server.'
+                    );
+                }
+
+                continue;
             }
-        }, Math.max(900, Math.min(1800, 700 + (jumlahFile * 80))));
 
-    });
+            const data = await progressResponse.json();
+
+            const total = Number(data.total_files) || 0;
+            const processed = Number(data.processed_files) || 0;
+            const percent = total > 0
+                ? Math.min(100, Math.round(processed / total * 100))
+                : 0;
+
+            if (data.status === 'completed') {
+                selesai = true;
+
+                btnCancelProcessing.disabled = false;
+
+                tampilkanHasilUpload(data.items);
+
+                updateProgress(
+                    100,
+                    'Selesai! ' +
+                    data.success_files + ' berhasil, ' +
+                    data.duplicate_files + ' duplikat, ' +
+                    data.failed_files + ' gagal.',
+                    3
+                );
+
+                btnUpload.textContent = 'Selesai';
+
+                if (Number(data.failed_files) === 0 &&
+    Number(data.duplicate_files) === 0) {
+    await tunggu(2500);
+    window.location.reload();
+}
+
+return;
+            }
+
+            updateProgress(
+                percent,
+                processed + ' dari ' + total + ' PDF selesai diproses OCR...',
+                2
+            );
+        }
+
+    } catch (error) {
+        updateProgress(
+            Number.parseInt(progressPercent.textContent, 10) || 0,
+            error.message || 'Terjadi kesalahan.',
+            2
+        );
+
+        btnUpload.disabled = false;
+        btnUpload.innerHTML = originalButtonHtml;
+
+        // Jangan otomatis mengirim ulang PDF karena proses
+        // sebelumnya mungkin sudah masuk antrean server.
+        console.error('Upload Queue BULOG:', error);
+    }
+});
+
 
 });
 

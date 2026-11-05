@@ -21,6 +21,8 @@ use App\Http\Controllers\ProfileController;
 Route::redirect('/', '/login');
 
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Guest
@@ -139,6 +141,11 @@ Route::middleware('auth')->group(function () {
 
 Route::post('/dokumen/upload-banyak', [DokumenController::class, 'storeBanyak'])
     ->name('dokumen.upload-banyak.store');
+
+
+Route::get('/dokumen/upload-banyak/progress/{batch}', [DokumenController::class, 'uploadBanyakProgress'])
+    ->name('dokumen.upload-banyak.progress');
+
 
         Route::get('/dokumen/{dokumen}/edit', [DokumenController::class, 'edit'])
             ->name('dokumen.edit');

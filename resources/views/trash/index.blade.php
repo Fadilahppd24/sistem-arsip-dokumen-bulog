@@ -1649,18 +1649,16 @@ body.dark-mode .swal-hapus-permanen .swal2-confirm:hover {
     {{-- FORM TERSEMBUNYI UNTUK BULK DELETE --}}
 
     <form
-        id="formBulkForceDelete"
-        action="{{ route('dokumen.bulkForceDelete') }}"
-        method="POST"
-        class="d-none"
-    >
-        @csrf
-        @method('DELETE')
+    id="formBulkForceDelete"
+    action="{{ route('dokumen.bulkForceDelete') }}"
+    method="POST"
+    class="d-none"
+>
+    @csrf
 
-        <div id="bulkIdsContainer"></div>
+    <div id="bulkIdsContainer"></div>
 
-    </form>
-
+</form>
 
 
     {{-- =====================================================
@@ -2301,19 +2299,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 if (result.isConfirmed) {
 
-                    // Bersihkan input id lama, isi ulang sesuai checkbox terpilih
-                    bulkIdsContainer.innerHTML = '';
+    bulkIdsContainer.innerHTML = '';
 
-                    checked.forEach(function (cb) {
-                        const input = document.createElement('input');
-                        input.type = 'hidden';
-                        input.name = 'ids[]';
-                        input.value = cb.value;
-                        bulkIdsContainer.appendChild(input);
-                    });
+    checked.forEach(function (cb) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'ids[]';
+        input.value = cb.value;
+        bulkIdsContainer.appendChild(input);
+    });
 
-                    formBulk.submit();
-                }
+    HTMLFormElement.prototype.submit.call(formBulk);
+}
+
 
             });
 

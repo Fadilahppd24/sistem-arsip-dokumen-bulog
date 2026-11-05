@@ -1,0 +1,118 @@
+<?php
+class CekDraf {
+
+public function storeBanyak(Request $request): \Illuminate\Http\JsonResponse
+{
+    $request->validate([
+        'files' => ['required', 'array', 'min:1'],
+        'files.*' => [
+            'required',
+            'file',
+            'mimes:pdf',
+            'max:102400',
+        ],
+    ], [
+        'files.required' => 'Pilih minimal satu file PDF.',
+        'files.array' => 'Format file tidak valid.',
+        'files.min' => 'Pilih minimal satu file PDF.',
+        'files.*.required' => 'File PDF wajib diunggah.',
+        'files.*.mimes' => 'Semua file harus berformat PDF.',
+        'files.*.max' => 'Ukuran setiap file maksimal 100 MB.',
+    ]);
+
+    $files = $request->file('files');
+
+    $batch = \App\Models\UploadBatch::create([
+        'user_id' => \Illuminate\Support\Facades\Auth::id(),
+        'total_files' => count($files),
+        'status' => 'pending',
+    ]);
+
+    foreach ($files as $file) {
+        $path = null;
+        $item = null;
+
+        try {
+            // Simpan PDF sebelum dikirim ke Queue.
+            $path = $file->store('dokumen', 'public');
+
+            if (!$path) {
+                throw new \RuntimeException('Gagal menyimpan PDF.');
+            }
+
+            // Buat satu catatan untuk setiap PDF.
+            $item = \App\Models\UploadBatchItem::create([
+                'upload_batch_id' => $batch->id,
+                'original_filename' => $file->getClientOriginalName(),
+                'file_path' => $path,
+                'status' => 'pending',
+            ]);
+
+            // Kirim PDF ke antrean OCR.
+            \App\Jobs\ProsesOcrDokumenJob::dispatch($item->id);
+
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error(
+                'Gagal menambahkan PDF ke antrean OCR',
+                [
+                    'batch_id' => $batch->id,
+                    'filename' => $file->getClientOriginalName(),
+                    'error' => $e->getMessage(),
+                ]
+            );
+
+            // Hapus PDF hanya jika belum ada catatan item Queue.
+// Jika item sudah dibuat, file dipertahankan agar tidak
+// terhapus ketika pekerjaan mungkin sudah masuk antrean.
+if ($path && $item === null) {
+    \Illuminate\Support\Facades\Storage::disk('public')
+        ->delete($path);
+}
+
+            // Jangan membuat dua catatan untuk PDF yang sama.
+            if ($item !== null) {
+                $item->update([
+                    'status' => 'gagal',
+                    'message' => 'Gagal menyiapkan PDF untuk OCR.',
+                    'file_path' => null,
+                ]);
+            } else {
+                \App\Models\UploadBatchItem::create([
+                    'upload_batch_id' => $batch->id,
+                    'original_filename' => $file->getClientOriginalName(),
+                    'status' => 'gagal',
+                    'message' => 'Gagal menyiapkan PDF untuk OCR.',
+                ]);
+            }
+
+            $batch->increment('processed_files');
+            $batch->increment('failed_files');
+        }
+    }
+
+    // Perbarui status tanpa menimpa batch yang sudah selesai.
+\App\Models\UploadBatch::query()
+    ->whereKey($batch->id)
+    ->where('status', 'pending')
+    ->update(['status' => 'processing']);
+
+$batch->refresh();
+
+if ($batch->processed_files >= $batch->total_files) {
+    \App\Models\UploadBatch::query()
+        ->whereKey($batch->id)
+        ->update(['status' => 'completed']);
+}
+
+    // Kirim ID batch untuk dipantau oleh popup BULOG.
+    return response()->json([
+        'message' => 'File PDF berhasil diterima untuk diproses.',
+        'batch_id' => $batch->id,
+        'progress_url' => route(
+            'dokumen.upload-banyak.progress',
+            ['batch' => $batch->id]
+        ),
+    ], 202);
+}
+
+}
