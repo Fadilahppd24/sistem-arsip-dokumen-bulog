@@ -1701,10 +1701,45 @@ body.dark-mode .swal-hapus-permanen .swal2-confirm:hover {
 
 
 
+        {{-- DROPDOWN JUMLAH DOKUMEN --}}
+
+        <div class="d-flex justify-content-end align-items-center gap-2 px-3 py-3">
+
+            <label for="perPageSampah" class="mb-0">
+                Tampilkan
+            </label>
+
+            <select
+                id="perPageSampah"
+                class="form-select form-select-sm"
+                style="width: 100px;"
+                onchange="ubahJumlahSampah(this.value)"
+            >
+                @foreach ([10, 20, 50, 100, 200, 500, 1000] as $jumlah)
+                    <option value="{{ $jumlah }}" {{ $perPage == $jumlah ? 'selected' : '' }}>
+                        {{ $jumlah }}
+                    </option>
+                @endforeach
+            </select>
+
+            <span>dokumen</span>
+
+        </div>
+
+        <script>
+            function ubahJumlahSampah(jumlah) {
+                const url = new URL(window.location.href);
+
+                url.searchParams.set('per_page', jumlah);
+                url.searchParams.delete('page');
+
+                window.location.href = url.toString();
+            }
+        </script>
+
         {{-- TABLE --}}
 
         <div class="table-responsive">
-
             <table class="table sampah-table align-middle mb-0">
 
                 <thead>
