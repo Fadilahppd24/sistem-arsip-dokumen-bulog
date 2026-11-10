@@ -6,23 +6,28 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
+        if (! Schema::hasTable('dokumen_upload_temps')) {
+            return;
+        }
+
+        if (Schema::hasColumn('dokumen_upload_temps', 'nama_mitra')) {
+            return;
+        }
+
         Schema::table('dokumen_upload_temps', function (Blueprint $table) {
             $table->string('nama_mitra')->nullable()->after('tanggal_dokumen');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::table('dokumen_upload_temps', function (Blueprint $table) {
-            $table->dropColumn('nama_mitra');
-        });
+        if (Schema::hasTable('dokumen_upload_temps')
+            && Schema::hasColumn('dokumen_upload_temps', 'nama_mitra')) {
+            Schema::table('dokumen_upload_temps', function (Blueprint $table) {
+                $table->dropColumn('nama_mitra');
+            });
+        }
     }
 };

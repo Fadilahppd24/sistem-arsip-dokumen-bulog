@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Jobs\ArsipkanDokumenJob;
 use App\Models\Dokumen;
 use App\Models\Kategori;
 use Illuminate\Support\Facades\Storage;
@@ -17,9 +18,13 @@ class ProsesOcrDokumenService
         $path = $filePath;
         $fileSize = Storage::disk('public')->size($path);
 
-    $pdftoppm = 'C:\Users\Papad Cantik\AppData\Local\Microsoft\WinGet\Packages\oschwartz10612.Poppler_Microsoft.Winget.Source_8wekyb3d8bbwe\poppler-25.07.0\Library\bin\pdftoppm.exe';
+       $pdftoppm = config('ocr.pdftoppm_path');
 
-    $tesseract = 'C:\Program Files\Tesseract-OCR\tesseract.exe';
+    $tesseract = config('ocr.tesseract_path');
+
+    if (config('ocr.tessdata_dir')) {
+        putenv('TESSDATA_PREFIX=' . config('ocr.tessdata_dir'));
+    }
 
     $ocrFolder = null;
 
@@ -662,13 +667,19 @@ $dokumen = Dokumen::create([
     'file_path' => $path,
     'file_size' => $fileSize,
     'user_id' => $userId,
+    'file_hash' => hash_file('sha256', $pdfPath),
+    'isi_ocr' => trim($hasilOCR),
+    'status_ocr' => 'proses',
 ]);
+
+ArsipkanDokumenJob::dispatch($dokumen->id);
 
 return [
     'status' => 'berhasil',
     'message' => 'Dokumen berhasil disimpan ke arsip.',
     'dokumen_id' => $dokumen->id,
 ];
+
 
     } catch (\Throwable $e) {
         if ($path && Storage::disk('public')->exists($path)) {

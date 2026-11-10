@@ -8,19 +8,26 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Dokumen extends Model
 {
-     use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
-    'kategori_id',
-    'nama_dokumen',
-    'nomor_keterangan',
-    'tanggal_dokumen',
-    'nama_mitra',
-    'deskripsi',
-    'file_path',
-    'file_size',
-    'user_id',
-];
+        'kategori_id',
+        'nama_dokumen',
+        'nomor_keterangan',
+        'tanggal_dokumen',
+        'nama_mitra',
+        'deskripsi',
+        'file_path',
+        'file_size',
+        'user_id',
+        'isi_ocr',        // BARU
+        'status_ocr',     // BARU
+        'ocr_error',      // BARU
+        'drive_file_id',  // BARU
+        'drive_url',      // BARU
+        'drive_error',    // BARU
+        'file_hash',      // BARU
+    ];
 
     protected function casts(): array
     {
@@ -29,10 +36,10 @@ class Dokumen extends Model
         ];
     }
 
-public function kategori()
-{
-    return $this->belongsTo(Kategori::class)->withTrashed();
-}
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class)->withTrashed();
+    }
 
     /**
      * User yang mengunggah dokumen ini (Admin).
@@ -68,7 +75,8 @@ public function kategori()
 
         return $query->where(function ($q) use ($keyword) {
             $q->where('nama_dokumen', 'like', "%{$keyword}%")
-                ->orWhere('nomor_keterangan', 'like', "%{$keyword}%");
+                ->orWhere('nomor_keterangan', 'like', "%{$keyword}%")
+                ->orWhere('isi_ocr', 'like', "%{$keyword}%"); // BARU
         });
     }
 }
