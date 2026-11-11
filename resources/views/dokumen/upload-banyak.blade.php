@@ -1410,13 +1410,8 @@ nama.style.cssText = 'display:block; font-size:13px; font-weight:700; color:#1e2
 
                 btnUpload.textContent = 'Selesai';
 
-                if (Number(data.failed_files) === 0 &&
-    Number(data.duplicate_files) === 0) {
-    await tunggu(2500);
-    window.location.reload();
-}
-
-return;
+                // Popup tidak ditutup otomatis; tutup lewat tombol X.
+                return;
             }
 
             updateProgress(

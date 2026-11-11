@@ -1,0 +1,82 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Dokumen extends Model
+{
+    use HasFactory, SoftDeletes;
+
+    protected $fillable = [
+        'kategori_id',
+        'nama_dokumen',
+        'nomor_keterangan',
+        'tanggal_dokumen',
+        'nama_mitra',
+        'deskripsi',
+        'file_path',
+        'file_size',
+        'user_id',
+        'isi_ocr',        // BARU
+        'status_ocr',     // BARU
+        'ocr_error',      // BARU
+        'drive_file_id',  // BARU
+        'drive_url',      // BARU
+        'drive_error',    // BARU
+        'file_hash',      // BARU
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'tanggal_dokumen' => 'date',
+        ];
+    }
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class)->withTrashed();
+    }
+
+    /**
+     * User yang mengunggah dokumen ini (Admin).
+     */
+    public function uploader()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * Ukuran file yang mudah dibaca, misal "1.24 MB".
+     */
+    public function getUkuranFormatAttribute(): string
+    {
+        $bytes = $this->file_size ?? 0;
+
+        if ($bytes >= 1048576) {
+            return number_format($bytes / 1048576, 2).' MB';
+        }
+
+        if ($bytes >= 1024) {
+            return number_format($bytes / 1024, 2).' KB';
+        }
+
+        return $bytes.' B';
+    }
+
+    public function scopeCari($query, ?string $keyword)
+    {
+        if (! $keyword) {
+            return $query;
+        }
+
+        return $query->where(function ($q) use ($keyword) {
+            $q->where('nama_dokumen', 'like', "%{$keyword}%")
+                ->orWhere('nomor_keterangan', 'like', "%{$keyword}%")
+                ->orWhere('isi_ocr', 'like', "%{$keyword}%"); // BARU
+        });
+    }
+}

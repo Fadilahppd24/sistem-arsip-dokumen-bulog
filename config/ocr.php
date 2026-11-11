@@ -2,7 +2,7 @@
 
 return [
     'pdftoppm_path' => env('PDFTOPPM_PATH', 'pdftoppm'),
-    'tesseract_path' => env('TESSERACT_PATH', 'C:\Program Files\Tesseract-OCR\tesseract.exe'),
+    'tesseract_path' => 'C:/Program Files/Tesseract-OCR/tesseract.exe',
     'tessdata_dir'   => env('TESSDATA_DIR'),
     'lang'           => env('OCR_LANG', 'ind'),
     'dpi'            => env('OCR_DPI', 200),
