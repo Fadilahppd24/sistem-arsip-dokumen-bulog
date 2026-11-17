@@ -29,7 +29,11 @@ class ArsipkanDokumenJob implements ShouldQueue
             return;
         }
 
-        $path = Storage::disk('public')->path($dokumen->file_path);
+        $path = storage_path('app/public/' . ltrim($dokumen->file_path, '/\\'));
+if (! is_file($path)) {
+    $dokumen->update(['drive_error' => 'File PDF tidak ditemukan: ' . $dokumen->file_path]);
+    return;
+}
 
         try {
             $teks = $ocr->extractText($path);
@@ -48,10 +52,9 @@ class ArsipkanDokumenJob implements ShouldQueue
 
         if (config('ocr.drive_folder_id')) {
             try {
-                $hasil = app(GoogleDriveService::class)->upload(
-                    $path,
-                    $dokumen->id . '_' . basename($dokumen->file_path)
-                );
+                $namaFile = preg_replace('/[\\\\\/:*?"<>|]+/', '-', $dokumen->nama_dokumen) . '.pdf';
+                
+                $hasil = app(GoogleDriveService::class)->upload($path, $namaFile);
                 $dokumen->update([
                     'drive_file_id' => $hasil['id'],
                     'drive_url'     => $hasil['url'],

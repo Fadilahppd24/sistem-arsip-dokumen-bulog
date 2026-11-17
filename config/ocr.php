@@ -9,4 +9,7 @@ return [
 
     'drive_folder_id'   => env('GOOGLE_DRIVE_FOLDER_ID'),
     'drive_credentials' => env('GOOGLE_APPLICATION_CREDENTIALS', 'storage/app/google/arsip-bulog.json'),
+
+    'oauth_client' => env('GOOGLE_OAUTH_CLIENT', 'storage/app/google/oauth-client.json'),
+    'oauth_token'  => env('GOOGLE_OAUTH_TOKEN', 'storage/app/google/oauth-token.json'),
 ];
