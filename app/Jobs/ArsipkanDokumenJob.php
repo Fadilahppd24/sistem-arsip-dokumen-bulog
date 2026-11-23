@@ -4,7 +4,6 @@ namespace App\Jobs;
 
 use App\Models\Dokumen;
 use App\Services\GoogleDriveService;
-use App\Services\OcrService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
@@ -22,8 +21,7 @@ class ArsipkanDokumenJob implements ShouldQueue
     {
     }
 
-    public function handle(OcrService $ocr): void
-    {
+public function handle(): void    {
         $dokumen = Dokumen::find($this->dokumenId);
         if (! $dokumen || ! Storage::disk('public')->exists($dokumen->file_path)) {
             return;
@@ -35,20 +33,7 @@ if (! is_file($path)) {
     return;
 }
 
-        try {
-            $teks = $ocr->extractText($path);
-            $dokumen->update([
-                'isi_ocr'    => $teks,
-                'status_ocr' => 'selesai',
-                'ocr_error'  => null,
-            ]);
-        } catch (Throwable $e) {
-            Log::warning('OCR lengkap gagal: ' . $e->getMessage());
-            $dokumen->update([
-                'status_ocr' => 'parsial',
-                'ocr_error'  => mb_substr($e->getMessage(), 0, 1000),
-            ]);
-        }
+
 
         if (config('ocr.drive_folder_id')) {
             try {

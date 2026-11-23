@@ -180,11 +180,11 @@ class ProsesOcrDokumenService
                 );
             }
 
-            \Log::info('HASIL OCR DOKUMEN', [
-                'file' => $originalFilename,
-                'jumlah_halaman' => count($ocrPages),
-                'ocr' => $hasilOCR,
-            ]);
+            \Log::info('OCR dokumen berhasil', [
+    'file' => $originalFilename,
+    'jumlah_halaman' => count($ocrPages),
+    'ukuran_hasil_ocr' => strlen($hasilOCR),
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -413,9 +413,9 @@ $dokumen = Dokumen::create([
     'file_path' => $path,
     'file_size' => $fileSize,
     'user_id' => $userId,
-    'file_hash' => hash_file('sha256', $pdfPath),
+    'file_hash' => $hashFile,
     'isi_ocr' => trim($hasilOCR),
-    'status_ocr' => 'proses',
+    'status_ocr' => 'selesai',
 ]);
 
 ArsipkanDokumenJob::dispatch($dokumen->id);

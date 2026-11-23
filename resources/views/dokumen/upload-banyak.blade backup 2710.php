@@ -236,7 +236,9 @@
                 <span class="bulog-scan-line"></span>
             </div>
 
-            <h3>Dokumen Sedang Diproses</h3>
+            <h3 style="color: #123b78 !important; opacity: 1 !important;">
+    Dokumen Sedang Diproses
+</h3>
             <p class="bulog-processing-desc">
                 Sistem sedang memproses dokumen untuk diarsipkan.
             </p>
@@ -917,7 +919,8 @@ body.dark-mode .upload-many-file-number {
 
 .bulog-processing-card h3 {
     margin: 0 0 5px;
-    color: #123b78;
+    color: #123b78 !important;
+    opacity: 1 !important;
     font-size: 23px;
     font-weight: 800;
 }
